@@ -1,0 +1,28 @@
+package team.ftthzj.subjectsystem.service;
+
+import java.util.Date;
+import java.util.List;
+
+import team.ftthzj.subjectsystem.po.Course;
+
+public interface CourseService {
+
+	// 新增课程
+	public int addCourse(String courseId, String courseName, double credit, String teacherId, String schoolTime,
+			Date beginTime, Date finishTime, Date endTime, int property);
+
+	//通过id查询课程
+	public Course searchCourseById(String courseId);
+	
+	//通过课程名查询课程
+	public List<Course> searchCoursesByName(String courseName);
+	
+	//通过课程类型查询课程
+	public List<Course> searchCoursesByProperty(int property);
+	
+	//修改课程
+	public int updateCourse(Course course);
+	
+	//通过id删除课程
+	public int deleteCourse(String courseId);
+}
