@@ -1,0 +1,6 @@
+SubjectSystem/.settings
+SubjectSystem/build
+SubjectSystem/config/db.properties
+SubjectSystem/WebContent/WEB-INF/lib
+SubjectSystem/.classpath
+SubjectSystem/.project
