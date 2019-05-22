@@ -1,0 +1,5 @@
+git config --global user.name "abao"  
+git config --global user.email "2210237490@qq.com"
+git config core.ignorecase false // 本地仓库文件是否大小写敏感，建议配置（不配置也没关系）
+ssh-keygen -t rsa -C "2210237490@qq.com"
+
