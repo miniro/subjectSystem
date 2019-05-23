@@ -1,10 +1,5 @@
-SubjectSystem.iml
-.idea
-bin
-.settings
-classes
-WebContent/WEB-INF/lib
-.classpath
-.project
-config/db.properties
 
+
+src/main/WebContent/WEB-INF/lib
+
+src/main/resources/db.properties
