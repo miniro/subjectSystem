@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 
 
 /**
- * 用户控制器类
+ * 学生控制器类
  */
 @Controller
 public class StuController {
@@ -27,7 +27,7 @@ public class StuController {
 		Student student = studentService.findStu(email, password);
 		if(student != null){
 			// 将用户对象添加到Session
-			session.setAttribute("USER_SESSION", student);
+			session.setAttribute("STU_SESSION", student);
 			// 跳转到主页面
 			return "customer";
 //			return "redirect:customer/list.action";
@@ -38,7 +38,7 @@ public class StuController {
 	}
 	
 	/**
-	 * 模拟其他类中跳转到客户管理页面的方法
+	 * 模拟其他类中跳转到客户管理页面的方法,测试拦截器
 	 */
 	@RequestMapping(value = "/toCustomer.action")
 	public String toCustomer() {
@@ -62,6 +62,5 @@ public class StuController {
 	public String toLogin() {
 	    return "login";
 	}
-
 
 }
