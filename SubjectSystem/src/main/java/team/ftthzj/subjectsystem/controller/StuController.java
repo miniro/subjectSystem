@@ -6,10 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import team.ftthzj.subjectsystem.po.Student;
 import team.ftthzj.subjectsystem.service.StudentService;
-
 import javax.servlet.http.HttpSession;
-
-
 /**
  * 学生控制器类
  */
@@ -19,7 +16,7 @@ public class StuController {
 	@Autowired
 	private StudentService studentService;
 	/**
-	 * 用户登录
+	 * 学生登录
 	 */
 	@RequestMapping(value = "/login.action", method = RequestMethod.POST)
 	public String login(String email, String password, Model model, HttpSession session) {
@@ -38,7 +35,7 @@ public class StuController {
 	}
 	
 	/**
-	 * 模拟其他类中跳转到客户管理页面的方法,测试拦截器
+	 * 模拟其他类中跳转到选课页面的方法,测试拦截器
 	 */
 	@RequestMapping(value = "/toCustomer.action")
 	public String toCustomer() {
@@ -60,7 +57,7 @@ public class StuController {
 	 */
 	@RequestMapping(value = "/login.action", method = RequestMethod.GET)
 	public String toLogin() {
-	    return "login";
+	    return "redirect:login";
 	}
 
 }
