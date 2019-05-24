@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import team.ftthzj.subjectsystem.dao.CourseDao;
 import team.ftthzj.subjectsystem.po.Course;
+import team.ftthzj.subjectsystem.po.Student;
 import team.ftthzj.subjectsystem.service.CourseService;
 
 @Service("courseService")
@@ -28,8 +29,9 @@ public class CourseServiceImpl implements CourseService{
 	}
 
 	public List<Course> searchCoursesByName(String courseName) {
-		// TODO Auto-generated method stub
-		return null;
+		Course course = new Course();
+		course.setCourceName(courseName);
+		return courseDao.searchCourses(course);
 	}
 
 	public List<Course> searchCoursesByProperty(int property) {
@@ -39,13 +41,13 @@ public class CourseServiceImpl implements CourseService{
 	}
 
 	public int updateCourse(Course course) {
-		// TODO Auto-generated method stub
-		return 0;
+		courseDao.updateCourse(course);
+		return 1;
 	}
 
 	public int deleteCourse(String courseId) {
-		// TODO Auto-generated method stub
-		return 0;
+		courseDao.deleteCourse(courseId);
+		return 1;
 	}
 
 }

@@ -3,5 +3,41 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="team.ftthzj.subjectsystem.dao.ScoreDao">
 	<!-- 选课相关的各种数据库操作 -->
+
+	<!-- 选课-->
+	<insert id="chooseCourse" parameterType="Score">
+		insert into Score(courseId, studentId) values(#{courseId}, #{studentId})
+	</insert>
+
+	<!-- 录入成绩-->
+	<update id="addScore" parameterType="Score">
+		update score
+		<set>
+			<if test="pacificScore != null">
+				pacificScore = #{pacificScore}
+			</if>
+			<if test="midtermScore != null">
+				midtermScore = #{midtermScore}
+			</if>
+			<if test="finalScore != null">
+				finalScore = #{finalScore}
+			</if>
+			<if test="sumScore != null">
+				sumScore = #{sumScore}
+			</if>
+		</set>
+		where studentId = #{studentId} and courseId = #{courseId}
+	</update>
+
+	<!-- 查询成绩-->
+	<select id="searchScores" parameterType="Score" resultType="Score">
+		select * from score where 1=1
+		<if test="courseId != null and courseId != ''">
+			and courseId = #{courseId}
+		</if>
+		<if test="studentId != null and studentId != ''">
+			and studentId = #{studentId}
+		</if>
+	</select>
 </mapper>
     

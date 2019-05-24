@@ -18,18 +18,28 @@ public class NoticeServiceImpl implements NoticeService{
 	private NoticeDao noticeDao;
 	
 	public int addNotice(int noticeId, String title, String startTime, String stopTime, String description) {
-		// TODO Auto-generated method stub
-		return 0;
+		Notice notice = new Notice();
+		notice.setNoticeId(noticeId);
+		notice.setTitle(title);
+		notice.setStartTime(startTime);
+		notice.setStopTime(stopTime);
+		notice.setDescription(description);
+		noticeDao.addNotice(notice);
+		return 1;
+	}
+
+	@Override
+	public List<Notice> loadAllNotice() {
+		return noticeDao.loadAllNotice();
 	}
 
 	public List<Notice> searchNotices(Notice notice) {
-		// TODO Auto-generated method stub
-		return null;
+		return noticeDao.searchNotice(notice);
 	}
 
-	public int deleteNotice(Notice notice) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteNotice(String noticeId) {
+		noticeDao.deleteNotice(noticeId);
+		return 1;
 	}
 
 }

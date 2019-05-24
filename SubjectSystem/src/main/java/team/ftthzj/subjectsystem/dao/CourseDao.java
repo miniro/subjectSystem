@@ -19,5 +19,5 @@ public interface CourseDao {
 	public int updateCourse(Course course);
 	
 	//删除课程
-	public int deleteCourse(Course course);
+	public int deleteCourse(String courseId);
 }

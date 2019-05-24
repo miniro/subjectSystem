@@ -2,20 +2,16 @@ package team.ftthzj.subjectsystem.dao;
 
 import team.ftthzj.subjectsystem.po.Score;
 
+import java.util.List;
+
 public interface ScoreDao {
 	
 	//学生选课
-	public int chooseCourse(String studentId, String courseId);
+	public int chooseCourse(Score score);
 	
-	//录入成绩
+	//录入或修改成绩
 	public int addScore(Score score);
 	
-	//通过学生id查询成绩
-	public Score searchScoreByStudentId(String studentId);
-	
-	//通过课程id查询成绩
-	public Score searchScoreByCourseId(String courseId);
-	
-	//修改成绩
-	public Score updateScore(Score score);
+	//查询成绩
+	public List<Score> searchScores(Score score);
 }

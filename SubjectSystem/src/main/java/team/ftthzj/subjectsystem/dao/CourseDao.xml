@@ -28,5 +28,41 @@
 		</if>
 	</select>
 
+	<!-- 修改课程-->
+	<update id="updateCourse" parameterType="Course">
+		update course
+		<set>
+			<if test="courseName != null">
+				courseName = #{courseName}
+			</if>
+			<if test="credit != null">
+				credit = #{credit}
+			</if>
+			<if test="teacherId != null">
+				teacherId = #{teacherId}
+			</if>
+			<if test="schoolTime != null">
+				schoolTime = #{schoolTime}
+			</if>
+			<if test="beginTime != null">
+				beginTime = #{beginTime}
+			</if>
+			<if test="finishTime != null">
+				finishTime = #{finishTime}
+			</if>
+			<if test="endTime != null">
+				endTime = #{endTime}
+			</if>
+			<if test="property != null">
+				property = #{property}
+			</if>
+		</set>
+	</update>
+
+	<!-- 删除课程-->
+	<delete id="deleteCourse" parameterType="String">
+		delete from course where courseId = #{courseId}
+	</delete>
+
 </mapper>
     

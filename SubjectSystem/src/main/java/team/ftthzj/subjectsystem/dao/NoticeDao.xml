@@ -4,9 +4,48 @@
 <mapper namespace="team.ftthzj.subjectsystem.dao.NoticeDao">
 	<!-- 通知的各种数据库操作 -->
 
+	<!-- 新建通知-->
+	<insert id="addNotice" parameterType="Notice">
+		insert into notice values(#{noticeId}, #{title}, #{startTime}, #{stopTime}, #{description})
+	</insert>
+
+	<!-- 列出所有通知-->
 	<select id="loadAllNotice" resultType="Notice">
 		select * from notice
 	</select>
+
+	<!-- 查询通知-->
+	<select id="searchNotice" parameterType="Notice" resultType="Notice">
+		select * from notice where 1=1
+		<if test="title != null and title != ''">
+			and title is like concat('%', #{title}, '%')
+		</if>
+	</select>
+
+	<!-- 修改通知-->
+	<update id="updateNotice" parameterType="Notice">
+		update notice
+		<set>
+			<if test="title != null">
+				title = #{title}
+			</if>
+			<if test="startTime != null">
+				startTime = #{startTime}
+			</if>
+			<if test="stopTime != null">
+				stopTime = #{stopTime}
+			</if>
+			<if test="description != null">
+				description = #{description}
+			</if>
+		</set>
+	</update>
+
+	<!-- 删除通知-->
+	<delete id="deleteNotice" parameterType="String">
+		delete from notice where noticeId = #{noticeId}
+	</delete>
+
 
 </mapper>
     
