@@ -8,6 +8,11 @@
 		select * from teacher where teacherId = #{teacherId}
 	</select>
 
+	<!-- 列出所有教师-->
+	<select id="loadAllTeachers" resultType="Teacher">
+		select * from teacher
+	</select>
+
 	<!-- 添加教师-->
 	<insert id="addTeacher" parameterType="Teacher">
 		insert into teacher(teacherId, name, sex, major, qq, phone, email, password, address, position)

@@ -9,10 +9,13 @@ public interface StudentDao {
 	
 	//添加学生
 	public int addStudent(Student student);
-	
+
+	//列出所有学生
+	public List<Student> loadAllStudents();
+
 	//通过id查询学生
 	public Student searchStudentById(String studentId);
-	
+
 	//通过其他条件查询所有学生
 	public List<Student> searchStudents(Student student);
 	

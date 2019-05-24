@@ -10,12 +10,12 @@
 	</insert>
 	
 	<!-- 根据id查询课程-->
-	<select id="Course" parameterType="String" resultType="Course">
+	<select id="searchCourseById" parameterType="String" resultType="Course">
 		select * from course where courseId = #{courseId}
 	</select>
 	
 	<!-- 根据其他条件查询课程-->
-	<select id="Course" parameterType="Student" resultType="Student">
+	<select id="searchCourses" parameterType="Student" resultType="Student">
 		select * from Course where 1=1
 		<if test="courseName != null and courseName != ''">
 			and courseName like concat('%', #{courseName}, '%')

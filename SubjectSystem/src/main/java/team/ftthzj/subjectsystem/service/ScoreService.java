@@ -2,6 +2,8 @@ package team.ftthzj.subjectsystem.service;
 
 import team.ftthzj.subjectsystem.po.Score;
 
+import java.util.List;
+
 public interface ScoreService {
 
 	// 学生选课
@@ -12,12 +14,12 @@ public interface ScoreService {
 			double sumScore);
 
 	// 通过学生id查询成绩
-	public Score searchScoreByStudentId(String studentId);
+	public List<Score> searchScoreByStudentId(String studentId);
 
 	// 通过课程id查询成绩
-	public Score searchScoreByCourseId(String courseId);
+	public List<Score> searchScoreByCourseId(String courseId);
 
 	// 修改成绩
-	public Score updateScore(String courseId, String studentId, double pacificScore, double midtermScore,
+	public int updateScore(String courseId, String studentId, double pacificScore, double midtermScore,
 			double finalScore, double sumScore);
 }

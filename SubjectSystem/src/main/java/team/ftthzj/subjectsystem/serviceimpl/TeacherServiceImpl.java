@@ -29,8 +29,9 @@ public class TeacherServiceImpl implements TeacherService{
 	}
 
 	public List<Teacher> searchTeachersByName(String teacherName) {
-		// TODO Auto-generated method stub
-		return null;
+		Teacher teacher = new Teacher();
+		teacher.setName(teacherName);
+		return teacherDao.searchTeachers(teacher);
 	}
 
 	public int updateTeacher(Teacher teacher) {
@@ -44,8 +45,7 @@ public class TeacherServiceImpl implements TeacherService{
 	}
 
 	public List<Teacher> searchAllTeachers() {
-		// TODO Auto-generated method stub
-		return null;
+		return teacherDao.loadAllTeachers();
 	}
 
 }

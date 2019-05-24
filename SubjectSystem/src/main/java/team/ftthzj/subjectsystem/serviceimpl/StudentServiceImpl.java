@@ -28,8 +28,9 @@ public class StudentServiceImpl implements StudentService{
 	}
 
 	public List<Student> searchStudentsByName(String studentName) {
-		// TODO Auto-generated method stub
-		return null;
+		Student student = new Student();
+		student.setName(studentName);
+		return studentDao.searchStudents(student);
 	}
 
 	public int updateStudent(Student student) {
@@ -49,8 +50,7 @@ public class StudentServiceImpl implements StudentService{
 	}
 
 	public List<Student> searchAllStudents() {
-		// TODO Auto-generated method stub
-		return null;
+		return studentDao.loadAllStudents();
 	}
 
 }

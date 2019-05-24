@@ -6,7 +6,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import team.ftthzj.subjectsystem.dao.ScoreDao;
 import team.ftthzj.subjectsystem.po.Score;
+import team.ftthzj.subjectsystem.po.Student;
 import team.ftthzj.subjectsystem.service.ScoreService;
+
+import java.util.List;
 
 @Service("scoreService")
 @Transactional
@@ -16,30 +19,51 @@ public class ScoreServiceImpl implements ScoreService{
 	private ScoreDao scoreDao;
 	
 	public int chooseCourse(String studentId, String courseId) {
-		// TODO Auto-generated method stub
-		return 0;
+		Score score = new Score();
+		score.setStudentId(studentId);
+		score.setCourseId(courseId);
+		scoreDao.chooseCourse(score);
+		return 1;
 	}
 
 	public int addScore(String courseId, String studentId, double pacificScore, double midtermScore, double finalScore,
 			double sumScore) {
-		// TODO Auto-generated method stub
-		return 0;
+		Score score = new Score();
+		score.setCourseId(courseId);
+		score.setStudentId(studentId);
+		score.setPacificScore(pacificScore);
+		score.setMidtermScore(midtermScore);
+		score.setFinalScore(finalScore);
+		score.setSumScore(sumScore);
+		return 1;
 	}
 
-	public Score searchScoreByStudentId(String studentId) {
-		// TODO Auto-generated method stub
-		return null;
+	@Override
+	public List<Score> searchScoreByStudentId(String studentId) {
+		Score score = new Score();
+		score.setStudentId(studentId);
+		return scoreDao.searchScores(score);
 	}
 
-	public Score searchScoreByCourseId(String courseId) {
-		// TODO Auto-generated method stub
-		return null;
+	@Override
+	public List<Score> searchScoreByCourseId(String courseId) {
+		Score score = new Score();
+		score.setStudentId(courseId);
+		return scoreDao.searchScores(score);
 	}
 
-	public Score updateScore(String courseId, String studentId, double pacificScore, double midtermScore,
-			double finalScore, double sumScore) {
-		// TODO Auto-generated method stub
-		return null;
+	@Override
+	public int updateScore(String courseId, String studentId, double pacificScore, double midtermScore, double finalScore, double sumScore) {
+		Score score = new Score();
+		score.setCourseId(courseId);
+		score.setStudentId(studentId);
+		score.setPacificScore(pacificScore);
+		score.setMidtermScore(midtermScore);
+		score.setFinalScore(finalScore);
+		score.setSumScore(sumScore);
+		scoreDao.addScore(score);
+		return 1;
 	}
+
 
 }

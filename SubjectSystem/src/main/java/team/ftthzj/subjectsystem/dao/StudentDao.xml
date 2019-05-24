@@ -12,6 +12,11 @@
 	    and password =#{password}
     </select>
 
+	<!-- 列出所有学生-->
+	<select id="loadAllStudents" resultType="Student">
+		select * from Student
+	</select>
+
 	<!-- 通过id查询学生-->
 	<select id="searchStudentById" parameterType="String" resultType="Student">
 		select * from student where studentId = #{studentId}

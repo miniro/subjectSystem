@@ -9,6 +9,9 @@ public interface TeacherDao {
 
 	//添加教师
 	public int addTeacher(Teacher teacher);
+
+	//列出所有教师
+	public List<Teacher> loadAllTeachers();
 	
 	//通过id查询教师
 	public Teacher searchTeacherById(String teacherId);
