@@ -3,5 +3,30 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="team.ftthzj.subjectsystem.dao.CourseDao">
 	<!-- 课程的各种数据库操作 -->
+	<!-- 新建课程-->
+	<insert id="addCourse" parameterType="Course">
+		insert into course(courseId, courseName, credit, teacherId, schoolTime, beginTime, finishTime, endTime, property)
+		values(#{courseId}, #{courseName}, #{credit}, #{teacherId}, #{schoolTime}, #{beginTime}, #{finishTime}, #{endTime}, #{property})
+	</insert>
+	
+	<!-- 根据id查询课程-->
+	<select id="Course" parameterType="String" resultType="Course">
+		select * from course where courseId = #{courseId}
+	</select>
+	
+	<!-- 根据其他条件查询课程-->
+	<select id="Course" parameterType="Student" resultType="Student">
+		select * from Course where 1=1
+		<if test="courseName != null and courseName != ''">
+			and courseName like concat('%', #{courseName}, '%')
+		</if>
+		<if test="teacherId != null and teacherId != ''">
+			and teacherId = #{teacherId}
+		</if>
+		<if test="property != null and property != ''">
+			and property = #{property}
+		</if>
+	</select>
+
 </mapper>
     

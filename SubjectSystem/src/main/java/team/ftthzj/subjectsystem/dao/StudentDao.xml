@@ -12,5 +12,64 @@
 	    and password =#{password}
     </select>
 
+	<!-- 通过id查询学生-->
+	<select id="searchStudentById" parameterType="String" resultType="Student">
+		select * from student where studentId = #{studentId}
+	</select>
+
+	<!-- 添加学生-->
+	<insert id="addStudent" parameterType="Student">
+		insert into student(studentId, name, sex, grade, school, major, qq, phone, email, password, address, enrollmentDate)
+		values(#{studentId}, #{name}, #{sex}, #{grade}, #{school}, #{major}, #{qq}, #{phone}, #{email}, #{password}, #{address}, #{enrollmentDate})
+	</insert>
+
+	<!-- 修改学生的grade,school,major,qq,phone,address-->
+	<update id="updateStudent" parameterType="Student">
+		update Student
+		<set>
+			<if test="grade!=null">
+				grade=#{grade},
+			</if>
+			<if test="school!=null">
+				school=#{school},
+			</if>
+			<if test="major!=null">
+				major=#{major},
+			</if>
+			<if test="qq!=null">
+				qq=#{qq},
+			</if>
+			<if test="phone!=null">
+				phone=#{phone},
+			</if>
+			<if test="address!=null">
+				address=#{address},
+			</if>
+		</set>
+		where studentId = #{studentId}
+	</update>
+
+	<!-- 删除学生-->
+	<delete id="deleteStudent" parameterType="String">
+		delete from Student where studentId = #{studentId}
+	</delete>
+
+	<!-- 按学号、姓名、学校、年级查询所有学生-->
+	<select id="searchStudents" parameterType="Student" resultType="Student">
+		select * from Student where 1=1
+		<if test="studentId != null and studentId != ''">
+			and studentId = #{studentId}
+		</if>
+		<if test="studentName != null and studentName != ''">
+			and studentName like concat('%', #{name}, '%')
+		</if>
+		<if test="school != null and school != ''">
+			and school like concat('%', #{school}, '%')
+		</if>
+		<if test="grade != null and grade != ''">
+			and grade = #{grade}
+		</if>
+	</select>
+
 </mapper>
     

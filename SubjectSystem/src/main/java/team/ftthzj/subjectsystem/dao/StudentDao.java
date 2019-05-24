@@ -20,7 +20,7 @@ public interface StudentDao {
 	public int updateStudent(Student student);
 	
 	//删除学生信息
-	public int deleteStudent(Student student);
+	public int deleteStudent(String studentId);
 	
 	//修改密码
 	public int updatePwd(String studentId, String pwd);

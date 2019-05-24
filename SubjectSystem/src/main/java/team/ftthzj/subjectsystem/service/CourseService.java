@@ -8,8 +8,7 @@ import team.ftthzj.subjectsystem.po.Course;
 public interface CourseService {
 
 	// 新增课程
-	public int addCourse(String courseId, String courseName, double credit, String teacherId, String schoolTime,
-			Date beginTime, Date finishTime, Date endTime, int property);
+	public int addCourse(Course course);
 
 	//通过id查询课程
 	public Course searchCourseById(String courseId);

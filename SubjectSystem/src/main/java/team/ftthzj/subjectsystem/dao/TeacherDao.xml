@@ -3,5 +3,44 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="team.ftthzj.subjectsystem.dao.TeacherDao">
 	<!-- 教师用户的各种数据库操作 -->
+	<!-- 通过id查询教师-->
+	<select id="searchTeacherById" parameterType="String" resultType="Teacher">
+		select * from teacher where teacherId = #{teacherId}
+	</select>
+
+	<!-- 添加教师-->
+	<insert id="addTeacher" parameterType="Teacher">
+		insert into teacher(teacherId, name, sex, major, qq, phone, email, password, address, position)
+		values(#{studentId}, #{name}, #{sex}, #{major}, #{qq}, #{phone}, #{email}, #{password}, #{address}, #{position})
+	</insert>
+
+	<!-- 修改教师的major,qq,phone,address,position-->
+	<update id="updateTeacher" parameterType="Teacher">
+		update Teacher
+		<set>
+			<if test="major!=null">
+				major=#{major},
+			</if>
+			<if test="qq!=null">
+				qq=#{qq},
+			</if>
+			<if test="phone!=null">
+				phone=#{phone},
+			</if>
+			<if test="address!=null">
+				address=#{address},
+			</if>
+			<if test="position!=null">
+				address=#{position},
+			</if>
+		</set>
+		where teacherId = #{teacherId}
+	</update>
+
+	<!-- 删除教师-->
+	<delete id="deleteTeacher" parameterType="String">
+		delete from Teacher where teacherId = #{teacherId}
+	</delete>
+
 </mapper>
     

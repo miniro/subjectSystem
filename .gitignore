@@ -1,6 +1,7 @@
-SubjectSystem/.settings
-SubjectSystem/build
-SubjectSystem/config/db.properties
+SubjectSystem/.idea
+SubjectSystem/bin
+SubjectSystem/classes
+SubjectSystem/SubjectSystem.iml
+SubjectSystem/src/main/resources
+SubjectSystem/src/main/test
 SubjectSystem/WebContent/WEB-INF/lib
-SubjectSystem/.classpath
-SubjectSystem/.project

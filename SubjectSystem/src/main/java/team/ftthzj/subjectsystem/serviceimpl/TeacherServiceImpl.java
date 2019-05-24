@@ -19,30 +19,28 @@ public class TeacherServiceImpl implements TeacherService{
 	@Autowired
 	private TeacherDao teacherDao;
 	
-	public int addTeacher(String teacherId, String name, String sex, String grade, String school, String major,
-			String qq, String phone, String email, String password, String address, Date enrollmentDate) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int addTeacher(Teacher teacher) {
+		teacherDao.addTeacher(teacher);
+		return 1;
 	}
 
-	public Student searchTeacherById(String teacherId) {
+	public Teacher searchTeacherById(String teacherId) {
+		return teacherDao.searchTeacherById(teacherId);
+	}
+
+	public List<Teacher> searchTeachersByName(String teacherName) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public List<Student> searchTeachersByName(String teacherName) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public int updateTeacher(Student teacher) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int updateTeacher(Teacher teacher) {
+		teacherDao.updateTeacher(teacher);
+		return 1;
 	}
 
 	public int deleteTeacherById(String teacherId) {
-		// TODO Auto-generated method stub
-		return 0;
+		teacherDao.deleteTeacher(teacherId);
+		return 1;
 	}
 
 	public List<Teacher> searchAllTeachers() {

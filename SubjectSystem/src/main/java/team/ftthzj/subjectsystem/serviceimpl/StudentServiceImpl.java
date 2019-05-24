@@ -18,15 +18,13 @@ public class StudentServiceImpl implements StudentService{
 	@Autowired
 	private StudentDao studentDao;
 	
-	public int addStudent(String studentId, String name, String sex, String grade, String school, String major,
-			String qq, String phone, String email, String password, String address, Date enrollmentDate) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int addStudent(Student student) {
+		studentDao.addStudent(student);
+		return 1;
 	}
 
 	public Student searchStudentById(String studentId) {
-		// TODO Auto-generated method stub
-		return null;
+		return studentDao.searchStudentById(studentId);
 	}
 
 	public List<Student> searchStudentsByName(String studentName) {
@@ -35,13 +33,13 @@ public class StudentServiceImpl implements StudentService{
 	}
 
 	public int updateStudent(Student student) {
-		// TODO Auto-generated method stub
-		return 0;
+		studentDao.updateStudent(student);
+		return 1;
 	}
 
 	public int deleteStudentById(String studentId) {
-		// TODO Auto-generated method stub
-		return 0;
+		studentDao.deleteStudent(studentId);
+		return 1;
 	}
 
 	@Override

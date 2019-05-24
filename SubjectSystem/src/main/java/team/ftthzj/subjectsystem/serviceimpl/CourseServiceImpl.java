@@ -18,15 +18,13 @@ public class CourseServiceImpl implements CourseService{
 	@Autowired
 	private CourseDao courseDao;
 
-	public int addCourse(String courseId, String courseName, double credit, String teacherId, String schoolTime,
-			Date beginTime, Date finishTime, Date endTime, int property) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int addCourse(Course course) {
+		courseDao.addCourse(course);
+		return 1;
 	}
 
 	public Course searchCourseById(String courseId) {
-		// TODO Auto-generated method stub
-		return null;
+		return courseDao.searchCourseById(courseId);
 	}
 
 	public List<Course> searchCoursesByName(String courseName) {
@@ -35,8 +33,9 @@ public class CourseServiceImpl implements CourseService{
 	}
 
 	public List<Course> searchCoursesByProperty(int property) {
-		// TODO Auto-generated method stub
-		return null;
+		Course course = new Course();
+		course.setProperty(property);
+		return courseDao.searchCourses(course);
 	}
 
 	public int updateCourse(Course course) {

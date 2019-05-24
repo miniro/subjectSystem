@@ -8,8 +8,7 @@ import team.ftthzj.subjectsystem.po.Student;
 public interface StudentService {
 
 	// 添加学生
-	public int addStudent(String studentId, String name, String sex, String grade, String school, String major,
-			String qq, String phone, String email, String password, String address, Date enrollmentDate);
+	public int addStudent(Student student);
 
 	//通过id查询学生
 	public Student searchStudentById(String studentId);
