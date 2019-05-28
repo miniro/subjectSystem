@@ -243,7 +243,7 @@
                 <form class="form-inline" method="get"
                       action="${pageContext.request.contextPath }/course/list.action">
                     <div class="form-group">
-                        <label for="courseName">课程id</label>
+                        <label for="courseId">课程id</label>
                         <input type="text" class="form-control" id="courseId"
                                value="${courseId }" name="courseId" />
                     </div>
@@ -253,22 +253,18 @@
                                value="${courseName }" name="courseName" />
                     </div>
                     <div class="form-group">
-                        <label for="courseName">老师id</label>
-                        <input type="text" class="form-control" id="teacherId"
-                               value="${teacherId }" name="teacherId" />
+                        <label for="teacherName">教师姓名</label>
+                        <input type="text" class="form-control" id="teacherName"
+                               value="${teacherName }" name="teacherName" />
                     </div>
-<%--                    <div class="form-group">--%>
-<%--                        <label for="property">课程类别</label>--%>
-<%--                        <select	class="form-control" id="property" name="property">--%>
-<%--                            <option value="">--请选择--</option>--%>
-<%--                            <c:forEach items="${d}" var="item">--%>
-<%--                                <option value="${item.dict_id}"--%>
-<%--                                        <c:if test="${item.dict_id == property}">selected</c:if>>--%>
-<%--                                        ${item.dict_item_name }--%>
-<%--                                </option>--%>
-<%--                            </c:forEach>--%>
-<%--                        </select>--%>
-<%--                    </div>--%>
+                    <div class="form-group">
+                        <label for="property">课程类别</label>
+                        <select	class="form-control" id="property1" name="property">
+                            <option value="">--请选择--</option>
+                            <option value="1">必修课</option>
+                            <option value="2">选修课</option>
+                        </select>
+                    </div>
 <%--                    <div class="form-group">--%>
 <%--                        <label for="credit">所占学分</label>--%>
 <%--                        <select	class="form-control" id="credit"  name="credit">--%>
@@ -298,7 +294,7 @@
                             <th>课程编号</th>
                             <th>课程名称</th>
                             <th>学分</th>
-                            <th>教师id</th>
+                            <th>教师姓名</th>
                             <th>课程性质</th>
                             <th>上课时间</th>
                         </tr>
@@ -306,12 +302,12 @@
                         <tbody>
                         <c:forEach items="${page.rows}" var="row">
                             <tr>
-                                <td>${row.getcourseId()}</td>
-                                <td>${row.getcourseName()}</td>
+                                <td>${row.courseId}</td>
+                                <td>${row.courseName}</td>
                                 <td>${row.credit}</td>
-                                <td>${row.teacherId}</td>
+                                <td>${row.teacherName}</td>
                                 <td>${row.property}</td>
-                                <td>${row.schoolTime}</td>
+                                <td>${row.time}</td>
                             </tr>
                         </c:forEach>
                         </tbody>
@@ -342,80 +338,117 @@
             <div class="modal-body">
                 <form class="form-horizontal" id="new_course_form">
                     <div class="form-group">
-                        <label for="new_courseName" class="col-sm-2 control-label">
-                            课程号
+                        <label for="new_courseId" class="col-sm-2 control-label">
+                            课程id
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="new_courseName" placeholder="课程名称" name="cust_name" />
+                            <input type="text" class="form-control" id="new_courseId" placeholder="课程id" name="courseId" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="new_courseFrom" style="float:left;padding:7px 15px 0 27px;">课程名</label>
+                        <label for="new_courseName" class="col-sm-2 control-label">
+                            课程名
+                        </label>
                         <div class="col-sm-10">
-                            <select	class="form-control" id="new_courseFrom" name="cust_source">
+                            <input type="text" class="form-control" id="new_courseName" placeholder="课程姓名" name="courseName" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="teacherId" style="float:left;padding:7px 15px 0 27px;">教师</label>
+                        <div class="col-sm-10">
+                            <select	class="form-control" id="teacherId" name="teacherId">
                                 <option value="">--请选择--</option>
-                                <c:forEach items="${fromType}" var="item">
-                                    <option value="${item.dict_id}"<c:if test="${item.dict_id == custSource}">selected</c:if>>
-                                            ${item.dict_item_name }
+                                <c:forEach items="${teacherList}" var="item">
+                                    <option value="${item.teacherId}"<c:if test="${item.teacherId == teacherId}"> selected</c:if>>${item.name}&emsp;${item.teacherId}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="credit" style="float:left;padding:7px 15px 0 27px;">学分</label>
+                        <div class="col-sm-10">
+                            <select	class="form-control" id="credit"  name="credit">
+                                <option value="">--请选择--</option>
+                                <c:forEach items="${creditList}" var="item">
+                                    <option value="${item}"<c:if test="${item == credit}"> selected</c:if>>
+                                            ${item}
                                     </option>
                                 </c:forEach>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="new_custIndustry" style="float:left;padding:7px 15px 0 27px;">学分</label>
+                        <label for="property" style="float:left;padding:7px 15px 0 27px;">课程性质</label>
                         <div class="col-sm-10">
-                            <select	class="form-control" id="new_custIndustry"  name="cust_industry">
+                            <select	class="form-control" id="property"  name="property">
                                 <option value="">--请选择--</option>
-                                <c:forEach items="${industryType}" var="item">
-                                    <option value="${item.dict_id}"<c:if test="${item.dict_id == custIndustry}"> selected</c:if>>
-                                            ${item.dict_item_name }
-                                    </option>
+                                <option value="1">必修课</option>
+                                <option value="2">选修课</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="weekTime" style="float:left;padding:7px 15px 0 27px;">上课时间</label>
+                        <div class="col-sm-10">
+                            <select	class="form-control" id="weekTime"  name="weekTime">
+                                <option value="">--请选择--</option>
+                                <c:forEach var="i" begin="1" end="7" step="1">
+                                    <option value="${i}">周${i}</option>
                                 </c:forEach>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="new_custLevel" style="float:left;padding:7px 15px 0 27px;">老师号</label>
+                        <label for="startingTime" style="float:left;padding:7px 15px 0 27px;">开始时间</label>
                         <div class="col-sm-10">
-                            <select	class="form-control" id="new_custLevel" name="cust_level">
+                            <select	class="form-control" id="startingTime"  name="startingTime">
                                 <option value="">--请选择--</option>
-                                <c:forEach items="${levelType}" var="item">
-                                    <option value="${item.dict_id}"<c:if test="${item.dict_id == custLevel}"> selected</c:if>>${item.dict_item_name }</option>
+                                <c:forEach var="j" begin="1" end="12" step="1">
+                                    <option value="${j}">${j}</option>
                                 </c:forEach>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="new_linkMan" class="col-sm-2 control-label">上课时间</label>
+                        <label for="endingTime" style="float:left;padding:7px 15px 0 27px;">结束时间</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="new_linkMan" placeholder="上课时间" name="cust_linkman" />
+                            <select	class="form-control" id="endingTime"  name="endingTime">
+                                <option value="">--请选择--</option>
+                                <c:forEach var="k" begin="1" end="12" step="1">
+                                    <option value="${k}">${k}</option>
+                                </c:forEach>
+                            </select>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="new_phone" class="col-sm-2 control-label">起始时间</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="new_phone" placeholder="起始时间" name="cust_phone" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="new_mobile" class="col-sm-2 control-label">结束时间</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="new_mobile" placeholder="结束时间" name="cust_mobile" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="new_zipcode" class="col-sm-2 control-label">截止时间</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="new_zipcode" placeholder="截止时间" name="cust_zipcode" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="new_address" class="col-sm-2 control-label">联系地址</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="new_address" placeholder="联系地址" name="cust_address" />
-                        </div>
-                    </div>
+<%--                    <div class="form-group">--%>
+<%--                        <label for="new_custLevel" style="float:left;padding:7px 15px 0 27px;">上课时间</label>--%>
+<%--                        <div class="col-sm-10">--%>
+<%--                            <select	class="form-control" id="new_custLevel" name="cust_level">--%>
+<%--                                <option value="">--请选择--</option>--%>
+<%--                                <c:forEach items="${levelType}" var="item">--%>
+<%--                                    <option value="${item.dict_id}"<c:if test="${item.dict_id == custLevel}"> selected</c:if>>${item.dict_item_name }</option>--%>
+<%--                                </c:forEach>--%>
+<%--                            </select>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                    <div class="form-group">--%>
+<%--                        <label for="new_phone" class="col-sm-2 control-label">起始时间</label>--%>
+<%--                        <div class="col-sm-10">--%>
+<%--                            <input type="text" class="form-control" id="new_phone" placeholder="起始时间" name="cust_phone" />--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                    <div class="form-group">--%>
+<%--                        <label for="new_mobile" class="col-sm-2 control-label">结束时间</label>--%>
+<%--                        <div class="col-sm-10">--%>
+<%--                            <input type="text" class="form-control" id="new_mobile" placeholder="结束时间" name="cust_mobile" />--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                    <div class="form-group">--%>
+<%--                        <label for="new_zipcode" class="col-sm-2 control-label">截止时间</label>--%>
+<%--                        <div class="col-sm-10">--%>
+<%--                            <input type="text" class="form-control" id="new_zipcode" placeholder="截止时间" name="cust_zipcode" />--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
                 </form>
             </div>
             <div class="modal-footer">

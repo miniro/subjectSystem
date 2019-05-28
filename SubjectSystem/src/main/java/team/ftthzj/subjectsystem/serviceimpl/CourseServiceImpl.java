@@ -1,5 +1,6 @@
 package team.ftthzj.subjectsystem.serviceimpl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -10,8 +11,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import team.ftthzj.subjectsystem.common.utils.Page;
 import team.ftthzj.subjectsystem.dao.CourseDao;
+import team.ftthzj.subjectsystem.dao.TeacherDao;
 import team.ftthzj.subjectsystem.po.Course;
+import team.ftthzj.subjectsystem.po.CourseForUi;
 import team.ftthzj.subjectsystem.po.Student;
+import team.ftthzj.subjectsystem.po.Teacher;
+import team.ftthzj.subjectsystem.service.CourseForUiService;
 import team.ftthzj.subjectsystem.service.CourseService;
 
 @Service("courseService")
@@ -20,6 +25,8 @@ public class CourseServiceImpl implements CourseService{
 
 	@Autowired
 	private CourseDao courseDao;
+	@Autowired
+	private TeacherDao teacherDao;
 
 	public int addCourse(Course course) {
 		courseDao.addCourse(course);
@@ -50,8 +57,9 @@ public class CourseServiceImpl implements CourseService{
 	}
 
 	@Override
-	public Page<Course> searchCourses(Integer page, Integer rows, String courseId, String courseName, String teacherName, String property, String credit) {
+	public Page<CourseForUi> searchCourses(Integer page, Integer rows, String courseId, String courseName, String teacherName, String property, String credit) {
 		Course course = new Course();
+		List<String> teacherIdList = new ArrayList<>();
 		int cnt = 0;
 		if(StringUtils.isNotBlank(courseId)){
 			course.setcourseId(courseId);
@@ -61,12 +69,17 @@ public class CourseServiceImpl implements CourseService{
 			course.setcourseName(courseName);
 			cnt += 1;
 		}
-		if(StringUtils.isNotBlank(property)){
-			course.setProperty(Integer.valueOf(property));
+		if(StringUtils.isNotBlank(teacherName)){
+			Teacher teacher = new Teacher();
+			teacher.setName(teacherName);
+			List<Teacher> teacherList = teacherDao.searchTeachers(teacher);
+			for (Teacher t : teacherList){
+				teacherIdList.add(t.getTeacherId());
+			}
 			cnt += 1;
 		}
-		if(StringUtils.isNotBlank(credit)){
-			course.setCredit(Integer.valueOf(credit));
+		if(StringUtils.isNotBlank(property)){
+			course.setProperty(Integer.valueOf(property));
 			cnt += 1;
 		}
 		if(cnt == 0){
@@ -74,11 +87,27 @@ public class CourseServiceImpl implements CourseService{
 		}
 		course.setStart((page-1) * rows);
 		course.setRows(rows);
-		List<Course> courses = courseDao.searchCourses(course);
+		List<Course> courses = new ArrayList<>();
+		if(teacherIdList.size() > 0){
+			for(String s : teacherIdList){
+				course.setTeacherId(s);
+				List<Course> coursesPart = courseDao.searchCourses(course);
+				courses.addAll(coursesPart);
+			}
+		}else {
+			courses = courseDao.searchCourses(course);
+		}
+        CourseForUiService courseForUiService = new CourseForUiServiceImpl();
+        List<CourseForUi> list = new ArrayList<>();
+        for(Course course1 : courses){
+            CourseForUi courseForUi = courseForUiService.format(course1);
+            courseForUi.setTeacherName(teacherDao.searchTeacherById(course1.getTeacherId()).getName());
+            list.add(courseForUi);
+        }
 		Integer count = courseDao.getCourseNum(course);
-		Page<Course> result = new Page<>();
+		Page<CourseForUi> result = new Page<>();
 		result.setPage(page);
-		result.setRows(courses);
+		result.setRows(list);
 		result.setSize(rows);
 		result.setTotal(count);
 		return result;
