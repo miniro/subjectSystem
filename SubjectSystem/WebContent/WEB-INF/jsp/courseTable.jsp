@@ -301,6 +301,10 @@
         返回主页
     </button>
 </a>
+<button onclick="onChange2()"
+        style="background-color: #00a2ae; color: #fff; padding: 5px 10px; border-radius: 4px;border: none">
+    查看已选课表
+</button>
 <button onclick="onChange()"
         style="background-color: #00a2ae; color: #fff; padding: 5px 10px; border-radius: 4px;border: none">
     查看预置课表
@@ -356,13 +360,7 @@
 
     //切换课表
     function onChange() {
-        var courseListOther = [
-            ['', '', '', '', '毛概@14208', '毛概@14208', '', '', '', '选修', '', ''],
-            ['大学英语(Ⅳ)@10203', '大学英语(Ⅳ)@10203', '', '', '模拟电子技术基础@16204', '模拟电子技术基础@16204', '', '', '', '', '', ''],
-            ['', '', '信号与系统@11302', '信号与系统@11302', '', '', '电路、信号与系统实验', '电路、信号与系统实验', '', '', '', ''],
-            ['形势与政策(Ⅳ)@15208', '形势与政策(Ⅳ)@15208', '', '', '电装实习@11301', '电装实习@11301', '', '', '', '大学体育', '大学体育', ''],
-            ['大学体育(Ⅳ)', '大学体育(Ⅳ)', '', '', '数据结构与算法分析', '数据结构与算法分析', '', '', '信号与系统', '信号与系统', '', ''],
-        ];
+        var courseListOther = ${coursesPresetName};
 
         Timetable.setOption({
             timetables: courseListOther,
@@ -377,6 +375,21 @@
         });
     };
 
+    function onChange2() {
+        var courseListOther = ${coursesName};
+
+        Timetable.setOption({
+            timetables: courseListOther,
+            week: ['一', '二', '三', '四', '五', '六', '日'],
+            styles: {
+                palette: ['#dedcda', '#ff4081']
+            },
+            timetableType: courseType,
+            gridOnClick: function (e) {
+                console.log(e);
+            }
+        });
+    };
 
     //清空新建课程窗口中的数据
     function clearhomepage() {

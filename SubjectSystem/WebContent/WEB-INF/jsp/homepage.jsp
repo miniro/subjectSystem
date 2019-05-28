@@ -262,11 +262,11 @@ $(function(){
                     <li>
                         <a href="#">
                             <div>
-                                <strong>张经理</strong> <span class="pull-right text-muted">
+                                <strong>教学办钟颖老师</strong> <span class="pull-right text-muted">
 								<em>昨天</em>
 							</span>
                             </div>
-                            <div>今天晚上开会，讨论一下下个月工作的事...</div>
+                            <div>请及时完成教学评价</div>
                         </a>
                     </li>
                     <li class="divider"></li>
@@ -290,7 +290,7 @@ $(function(){
                         <a href="#">
                             <div>
                                 <p>
-                                    <strong>任务 1</strong>
+                                    <strong>完成教学评价</strong>
                                     <span class="pull-right text-muted">完成40%</span>
                                 </p>
                                 <div class="progress progress-striped active">
@@ -308,7 +308,7 @@ $(function(){
                         <a href="#">
                             <div>
                                 <p>
-                                    <strong>任务 2</strong>
+                                    <strong>完善个人资料</strong>
                                     <span class="pull-right text-muted">完成20%</span>
                                 </p>
                                 <div class="progress progress-striped active">
@@ -366,15 +366,6 @@ $(function(){
                     </li>
                     <li class="divider"></li>
                     <li>
-                        <a href="#">
-                            <div>
-                                <i class="fa fa-upload fa-fw"></i> 服务器重启
-                                <span class="pull-right text-muted small">4分钟之前</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
                         <a class="text-center" href="#">
                             <strong>查看所有提醒</strong>
                             <i class="fa fa-angle-right"></i>
@@ -394,7 +385,7 @@ $(function(){
                         用户：${STU_SESSION.name}
                     </a>
                     </li>
-                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> 系统设置</a></li>
+                    <li><a href="${pageContext.request.contextPath }/connectUs.action"><i class="fa fa-gear fa-fw"></i> 上报错误</a></li>
                     <li class="divider"></li>
                     <li>
                         <a href="${pageContext.request.contextPath }/logout.action">
@@ -543,6 +534,52 @@ $(function(){
         </div>
     </div>
     <!-- 课程列表查询部分  end-->
+    <!-- footer -->
+    <div class="wave-box">
+
+        <div class="marquee-box marquee-up" id="marquee-box">
+            <div class="marquee">
+                <div class="wave-list-box" id="wave-list-box1">
+                    <ul>
+                        <li><img height="60" alt="波浪" src="${pageContext.request.contextPath}/images/wave_02.png"></li>
+                    </ul>
+                </div>
+                <div class="wave-list-box" id="wave-list-box2">
+                    <ul>
+                        <li><img height="60" alt="波浪" src="${pageContext.request.contextPath}/images/wave_02.png"></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="marquee-box" id="marquee-box3">
+            <div class="marquee">
+                <div class="wave-list-box" id="wave-list-box4">
+                    <ul>
+                        <li><img height="60" alt="波浪" src="${pageContext.request.contextPath}/images/wave_01.png"></li>
+                    </ul>
+                </div>
+                <div class="wave-list-box" id="wave-list-box5">
+                    <ul>
+                        <li><img height="60" alt="波浪" src="${pageContext.request.contextPath}/images/wave_01.png"></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="footer">
+        <div class="auto clearfix">
+
+            <div class="footer-floor1">
+                <div class="clear-float"></div>
+            </div>
+        </div>
+        <div class="footer-floor2">
+            <p>©2019-2019 fttAndAbao 版权所有</p>
+        </div>
+    </div>
+    <!-- footer end -->
 </div>
 <!-- 创建课程模态框 -->
 <div class="modal fade" id="newcourseDialog" tabindex="-1" role="dialog"
@@ -736,53 +773,6 @@ $(function(){
 
 <div style="margin-top: 100px"></div>
 
-<!-- footer -->
-<div class="wave-box">
-
-    <div class="marquee-box marquee-up" id="marquee-box">
-        <div class="marquee">
-            <div class="wave-list-box" id="wave-list-box1">
-                <ul>
-                    <li><img height="60" alt="波浪" src="${pageContext.request.contextPath}/images/wave_02.png"></li>
-                </ul>
-            </div>
-            <div class="wave-list-box" id="wave-list-box2">
-                <ul>
-                    <li><img height="60" alt="波浪" src="${pageContext.request.contextPath}/images/wave_02.png"></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <div class="marquee-box" id="marquee-box3">
-        <div class="marquee">
-            <div class="wave-list-box" id="wave-list-box4">
-                <ul>
-                    <li><img height="60" alt="波浪" src="${pageContext.request.contextPath}/images/wave_01.png"></li>
-                </ul>
-            </div>
-            <div class="wave-list-box" id="wave-list-box5">
-                <ul>
-                    <li><img height="60" alt="波浪" src="${pageContext.request.contextPath}/images/wave_01.png"></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-</div>
-<div class="footer">
-    <div class="auto clearfix">
-
-        <div class="footer-floor1">
-            <div class="clear-float"></div>
-        </div>
-    </div>
-    <div class="footer-floor2">
-        <p>©2019-2019 fttAndAbao 版权所有</p>
-    </div>
-</div>
-<!-- footer end -->
-
 <!-- 引入js文件 -->
 <!-- jQuery -->
 <script src="<%=basePath%>js/jquery-1.11.3.min.js"></script>
@@ -873,7 +863,7 @@ $(function(){
     }
 </script>
 
-<%--<div id="clock" style="width:150px;height:150px">--%>
+<%--<div id="clock" style="width:150px;height:150px;float:right">--%>
     <%--<div id="hour" style="transform: rotate(56deg);"><img src="${pageContext.request.contextPath}/images/hour.png"></div>--%>
     <%--<div id="minute" style="transform: rotate(312deg);"><img src="${pageContext.request.contextPath}/images/minute.png"></div>--%>
     <%--<div id="second" style="transform: rotate(6deg);"><img src="${pageContext.request.contextPath}/images/second.png"></div>--%>

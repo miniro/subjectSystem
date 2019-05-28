@@ -14,6 +14,11 @@
 		select * from course where courseId = #{courseId}
 	</select>
 
+	<!-- 根据id查询预置课程-->
+	<select id="searchPresetCourseById" parameterType="String" resultType="Course">
+		select * from course where courseId = #{courseId} and preset='1'
+	</select>
+
 	<!-- SQL片段-->
 	<sql id="searchCoursesWhere">
 		<where>

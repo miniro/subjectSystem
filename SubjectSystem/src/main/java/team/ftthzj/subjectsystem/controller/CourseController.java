@@ -59,10 +59,45 @@ public class CourseController {
         Student student = (Student) session.getAttribute("STU_SESSION");
         List<Score> scores= scoreService.searchScoreByStudentId(student.getStudentId());
         List<Course> courses=new ArrayList<>();
+        List<Course> coursesPreset=new ArrayList<>();
         for(Score score:scores){
             Course course=courseService.searchCourseById(score.getCourseId());
-            courses.add(course);
+            if(course.getPreset()==0)
+                courses.add(course);
+            else
+                coursesPreset.add(course);
         }
+        List<List<String>> coursesName=getCoursesName(courses);
+        List<List<String>> coursesPresetName=getCoursesName(coursesPreset);
+        model.addAttribute("coursesTable", courses);
+        model.addAttribute("coursesName", coursesName);
+        model.addAttribute("coursesPresetName", coursesPresetName);
+        return "courseTable";
+    }
+    class CourseComparator implements Comparator<Course> {
+        public int compare(Course object1, Course object2) {// 实现接口中的方法
+            return new Integer(object1.getStartingTime()).compareTo(object2.getStartingTime());
+        }
+    }
+    public void sortCourse(List<Course> list){
+        Collections.sort(list,new CourseComparator());
+    }
+    List<String> generate(List<Course> list){
+        List<String> day=new ArrayList<>();
+        for(int i=0;i<12;i++)
+            day.add("''");
+        for(Course course:list){
+            int start=course.getStartingTime();
+            int during=course.getDuration();
+            System.out.println(course.getcourseName());
+            for(int j=0;j<during;j++){
+                day.remove(start-1+j);
+                day.add(start-1+j,"'"+course.getcourseName()+"'");
+            }
+        }
+        return day;
+    }
+    public List<List<String>> getCoursesName(List<Course> courses){
         List<List<String>> coursesName=new ArrayList<>();
         List<Course> day1=new ArrayList<>();List<Course> day2=new ArrayList<>();
         List<Course> day3=new ArrayList<>();List<Course> day4=new ArrayList<>();
@@ -94,32 +129,6 @@ public class CourseController {
         coursesName.add(day33);coursesName.add(day44);
         coursesName.add(day55);coursesName.add(day66);
         coursesName.add(day77);
-        model.addAttribute("coursesTable", courses);
-        model.addAttribute("coursesName", coursesName);
-        return "courseTable";
+        return coursesName;
     }
-    class CourseComparator implements Comparator<Course> {
-        public int compare(Course object1, Course object2) {// 实现接口中的方法
-            return new Integer(object1.getStartingTime()).compareTo(object2.getStartingTime());
-        }
-    }
-    public void sortCourse(List<Course> list){
-        Collections.sort(list,new CourseComparator());
-    }
-    List<String> generate(List<Course> list){
-        List<String> day=new ArrayList<>();
-        for(int i=0;i<12;i++)
-            day.add("''");
-        for(Course course:list){
-            int start=course.getStartingTime();
-            int during=course.getDuration();
-            System.out.println(course.getcourseName());
-            for(int j=0;j<during;j++){
-                day.remove(start-1+j);
-                day.add(start-1+j,"'"+course.getcourseName()+"'");
-            }
-        }
-        return day;
-    }
-
 }
