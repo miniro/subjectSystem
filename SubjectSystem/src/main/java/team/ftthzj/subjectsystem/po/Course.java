@@ -107,6 +107,14 @@ public class Course {
 		return enddingTime;
 	}
 
+	public int getPreset() {
+		return preset;
+	}
+
+	public void setPreset(int preset) {
+		this.preset = preset;
+	}
+
 	public void setEnddingTime(int enddingTime) {
 		this.enddingTime = enddingTime;
 	}
@@ -119,8 +127,11 @@ public class Course {
 		this.weekTime = weekTime;
 	}
 
+
+	
 	private int enddingTime;
 	private int weekTime;
+	private int preset;
 	private Integer start;            // 起始行
 	private Integer rows;             // 所取行数
 

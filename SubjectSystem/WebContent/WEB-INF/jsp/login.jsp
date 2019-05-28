@@ -422,6 +422,7 @@
 				<div id="owl-login" class="forget-owl">
 					<div class="hand"></div>
 					<div class="hand hand-r"></div>
+					<div class="hand hand-r"></div>
 					<div class="arms">
 						<div class="arm"></div>
 						<div class="arm arm-r"></div>

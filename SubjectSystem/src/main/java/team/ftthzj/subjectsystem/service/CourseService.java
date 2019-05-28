@@ -32,4 +32,7 @@ public interface CourseService {
 	
 	//通过id删除课程
 	public int deleteCourse(String courseId);
+
+	//通过id查询预置课程
+	public Course searchPresetCourseById(String courseId);
 }

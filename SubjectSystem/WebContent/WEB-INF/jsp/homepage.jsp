@@ -25,8 +25,224 @@
     <!-- Custom Fonts -->
     <link href="<%=basePath%>css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <link href="<%=basePath%>css/boot-crm.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="<%=basePath%>css/style.css">
+    <style type="text/css">
+        html, body {height:100%;}
+
+        body {
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2afd0', endColorstr='#88caec',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+            font-family: 'Comfortaa', cursive;
+        }
+
+        #clock {
+            height: 100%;
+            position: relative;
+            width: 100%;
+            margin:10% auto;
+            border-radius:50%;
+            box-shadow:25px 40px 100px rgba(2, 2, 2, 0.7);
+        }
+
+        #clock div {
+            position: absolute;
+            left:50%;
+        }
+
+        #clock img[src*="second"] {
+            transition: transform 600000s linear 1s;
+            height: 150px;
+            width: 100%;
+        }
+
+        #clock:target img[src*="second"] {
+            transform: rotate(3600000deg);
+            height: 150px;
+            width: 2px;
+        }
+
+        #clock img[src*="minute"] {
+            transition: transform 360000s linear 0s;
+            height: 150px;
+            width: 3px;
+        }
+
+        #clock:target img[src*="minute"] {
+            height: 150px;
+            width: 3px;
+            transform: rotate(36000deg);
+        }
+
+        #clock img[src*="hour"] {
+            height: 150px;
+            width: 4px;
+            color: #c7254e;
+            transition: transform 216000s linear 0s;
+        }
+
+        #clock:target img[src*="hour"] {
+            height: 150px;
+            width: 4px;
+            color: #c7254e;
+            transform: rotate(360deg);
+        }
+        .clock1 {
+            background:#383838 url("${pageContext.request.contextPath}/images/clock1.png") no-repeat;
+            background-size:150px 150px;
+        }
+
+        .clock2 {
+            background:#383838 url("${pageContext.request.contextPath}/images/clock2.png") no-repeat;
+            background-size:150px 150px;
+        }
+
+        .clock3 {
+            background:#383838 url("${pageContext.request.contextPath}/images/clock3.png") no-repeat;
+            background-size:150px 150px;
+        }
+
+        .clock4 {
+            background:#383838 url("${pageContext.request.contextPath}/images/clock4.png") no-repeat;
+            background-size:150px 150px;
+        }
+
+        .clock5 {
+            background:#383838 url("${pageContext.request.contextPath}/images/clock5.png") no-repeat;
+            background-size:150px 150px;
+        }
+
+        .clock6 {
+            background:#383838 url("${pageContext.request.contextPath}/images/clock6.png") no-repeat;
+            background-size:150px 150px;
+        }
+
+        .clock7 {
+            background:#383838 url("${pageContext.request.contextPath}/images/clock7.png") no-repeat;
+            background-size:150px 150px;
+        }
+        .clock8 {
+            background:#383838 url("${pageContext.request.contextPath}/images/clock8.png") no-repeat;
+            background-size:150px 150px;
+        }
+
+        .clock9 {
+            background:#383838 url("${pageContext.request.contextPath}/images/clock9.png") no-repeat;
+            background-size:150px 150px;
+        }
+
+        .clock10 {
+            background:#383838 url("${pageContext.request.contextPath}/images/clock10.png") no-repeat;
+            background-size:150px 150px;
+        }
+
+        .clock11 {
+            background:#383838 url("${pageContext.request.contextPath}/images/clock11.png") no-repeat;
+            background-size:150px 150px;
+        }
+
+        .clock12 {
+            background:#383838 url("${pageContext.request.contextPath}/images/clock12.png") no-repeat;
+            background-size:150px 150px;
+        }
+
+        .clock13 {
+            background:#383838 url("${pageContext.request.contextPath}/images/clock1.png") no-repeat;
+            background-size:150px 150px;
+        }
+
+        .clock14 {
+            background:#383838 url("${pageContext.request.contextPath}/images/clock2.png") no-repeat;
+            background-size:150px 150px;
+        }
+
+        .clock15 {
+            background:#383838 url("${pageContext.request.contextPath}/images/clock3.png") no-repeat;
+            background-size:150px 150px;
+        }
+
+        .clock16 {
+            background:#383838 url("${pageContext.request.contextPath}/images/clock4.png") no-repeat;
+            background-size:150px 150px;
+        }
+
+        .clock17 {
+            background:#383838 url("${pageContext.request.contextPath}/images/clock5.png") no-repeat;
+            background-size:150px 150px;
+        }
+
+        .clock18 {
+            background:#383838 url("${pageContext.request.contextPath}/images/clock6.png") no-repeat;
+            background-size:150px 150px;
+        }
+
+        .clock19 {
+            background:#383838 url("${pageContext.request.contextPath}/images/clock7.png") no-repeat;
+            background-size:150px 150px;
+        }
+        .clock20 {
+            background:#383838 url("${pageContext.request.contextPath}/images/clock8.png") no-repeat;
+            background-size:150px 150px;
+        }
+        .clock21 {
+            background:#383838 url("${pageContext.request.contextPath}/images/clock9.png") no-repeat;
+            background-size:150px 150px;
+        }
+        .clock22 {
+            background:#383838 url("${pageContext.request.contextPath}/images/clock10.png") no-repeat;
+            background-size:150px 150px;
+        }
+
+        .clock23 {
+            background:#383838 url("${pageContext.request.contextPath}/images/clock11.png") no-repeat;
+            background-size:150px 150px;
+        }
+
+        .clock0 {
+            background:#383838 url("${pageContext.request.contextPath}/images/clock12.png") no-repeat;
+            background-size:150px 150px;
+        }
+
+    </style>
 </head>
 <body>
+<script type="text/javascript" src="<%=basePath%>js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript">function Clock_dg(prop) {
+    var angle = 360/60,
+        date = new Date();
+    var h = date.getHours();
+    if(h > 12) {
+        h = h - 12;
+    }
+
+    hour = h;
+    minute = date.getMinutes(),
+        second = date.getSeconds(),
+        hourAngle = (360/12) * hour + (360/(12*60)) * minute;
+
+    $('#minute')[0].style[prop] = 'rotate('+angle * minute+'deg)';
+    $('#second')[0].style[prop] = 'rotate('+angle * second+'deg)';
+    $('#hour')[0].style[prop] = 'rotate('+hourAngle+'deg)';
+    $('#clock').addClass('clock'+h);
+}
+
+
+$(function(){
+    var props = 'transform WebkitTransform MozTransform OTransform msTransform'.split(' '),
+        prop,
+        el = document.createElement('div');
+
+    for(var i = 0, l = props.length; i < l; i++) {
+        if(typeof el.style[props[i]] !== "undefined") {
+            prop = props[i];
+            break;
+        }
+    }
+    setInterval(function(){
+        Clock_dg(prop)
+    },100);
+});
+</script>
+
+
 <div id="wrapper">
     <!-- 导航栏部分 -->
     <nav class="navbar navbar-default navbar-static-top" role="navigation"
@@ -46,11 +262,11 @@
                     <li>
                         <a href="#">
                             <div>
-                                <strong>张经理</strong> <span class="pull-right text-muted">
+                                <strong>教学办钟颖老师</strong> <span class="pull-right text-muted">
 								<em>昨天</em>
 							</span>
                             </div>
-                            <div>今天晚上开会，讨论一下下个月工作的事...</div>
+                            <div>请及时完成教学评价</div>
                         </a>
                     </li>
                     <li class="divider"></li>
@@ -74,7 +290,7 @@
                         <a href="#">
                             <div>
                                 <p>
-                                    <strong>任务 1</strong>
+                                    <strong>完成教学评价</strong>
                                     <span class="pull-right text-muted">完成40%</span>
                                 </p>
                                 <div class="progress progress-striped active">
@@ -92,7 +308,7 @@
                         <a href="#">
                             <div>
                                 <p>
-                                    <strong>任务 2</strong>
+                                    <strong>完善个人资料</strong>
                                     <span class="pull-right text-muted">完成20%</span>
                                 </p>
                                 <div class="progress progress-striped active">
@@ -150,15 +366,6 @@
                     </li>
                     <li class="divider"></li>
                     <li>
-                        <a href="#">
-                            <div>
-                                <i class="fa fa-upload fa-fw"></i> 服务器重启
-                                <span class="pull-right text-muted small">4分钟之前</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
                         <a class="text-center" href="#">
                             <strong>查看所有提醒</strong>
                             <i class="fa fa-angle-right"></i>
@@ -178,7 +385,7 @@
                         用户：${STU_SESSION.name}
                     </a>
                     </li>
-                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> 系统设置</a></li>
+                    <li><a href="${pageContext.request.contextPath }/connectUs.action"><i class="fa fa-gear fa-fw"></i> 上报错误</a></li>
                     <li class="divider"></li>
                     <li>
                         <a href="${pageContext.request.contextPath }/logout.action">
@@ -193,7 +400,7 @@
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
-                    <img src="${pageContext.request.contextPath}/images/school.jpg"  height="195" width="250" alt="城市学院" />
+                    <img src="${pageContext.request.contextPath}/images/school.jpg"  height="195" width="280" alt="城市学院" />
                     <li>
                         <a href="${pageContext.request.contextPath }/course/list.action" class="active">
                             <i class="fa fa-edit fa-fw" aria-hidden="true"></i> 课程管理
@@ -323,6 +530,52 @@
         </div>
     </div>
     <!-- 课程列表查询部分  end-->
+    <!-- footer -->
+    <div class="wave-box">
+
+        <div class="marquee-box marquee-up" id="marquee-box">
+            <div class="marquee">
+                <div class="wave-list-box" id="wave-list-box1">
+                    <ul>
+                        <li><img height="60" alt="波浪" src="${pageContext.request.contextPath}/images/wave_02.png"></li>
+                    </ul>
+                </div>
+                <div class="wave-list-box" id="wave-list-box2">
+                    <ul>
+                        <li><img height="60" alt="波浪" src="${pageContext.request.contextPath}/images/wave_02.png"></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="marquee-box" id="marquee-box3">
+            <div class="marquee">
+                <div class="wave-list-box" id="wave-list-box4">
+                    <ul>
+                        <li><img height="60" alt="波浪" src="${pageContext.request.contextPath}/images/wave_01.png"></li>
+                    </ul>
+                </div>
+                <div class="wave-list-box" id="wave-list-box5">
+                    <ul>
+                        <li><img height="60" alt="波浪" src="${pageContext.request.contextPath}/images/wave_01.png"></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="footer">
+        <div class="auto clearfix">
+
+            <div class="footer-floor1">
+                <div class="clear-float"></div>
+            </div>
+        </div>
+        <div class="footer-floor2">
+            <p>©2019-2019 fttAndAbao 版权所有</p>
+        </div>
+    </div>
+    <!-- footer end -->
 </div>
 <!-- 创建课程模态框 -->
 <div class="modal fade" id="newcourseDialog" tabindex="-1" role="dialog"
@@ -369,10 +622,8 @@
                         <div class="col-sm-10">
                             <select	class="form-control" id="credit"  name="credit">
                                 <option value="">--请选择--</option>
-                                <c:forEach items="${creditList}" var="item">
-                                    <option value="${item}"<c:if test="${item == credit}"> selected</c:if>>
-                                            ${item}
-                                    </option>
+                                <c:forEach items="${creditList}" var="value">
+                                    <option value="${value}"<c:if test="${value == credit}"> selected</c:if>>${value}</option>
                                 </c:forEach>
                             </select>
                         </div>
@@ -550,6 +801,9 @@
         </div>
     </div>
 </div>
+
+<div style="margin-top: 100px"></div>
+
 <!-- 引入js文件 -->
 <!-- jQuery -->
 <script src="<%=basePath%>js/jquery-1.11.3.min.js"></script>
@@ -562,6 +816,7 @@
 <script src="<%=basePath%>js/dataTables.bootstrap.min.js"></script>
 <!-- Custom Theme JavaScript -->
 <script src="<%=basePath%>js/sb-admin-2.js"></script>
+<script src="<%=basePath%>js/script.js"></script>
 <!-- 编写js代码 -->
 <script type="text/javascript">
     //清空新建课程窗口中的数据
@@ -638,5 +893,11 @@
         }
     }
 </script>
+
+<%--<div id="clock" style="width:150px;height:150px;float:right">--%>
+    <%--<div id="hour" style="transform: rotate(56deg);"><img src="${pageContext.request.contextPath}/images/hour.png"></div>--%>
+    <%--<div id="minute" style="transform: rotate(312deg);"><img src="${pageContext.request.contextPath}/images/minute.png"></div>--%>
+    <%--<div id="second" style="transform: rotate(6deg);"><img src="${pageContext.request.contextPath}/images/second.png"></div>--%>
+<%--</div>--%>
 </body>
 </html>

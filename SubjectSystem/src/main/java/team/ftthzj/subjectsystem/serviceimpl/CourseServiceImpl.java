@@ -32,11 +32,12 @@ public class CourseServiceImpl implements CourseService{
 		courseDao.addCourse(course);
 		return 1;
 	}
-
 	public Course searchCourseById(String courseId) {
 		return courseDao.searchCourseById(courseId);
 	}
-
+	public Course searchPresetCourseById(String courseId) {
+		return courseDao.searchPresetCourseById(courseId);
+	}
 	public List<Course> searchCoursesByName(String courseName) {
 		Course course = new Course();
 		course.setcourseName(courseName);
