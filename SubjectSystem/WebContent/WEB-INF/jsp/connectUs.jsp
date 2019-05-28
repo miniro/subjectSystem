@@ -55,7 +55,7 @@
             </div>
 
             <div class="container-contact100-form-btn">
-                <button class="contact100-form-btn"type="submit">提 交</button>
+                <button class="contact100-form-btn"type="submit" ">提 交</button>
             </div>
             <div class="contact100-form-social flex-c-m">
                 <a href="http://www.dowebok.com" class="contact100-form-social-item flex-c-m bg1 m-r-20" target="_blank">
@@ -79,16 +79,41 @@
 
 <script src="vendor/jquery/jquery-1.12.4.min.js"></script>
 <script src="vendor/select2/select2.min.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script>
-
+    var errorType;
     function change() {
 
-        var result = $("#select").val();
-
-        // alert("您选择的是："+result);
+        errorType = $("#select").val();
+        alert("您选择的是："+errorType);
 
     }
+    function testJson(){
+        // 获取输入的用户名和密码
+        var content = $("#content").val();
+        var errorType = $("#content").val();
 
+        $.ajax({
+            url : "${pageContext.request.contextPath }/message/addMessage.action",
+            type : "post",
+            // data表示发送的数据
+            data :JSON.stringify({content:content,e:errorType}),
+            // 定义发送请求的数据格式为JSON字符串
+            contentType : "application/json;charset=UTF-8",
+            //定义回调响应的数据格式为JSON字符串,该属性可以省略
+            dataType : "json",
+            beforeSend : function(req) {
+                req.setRequestHeader('Content-Type', 'application/json');  ///加这一行解决问题
+            },
+            //成功响应的结果
+            success : function(data){
+                if(data != null){
+                    alert("您输入的用户名为："+data.errorType+
+                        "密码为："+data.content);
+                }
+            }
+        });
+    }
     $(".js-select2").each(function(){
         $(this).select2({
             minimumResultsForSearch: 20,

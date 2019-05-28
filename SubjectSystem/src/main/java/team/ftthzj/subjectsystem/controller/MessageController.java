@@ -1,19 +1,12 @@
 package team.ftthzj.subjectsystem.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import team.ftthzj.subjectsystem.po.Course;
+import org.springframework.web.bind.annotation.*;
 import team.ftthzj.subjectsystem.po.Message;
-import team.ftthzj.subjectsystem.po.Score;
 import team.ftthzj.subjectsystem.po.Student;
-import team.ftthzj.subjectsystem.service.CourseService;
 import team.ftthzj.subjectsystem.service.MessageService;
-
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.List;
+
 
 /**
  * ftt控制器类
@@ -24,16 +17,29 @@ public class MessageController {
     @Autowired
     private MessageService messageService;
 
-    @RequestMapping(value = "/message/addMessage.action",method = RequestMethod.POST)
-    public String addMessage(String content, int errorType, HttpSession session) {
+    /**
+     * 接收页面请求的JSON数据，并打印JSON格式结果
+     */
+    @RequestMapping(value = "/message/addMessage.action")
+    public String addMessage(String content,String service,HttpSession session) {
         Student student = (Student) session.getAttribute("STU_SESSION");
-        Message message=new Message();
+        Message message =new Message();
         message.setStudentId(student.getStudentId());
         message.setContent(content);
-        message.setErrorType(errorType);
+        if(service.equals("系统错误"))
+            message.setErrorType(0);
+        if(service.equals("课程信息错误"))
+            message.setErrorType(1);
+        if(service.equals("课表显示错误"))
+            message.setErrorType(2);
+        if(service.equals("公告显示错误"))
+            message.setErrorType(3);
+        if(service.equals("成绩录入错误"))
+            message.setErrorType(4);
+        if(service.equals("其他错误"))
+            message.setErrorType(5);
         messageService.addMessage(message);
-        System.out.println(message.getContent());
-        return "redirect:connectUs";
+        return "homepage";
     }
 
     @RequestMapping(value = "/connectUs.action")

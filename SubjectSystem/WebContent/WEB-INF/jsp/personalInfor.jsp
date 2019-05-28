@@ -402,7 +402,7 @@ $(function(){
                 <ul class="nav" id="side-menu">
                     <img src="${pageContext.request.contextPath}/images/school.jpg"  height="195" width="280" alt="城市学院" />
                     <li>
-                        <a href="${pageContext.request.contextPath }/course/list.action" class="active">
+                        <a href="${pageContext.request.contextPath }/course/list.action" >
                             <i class="fa fa-edit fa-fw" aria-hidden="true"></i> 课程管理
                         </a>
                     </li>
