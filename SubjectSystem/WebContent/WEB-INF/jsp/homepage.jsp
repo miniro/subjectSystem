@@ -671,35 +671,6 @@ $(function(){
                             </select>
                         </div>
                     </div>
-<%--                    <div class="form-group">--%>
-<%--                        <label for="new_custLevel" style="float:left;padding:7px 15px 0 27px;">上课时间</label>--%>
-<%--                        <div class="col-sm-10">--%>
-<%--                            <select	class="form-control" id="new_custLevel" name="cust_level">--%>
-<%--                                <option value="">--请选择--</option>--%>
-<%--                                <c:forEach items="${levelType}" var="item">--%>
-<%--                                    <option value="${item.dict_id}"<c:if test="${item.dict_id == custLevel}"> selected</c:if>>${item.dict_item_name }</option>--%>
-<%--                                </c:forEach>--%>
-<%--                            </select>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                    <div class="form-group">--%>
-<%--                        <label for="new_phone" class="col-sm-2 control-label">起始时间</label>--%>
-<%--                        <div class="col-sm-10">--%>
-<%--                            <input type="text" class="form-control" id="new_phone" placeholder="起始时间" name="cust_phone" />--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                    <div class="form-group">--%>
-<%--                        <label for="new_mobile" class="col-sm-2 control-label">结束时间</label>--%>
-<%--                        <div class="col-sm-10">--%>
-<%--                            <input type="text" class="form-control" id="new_mobile" placeholder="结束时间" name="cust_mobile" />--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                    <div class="form-group">--%>
-<%--                        <label for="new_zipcode" class="col-sm-2 control-label">截止时间</label>--%>
-<%--                        <div class="col-sm-10">--%>
-<%--                            <input type="text" class="form-control" id="new_zipcode" placeholder="截止时间" name="cust_zipcode" />--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
                 </form>
             </div>
             <div class="modal-footer">

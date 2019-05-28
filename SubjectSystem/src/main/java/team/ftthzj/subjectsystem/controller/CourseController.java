@@ -59,7 +59,7 @@ public class CourseController {
 
     @RequestMapping(value = "/course/create.action")
     @ResponseBody
-    public String creatCourse(HttpServletRequest request, HttpServletResponse response){
+    public String creatCourse(HttpServletRequest request){
         Course course = new Course();
         course.setcourseId(request.getParameter("courseId"));
         course.setcourseName(request.getParameter("courseName"));
@@ -68,10 +68,12 @@ public class CourseController {
         String weekTime = request.getParameter("weekTime");
         String startingTime = request.getParameter("startingTime");
         String endingTime = request.getParameter("endingTime");
+        String property = request.getParameter("property");
         course.setCredit(Double.valueOf(credit));
         course.setWeekTime(Integer.valueOf(weekTime));
         course.setStartingTime(Integer.valueOf(startingTime));
         course.setEnddingTime(Integer.valueOf(endingTime));
+        course.setProperty(Integer.valueOf(property));
         int rows = courseService.addCourse(course);
         if(rows > 0){
             return "OK";
