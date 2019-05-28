@@ -1,3 +1,10 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: abao
+  Date: 2019-05-24
+  Time: 14:20
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 		 pageEncoding="UTF-8"%>
 <html>
@@ -192,8 +199,8 @@
 					flag = true;
 				}
 			}
-			//用户名只能是15位以下的字母或数字
-			var regExp = new RegExp("^[a-zA-Z0-9_]{1,15}$");
+			//用户名只能是25位以下的字母或数字
+			var regExp = new RegExp("^[A-Za-z\\d]+([-_.][A-Za-z\\d]+)*@([A-Za-z\\d]+[-.])+[A-Za-z\\d]{2,4}$");
 			if(!regExp.test(username)){
 				$.pt({
 					target: $("#register-username"),
@@ -201,7 +208,7 @@
 					align: 't',
 					width: 'auto',
 					height: 'auto',
-					content:"用户名必须为15位以下的字母或数字"
+					content:"用户名必须是邮箱地址"
 				});
 				flag = true;
 			}
@@ -280,7 +287,7 @@
 				flag = true;
 			}
 			//用户名只能是15位以下的字母或数字
-			var regExp = new RegExp("^[a-zA-Z0-9_]{1,15}$");
+			var regExp = new RegExp("^[A-Za-z\\d]+([-_.][A-Za-z\\d]+)*@([A-Za-z\\d]+[-.])+[A-Za-z\\d]{2,4}$");
 			if(!regExp.test(username)){
 				$.pt({
 					target: $("#forget-username"),
@@ -288,7 +295,7 @@
 					align: 't',
 					width: 'auto',
 					height: 'auto',
-					content:"用户名必须为15位以下的字母或数字"
+					content:"用户名必须为邮箱地址"
 				});
 				flag = true;
 			}
@@ -385,14 +392,15 @@
 					<section class="content">
 							<span class="input input--hideo">
 								<input class="input__field input__field--hideo" type="text" id="email" name="email"
-									   autocomplete="off" placeholder="请输入用户名" tabindex="1" maxlength="15" />
+									   autocomplete="off" placeholder="请输入用户名" tabindex="1" maxlength="25" />
+
 								<label class="input__label input__label--hideo" for="email">
 									<i class="fa fa-fw fa-user icon icon--hideo"></i>
 									<span class="input__label-content input__label-content--hideo"></span>
 								</label>
 							</span>
 							<span class="input input--hideo">
-								<input class="input__field input__field--hideo" type="password" id="password"name="password" placeholder="请输入密码" tabindex="2" maxlength="15"/>
+								<input class="input__field input__field--hideo" type="password" id="password"name="password" placeholder="请输入密码" tabindex="2" maxlength="25"/>
 								<label class="input__label input__label--hideo" for="password">
 									<i class="fa fa-fw fa-lock icon icon--hideo"></i>
 									<span class="input__label-content input__label-content--hideo"></span>
@@ -469,21 +477,22 @@
 					<section class="content">
 							<span class="input input--hideo">
 								<input class="input__field input__field--hideo" type="text" id="register-username"
-									   autocomplete="off" placeholder="请输入用户名" maxlength="15"/>
+									   autocomplete="off" placeholder="请输入用户名" maxlength="25"/>
 								<label class="input__label input__label--hideo" for="register-username">
 									<i class="fa fa-fw fa-user icon icon--hideo"></i>
 									<span class="input__label-content input__label-content--hideo"></span>
 								</label>
 							</span>
 						<span class="input input--hideo">
-								<input class="input__field input__field--hideo" type="password" id="register-password" placeholder="请输入密码" maxlength="15"/>
+								<input class="input__field input__field--hideo" type="password" id="register-password" placeholder="请输入密码" maxlength="25"/>
+
 								<label class="input__label input__label--hideo" for="register-password">
 									<i class="fa fa-fw fa-lock icon icon--hideo"></i>
 									<span class="input__label-content input__label-content--hideo"></span>
 								</label>
 							</span>
 						<span class="input input--hideo">
-								<input class="input__field input__field--hideo" type="password" id="register-repassword" placeholder="请确认密码" maxlength="15"/>
+								<input class="input__field input__field--hideo" type="password" id="register-repassword" placeholder="请确认密码" maxlength="25"/>
 								<label class="input__label input__label--hideo" for="register-repassword">
 									<i class="fa fa-fw fa-lock icon icon--hideo"></i>
 									<span class="input__label-content input__label-content--hideo"></span>

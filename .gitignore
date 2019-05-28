@@ -2,6 +2,7 @@ SubjectSystem/.idea
 SubjectSystem/bin
 SubjectSystem/classes
 SubjectSystem/SubjectSystem.iml
+SubjectSystem/.DS_Store
 SubjectSystem/src/main/resources
 SubjectSystem/src/main/test
 SubjectSystem/WebContent/WEB-INF/lib

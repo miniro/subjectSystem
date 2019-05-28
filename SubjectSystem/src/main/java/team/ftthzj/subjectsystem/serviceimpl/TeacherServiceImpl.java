@@ -45,7 +45,9 @@ public class TeacherServiceImpl implements TeacherService{
 	}
 
 	public List<Teacher> searchAllTeachers() {
-		return teacherDao.loadAllTeachers();
+		Teacher teacher = new Teacher();
+		teacher.setId(0);
+		return teacherDao.searchTeachers(teacher);
 	}
 
 }

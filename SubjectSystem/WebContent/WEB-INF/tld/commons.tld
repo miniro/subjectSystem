@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE taglib
-   PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN"
-   "http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd">
+        PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN"
+        "http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd">
 <taglib>
     <!-- 指定标签库的版本号 -->
     <tlib-version>2.0</tlib-version>
@@ -10,7 +10,7 @@
     <!-- 指定标签库的名称 -->
     <short-name>common</short-name>
     <!-- 指定标签库的URI -->
-    <uri>http://itheima.com/common/</uri>
+    <uri>http://subjectsystem.ftthzj.team/common/</uri>
     <!-- 指定标签库的显示名称 -->
     <display-name>Common Tag</display-name>
     <!-- 指定标签库的描述 -->
@@ -20,7 +20,8 @@
         <!-- 指定注册的自定义标签名称 -->
         <name>page</name>
         <!-- 指定自定义标签的标签处理器类 -->
-        <tag-class>com.itheima.common.utils.NavigationTag</tag-class>
+        <tag-class>team.ftthzj.subjectsystem.common.utils.NavigationTag</tag-class>
+
         <!-- 指定标签体类型 -->
         <body-content>JSP</body-content>
         <!-- 描述 -->
@@ -35,12 +36,12 @@
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <name>bean</name> 
+            <name>bean</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <name>number</name> 
+            <name>number</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
-	</tag>
+    </tag>
 </taglib>

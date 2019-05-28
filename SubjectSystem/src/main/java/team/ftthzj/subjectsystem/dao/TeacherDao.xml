@@ -8,21 +8,19 @@
 		select * from teacher where teacherId = #{teacherId}
 	</select>
 
-	<!-- 列出所有教师-->
-	<select id="loadAllTeachers" resultType="Teacher">
-		select * from teacher
-	</select>
-
 	<!-- 添加教师-->
 	<insert id="addTeacher" parameterType="Teacher">
 		insert into teacher(teacherId, name, sex, major, qq, phone, email, password, address, position)
 		values(#{studentId}, #{name}, #{sex}, #{major}, #{qq}, #{phone}, #{email}, #{password}, #{address}, #{position})
 	</insert>
 
-	<!-- 修改教师的major,qq,phone,address,position-->
+	<!-- 修改教师的name,major,qq,phone,address,position-->
 	<update id="updateTeacher" parameterType="Teacher">
 		update Teacher
 		<set>
+			<if test="name!=null">
+				name=#{name}
+			</if>
 			<if test="major!=null">
 				major=#{major},
 			</if>
@@ -46,6 +44,26 @@
 	<delete id="deleteTeacher" parameterType="String">
 		delete from Teacher where teacherId = #{teacherId}
 	</delete>
+
+	<!-- 按教工号、姓名、major、职称查询所有老师-->
+	<select id="searchTeachers" parameterType="Teacher" resultType="Teacher">
+		select * from Teacher where 1=1
+		<if test="teacherId != null and teacherId != ''">
+			and teacherId = #{teacherId}
+		</if>
+		<if test="name != null and name != ''">
+			and name like concat('%', #{name}, '%')
+		</if>
+		<if test="major != null and major != ''">
+			and major like concat('%', #{major}, '%')
+		</if>
+		<if test="position != null and position != ''">
+			and position = #{position}
+		</if>
+		<if test="id != null">
+			and id > #{id}
+		</if>
+	</select>
 
 </mapper>
     

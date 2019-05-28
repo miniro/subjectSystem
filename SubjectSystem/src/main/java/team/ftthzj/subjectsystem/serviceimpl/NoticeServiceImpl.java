@@ -30,11 +30,16 @@ public class NoticeServiceImpl implements NoticeService{
 
 	@Override
 	public List<Notice> loadAllNotice() {
-		return noticeDao.loadAllNotice();
+		Notice notice = new Notice();
+		notice.setNoticeId(0);
+		return this.noticeDao.searchNotice(notice);
 	}
 
-	public List<Notice> searchNotices(Notice notice) {
-		return noticeDao.searchNotice(notice);
+	@Override
+	public List<Notice> searchNotices(String title) {
+		Notice notice = new Notice();
+		notice.setTitle(title);
+		return this.noticeDao.searchNotice(notice);
 	}
 
 	public int deleteNotice(String noticeId) {

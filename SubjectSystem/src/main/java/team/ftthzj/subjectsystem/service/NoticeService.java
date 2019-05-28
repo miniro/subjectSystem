@@ -12,8 +12,8 @@ public interface NoticeService {
 	//列出所有消息
 	public List<Notice> loadAllNotice();
 
-	//查询消息
-	public List<Notice> searchNotices(Notice notice);
+	//按标题查询消息
+	public List<Notice> searchNotices(String title);
 	
 	//删除消息
 	public int deleteNotice(String noticeId);

@@ -9,9 +9,6 @@ public interface NoticeDao {
 	//新建消息
 	public int addNotice(Notice notice);
 
-	//列出所有消息
-	public List<Notice> loadAllNotice();
-
 	//查询消息
 	public List<Notice> searchNotice(Notice notice);
 	

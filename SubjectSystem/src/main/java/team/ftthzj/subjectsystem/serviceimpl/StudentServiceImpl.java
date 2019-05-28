@@ -24,7 +24,7 @@ public class StudentServiceImpl implements StudentService{
 	}
 
 	public Student searchStudentById(String studentId) {
-		return studentDao.searchStudentById(studentId);
+		return this.studentDao.searchStudentById(studentId);
 	}
 
 	public List<Student> searchStudentsByName(String studentName) {
@@ -45,12 +45,13 @@ public class StudentServiceImpl implements StudentService{
 
 	@Override
 	public Student findStu(String email, String password) {
-		Student  student = this.studentDao.findStu(email, password);
-		return student;
+		return this.studentDao.findStu(email, password);
 	}
 
 	public List<Student> searchAllStudents() {
-		return studentDao.loadAllStudents();
+		Student student = new Student();
+		student.setId(0);
+		return studentDao.searchStudents(student);
 	}
 
 }

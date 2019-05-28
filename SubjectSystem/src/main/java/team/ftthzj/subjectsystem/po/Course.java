@@ -9,17 +9,17 @@ public class Course {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getCourceId() {
-		return courceId;
+	public String getcourseId() {
+		return courseId;
 	}
-	public void setCourceId(String courceId) {
-		this.courceId = courceId;
+	public void setcourseId(String courseId) {
+		this.courseId = courseId;
 	}
-	public String getCourceName() {
-		return courceName;
+	public String getcourseName() {
+		return courseName;
 	}
-	public void setCourceName(String courceName) {
-		this.courceName = courceName;
+	public void setcourseName(String courseName) {
+		this.courseName = courseName;
 	}
 	public double getCredit() {
 		return credit;
@@ -58,13 +58,32 @@ public class Course {
 		this.property = property;
 	}
 	private int id;
-	private String courceId;
-	private String courceName;
+	private String courseId;
+
+	public Integer getRows() {
+		return rows;
+	}
+
+	public void setRows(Integer rows) {
+		this.rows = rows;
+	}
+
+	public Integer getStart() {
+		return start;
+	}
+
+	public void setStart(Integer start) {
+		this.start = start;
+	}
+
+	private String courseName;
 	private double credit; //学分
 	private String teacherId;
 	private String schoolTime; //上课时间
 	private Date beginTime;
 	private Date endTime;
 	private int property; //课程性质
+	private Integer start;            // 起始行
+	private Integer rows;             // 所取行数
 	
 }

@@ -12,13 +12,8 @@
 	    and password =#{password}
     </select>
 
-	<!-- 列出所有学生-->
-	<select id="loadAllStudents" resultType="Student">
-		select * from Student
-	</select>
-
 	<!-- 通过id查询学生-->
-	<select id="searchStudentById" parameterType="String" resultType="Student">
+	<select id="searchStudentById" parameterType="String" resultType="student">
 		select * from student where studentId = #{studentId}
 	</select>
 
@@ -28,10 +23,13 @@
 		values(#{studentId}, #{name}, #{sex}, #{grade}, #{school}, #{major}, #{qq}, #{phone}, #{email}, #{password}, #{address}, #{enrollmentDate})
 	</insert>
 
-	<!-- 修改学生的grade,school,major,qq,phone,address-->
+	<!-- 修改学生的name,grade,school,major,qq,phone,address-->
 	<update id="updateStudent" parameterType="Student">
 		update Student
 		<set>
+			<if test="name!=null">
+				name=#{name}
+			</if>
 			<if test="grade!=null">
 				grade=#{grade},
 			</if>
@@ -65,14 +63,17 @@
 		<if test="studentId != null and studentId != ''">
 			and studentId = #{studentId}
 		</if>
-		<if test="studentName != null and studentName != ''">
-			and studentName like concat('%', #{name}, '%')
+		<if test="name != null and name != ''">
+			and name like concat('%', #{name}, '%')
 		</if>
 		<if test="school != null and school != ''">
 			and school like concat('%', #{school}, '%')
 		</if>
 		<if test="grade != null and grade != ''">
 			and grade = #{grade}
+		</if>
+		<if test="id != null">
+			and id > #{id}
 		</if>
 	</select>
 

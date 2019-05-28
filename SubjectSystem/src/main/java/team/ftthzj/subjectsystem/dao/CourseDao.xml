@@ -13,19 +13,44 @@
 	<select id="searchCourseById" parameterType="String" resultType="Course">
 		select * from course where courseId = #{courseId}
 	</select>
-	
+
+	<!-- SQL片段-->
+	<sql id="searchCoursesWhere">
+		<where>
+			<if test="courseId != null">
+				courseId = #{courseId}
+			</if>
+			<if test="courseName != null">
+				and courseName like concat('%', #{courseName}, '%')
+			</if>
+			<if test="teacherId != null">
+				and tacherId = #{teacherId}
+			</if>
+			<if test="property != 0">
+				and property = #{property}
+			</if>
+			<if test="credit != 0">
+				and credit = #{credit}
+			</if>
+			<if test="id != null">
+				and id > #{id}
+			</if>
+		</where>
+	</sql>
+
 	<!-- 根据其他条件查询课程-->
-	<select id="searchCourses" parameterType="Student" resultType="Student">
-		select * from Course where 1=1
-		<if test="courseName != null and courseName != ''">
-			and courseName like concat('%', #{courseName}, '%')
+	<select id="searchCourses" parameterType="Course" resultType="Course">
+		select * from Course
+		<include refid="searchCoursesWhere"></include>
+		<if test="start !=null and rows != null">
+			limit #{start},#{rows}
 		</if>
-		<if test="teacherId != null and teacherId != ''">
-			and teacherId = #{teacherId}
-		</if>
-		<if test="property != null and property != ''">
-			and property = #{property}
-		</if>
+	</select>
+
+	<!-- 获取课程总数-->
+	<select id="getCourseNum" parameterType="Course" resultType="Integer">
+		select count(*) from Course
+		<include refid="searchCoursesWhere"></include>
 	</select>
 
 	<!-- 修改课程-->

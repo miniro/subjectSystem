@@ -24,7 +24,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 		}
 		// 获取Session
 		HttpSession session = request.getSession();
-		Student stu = (Student) session.getAttribute("USER_SESSION");
+		Student stu = (Student) session.getAttribute("STU_SESSION");
 		// 判断Session中是否有用户数据，如果有，则返回true,继续向下执行
 		if (stu != null) {
 			return true;

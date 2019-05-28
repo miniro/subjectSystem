@@ -9,16 +9,14 @@
 		insert into notice values(#{noticeId}, #{title}, #{startTime}, #{stopTime}, #{description})
 	</insert>
 
-	<!-- 列出所有通知-->
-	<select id="loadAllNotice" resultType="Notice">
-		select * from notice
-	</select>
-
 	<!-- 查询通知-->
 	<select id="searchNotice" parameterType="Notice" resultType="Notice">
-		select * from notice where 1=1
+		select * from Notice where 1=1
 		<if test="title != null and title != ''">
-			and title is like concat('%', #{title}, '%')
+			and title like concat('%', #{title}, '%')
+		</if>
+		<if test="noticeId != null and noticeId != ''">
+			and noticeId > #{noticeId}
 		</if>
 	</select>
 

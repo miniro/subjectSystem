@@ -8,12 +8,15 @@ public interface CourseDao {
 	
 	//新建课程
 	public int addCourse(Course course);
-	
+
 	//通过id查询课程
 	public Course searchCourseById(String courseId);
 	
 	//通过其他条件查询课程
 	public List<Course> searchCourses(Course course);
+
+	//查询课程数量
+	public Integer getCourseNum(Course course);
 	
 	//修改课程
 	public int updateCourse(Course course);
