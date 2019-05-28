@@ -82,7 +82,44 @@ public class Course {
 	private String schoolTime; //上课时间
 	private Date beginTime;
 	private Date endTime;
-	private int property; //课程性质
+	private int property;
+	private int duration;
+	private int startingTime;
+
+	public int getDuration() {
+		return duration;
+	}
+
+	public void setDuration(int duration) {
+		this.duration = duration;
+	}
+
+	public int getStartingTime() {
+		return startingTime;
+	}
+
+	public void setStartingTime(int startingTime) {
+		this.startingTime = startingTime;
+	}
+
+	public int getEnddingTime() {
+		return enddingTime;
+	}
+
+	public void setEnddingTime(int enddingTime) {
+		this.enddingTime = enddingTime;
+	}
+
+	public int getWeekTime() {
+		return weekTime;
+	}
+
+	public void setWeekTime(int weekTime) {
+		this.weekTime = weekTime;
+	}
+
+	private int enddingTime;
+	private int weekTime;
 	private Integer start;            // 起始行
 	private Integer rows;             // 所取行数
 	

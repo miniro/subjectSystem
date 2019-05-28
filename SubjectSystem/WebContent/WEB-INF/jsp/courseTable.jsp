@@ -292,51 +292,19 @@
             </li>
             <!-- 用户信息和系统设置结束 -->
         </ul>
-        <div class="navbar-default sidebar" role="navigation">
-            <div class="sidebar-nav navbar-collapse">
-                <ul class="nav" id="side-menu">
-                    <img src="${pageContext.request.contextPath}/images/school.jpg"  height="195" width="250" alt="城市学院" />
-                    <li>
-                        <a href="${pageContext.request.contextPath }/course/list.action">
-                            <i class="fa fa-edit fa-fw" aria-hidden="true"></i> 课程管理
-                        </a>
-                    </li>
-                    <li>
-                        <a href="${pageContext.request.contextPath }/course/toCourseTable.action">
-                            <i class="fa fa-table fa-fw" aria-hidden="true"></i> 查看课表
-                        </a>
-                    </li>
-                    <li>
-                        <a href="${pageContext.request.contextPath }/score/listScoreTable.action">
-                            <i class="fa fa-file fa-fw" aria-hidden="true"></i> 查看成绩
-                        </a>
-                    </li>
-                    <li>
-                        <a href="${pageContext.request.contextPath }/notice/list.action">
-                            <i class="fa fa-exclamation-circle fa-fw"  aria-hidden="true"></i> 查看公告
-                        </a>
-                    </li>
-                    <li>
-                        <a href="${pageContext.request.contextPath }/information/list.action">
-                            <i class="fa fa-gear fa-fw" aria-hidden="true"></i>个人信息
-                        </a>
-                    </li>
-                    <li>
-                        <a href="${pageContext.request.contextPath }/fttAndHzj/list.action">
-                            <i class="fa fa-bug fa-fw" aria-hidden="true"></i>关于我们
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
     </nav>
 </div>
+
 <div id="coursesTable"></div>
+<a href="${pageContext.request.contextPath }/course/list.action" class="active" >
+    <button style="background-color: #00a2ae; color: #fff; padding: 5px 10px; border-radius: 4px;border: none">
+        返回主页
+    </button>
+</a>
 <button onclick="onChange()"
         style="background-color: #00a2ae; color: #fff; padding: 5px 10px; border-radius: 4px;border: none">
-    切换课表
+    查看预置课表
 </button>
-</div>
 <!-- 引入js文件 -->
 <!-- jQuery -->
 <script src="<%=basePath%>js/jquery-1.11.3.min.js"></script>
@@ -351,15 +319,10 @@
 <script src="<%=basePath%>js/sb-admin-2.js"></script>
 <!-- 编写js代码 -->
 <script type="text/javascript">
-    var courseList = [
-        ['大学英语(Ⅳ)@10203', '大学英语(Ⅳ)@10203', '', '', '', '', '毛概@14208', '毛概@14208', '', '', '', '选修'],
-        ['', '', '信号与系统@11302', '信号与系统@11302', '模拟电子技术基础@16204', '模拟电子技术基础@16204', '', '', '', '', '', ''],
-        ['大学体育(Ⅳ)', '大学体育(Ⅳ)', '形势与政策(Ⅳ)@15208', '形势与政策(Ⅳ)@15208', '', '', '电路、信号与系统实验', '电路、信号与系统实验', '', '', '', ''],
-        ['', '', '', '', '电装实习@11301', '电装实习@11301', '', '', '', '大学体育', '大学体育', ''],
-        ['', '', '数据结构与算法分析', '数据结构与算法分析', '', '', '', '', '信号与系统', '信号与系统', '', ''],
-    ];
-    var week = window.innerWidth > 360 ? ['周一', '周二', '周三', '周四', '周五'] :
-        ['一', '二', '三', '四', '五'];
+    var courseList =${coursesName};
+
+    var week = window.innerWidth > 360 ? ['周一', '周二', '周三', '周四', '周五','周六','周日'] :
+        ['一', '二', '三', '四', '五','六','七'];
     var day = new Date().getDay();
     var courseType = [
         [{index: '1', name: '8:30'}, 1],
@@ -489,5 +452,6 @@
         }
     }
 </script>
+</div>
 </body>
 </html>

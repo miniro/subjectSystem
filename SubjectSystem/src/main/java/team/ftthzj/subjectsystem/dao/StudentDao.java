@@ -29,5 +29,5 @@ public interface StudentDao {
 	 * 通过账号和密码查询用户
 	 */
 	public Student findStu(@Param("email") String email,
-						 @Param("password") String password);
+                           @Param("password") String password);
 }

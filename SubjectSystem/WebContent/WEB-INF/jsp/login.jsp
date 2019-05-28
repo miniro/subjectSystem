@@ -353,8 +353,6 @@
 
 			background-repeat: no-repeat;
 
-			background-position: center center #2d1312;
-
 			background-color: #00BDDC;
 
 			background-image: url(${pageContext.request.contextPath}/images/snow.jpg);

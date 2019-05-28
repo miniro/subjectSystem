@@ -26,7 +26,7 @@ public interface StudentService {
 	public int deleteStudentById(String studentId);
 
 	// 通过账号和密码查询学生
-	public Student findStu(String email,String password);
+	public Student findStu(String email, String password);
 
 }
 
