@@ -31,7 +31,7 @@
 
 	<!-- 查询成绩-->
 	<select id="searchScores" parameterType="Score" resultType="Score">
-		select * from Score where 1=1
+		select * from score where 1=1
 		<if test="courseId != null and courseId != ''">
 			and courseId = #{courseId}
 		</if>

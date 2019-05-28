@@ -49,5 +49,4 @@ public class TeacherServiceImpl implements TeacherService{
 		teacher.setId(0);
 		return teacherDao.searchTeachers(teacher);
 	}
-
 }

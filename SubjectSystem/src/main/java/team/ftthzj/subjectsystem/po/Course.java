@@ -81,6 +81,7 @@ public class Course {
 	private String teacherId;
 	private String schoolTime; //上课时间
 	private Date beginTime;
+	private Date finishTime;
 	private Date endTime;
 	private int property;
 	private int duration;
@@ -133,5 +134,12 @@ public class Course {
 	private int preset;
 	private Integer start;            // 起始行
 	private Integer rows;             // 所取行数
-	
+
+	public Date getFinishTime() {
+		return finishTime;
+	}
+
+	public void setFinishTime(Date finishTime) {
+		this.finishTime = finishTime;
+	}
 }

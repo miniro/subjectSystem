@@ -4,9 +4,9 @@
 <mapper namespace="team.ftthzj.subjectsystem.dao.CourseDao">
 	<!-- 课程的各种数据库操作 -->
 	<!-- 新建课程-->
-	<insert id="addCourse" parameterType="Course">
-		insert into course(courseId, courseName, credit, teacherId, schoolTime, beginTime, finishTime, endTime, property)
-		values(#{courseId}, #{courseName}, #{credit}, #{teacherId}, #{schoolTime}, #{beginTime}, #{finishTime}, #{endTime}, #{property})
+	<insert id="addCourse" parameterType="course">
+		insert into course(courseId, courseName, credit, teacherId, schoolTime, beginTime, finishTime, endTime, property, duration, startingTime, enddingTime, weekTime)
+		values(#{courseId}, #{courseName}, #{credit}, #{teacherId}, #{schoolTime}, #{beginTime}, #{finishTime}, #{endTime}, #{property}, #{duration}, #{startingTime}, #{enddingTime}, #{weekTime})
 	</insert>
 	
 	<!-- 根据id查询课程-->
@@ -29,13 +29,10 @@
 				and courseName like concat('%', #{courseName}, '%')
 			</if>
 			<if test="teacherId != null">
-				and tacherId = #{teacherId}
+				and teacherId = #{teacherId}
 			</if>
 			<if test="property != 0">
 				and property = #{property}
-			</if>
-			<if test="credit != 0">
-				and credit = #{credit}
 			</if>
 			<if test="id != null">
 				and id > #{id}

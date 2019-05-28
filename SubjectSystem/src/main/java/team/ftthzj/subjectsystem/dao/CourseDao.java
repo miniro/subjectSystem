@@ -7,7 +7,7 @@ import team.ftthzj.subjectsystem.po.Course;
 public interface CourseDao {
 	
 	//新建课程
-	public int addCourse(Course course);
+	public Integer addCourse(Course course);
 
 	//通过id查询课程
 	public Course searchCourseById(String courseId);

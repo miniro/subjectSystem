@@ -5,6 +5,7 @@ import java.util.List;
 
 import team.ftthzj.subjectsystem.common.utils.Page;
 import team.ftthzj.subjectsystem.po.Course;
+import team.ftthzj.subjectsystem.po.CourseForUi;
 
 public interface CourseService {
 
@@ -24,7 +25,7 @@ public interface CourseService {
 	public List<Course> loadAllCourses();
 
 	//查询课程
-	public Page<Course> searchCourses(Integer page, Integer rows, String courseId, String courseName, String teacherName, String property, String credit);
+	public Page<CourseForUi> searchCourses(Integer page, Integer rows, String courseId, String courseName, String teacherName, String property, String credit);
 	
 	//修改课程
 	public int updateCourse(Course course);

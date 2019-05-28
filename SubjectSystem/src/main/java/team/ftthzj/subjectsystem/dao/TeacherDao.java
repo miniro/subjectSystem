@@ -21,7 +21,4 @@ public interface TeacherDao {
 	
 	//删除教师信息
 	public int deleteTeacher(String teacher);
-	
-	//修改密码
-	public int updatePwd(String teacherId, String pwd);
 }
