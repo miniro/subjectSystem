@@ -427,6 +427,11 @@ $(function(){
                         </a>
                     </li>
                     <li>
+                        <a href="${pageContext.request.contextPath }/message/list.action">
+                            <i class="fa fa-bug fa-fw" aria-hidden="true"></i>消息管理
+                        </a>
+                    </li>
+                    <li>
                         <a href="${pageContext.request.contextPath }/fttAndHzj/list.action">
                             <i class="fa fa-bug fa-fw" aria-hidden="true"></i>关于我们
                         </a>

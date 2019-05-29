@@ -82,6 +82,42 @@ public class CourseController {
         }
     }
 
+
+    @RequestMapping(value = "/course/update.action")
+    @ResponseBody
+    public String editCourse(HttpServletRequest request){
+        int flag = courseService.deleteCourse(request.getParameter("oldCourseId"));
+        Course course = new Course();
+        course.setcourseId(request.getParameter("courseId"));
+        course.setcourseName(request.getParameter("courseName"));
+        course.setTeacherId(request.getParameter("teacherId"));
+        String credit = request.getParameter("credit");
+        String weekTime = request.getParameter("weekTime");
+        String startingTime = request.getParameter("startingTime");
+        String endingTime = request.getParameter("endingTime");
+        String property = request.getParameter("property");
+        System.out.println(credit+" "+weekTime);
+        course.setCredit(Double.valueOf(credit));
+        course.setWeekTime(Integer.valueOf(weekTime));
+        course.setStartingTime(Integer.valueOf(startingTime));
+        course.setEnddingTime(Integer.valueOf(endingTime));
+        course.setProperty(Integer.valueOf(property));
+        int rows = courseService.addCourse(course);
+        if(flag==1&&rows==1){
+            return "OK";
+        }else {
+            return "FAIL";
+        }
+    }
+
+
+    @RequestMapping(value = "/course/delete.action")
+    public String deleteCourse(HttpServletRequest request) {
+        int flag=courseService.deleteCourse(request.getParameter("courseId"));
+
+        return "courseTable";
+    }
+
     @RequestMapping(value = "/course/toCourseTable.action")
     public String toCourseTable(HttpSession session, Model model) {
         Student student = (Student) session.getAttribute("STU_SESSION");
