@@ -496,7 +496,7 @@ $(function(){
         <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
            data-target="#newscoreDialog" onclick="clearscore()">新建</a>
         <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
-           data-target="#scoreEditDialog" onclick="clearscore()">修改</a>
+           data-target="#scorechooseEditDialog" onclick="clearscore()">修改</a>
         <a href="#" class="btn btn-danger btn-xs" data-toggle="modal"
            data-target="#scoreDeleteDialog" onclick="clearscore()">删除</a>
         <div class="row">
@@ -656,6 +656,37 @@ $(function(){
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="scorechooseEditDialog" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">修改成绩信息</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="edit_score_form">
+                    <div class="form-group">
+                        <label for="courseId" class="col-sm-2 control-label">
+                            成绩编号
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="chooseScoreId" placeholder="成绩编号" name="chooseScoreId" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <a href="#" class="btn btn-primary" data-toggle="modal"
+                   data-target="#scoreEditDialog" onclick= "editscore(document.getElementById('chooseScoreId').value)" >选择成绩编号</a>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- 修改成绩模态框 -->
 <div class="modal fade" id="scoreEditDialog" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel">
@@ -665,40 +696,24 @@ $(function(){
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel1">新建成绩信息</h4>
+                <h4 class="modal-title" id="myModalLabel1">修改成绩信息</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" id="edit_score_form">
+                <form class="form-horizontal" id="update_score_form">
                     <div class="form-group">
                         <label for="courseId" class="col-sm-2 control-label">
-                            原课程号
+                            课程号
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="oldcourseId" placeholder="课程编号" name="oldcourseId" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="courseId" class="col-sm-2 control-label">
-                            新课程号
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="courseId" placeholder="课程编号" name="courseId" />
+                            <input type="text" class="form-control" id="editcourseId" placeholder="课程编号" name="courseId" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="studentId" class="col-sm-2 control-label">
-                            原学生号
+                            学生号
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="oldstudentId" placeholder="学生编号" name="oldstudentId" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="studentId" class="col-sm-2 control-label">
-                            新学生号
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="studentId" placeholder="学生编号" name="studentId" />
+                            <input type="text" class="form-control" id="editstudentId" placeholder="学生编号" name="studentId" />
                         </div>
                     </div>
                     <div class="form-group">
@@ -706,7 +721,7 @@ $(function(){
                             平时成绩
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="pacificScore" placeholder="平时成绩" name="pacificScore" />
+                            <input type="text" class="form-control" id="editpacificScore" placeholder="平时成绩" name="pacificScore" />
                         </div>
                     </div>
                     <div class="form-group">
@@ -714,7 +729,7 @@ $(function(){
                             期中成绩
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="midScore" placeholder="期中成绩" name="midScore" />
+                            <input type="text" class="form-control" id="editmidScore" placeholder="期中成绩" name="midScore" />
                         </div>
                     </div>
                     <div class="form-group">
@@ -722,7 +737,7 @@ $(function(){
                             期末成绩
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="finalScore" placeholder="期末成绩" name="finalScore" />
+                            <input type="text" class="form-control" id="editfinalScore" placeholder="期末成绩" name="finalScore" />
                         </div>
                     </div>
                     <div class="form-group">
@@ -730,7 +745,15 @@ $(function(){
                             总成绩
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="sumScore" placeholder="总成绩" name="sumScore" />
+                            <input type="text" class="form-control" id="editsumScore" placeholder="总成绩" name="sumScore" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="sumScore" class="col-sm-2 control-label">
+                            成绩状态
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="editstatus" placeholder="成绩状态" name="status" />
                         </div>
                     </div>
                 </form>
@@ -802,13 +825,17 @@ $(function(){
     //清空新建成绩窗口中的数据
     function clearscore() {
         $("#courseId").val("");
-        $("#oldcourseId").val("");
-        $("#studentId").val("");
         $("#studentId").val("");
         $("#pacificScore").val("");
         $("#midScore").val("");
         $("#finalScore").val("");
         $("#sumScore").val("");
+        $("#editcourseId").val("");
+        $("#editstudentId").val("");
+        $("#editpacificScore").val("");
+        $("#editmidScore").val("");
+        $("#editfinalScore").val("");
+        $("#editsumScore").val("");
     }
     // 创建成绩
     function createscore() {
@@ -826,7 +853,7 @@ $(function(){
     // 执行修改成绩操作
     function updatescore() {
         $.post("<%=basePath%>score/update.action",
-            $("#edit_score_form").serialize(),function(data){
+            $("#update_score_form").serialize(),function(data){
                 if(data =="OK"){
                     alert("成绩信息更新成功！");
                     window.location.reload();
@@ -843,15 +870,13 @@ $(function(){
             url:"<%=basePath%>score/getscoreById.action",
             data:{"id":id},
             success:function(data) {
-                $("#old_scoreId").val(data.old_scoreId);
-                $("#new_scoreId").val(data.new_scoreId);
-                $("#new_scoreName").val(data.new_scoreName)
-                $("#teacherId").val(data.teacherId)
-                $("#credit").val(data.credit)
-                $("#property").val(data.property);
-                $("#weekTime").val(data.weekTime);
-                $("#startingTime").val(data.startingTime);
-                $("#endingTime").val(data.endingTime);
+                $("#editcourseId").val(data.courseId);
+                $("#editstudentId").val(data.studentId);
+                $("#editpacificScore").val(data.pacificScore);
+                $("#editmidScore").val(data.midtermScore);
+                $("#editfinalScore").val(data.finalScore);
+                $("#editsumScore").val(data.sumScore);
+                $("#editstatus").val(data.status);
             }
         });
     }

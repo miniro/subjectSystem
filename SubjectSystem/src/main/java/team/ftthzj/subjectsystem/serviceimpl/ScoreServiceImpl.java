@@ -57,7 +57,7 @@ public class ScoreServiceImpl implements ScoreService{
 	}
 
 	@Override
-	public int updateScore(String courseId, String studentId, double pacificScore, double midtermScore, double finalScore, double sumScore) {
+	public int editScore(String courseId, String studentId, double pacificScore, double midtermScore, double finalScore, double sumScore) {
 		Score score = new Score();
 		score.setCourseId(courseId);
 		score.setStudentId(studentId);
@@ -75,6 +75,25 @@ public class ScoreServiceImpl implements ScoreService{
 		return 1;
 	}
 
+	@Override
+	public List<Score> getScoreByStuAndCourse(String stuId,String courseId){
+		Score score=new Score();
+		score.setStudentId(stuId);
+		score.setCourseId(courseId);
+		return scoreDao.searchScores(score);
+	}
 
+	@Override
+	public List<Score> getScoreByScoreId(int scoreId){
+		Score score=new Score();
+		score.setId(scoreId);
+		return scoreDao.searchScores(score);
+	}
+
+	@Override
+	public int updateScore(Score score){
+		scoreDao.updateScore(score);
+		return 1;
+	}
 
 }

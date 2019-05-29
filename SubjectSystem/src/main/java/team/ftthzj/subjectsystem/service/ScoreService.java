@@ -13,7 +13,7 @@ public interface ScoreService {
 
 	// 录入成绩
 	public int addScore(String courseId, String studentId, double pacificScore, double midtermScore, double finalScore,
-			double sumScore);
+						double sumScore);
 
 	// 通过学生id查询成绩
 	public List<Score> searchScoreByStudentId(String studentId);
@@ -22,12 +22,18 @@ public interface ScoreService {
 	public List<Score> searchScoreByCourseId(String courseId);
 
 	// 修改成绩
-	public int updateScore(String courseId, String studentId, double pacificScore, double midtermScore,
-			double finalScore, double sumScore);
+	public int editScore(String courseId, String studentId, double pacificScore, double midtermScore,
+						   double finalScore, double sumScore);
 
 	// 删除成绩
 	public int deleteScore(Score score);
 
 	//查询成绩
 //	public Page<Score> searchCourses(Integer page, Integer rows, String courseId, String studentId, double pacificScore, double midtermScore, double finalScore, double sumScore);
+
+	public List<Score> getScoreByStuAndCourse(String stuId, String courseId);
+
+	public List<Score> getScoreByScoreId(int scoreId);
+
+	public int updateScore(Score score);
 }

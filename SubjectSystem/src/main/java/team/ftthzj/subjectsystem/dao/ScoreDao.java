@@ -17,4 +17,10 @@ public interface ScoreDao {
 
 	//删除成绩
 	public int deleteScore(Score score);
+
+	//根据学生id和课程id获取成绩
+	public Score getScoreByStuAndCourse(String stuId,String courseId);
+
+	//更新成绩
+	public int updateScore(Score score);
 }
