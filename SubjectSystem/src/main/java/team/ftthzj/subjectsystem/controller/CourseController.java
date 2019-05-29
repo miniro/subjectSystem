@@ -8,14 +8,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import team.ftthzj.subjectsystem.common.utils.Page;
 import team.ftthzj.subjectsystem.po.*;
 import team.ftthzj.subjectsystem.service.*;
-import team.ftthzj.subjectsystem.serviceimpl.BasicServiceImpl;
-import team.ftthzj.subjectsystem.serviceimpl.CourseForUiServiceImpl;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.*;
-import java.util.function.DoubleToLongFunction;
 
 /**
  * 课程控制器类
@@ -57,6 +52,7 @@ public class CourseController {
         return "homepage";
     }
 
+
     @RequestMapping(value = "/course/create.action")
     @ResponseBody
     public String creatCourse(HttpServletRequest request){
@@ -87,22 +83,19 @@ public class CourseController {
     @ResponseBody
     public String editCourse(HttpServletRequest request){
         int flag = courseService.deleteCourse(request.getParameter("oldCourseId"));
-        Course course = new Course();
-        course.setcourseId(request.getParameter("courseId"));
-        course.setcourseName(request.getParameter("courseName"));
-        course.setTeacherId(request.getParameter("teacherId"));
-        String credit = request.getParameter("credit");
-        String weekTime = request.getParameter("weekTime");
+        Course newcourse = new Course();
+        newcourse.setcourseId(request.getParameter("courseId"));
+        newcourse.setcourseName(request.getParameter("courseName"));
+        newcourse.setTeacherId(request.getParameter("teacherId"));
         String startingTime = request.getParameter("startingTime");
         String endingTime = request.getParameter("endingTime");
         String property = request.getParameter("property");
-        System.out.println(credit+" "+weekTime);
-        course.setCredit(Double.valueOf(credit));
-        course.setWeekTime(Integer.valueOf(weekTime));
-        course.setStartingTime(Integer.valueOf(startingTime));
-        course.setEnddingTime(Integer.valueOf(endingTime));
-        course.setProperty(Integer.valueOf(property));
-        int rows = courseService.addCourse(course);
+        newcourse.setCredit(Double.valueOf(request.getParameter("credit")));
+        newcourse.setWeekTime(Integer.valueOf(request.getParameter("weekTime")));
+        newcourse.setStartingTime(Integer.valueOf(startingTime));
+        newcourse.setEnddingTime(Integer.valueOf(endingTime));
+        newcourse.setProperty(Integer.valueOf(property));
+        int rows = courseService.addCourse(newcourse);
         if(flag==1&&rows==1){
             return "OK";
         }else {
@@ -110,12 +103,14 @@ public class CourseController {
         }
     }
 
-
     @RequestMapping(value = "/course/delete.action")
     public String deleteCourse(HttpServletRequest request) {
         int flag=courseService.deleteCourse(request.getParameter("courseId"));
-
-        return "courseTable";
+        if(flag==1){
+            return "OK";
+        }else {
+            return "FAIL";
+        }
     }
 
     @RequestMapping(value = "/course/toCourseTable.action")
@@ -153,7 +148,6 @@ public class CourseController {
         for(Course course:list){
             int start=course.getStartingTime();
             int during=course.getDuration();
-            System.out.println(course.getcourseName());
             for(int j=0;j<during;j++){
                 day.remove(start-1+j);
                 day.add(start-1+j,"'"+course.getcourseName()+"'");

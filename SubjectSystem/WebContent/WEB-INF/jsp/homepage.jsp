@@ -812,7 +812,7 @@ $(function(){
                 <h4 class="modal-title" id="myModalLabel">删除课程</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" id="new_course_form">
+                <form class="form-horizontal" id="delete_course_form">
                     <div class="form-group">
                         <label for="new_courseId" class="col-sm-2 control-label">
                             课程编号
@@ -825,7 +825,7 @@ $(function(){
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" onclick="deletecourse(${courseId})">删除课程</button>
+                <button type="button" class="btn btn-primary" onclick="deletecourse()">删除课程</button>
             </div>
         </div>
     </div>
@@ -853,6 +853,9 @@ $(function(){
     function clearcourse() {
         $("#new_courseName").val("");
         $("#new_courseId").val("");
+        $("#oldCourseId").val("");
+        $("#courseName").val("");
+        $("#courseId").val("");
         $("#old_courseId").val("");
         $("#teacherId").val("");
         $("#credit").val("");
@@ -906,20 +909,19 @@ $(function(){
             }
         });
     }
-
     // 删除课程
-    function deletecourse(id) {
-        if(confirm('确实要删除该课程吗?')) {
-            $.post("<%=basePath%>course/delete.action",{"id":id},
-                function(data){
-                    if(data =="OK"){
-                        alert("课程删除成功！");
-                        window.location.reload();
-                    }else{
-                        alert("删除课程失败！");
-                        window.location.reload();
-                    }
-                });
+    function deletecourse() {
+        if(confirm('确定要删除该课程吗?')) {
+            $.post("<%=basePath%>course/delete.action",
+                $("#delete_course_form").serialize(), function(data){
+                if(data =="OK"){
+                    alert("课程删除成功！");
+                    window.location.reload();
+                }else{
+                    alert("删除课程失败！");
+                    window.location.reload();
+                }
+            });
         }
     }
 </script>
