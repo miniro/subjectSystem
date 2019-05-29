@@ -74,7 +74,6 @@ public class ScoreController {
     @RequestMapping(value = "/score/getscoreById.action")
     @ResponseBody
     public Score getScoreById(int id) {
-        System.out.println(id);
         List<Score>list=scoreService.getScoreByScoreId(id);
         return list.get(0);
     }

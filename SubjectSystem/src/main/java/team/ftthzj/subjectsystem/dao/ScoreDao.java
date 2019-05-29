@@ -23,4 +23,7 @@ public interface ScoreDao {
 
 	//更新成绩
 	public int updateScore(Score score);
+
+	public List<Score> searchScoresById(Score score);
+
 }

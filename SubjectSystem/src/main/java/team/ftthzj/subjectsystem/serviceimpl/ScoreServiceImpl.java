@@ -87,7 +87,7 @@ public class ScoreServiceImpl implements ScoreService{
 	public List<Score> getScoreByScoreId(int scoreId){
 		Score score=new Score();
 		score.setId(scoreId);
-		return scoreDao.searchScores(score);
+		return scoreDao.searchScoresById(score);
 	}
 
 	@Override

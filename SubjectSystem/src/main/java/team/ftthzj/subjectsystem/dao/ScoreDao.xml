@@ -15,29 +15,42 @@
 		values(#{courseId}, #{studentId}, #{pacificScore}, #{midtermScore}, #{finalScore}, #{sumScore} ,0)
 	</insert>
 
-	<!-- 录入成绩-->
-	<!--<update id="addScore" parameterType="Score">-->
-		<!--update score-->
-		<!--<set>-->
-			<!--<if test="pacificScore != null">-->
-				<!--pacificScore = #{pacificScore}-->
-			<!--</if>-->
-			<!--<if test="midtermScore != null">-->
-				<!--midtermScore = #{midtermScore}-->
-			<!--</if>-->
-			<!--<if test="finalScore != null">-->
-				<!--finalScore = #{finalScore}-->
-			<!--</if>-->
-			<!--<if test="sumScore != null">-->
-				<!--sumScore = #{sumScore}-->
-			<!--</if>-->
-		<!--</set>-->
-		<!--where studentId = #{studentId} and courseId = #{courseId}-->
-	<!--</update>-->
+
+
+	<!-- 更新成绩-->
+	<update id="updateScore" parameterType="Score">
+		update score
+		<set>
+			<if test="pacificScore != null">
+				pacificScore = #{pacificScore},
+			</if>
+			<if test="midtermScore != null">
+				midtermScore = #{midtermScore},
+			</if>
+			<if test="finalScore != null">
+				finalScore = #{finalScore},
+			</if>
+			<if test="sumScore != null">
+				sumScore = #{sumScore},
+			</if>
+		</set>
+		where studentId = #{studentId} and courseId = #{courseId}
+	</update>
+
+	<!-- 查询成绩-->
+	<select id="searchScoresById" parameterType="Score" resultType="Score">
+		select * from score where id = #{id}
+	</select>
 
 	<!-- 查询成绩-->
 	<select id="searchScores" parameterType="Score" resultType="Score">
-		select * from score where id = #{id}
+		select * from score where 1=1
+		<if test="courseId != null and courseId != ''">
+			and courseId = #{courseId}
+		</if>
+		<if test="studentId != null and studentId != ''">
+			and studentId = #{studentId}
+		</if>
 	</select>
 
 	<!-- 删除成绩-->
