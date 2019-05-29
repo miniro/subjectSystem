@@ -88,12 +88,12 @@ public class CourseController {
         newcourse.setcourseName(request.getParameter("courseName"));
         newcourse.setTeacherId(request.getParameter("teacherId"));
         String startingTime = request.getParameter("startingTime");
-        String endingTime = request.getParameter("endingTime");
+        String enddingTime = request.getParameter("enddingTime");
         String property = request.getParameter("property");
         newcourse.setCredit(Double.valueOf(request.getParameter("credit")));
         newcourse.setWeekTime(Integer.valueOf(request.getParameter("weekTime")));
         newcourse.setStartingTime(Integer.valueOf(startingTime));
-        newcourse.setEnddingTime(Integer.valueOf(endingTime));
+        newcourse.setEnddingTime(Integer.valueOf(enddingTime));
         newcourse.setProperty(Integer.valueOf(property));
         int rows = courseService.addCourse(newcourse);
         if(flag==1&&rows==1){
@@ -101,6 +101,16 @@ public class CourseController {
         }else {
             return "FAIL";
         }
+    }
+
+    /**
+     * 通过id获取course信息
+     */
+    @RequestMapping(value = "/course/getcourseById.action")
+    @ResponseBody
+    public Course getCourseById(String id) {
+        Course course = courseService.searchCourseById(id);
+        return course;
     }
 
     @RequestMapping(value = "/course/delete.action")

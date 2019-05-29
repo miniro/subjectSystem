@@ -493,9 +493,9 @@ $(function(){
                 </form>
             </div>
         </div>
-        <a href="#" class="btn btn-primary" data-toggle="modal"
+        <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
            data-target="#newscoreDialog" onclick="clearscore()">新建</a>
-        <a href="#" class="btn btn-primary" data-toggle="modal"
+        <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
            data-target="#scoreEditDialog" onclick="clearscore()">修改</a>
         <a href="#" class="btn btn-danger btn-xs" data-toggle="modal"
            data-target="#scoreDeleteDialog" onclick="clearscore()">删除</a>

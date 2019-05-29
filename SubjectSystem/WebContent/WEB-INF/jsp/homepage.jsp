@@ -493,10 +493,10 @@ $(function(){
                 </form>
             </div>
         </div>
-        <a href="#" class="btn btn-primary" data-toggle="modal"
+        <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
            data-target="#newcourseDialog" onclick="clearcourse()">新建</a>
-        <a href="#" class="btn btn-primary" data-toggle="modal"
-           data-target="#courseEditDialog" onclick="clearcourse()">修改</a>
+        <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
+           data-target="#courseChooseEditDialog" onclick="clearcourse()">修改</a>
         <a href="#" class="btn btn-danger btn-xs" data-toggle="modal"
            data-target="#courseDeleteDialog" onclick="clearcourse()">删除</a>
         <div class="row">
@@ -689,6 +689,37 @@ $(function(){
         </div>
     </div>
 </div>
+<!-- 选择修改课程模态框 -->
+<div class="modal fade" id="courseChooseEditDialog" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel2">修改课程</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="delete_course_form2">
+                    <div class="form-group">
+                        <label for="new_courseId" class="col-sm-2 control-label">
+                            课程编号
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="chooseCourseId" placeholder="课程编号" name="chooseCourseId" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <a href="#" class="btn btn-primary" data-toggle="modal"
+                   data-target="#courseEditDialog" onclick= "editcourse(document.getElementById('chooseCourseId').value)">选择课程</a>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- 修改课程模态框 -->
 <div class="modal fade" id="courseEditDialog" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel">
@@ -703,19 +734,11 @@ $(function(){
             <div class="modal-body">
                 <form class="form-horizontal" id="edit_course_form">
                     <div class="form-group">
-                        <label for="old_courseId" class="col-sm-2 control-label">
-                            原课程号
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="old_courseId" placeholder="课程编号" name="oldCourseId" />
-                        </div>
-                    </div>
-                    <div class="form-group">
                         <label for="new_courseId" class="col-sm-2 control-label">
-                            新课程号
+                            课程编号
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="new_courseId" placeholder="课程编号" name="courseId" />
+                            <input type="text" class="form-control" id="editcourseId" placeholder="课程编号" name="courseId" />
                         </div>
                     </div>
                     <div class="form-group">
@@ -723,13 +746,13 @@ $(function(){
                             课程名
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="new_courseName" placeholder="课程姓名" name="courseName" />
+                            <input type="text" class="form-control" id="editcourseName" placeholder="课程姓名" name="courseName" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="teacherId" style="float:left;padding:7px 15px 0 27px;">教师</label>
                         <div class="col-sm-10">
-                            <select	class="form-control" id="teacherId" name="teacherId">
+                            <select	class="form-control" id="editteacherId" name="teacherId">
                                 <option value="">--请选择--</option>
                                 <c:forEach items="${teacherList}" var="item">
                                     <option value="${item.teacherId}"<c:if test="${item.teacherId == teacherId}"> selected</c:if>>${item.name}&emsp;${item.teacherId}</option>
@@ -740,7 +763,7 @@ $(function(){
                     <div class="form-group">
                         <label for="credit" style="float:left;padding:7px 15px 0 27px;">学分</label>
                         <div class="col-sm-10">
-                            <select	class="form-control" id="credit"  name="credit">
+                            <select	class="form-control" id="editcredit"  name="credit">
                                 <option value="">--请选择--</option>
                                 <c:forEach items="${creditList}" var="value">
                                     <option value="${value}"<c:if test="${value == credit}"> selected</c:if>>${value}</option>
@@ -751,7 +774,7 @@ $(function(){
                     <div class="form-group">
                         <label for="property" style="float:left;padding:7px 15px 0 27px;">课程性质</label>
                         <div class="col-sm-10">
-                            <select	class="form-control" id="property"  name="property">
+                            <select	class="form-control" id="editproperty"  name="property">
                                 <option value="">--请选择--</option>
                                 <option value="1">必修课</option>
                                 <option value="2">选修课</option>
@@ -761,7 +784,7 @@ $(function(){
                     <div class="form-group">
                         <label for="weekTime" style="float:left;padding:7px 15px 0 27px;">上课时间</label>
                         <div class="col-sm-10">
-                            <select	class="form-control" id="weekTime"  name="weekTime">
+                            <select	class="form-control" id="editweekTime"  name="weekTime">
                                 <option value="">--请选择--</option>
                                 <c:forEach var="i" begin="1" end="7" step="1">
                                     <option value="${i}">周${i}</option>
@@ -770,9 +793,42 @@ $(function(){
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="startingTime" style="float:left;padding:7px 15px 0 27px;">begin</label>
+                        <div class="col-sm-10">
+                            <select	class="form-control" id="editbeginTime"  name="beginTime">
+                                <option value="">--请选择--</option>
+                                <c:forEach var="j" begin="1" end="12" step="1">
+                                    <option value="${j}">${j}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="startingTime" style="float:left;padding:7px 15px 0 27px;">finish</label>
+                        <div class="col-sm-10">
+                            <select	class="form-control" id="editfinishTime"  name="finishTime">
+                                <option value="">--请选择--</option>
+                                <c:forEach var="j" begin="1" end="12" step="1">
+                                    <option value="${j}">${j}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="startingTime" style="float:left;padding:7px 15px 0 27px;">end</label>
+                        <div class="col-sm-10">
+                            <select	class="form-control" id="editendTime"  name="endTime">
+                                <option value="">--请选择--</option>
+                                <c:forEach var="j" begin="1" end="12" step="1">
+                                    <option value="${j}">${j}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label for="startingTime" style="float:left;padding:7px 15px 0 27px;">开始时间</label>
                         <div class="col-sm-10">
-                            <select	class="form-control" id="startingTime"  name="startingTime">
+                            <select	class="form-control" id="editstartingTime"  name="startingTime">
                                 <option value="">--请选择--</option>
                                 <c:forEach var="j" begin="1" end="12" step="1">
                                     <option value="${j}">${j}</option>
@@ -783,9 +839,20 @@ $(function(){
                     <div class="form-group">
                         <label for="endingTime" style="float:left;padding:7px 15px 0 27px;">结束时间</label>
                         <div class="col-sm-10">
-                            <select	class="form-control" id="endingTime"  name="endingTime">
+                            <select	class="form-control" id="enddingTime"  name="enddingTime">
                                 <option value="">--请选择--</option>
                                 <c:forEach var="k" begin="1" end="12" step="1">
+                                    <option value="${k}">${k}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="endingTime" style="float:left;padding:7px 15px 0 27px;">预置课表</label>
+                        <div class="col-sm-10">
+                            <select	class="form-control" id="editpreset"  name="preset">
+                                <option value="">--请选择--</option>
+                                <c:forEach var="k" begin="0" end="1" step="1">
                                     <option value="${k}">${k}</option>
                                 </c:forEach>
                             </select>
@@ -897,15 +964,21 @@ $(function(){
             url:"<%=basePath%>course/getcourseById.action",
             data:{"id":id},
             success:function(data) {
-                $("#old_courseId").val(data.old_courseId);
-                $("#new_courseId").val(data.new_courseId);
-                $("#new_courseName").val(data.new_courseName)
-                $("#teacherId").val(data.teacherId)
-                $("#credit").val(data.credit)
-                $("#property").val(data.property);
-                $("#weekTime").val(data.weekTime);
-                $("#startingTime").val(data.startingTime);
-                $("#endingTime").val(data.endingTime);
+                $("#editcourseId").val(data.courseId);
+                $("#editcourseName").val(data.courseName)
+                $("#editteacherId").val(data.teacherId)
+                $("#editcredit").val(data.credit)
+                $("#editproperty").val(data.property);
+                $("#editweekTime").val(data.weekTime);
+                $("#editbeginTime").val(data.beginTime);
+                $("#editfinishTime").val(data.finishTime);
+                $("#editendTime").val(data.endTime);
+                $("#editproperty").val(data.property);
+                $("#editduration").val(data.duration);
+                $("#editstartingTime").val(data.startingTime);
+                $("#editenddingTime").val(data.enddingTime);
+                $("#editweekTime").val(data.weekTime);
+                $("#editpreset").val(data.preset);
             }
         });
     }

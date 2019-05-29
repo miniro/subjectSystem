@@ -20,4 +20,7 @@ public interface NoticeService {
 
 	//获取消息
     public Notice searchNoticeById(int noticeId);
+
+    //更新消息
+	public int updateNotice(Notice notice);
 }

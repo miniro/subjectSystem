@@ -25,10 +25,11 @@ public class NoticeController {
     public String list() {
         return "notice";
     }
-    
+
+
     @RequestMapping(value = "/notice/create.action")
     @ResponseBody
-    public String creatnotice(HttpServletRequest request){
+    public String creatNotice(HttpServletRequest request){
         int rows = noticeService.addNotice(request.getParameter("title"),request.getParameter("startTime")
                 ,request.getParameter("stopTime"),request.getParameter("description"));
         if(rows > 0){
@@ -45,14 +46,12 @@ public class NoticeController {
     @ResponseBody
     public Notice getNoticeById(Integer id) {
         Notice notice = noticeService.searchNoticeById(id);
-        System.out.println(notice.getDescription());
-        System.out.println(notice.getStartTime());
         return notice;
     }
 
     @RequestMapping(value = "/notice/delete.action")
     @ResponseBody
-    public String deletenotice(HttpServletRequest request) {
+    public String deleteNotice(HttpServletRequest request) {
         int flag=noticeService.deleteNotice(Integer.valueOf(request.getParameter("noticeId")));
         if(flag==1){
             return "OK";
@@ -61,4 +60,14 @@ public class NoticeController {
         }
     }
 
+    @RequestMapping(value = "/notice/update.action")
+    @ResponseBody
+    public String updateNotice(Notice notice){
+        int rows = noticeService.updateNotice(notice);
+        if(rows > 0){
+            return "OK";
+        }else{
+            return "FAIL";
+        }
+    }
 }

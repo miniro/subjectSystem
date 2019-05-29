@@ -25,16 +25,16 @@
 		update notice
 		<set>
 			<if test="title != null">
-				title = #{title}
+				title = #{title},
 			</if>
 			<if test="startTime != null">
-				startTime = #{startTime}
+				startTime = #{startTime},
 			</if>
 			<if test="stopTime != null">
-				stopTime = #{stopTime}
+				stopTime = #{stopTime},
 			</if>
 			<if test="description != null">
-				description = #{description}
+				description = #{description},
 			</if>
 		</set>
 	</update>

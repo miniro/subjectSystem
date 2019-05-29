@@ -493,9 +493,9 @@ $(function(){
                 </form>
             </div>
         </div>
-        <a href="#" class="btn btn-primary" data-toggle="modal"
+        <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
            data-target="#newnoticeDialog" onclick="clearnotice()">新建</a>
-        <a href="#" class="btn btn-primary" data-toggle="modal"
+        <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
            data-target="#noticeChooseEditDialog" onclick="clearnotice()">修改</a>
         <a href="#" class="btn btn-danger btn-xs" data-toggle="modal"
            data-target="#noticeDeleteDialog" onclick="clearnotice()">删除</a>
@@ -650,7 +650,7 @@ $(function(){
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel1">修改公告</h4>
+                <h4 class="modal-title" id="myModalLabel2">修改公告</h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="edit_notice_form">
@@ -682,16 +682,16 @@ $(function(){
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel1">修改公告信息</h4>
+                <h4 class="modal-title" id="myModalLabel3">修改公告信息</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" id="new_notice_form">
+                <form class="form-horizontal" id="update_notice_form">
                     <div class="form-group">
                         <label for="title" class="col-sm-2 control-label">
                             标题
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="title" placeholder="标题" name="title" />
+                            <input type="text" class="form-control" id="edittitle" name="title" />
                         </div>
                     </div>
                     <div class="form-group">
@@ -699,7 +699,7 @@ $(function(){
                             起始时间
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="startTime" placeholder="起始时间" name="startTime" />
+                            <input type="text" class="form-control" id="editstartTime"  name="startTime" />
                         </div>
                     </div>
                     <div class="form-group">
@@ -707,7 +707,7 @@ $(function(){
                             结束时间
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="stopTime" placeholder="结束时间" name="stopTime" />
+                            <input type="text" class="form-control" id="editstopTime"  name="stopTime" />
                         </div>
                     </div>
                     <div class="form-group">
@@ -715,7 +715,7 @@ $(function(){
                             公告内容
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="description" placeholder="公告内容" name="description" />
+                            <input type="text" class="form-control" id="editdescription"  name="description" />
                         </div>
                     </div>
                 </form>
@@ -800,7 +800,7 @@ $(function(){
     // 执行修改公告操作
     function updatenotice() {
         $.post("<%=basePath%>notice/update.action",
-            $("#edit_notice_form").serialize(),function(data){
+            $("#update_notice_form").serialize(),function(data){
                 if(data =="OK"){
                     alert("公告信息更新成功！");
                     window.location.reload();
@@ -817,11 +817,11 @@ $(function(){
             url:"<%=basePath%>notice/getnoticeById.action",
             data:{"id":id},
             success:function(data) {
-                $("#noticeId").val(data.noticeId);
-                $("#title").val(data.title);
-                $("#startTime").val(data.startTime)
-                $("#stopTime").val(data.stopTime);
-                $("#description").val(data.description);
+                $("#editnoticeId").val(data.noticeId);
+                $("#edittitle").val(data.title);
+                $("#editstartTime").val(data.startTime)
+                $("#editstopTime").val(data.stopTime);
+                $("#editdescription").val(data.description);
             }
         });
     }

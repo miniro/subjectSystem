@@ -46,7 +46,7 @@ public class ScoreController {
     }
 
 
-   @RequestMapping(value = "/score/update.action")
+    @RequestMapping(value = "/score/update.action")
     @ResponseBody
     public String editscore(HttpServletRequest request){
         Score score=new Score();
