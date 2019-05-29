@@ -104,6 +104,7 @@ public class CourseController {
     }
 
     @RequestMapping(value = "/course/delete.action")
+    @ResponseBody
     public String deleteCourse(HttpServletRequest request) {
         int flag=courseService.deleteCourse(request.getParameter("courseId"));
         if(flag==1){
