@@ -248,7 +248,7 @@ $(function(){
     <nav class="navbar navbar-default navbar-static-top" role="navigation"
          style="margin-bottom: 0">
         <div class="navbar-header">
-            <a class="navbar-brand" href="<%=basePath%>course/list.action">反方教学选课系统</a>
+            <a class="navbar-brand" href="<%=basePath%>notice/list.action">反方教学选课系统</a>
         </div>
         <!-- 导航栏右侧图标部分 -->
         <ul class="nav navbar-top-links navbar-right">
@@ -402,7 +402,7 @@ $(function(){
                 <ul class="nav" id="side-menu">
                     <img src="${pageContext.request.contextPath}/images/school.jpg"  height="195" width="280" alt="城市学院" />
                     <li>
-                        <a href="${pageContext.request.contextPath }/course/list.action">
+                        <a href="${pageContext.request.contextPath }/course/list.action" >
                             <i class="fa fa-edit fa-fw" aria-hidden="true"></i> 课程管理
                         </a>
                     </li>
@@ -428,7 +428,7 @@ $(function(){
                     </li>
                     <li>
                         <a href="${pageContext.request.contextPath }/message/list.action">
-                            <i class="fa fa-bug fa-fw" aria-hidden="true"></i>消息管理
+                            <i class="fa fa-magic fa-fw" aria-hidden="true"></i>消息管理
                         </a>
                     </li>
                     <li>
@@ -441,11 +441,11 @@ $(function(){
         </div>
         <!-- 左侧显示列表部分 end-->
     </nav>
-    <!-- 课程列表查询部分  start-->
+    <!-- 公告列表查询部分  start-->
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">课程管理</h1>
+                <h1 class="page-header">公告管理</h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
@@ -453,34 +453,30 @@ $(function(){
         <div class="panel panel-default">
             <div class="panel-body">
                 <form class="form-inline" method="get"
-                      action="${pageContext.request.contextPath }/course/list.action">
+                      action="${pageContext.request.contextPath }/notice/list.action">
                     <div class="form-group">
-                        <label for="courseName">课程id</label>
-                        <input type="text" class="form-control" id="courseId"
-                               value="${courseId }" name="courseId" />
+                        <label for="noticeId">公告编号</label>
+                        <input type="text" class="form-control" id="noticeId"
+                               value="${noticeId }" name="noticeId" />
                     </div>
                     <div class="form-group">
-                        <label for="courseName">课程名称</label>
-                        <input type="text" class="form-control" id="courseName"
-                               value="${courseName }" name="courseName" />
+                        <label for="noticeName">公告名称</label>
+                        <input type="text" class="form-control" id="noticeName"
+                               value="${noticeName }" name="noticeName" />
                     </div>
                     <div class="form-group">
-                        <label for="courseName">老师id</label>
-                        <input type="text" class="form-control" id="teacherId"
-                               value="${teacherId }" name="teacherId" />
+                        <label for="teacherName">教师姓名</label>
+                        <input type="text" class="form-control" id="teacherName"
+                               value="${teacherName }" name="teacherName" />
                     </div>
-                    <%--                    <div class="form-group">--%>
-                    <%--                        <label for="property">课程类别</label>--%>
-                    <%--                        <select	class="form-control" id="property" name="property">--%>
-                    <%--                            <option value="">--请选择--</option>--%>
-                    <%--                            <c:forEach items="${d}" var="item">--%>
-                    <%--                                <option value="${item.dict_id}"--%>
-                    <%--                                        <c:if test="${item.dict_id == property}">selected</c:if>>--%>
-                    <%--                                        ${item.dict_item_name }--%>
-                    <%--                                </option>--%>
-                    <%--                            </c:forEach>--%>
-                    <%--                        </select>--%>
-                    <%--                    </div>--%>
+                    <div class="form-group">
+                        <label for="property1">公告类别</label>
+                        <select	class="form-control" id="property1" name="property">
+                            <option value="">--请选择--</option>
+                            <option value="1">必修课</option>
+                            <option value="2">选修课</option>
+                        </select>
+                    </div>
                     <%--                    <div class="form-group">--%>
                     <%--                        <label for="credit">所占学分</label>--%>
                     <%--                        <select	class="form-control" id="credit"  name="credit">--%>
@@ -498,38 +494,42 @@ $(function(){
             </div>
         </div>
         <a href="#" class="btn btn-primary" data-toggle="modal"
-           data-target="#newcourseDialog" onclick="clearcourse()">新建</a>
+           data-target="#newnoticeDialog" onclick="clearnotice()">新建</a>
+        <a href="#" class="btn btn-primary" data-toggle="modal"
+           data-target="#noticeChooseEditDialog" onclick="clearnotice()">修改</a>
+        <a href="#" class="btn btn-danger btn-xs" data-toggle="modal"
+           data-target="#noticeDeleteDialog" onclick="clearnotice()">删除</a>
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">课程信息列表</div>
+                    <div class="panel-heading">公告信息列表</div>
                     <!-- /.panel-heading -->
                     <table class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                            <th>课程编号</th>
-                            <th>课程名称</th>
+                            <th>公告编号</th>
+                            <th>公告名称</th>
                             <th>学分</th>
-                            <th>教师id</th>
-                            <th>课程性质</th>
+                            <th>教师姓名</th>
+                            <th>公告性质</th>
                             <th>上课时间</th>
                         </tr>
                         </thead>
                         <tbody>
                         <c:forEach items="${page.rows}" var="row">
                             <tr>
-                                <td>${row.getcourseId()}</td>
-                                <td>${row.getcourseName()}</td>
+                                <td>${row.noticeId}</td>
+                                <td>${row.noticeName}</td>
                                 <td>${row.credit}</td>
-                                <td>${row.teacherId}</td>
+                                <td>${row.teacherName}</td>
                                 <td>${row.property}</td>
-                                <td>${row.schoolTime}</td>
+                                <td>${row.time}</td>
                             </tr>
                         </c:forEach>
                         </tbody>
                     </table>
                     <div class="col-md-12 text-right">
-                        <itheima:page url="${pageContext.request.contextPath }/course/list.action" />
+                        <itheima:page url="${pageContext.request.contextPath }/notice/list.action" />
                     </div>
                     <!-- /.panel-body -->
                 </div>
@@ -538,7 +538,7 @@ $(function(){
             <!-- /.col-lg-12 -->
         </div>
     </div>
-    <!-- 课程列表查询部分  end-->
+    <!-- 公告列表查询部分  end-->
     <!-- footer -->
     <div class="wave-box">
 
@@ -586,8 +586,8 @@ $(function(){
     </div>
     <!-- footer end -->
 </div>
-<!-- 创建课程模态框 -->
-<div class="modal fade" id="newcourseDialog" tabindex="-1" role="dialog"
+<!-- 创建公告模态框 -->
+<div class="modal fade" id="newnoticeDialog" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -595,96 +595,54 @@ $(function(){
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel1">新建课程信息</h4>
+                <h4 class="modal-title" id="myModalLabel1">新建公告信息</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" id="new_course_form">
+                <form class="form-horizontal" id="new_notice_form">
                     <div class="form-group">
-                        <label for="new_courseName" class="col-sm-2 control-label">
-                            课程号
+                        <label for="title" class="col-sm-2 control-label">
+                            标题
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="new_courseName" placeholder="课程名称" name="cust_name" />
+                            <input type="text" class="form-control" id="title" placeholder="标题" name="title" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="new_courseFrom" style="float:left;padding:7px 15px 0 27px;">课程名</label>
+                        <label for="startTime" class="col-sm-2 control-label">
+                            起始时间
+                        </label>
                         <div class="col-sm-10">
-                            <select	class="form-control" id="new_courseFrom" name="cust_source">
-                                <option value="">--请选择--</option>
-                                <c:forEach items="${fromType}" var="item">
-                                    <option value="${item.dict_id}"<c:if test="${item.dict_id == custSource}">selected</c:if>>
-                                            ${item.dict_item_name }
-                                    </option>
-                                </c:forEach>
-                            </select>
+                            <input type="text" class="form-control" id="startTime" placeholder="起始时间" name="startTime" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="new_custIndustry" style="float:left;padding:7px 15px 0 27px;">学分</label>
+                        <label for="stopTime" class="col-sm-2 control-label">
+                            结束时间
+                        </label>
                         <div class="col-sm-10">
-                            <select	class="form-control" id="new_custIndustry"  name="cust_industry">
-                                <option value="">--请选择--</option>
-                                <c:forEach items="${industryType}" var="item">
-                                    <option value="${item.dict_id}"<c:if test="${item.dict_id == custIndustry}"> selected</c:if>>
-                                            ${item.dict_item_name }
-                                    </option>
-                                </c:forEach>
-                            </select>
+                            <input type="text" class="form-control" id="stopTime" placeholder="结束时间" name="stopTime" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="new_custLevel" style="float:left;padding:7px 15px 0 27px;">老师号</label>
+                        <label for="description" class="col-sm-2 control-label">
+                            公告内容
+                        </label>
                         <div class="col-sm-10">
-                            <select	class="form-control" id="new_custLevel" name="cust_level">
-                                <option value="">--请选择--</option>
-                                <c:forEach items="${levelType}" var="item">
-                                    <option value="${item.dict_id}"<c:if test="${item.dict_id == custLevel}"> selected</c:if>>${item.dict_item_name }</option>
-                                </c:forEach>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="new_linkMan" class="col-sm-2 control-label">上课时间</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="new_linkMan" placeholder="上课时间" name="cust_linkman" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="new_phone" class="col-sm-2 control-label">起始时间</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="new_phone" placeholder="起始时间" name="cust_phone" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="new_mobile" class="col-sm-2 control-label">结束时间</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="new_mobile" placeholder="结束时间" name="cust_mobile" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="new_zipcode" class="col-sm-2 control-label">截止时间</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="new_zipcode" placeholder="截止时间" name="cust_zipcode" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="new_address" class="col-sm-2 control-label">联系地址</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="new_address" placeholder="联系地址" name="cust_address" />
+                            <input type="text" class="form-control" id="description" placeholder="公告内容" name="description" />
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" onclick="createcourse()">创建课程</button>
+                <button type="button" class="btn btn-primary" onclick="createnotice()">创建公告</button>
             </div>
         </div>
     </div>
 </div>
-<!-- 修改课程模态框 -->
-<div class="modal fade" id="courseEditDialog" tabindex="-1" role="dialog"
+
+<!-- 选择修改公告模态框 -->
+<div class="modal fade" id="noticeChooseEditDialog" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -692,89 +650,114 @@ $(function(){
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel">修改课程信息</h4>
+                <h4 class="modal-title" id="myModalLabel1">修改公告</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" id="edit_course_form">
-                    <input type="hidden" id="edit_cust_id" name="cust_id"/>
+                <form class="form-horizontal" id="edit_notice_form">
                     <div class="form-group">
-                        <label for="edit_courseName" class="col-sm-2 control-label">课程名称</label>
+                        <label for="chooseNoticeId" class="col-sm-2 control-label">
+                            公告编号
+                        </label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="edit_courseName" placeholder="课程名称" name="cust_name" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="edit_courseFrom" style="float:left;padding:7px 15px 0 27px;">课程来源</label>
-                        <div class="col-sm-10">
-                            <select	class="form-control" id="edit_courseFrom" name="cust_source">
-                                <option value="">--请选择--</option>
-                                <c:forEach items="${fromType}" var="item">
-                                    <option value="${item.dict_id}"<c:if test="${item.dict_id == custSource}"> selected</c:if>>${item.dict_item_name }</option>
-                                </c:forEach>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="edit_custIndustry" style="float:left;padding:7px 15px 0 27px;">所属行业</label>
-                        <div class="col-sm-10">
-                            <select	class="form-control" id="edit_custIndustry"  name="cust_industry">
-                                <option value="">--请选择--</option>
-                                <c:forEach items="${industryType}" var="item">
-                                    <option value="${item.dict_id}"<c:if test="${item.dict_id == custIndustry}"> selected</c:if>>${item.dict_item_name }</option>
-                                </c:forEach>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="edit_custLevel" style="float:left;padding:7px 15px 0 27px;">课程级别</label>
-                        <div class="col-sm-10">
-                            <select	class="form-control" id="edit_custLevel" name="cust_level">
-                                <option value="">--请选择--</option>
-                                <c:forEach items="${levelType}" var="item">
-                                    <option value="${item.dict_id}"<c:if test="${item.dict_id == custLevel}"> selected</c:if>>${item.dict_item_name }</option>
-                                </c:forEach>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="edit_linkMan" class="col-sm-2 control-label">联系人</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="edit_linkMan" placeholder="联系人" name="cust_linkman" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="edit_phone" class="col-sm-2 control-label">固定电话</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="edit_phone" placeholder="固定电话" name="cust_phone" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="edit_mobile" class="col-sm-2 control-label">移动电话</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="edit_mobile" placeholder="移动电话" name="cust_mobile" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="edit_zipcode" class="col-sm-2 control-label">邮政编码</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="edit_zipcode" placeholder="邮政编码" name="cust_zipcode" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="edit_address" class="col-sm-2 control-label">联系地址</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="edit_address" placeholder="联系地址" name="cust_address" />
+                            <input type="text" class="form-control" id="chooseNoticeId" placeholder="公告编号" name="chooseNoticeId" />
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" onclick="updatecourse()">保存修改</button>
+                <a href="#" class="btn btn-primary" data-toggle="modal"
+                   data-target="#noticeEditDialog" onclick= "editNotice(document.getElementById('chooseNoticeId').value)">选择公告</a>
             </div>
         </div>
     </div>
 </div>
+
+<!-- 修改公告模态框 -->
+<div class="modal fade" id="noticeEditDialog" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel1">修改公告信息</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="new_notice_form">
+                    <div class="form-group">
+                        <label for="title" class="col-sm-2 control-label">
+                            标题
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="title" placeholder="标题" name="title" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="startTime" class="col-sm-2 control-label">
+                            起始时间
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="startTime" placeholder="起始时间" name="startTime" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="stopTime" class="col-sm-2 control-label">
+                            结束时间
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="stopTime" placeholder="结束时间" name="stopTime" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="description" class="col-sm-2 control-label">
+                            公告内容
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="description" placeholder="公告内容" name="description" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="updatenotice()">修改公告</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 删除公告模态框 -->
+<div class="modal fade" id="noticeDeleteDialog" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">删除公告</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="delete_notice_form">
+                    <div class="form-group">
+                        <label for="noticeId" class="col-sm-2 control-label">
+                            公告编号
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="noticeId" placeholder="公告编号" name="noticeId" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="deletenotice()">删除公告</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <div style="margin-top: 100px"></div>
 
@@ -793,74 +776,65 @@ $(function(){
 <script src="<%=basePath%>js/script.js"></script>
 <!-- 编写js代码 -->
 <script type="text/javascript">
-    //清空新建课程窗口中的数据
-    function clearcourse() {
-        $("#new_courseName").val("");
-        $("#new_courseFrom").val("")
-        $("#new_custIndustry").val("")
-        $("#new_custLevel").val("")
-        $("#new_linkMan").val("");
-        $("#new_phone").val("");
-        $("#new_mobile").val("");
-        $("#new_zipcode").val("");
-        $("#new_address").val("");
+    //清空新建公告窗口中的数据
+    function clearnotice() {
+        $("#noticeID").val("");
+        $("#title").val("");
+        $("#startTime").val("");
+        $("#stopTime").val("");
+        $("#description").val("");
     }
-    // 创建课程
-    function createcourse() {
-        $.post("<%=basePath%>course/create.action",
-            $("#new_course_form").serialize(),function(data){
+    // 创建公告
+    function createnotice() {
+        $.post("<%=basePath%>notice/create.action",
+            $("#new_notice_form").serialize(),function(data){
                 if(data =="OK"){
-                    alert("课程创建成功！");
+                    alert("公告创建成功！");
                     window.location.reload();
                 }else{
-                    alert("课程创建失败！");
+                    alert("公告创建失败！");
                     window.location.reload();
                 }
             });
     }
-    // 通过id获取修改的课程信息
-    function editcourse(id) {
+    // 执行修改公告操作
+    function updatenotice() {
+        $.post("<%=basePath%>notice/update.action",
+            $("#edit_notice_form").serialize(),function(data){
+                if(data =="OK"){
+                    alert("公告信息更新成功！");
+                    window.location.reload();
+                }else{
+                    alert("公告信息更新失败！");
+                    window.location.reload();
+                }
+            });
+    }
+    // 通过noticeId获取修改的公告信息
+    function editNotice(id) {
         $.ajax({
             type:"get",
-            url:"<%=basePath%>course/getcourseById.action",
+            url:"<%=basePath%>notice/getnoticeById.action",
             data:{"id":id},
             success:function(data) {
-                $("#edit_cust_id").val(data.cust_id);
-                $("#edit_courseName").val(data.cust_name);
-                $("#edit_courseFrom").val(data.cust_source)
-                $("#edit_custIndustry").val(data.cust_industry)
-                $("#edit_custLevel").val(data.cust_level)
-                $("#edit_linkMan").val(data.cust_linkman);
-                $("#edit_phone").val(data.cust_phone);
-                $("#edit_mobile").val(data.cust_mobile);
-                $("#edit_zipcode").val(data.cust_zipcode);
-                $("#edit_address").val(data.cust_address);
-
+                $("#noticeId").val(data.noticeId);
+                $("#title").val(data.title);
+                $("#startTime").val(data.startTime)
+                $("#stopTime").val(data.stopTime);
+                $("#description").val(data.description);
             }
         });
     }
-    // 执行修改课程操作
-    function updatecourse() {
-        $.post("<%=basePath%>course/update.action",$("#edit_course_form").serialize(),function(data){
-            if(data =="OK"){
-                alert("课程信息更新成功！");
-                window.location.reload();
-            }else{
-                alert("课程信息更新失败！");
-                window.location.reload();
-            }
-        });
-    }
-    // 删除课程
-    function deletecourse(id) {
-        if(confirm('确实要删除该课程吗?')) {
-            $.post("<%=basePath%>course/delete.action",{"id":id},
-                function(data){
+    // 删除公告
+    function deletenotice() {
+        if(confirm('确定要删除该公告吗?')) {
+            $.post("<%=basePath%>notice/delete.action",
+                $("#delete_notice_form").serialize(), function(data){
                     if(data =="OK"){
-                        alert("课程删除成功！");
+                        alert("公告删除成功！");
                         window.location.reload();
                     }else{
-                        alert("删除课程失败！");
+                        alert("公告删除失败！");
                         window.location.reload();
                     }
                 });

@@ -6,7 +6,7 @@
 
 	<!-- 新建通知-->
 	<insert id="addNotice" parameterType="Notice">
-		insert into notice values(#{noticeId}, #{title}, #{startTime}, #{stopTime}, #{description})
+		insert into notice(title,startTime,stopTime,description) values(#{title}, #{startTime}, #{stopTime}, #{description})
 	</insert>
 
 	<!-- 查询通知-->
@@ -40,10 +40,13 @@
 	</update>
 
 	<!-- 删除通知-->
-	<delete id="deleteNotice" parameterType="String">
+	<delete id="deleteNotice" parameterType="Int">
 		delete from notice where noticeId = #{noticeId}
 	</delete>
 
+	<select id="getNotice" parameterType="int" resultType="Notice">
+		select * from notice where noticeId = #{noticeId}
+	</select>
 
 </mapper>
     

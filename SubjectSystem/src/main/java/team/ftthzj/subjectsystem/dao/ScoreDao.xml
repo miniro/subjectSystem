@@ -10,24 +10,30 @@
 	</insert>
 
 	<!-- 录入成绩-->
-	<update id="addScore" parameterType="Score">
-		update score
-		<set>
-			<if test="pacificScore != null">
-				pacificScore = #{pacificScore}
-			</if>
-			<if test="midtermScore != null">
-				midtermScore = #{midtermScore}
-			</if>
-			<if test="finalScore != null">
-				finalScore = #{finalScore}
-			</if>
-			<if test="sumScore != null">
-				sumScore = #{sumScore}
-			</if>
-		</set>
-		where studentId = #{studentId} and courseId = #{courseId}
-	</update>
+	<insert id="addScore" parameterType="Score">
+		insert into score(courseId, studentId, pacificScore, midtermScore, finalScore, sumScore, status)
+		values(#{courseId}, #{studentId}, #{pacificScore}, #{midtermScore}, #{finalScore}, #{sumScore} ,0)
+	</insert>
+
+	<!-- 录入成绩-->
+	<!--<update id="addScore" parameterType="Score">-->
+		<!--update score-->
+		<!--<set>-->
+			<!--<if test="pacificScore != null">-->
+				<!--pacificScore = #{pacificScore}-->
+			<!--</if>-->
+			<!--<if test="midtermScore != null">-->
+				<!--midtermScore = #{midtermScore}-->
+			<!--</if>-->
+			<!--<if test="finalScore != null">-->
+				<!--finalScore = #{finalScore}-->
+			<!--</if>-->
+			<!--<if test="sumScore != null">-->
+				<!--sumScore = #{sumScore}-->
+			<!--</if>-->
+		<!--</set>-->
+		<!--where studentId = #{studentId} and courseId = #{courseId}-->
+	<!--</update>-->
 
 	<!-- 查询成绩-->
 	<select id="searchScores" parameterType="Score" resultType="Score">
@@ -39,5 +45,11 @@
 			and studentId = #{studentId}
 		</if>
 	</select>
+
+	<!-- 删除成绩-->
+	<delete id="deleteScore" parameterType="Score">
+		delete from score where courseId = #{courseId} and studentId = #{studentId}
+	</delete>
+
 </mapper>
     

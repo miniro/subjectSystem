@@ -17,9 +17,8 @@ public class NoticeServiceImpl implements NoticeService{
 	@Autowired
 	private NoticeDao noticeDao;
 	
-	public int addNotice(int noticeId, String title, String startTime, String stopTime, String description) {
+	public int addNotice(String title, String startTime, String stopTime, String description) {
 		Notice notice = new Notice();
-		notice.setNoticeId(noticeId);
 		notice.setTitle(title);
 		notice.setStartTime(startTime);
 		notice.setStopTime(stopTime);
@@ -42,9 +41,16 @@ public class NoticeServiceImpl implements NoticeService{
 		return this.noticeDao.searchNotice(notice);
 	}
 
-	public int deleteNotice(String noticeId) {
+	@Override
+	public int deleteNotice(int noticeId) {
 		noticeDao.deleteNotice(noticeId);
 		return 1;
 	}
+
+	@Override
+	public Notice searchNoticeById(int noticeId){
+		return noticeDao.getNotice(noticeId);
+	}
+
 
 }

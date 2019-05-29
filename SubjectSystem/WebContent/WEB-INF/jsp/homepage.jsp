@@ -428,7 +428,7 @@ $(function(){
                     </li>
                     <li>
                         <a href="${pageContext.request.contextPath }/message/list.action">
-                            <i class="fa fa-bug fa-fw" aria-hidden="true"></i>消息管理
+                            <i class="fa fa-magic fa-fw" aria-hidden="true"></i>消息管理
                         </a>
                     </li>
                     <li>
@@ -497,7 +497,7 @@ $(function(){
            data-target="#newcourseDialog" onclick="clearcourse()">新建</a>
         <a href="#" class="btn btn-primary" data-toggle="modal"
            data-target="#courseEditDialog" onclick="clearcourse()">修改</a>
-        <a href="#" class="btn btn-primary" data-toggle="modal"
+        <a href="#" class="btn btn-danger btn-xs" data-toggle="modal"
            data-target="#courseDeleteDialog" onclick="clearcourse()">删除</a>
         <div class="row">
             <div class="col-lg-12">

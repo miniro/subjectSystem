@@ -7,7 +7,7 @@ import team.ftthzj.subjectsystem.po.Notice;
 public interface NoticeService {
 
 	//新建消息
-	public int addNotice(int noticeId, String title, String startTime, String stopTime, String description);
+	public int addNotice(String title, String startTime, String stopTime, String description);
 
 	//列出所有消息
 	public List<Notice> loadAllNotice();
@@ -16,5 +16,8 @@ public interface NoticeService {
 	public List<Notice> searchNotices(String title);
 	
 	//删除消息
-	public int deleteNotice(String noticeId);
+	public int deleteNotice(int noticeId);
+
+	//获取消息
+    public Notice searchNoticeById(int noticeId);
 }

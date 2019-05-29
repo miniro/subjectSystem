@@ -16,6 +16,8 @@ public interface NoticeDao {
 	public int updateNotice(Notice notice);
 	
 	//删除消息
-	public int deleteNotice(String noticeId);
+	public int deleteNotice(int noticeId);
+
+	public Notice getNotice(int noticeId);
 
 }

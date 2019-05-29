@@ -1,14 +1,17 @@
 package team.ftthzj.subjectsystem.serviceimpl;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import team.ftthzj.subjectsystem.common.utils.Page;
 import team.ftthzj.subjectsystem.dao.ScoreDao;
-import team.ftthzj.subjectsystem.po.Score;
-import team.ftthzj.subjectsystem.po.Student;
+import team.ftthzj.subjectsystem.po.*;
+import team.ftthzj.subjectsystem.service.CourseForUiService;
 import team.ftthzj.subjectsystem.service.ScoreService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service("scoreService")
@@ -35,6 +38,7 @@ public class ScoreServiceImpl implements ScoreService{
 		score.setMidtermScore(midtermScore);
 		score.setFinalScore(finalScore);
 		score.setSumScore(sumScore);
+		scoreDao.addScore(score);
 		return 1;
 	}
 
@@ -64,6 +68,13 @@ public class ScoreServiceImpl implements ScoreService{
 		scoreDao.addScore(score);
 		return 1;
 	}
+
+	@Override
+	public int deleteScore(Score score){
+		scoreDao.deleteScore(score);
+		return 1;
+	}
+
 
 
 }
