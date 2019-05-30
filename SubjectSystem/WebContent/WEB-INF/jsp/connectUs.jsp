@@ -32,51 +32,48 @@
         <form class="contact100-form validate-form" action="${pageContext.request.contextPath }/message/addMessage.action" method="post">
             <span class="contact100-form-title">联系管理员</span>
             <div class="wrap-input100">
-                <div class="label-input100">选择错误类型</div>
+                <div class="label-input100">选择消息类型</div>
                 <div>
                     <select class="js-select2" name="service" id="select" onchange="change()">
-                        <option>请选择</option>
-                        <option>系统错误</option>
-                        <option>课程信息错误</option>
-                        <option>课表显示错误</option>
-                        <option>公告显示错误</option>
-                        <option>成绩录入错误</option>
-                        <option>其他错误</option>
+                        <option>上报错误</option>
+                        <option>提出建议</option>
+                        <option>其他类型</option>
                     </select>
                     <div class="dropDownSelect2"></div>
                 </div>
                 <span class="focus-input100"></span>
             </div>
 
-            <div class="wrap-input100 validate-input" data-validate="留言不能为空">
-                <label class="label-input100" for="message">留言</label>
-                <textarea id="message" class="input100" name="content" placeholder="请输入留言"></textarea>
+            <div class="wrap-input100 validate-input" data-validate="消息内容不能为空">
+                <label class="label-input100" for="message">消息内容</label>
+                <textarea id="message" class="input100" name="content" placeholder="请输入消息内容"></textarea>
                 <span class="focus-input100"></span>
             </div>
 
             <div class="container-contact100-form-btn">
-                <button class="contact100-form-btn"type="submit" ">提 交</button>
+                <button class="contact100-form-btn"type="submit">提 交</button>
             </div>
+            <a href="${pageContext.request.contextPath }/course/list.action">
+                    返回主页
+            </a>
             <div class="contact100-form-social flex-c-m">
-                <a href="http://www.dowebok.com" class="contact100-form-social-item flex-c-m bg1 m-r-20" target="_blank">
+                <a  class="contact100-form-social-item flex-c-m bg1 m-r-20" target="_blank">
                     <i class="fa fa-wechat" aria-hidden="true"></i>
                 </a>
 
-                <a href="http://www.dowebok.com/code" class="contact100-form-social-item flex-c-m bg2 m-r-20" target="_blank">
+                <a  class="contact100-form-social-item flex-c-m bg2 m-r-20" target="_blank">
                     <i class="fa fa-qq" aria-hidden="true"></i>
                 </a>
 
-                <a href="http://www.dowebok.com/950.html" class="contact100-form-social-item flex-c-m bg3" target="_blank">
+                <a  class="contact100-form-social-item flex-c-m bg3" target="_blank">
                     <i class="fa fa-weibo" aria-hidden="true"></i>
                 </a>
             </div>
         </form>
-
         <div class="contact100-more flex-col-c-m" style="background-image: url('images/bg-01.jpg');">
         </div>
     </div>
 </div>
-
 <script src="vendor/jquery/jquery-1.12.4.min.js"></script>
 <script src="vendor/select2/select2.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

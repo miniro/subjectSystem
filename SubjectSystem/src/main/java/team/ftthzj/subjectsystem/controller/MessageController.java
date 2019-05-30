@@ -18,27 +18,19 @@ public class MessageController {
     @Autowired
     private MessageService messageService;
 
-    /**
-     * 接收页面请求的JSON数据，并打印JSON格式结果
-     */
     @RequestMapping(value = "/message/addMessage.action")
     public String addMessage(String content,String service,HttpSession session) {
         Student student = (Student) session.getAttribute("STU_SESSION");
         Message message =new Message();
         message.setStudentId(student.getStudentId());
         message.setContent(content);
-        if(service.equals("系统错误"))
+        if(service.equals("联系管理员"))
             message.setErrorType(0);
-        if(service.equals("课程信息错误"))
+        if(service.equals("提出建议"))
             message.setErrorType(1);
-        if(service.equals("课表显示错误"))
+        if(service.equals("其他类型"))
             message.setErrorType(2);
-        if(service.equals("公告显示错误"))
-            message.setErrorType(3);
-        if(service.equals("成绩录入错误"))
-            message.setErrorType(4);
-        if(service.equals("其他错误"))
-            message.setErrorType(5);
+        message.setProperty(0);
         messageService.addMessage(message);
         return "homepage";
     }
@@ -52,16 +44,20 @@ public class MessageController {
      * 消息列表
      */
     @RequestMapping(value = "/message/list.action")
-    public String list() {
+    public String listMessage() {
         return "message";
     }
 
 
     @RequestMapping(value = "/message/create.action")
     @ResponseBody
-    public String creatmessage(HttpServletRequest request){
-        int rows = messageService.addmessage(request.getParameter("title"),request.getParameter("startTime")
-                ,request.getParameter("stopTime"),request.getParameter("description"));
+    public String creatMessage(HttpServletRequest request){
+        Message message=new Message();
+        message.setErrorType(Integer.valueOf(request.getParameter("errorType")));
+        message.setContent(request.getParameter("content"));
+        message.setStudentId(request.getParameter("studentId"));
+        message.setProperty(1);
+        int rows = messageService.addMessage(message);
         if(rows > 0){
             return "OK";
         }else {
@@ -74,15 +70,15 @@ public class MessageController {
      */
     @RequestMapping(value = "/message/getmessageById.action")
     @ResponseBody
-    public message getmessageById(Integer id) {
-        message message = messageService.searchmessageById(id);
+    public Message getMessageById(Integer id) {
+        Message message = messageService.searchMessageById(id);
         return message;
     }
 
     @RequestMapping(value = "/message/delete.action")
     @ResponseBody
-    public String deletemessage(HttpServletRequest request) {
-        int flag=messageService.deletemessage(Integer.valueOf(request.getParameter("messageId")));
+    public String deleteMessage(HttpServletRequest request) {
+        int flag=messageService.deleteMessage(Integer.valueOf(request.getParameter("id")));
         if(flag==1){
             return "OK";
         }else {
@@ -92,8 +88,8 @@ public class MessageController {
 
     @RequestMapping(value = "/message/update.action")
     @ResponseBody
-    public String updatemessage(message message){
-        int rows = messageService.updatemessage(message);
+    public String updateMessage(Message message){
+        int rows = messageService.updateMessage(message);
         if(rows > 0){
             return "OK";
         }else{

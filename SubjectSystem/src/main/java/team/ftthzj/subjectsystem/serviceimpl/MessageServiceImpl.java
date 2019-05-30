@@ -27,7 +27,6 @@ public class MessageServiceImpl implements MessageService {
 		return 1;
 	}
 
-
 	//删除消息
 	public int deleteMessage(int messageId){
 		messageDao.deleteMessage(messageId);

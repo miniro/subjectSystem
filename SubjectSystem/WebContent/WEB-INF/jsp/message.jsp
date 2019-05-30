@@ -248,7 +248,7 @@ $(function(){
     <nav class="navbar navbar-default navbar-static-top" role="navigation"
          style="margin-bottom: 0">
         <div class="navbar-header">
-            <a class="navbar-brand" href="<%=basePath%>score/list.action">反方教学选课系统</a>
+            <a class="navbar-brand" href="<%=basePath%>message/list.action">反方教学选课系统</a>
         </div>
         <!-- 导航栏右侧图标部分 -->
         <ul class="nav navbar-top-links navbar-right">
@@ -385,7 +385,7 @@ $(function(){
                         用户：${STU_SESSION.name}
                     </a>
                     </li>
-                    <li><a href="${pageContext.request.contextPath }/connectUs.action"><i class="fa fa-gear fa-fw"></i> 上报错误</a></li>
+                    <li><a href="${pageContext.request.contextPath }/connectUs.action"><i class="fa fa-gear fa-fw"></i> 联系管理员</a></li>
                     <li class="divider"></li>
                     <li>
                         <a href="${pageContext.request.contextPath }/logout.action">
@@ -412,13 +412,13 @@ $(function(){
                         </a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath }/score/listScoreTable.action">
-                            <i class="fa fa-file fa-fw" aria-hidden="true"></i> 查看成绩
+                        <a href="${pageContext.request.contextPath }/message/listmessageTable.action">
+                            <i class="fa fa-file fa-fw" aria-hidden="true"></i> 成绩管理
                         </a>
                     </li>
                     <li>
                         <a href="${pageContext.request.contextPath }/notice/list.action">
-                            <i class="fa fa-exclamation-circle fa-fw"  aria-hidden="true"></i> 查看公告
+                            <i class="fa fa-exclamation-circle fa-fw"  aria-hidden="true"></i> 公告管理
                         </a>
                     </li>
                     <li>
@@ -441,11 +441,11 @@ $(function(){
         </div>
         <!-- 左侧显示列表部分 end-->
     </nav>
-    <!-- 成绩列表查询部分  start-->
+    <!-- 消息列表查询部分  start-->
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">成绩管理</h1>
+                <h1 class="page-header">消息管理</h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
@@ -453,16 +453,11 @@ $(function(){
         <div class="panel panel-default">
             <div class="panel-body">
                 <form class="form-inline" method="get"
-                      action="${pageContext.request.contextPath }/score/list.action">
+                      action="${pageContext.request.contextPath }/message/list.action">
                     <div class="form-group">
-                        <label for="scoreId">成绩编号</label>
-                        <input type="text" class="form-control" id="scoreId"
-                               value="${scoreId }" name="scoreId" />
-                    </div>
-                    <div class="form-group">
-                        <label for="scoreName">成绩名称</label>
-                        <input type="text" class="form-control" id="scoreName"
-                               value="${scoreName }" name="scoreName" />
+                        <label for="messageName">消息名称</label>
+                        <input type="text" class="form-control" id="messageName"
+                               value="${messageName }" name="messageName" />
                     </div>
                     <div class="form-group">
                         <label for="teacherName">教师姓名</label>
@@ -470,7 +465,7 @@ $(function(){
                                value="${teacherName }" name="teacherName" />
                     </div>
                     <div class="form-group">
-                        <label for="property1">成绩类别</label>
+                        <label for="property1">消息类别</label>
                         <select	class="form-control" id="property1" name="property">
                             <option value="">--请选择--</option>
                             <option value="1">必修课</option>
@@ -494,32 +489,30 @@ $(function(){
             </div>
         </div>
         <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
-           data-target="#newscoreDialog" onclick="clearscore()">新建</a>
+           data-target="#newmessageDialog" onclick="clearmessage()">新建</a>
         <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
-           data-target="#scorechooseEditDialog" onclick="clearscore()">修改</a>
+           data-target="#messagechooseEditDialog" onclick="clearmessage()">修改</a>
         <a href="#" class="btn btn-danger btn-xs" data-toggle="modal"
-           data-target="#scoreDeleteDialog" onclick="clearscore()">删除</a>
+           data-target="#messageDeleteDialog" onclick="clearmessage()">删除</a>
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">成绩信息列表</div>
+                    <div class="panel-heading">消息信息列表</div>
                     <!-- /.panel-heading -->
                     <table class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                            <th>成绩编号</th>
-                            <th>成绩名称</th>
-                            <th>学分</th>
-                            <th>教师姓名</th>
-                            <th>成绩性质</th>
-                            <th>上课时间</th>
+                            <th>消息编号</th>
+                            <th>消息内容</th>
+                            <th>错误类型</th>
+                            <th>学生编号</th>
                         </tr>
                         </thead>
                         <tbody>
                         <c:forEach items="${page.rows}" var="row">
                             <tr>
-                                <td>${row.scoreId}</td>
-                                <td>${row.scoreName}</td>
+                                <td>${row.messageId}</td>
+                                <td>${row.messageName}</td>
                                 <td>${row.credit}</td>
                                 <td>${row.teacherName}</td>
                                 <td>${row.property}</td>
@@ -529,7 +522,7 @@ $(function(){
                         </tbody>
                     </table>
                     <div class="col-md-12 text-right">
-                        <itheima:page url="${pageContext.request.contextPath }/score/list.action" />
+                        <itheima:page url="${pageContext.request.contextPath }/message/list.action" />
                     </div>
                     <!-- /.panel-body -->
                 </div>
@@ -538,7 +531,7 @@ $(function(){
             <!-- /.col-lg-12 -->
         </div>
     </div>
-    <!-- 成绩列表查询部分  end-->
+    <!-- 消息列表查询部分  end-->
     <!-- footer -->
     <div class="wave-box">
 
@@ -586,8 +579,8 @@ $(function(){
     </div>
     <!-- footer end -->
 </div>
-<!-- 创建成绩模态框 -->
-<div class="modal fade" id="newscoreDialog" tabindex="-1" role="dialog"
+<!-- 创建消息模态框 -->
+<div class="modal fade" id="newmessageDialog" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -595,16 +588,16 @@ $(function(){
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel1">新建成绩信息</h4>
+                <h4 class="modal-title" id="myModalLabel1">新建消息信息</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" id="new_score_form">
+                <form class="form-horizontal" id="new_message_form">
                     <div class="form-group">
-                        <label for="courseId" class="col-sm-2 control-label">
-                            课程编号
+                        <label for="content" class="col-sm-2 control-label">
+                            消息内容
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="courseId" placeholder="课程编号" name="courseId" />
+                            <input type="text" class="form-control" id="content" placeholder="消息内容" name="content" />
                         </div>
                     </div>
                     <div class="form-group">
@@ -616,48 +609,24 @@ $(function(){
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="pacificScore" class="col-sm-2 control-label">
-                            平时成绩
+                        <label for="errorType" class="col-sm-2 control-label">
+                            错误类型
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="pacificScore" placeholder="平时成绩" name="pacificScore" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="midScore" class="col-sm-2 control-label">
-                            期中成绩
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="midScore" placeholder="期中成绩" name="midScore" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="finalScore" class="col-sm-2 control-label">
-                            期末成绩
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="finalScore" placeholder="期末成绩" name="finalScore" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="sumScore" class="col-sm-2 control-label">
-                            总成绩
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="sumScore" placeholder="总成绩" name="sumScore" />
+                            <input type="text" class="form-control" id="errorType" placeholder="错误类型" name="errorType" />
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" onclick="createscore()">创建成绩</button>
+                <button type="button" class="btn btn-primary" onclick="createmessage()">创建消息</button>
             </div>
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="scorechooseEditDialog" tabindex="-1" role="dialog"
+<div class="modal fade" id="messagechooseEditDialog" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -665,16 +634,16 @@ $(function(){
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel">修改成绩信息</h4>
+                <h4 class="modal-title" id="myModalLabel">修改消息信息</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" id="edit_score_form">
+                <form class="form-horizontal" id="edit_message_form">
                     <div class="form-group">
-                        <label for="courseId" class="col-sm-2 control-label">
-                            成绩编号
+                        <label for="choosemessageId" class="col-sm-2 control-label">
+                            消息编号
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="chooseScoreId" placeholder="成绩编号" name="chooseScoreId" />
+                            <input type="text" class="form-control" id="choosemessageId" placeholder="消息编号" name="choosemessageId" />
                         </div>
                     </div>
                 </form>
@@ -682,13 +651,13 @@ $(function(){
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                 <a href="#" class="btn btn-primary" data-toggle="modal"
-                   data-target="#scoreEditDialog" onclick= "editscore(document.getElementById('chooseScoreId').value)" >选择成绩编号</a>
+                   data-target="#messageEditDialog" onclick= "editmessage(document.getElementById('choosemessageId').value)" >选择消息编号</a>
             </div>
         </div>
     </div>
 </div>
-<!-- 修改成绩模态框 -->
-<div class="modal fade" id="scoreEditDialog" tabindex="-1" role="dialog"
+<!-- 修改消息模态框 -->
+<div class="modal fade" id="messageEditDialog" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -696,77 +665,45 @@ $(function(){
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel1">修改成绩信息</h4>
+                <h4 class="modal-title" id="myModalLabel1">修改消息信息</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" id="update_score_form">
+                <form class="form-horizontal" id="update_message_form">
                     <div class="form-group">
-                        <label for="courseId" class="col-sm-2 control-label">
-                            课程号
+                        <label for="editcontent" class="col-sm-2 control-label">
+                            消息内容
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="editcourseId" placeholder="课程编号" name="courseId" />
+                            <input type="text" class="form-control" id="editcontent" placeholder="消息内容" name="content" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="studentId" class="col-sm-2 control-label">
-                            学生号
+                        <label for="editstudentId" class="col-sm-2 control-label">
+                            学生编号
                         </label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="editstudentId" placeholder="学生编号" name="studentId" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="pacificScore" class="col-sm-2 control-label">
-                            平时成绩
+                        <label for="editerrorType" class="col-sm-2 control-label">
+                            错误类型
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="editpacificScore" placeholder="平时成绩" name="pacificScore" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="midScore" class="col-sm-2 control-label">
-                            期中成绩
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="editmidScore" placeholder="期中成绩" name="midScore" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="finalScore" class="col-sm-2 control-label">
-                            期末成绩
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="editfinalScore" placeholder="期末成绩" name="finalScore" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="sumScore" class="col-sm-2 control-label">
-                            总成绩
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="editsumScore" placeholder="总成绩" name="sumScore" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="sumScore" class="col-sm-2 control-label">
-                            成绩状态
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="editstatus" placeholder="成绩状态" name="status" />
+                            <input type="text" class="form-control" id="editerrorType" placeholder="错误类型" name="Type" />
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" onclick="updatescore()">修改成绩</button>
+                <button type="button" class="btn btn-primary" onclick="updatemessage()">修改消息</button>
             </div>
         </div>
     </div>
 </div>
-<!-- 删除成绩模态框 -->
-<div class="modal fade" id="scoreDeleteDialog" tabindex="-1" role="dialog"
+<!-- 删除消息模态框 -->
+<div class="modal fade" id="messageDeleteDialog" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -774,31 +711,23 @@ $(function(){
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel">删除成绩</h4>
+                <h4 class="modal-title" id="myModalLabel">删除消息</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" id="delete_score_form">
+                <form class="form-horizontal" id="delete_message_form">
                     <div class="form-group">
-                        <label for="courseId" class="col-sm-2 control-label">
-                            课程编号
+                        <label for="id" class="col-sm-2 control-label">
+                            消息编号
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="courseId" placeholder="课程编号" name="courseId" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="studentId" class="col-sm-2 control-label">
-                            学生编号
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="studentId" placeholder="学生编号" name="studentId" />
+                            <input type="text" class="form-control" id="id" placeholder="消息编号" name="id" />
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" onclick="deletescore()">删除成绩</button>
+                <button type="button" class="btn btn-primary" onclick="deletemessage()">删除消息</button>
             </div>
         </div>
     </div>
@@ -822,74 +751,65 @@ $(function(){
 <script src="<%=basePath%>js/script.js"></script>
 <!-- 编写js代码 -->
 <script type="text/javascript">
-    //清空新建成绩窗口中的数据
-    function clearscore() {
-        $("#courseId").val("");
+    //清空新建消息窗口中的数据
+    function clearmessage() {
+        $("#id").val("");
         $("#studentId").val("");
-        $("#pacificScore").val("");
-        $("#midScore").val("");
-        $("#finalScore").val("");
-        $("#sumScore").val("");
-        $("#editcourseId").val("");
         $("#editstudentId").val("");
-        $("#editpacificScore").val("");
-        $("#editmidScore").val("");
-        $("#editfinalScore").val("");
-        $("#editsumScore").val("");
+        $("#errorType").val("");
+        $("#editerrorType").val("");
+        $("#content").val("");
+        $("#editcontent").val("");
     }
-    // 创建成绩
-    function createscore() {
-        $.post("<%=basePath%>score/create.action",
-            $("#new_score_form").serialize(),function(data){
+    // 创建消息
+    function createmessage() {
+        $.post("<%=basePath%>message/create.action",
+            $("#new_message_form").serialize(),function(data){
                 if(data =="OK"){
-                    alert("成绩创建成功！");
+                    alert("消息创建成功！");
                     window.location.reload();
                 }else{
-                    alert("成绩创建失败！");
+                    alert("消息创建失败！");
                     window.location.reload();
                 }
             });
     }
-    // 执行修改成绩操作
-    function updatescore() {
-        $.post("<%=basePath%>score/update.action",
-            $("#update_score_form").serialize(),function(data){
+    // 执行修改消息操作
+    function updatemessage() {
+        $.post("<%=basePath%>message/update.action",
+            $("#update_message_form").serialize(),function(data){
                 if(data =="OK"){
-                    alert("成绩信息更新成功！");
+                    alert("消息信息更新成功！");
                     window.location.reload();
                 }else{
-                    alert("成绩信息更新失败！");
+                    alert("消息信息更新失败！");
                     window.location.reload();
                 }
             });
     }
-    // 通过id获取修改的成绩信息
-    function editscore(id) {
+    // 通过id获取修改的消息信息
+    function editmessage(id) {
         $.ajax({
             type:"get",
-            url:"<%=basePath%>score/getscoreById.action",
+            url:"<%=basePath%>message/getmessageById.action",
             data:{"id":id},
             success:function(data) {
-                $("#editcourseId").val(data.courseId);
                 $("#editstudentId").val(data.studentId);
-                $("#editpacificScore").val(data.pacificScore);
-                $("#editmidScore").val(data.midtermScore);
-                $("#editfinalScore").val(data.finalScore);
-                $("#editsumScore").val(data.sumScore);
-                $("#editstatus").val(data.status);
+                $("#editerrorType").val(data.errorType);
+                $("#editcontent").val(data.content);
             }
         });
     }
-    // 删除成绩
-    function deletescore() {
-        if(confirm('确定要删除该成绩吗?')) {
-            $.post("<%=basePath%>score/delete.action",
-                $("#delete_score_form").serialize(), function(data){
+    // 删除消息
+    function deletemessage() {
+        if(confirm('确定要删除该消息吗?')) {
+            $.post("<%=basePath%>message/delete.action",
+                $("#delete_message_form").serialize(), function(data){
                     if(data =="OK"){
-                        alert("成绩删除成功！");
+                        alert("消息删除成功！");
                         window.location.reload();
                     }else{
-                        alert("删除成绩失败！");
+                        alert("删除消息失败！");
                         window.location.reload();
                     }
                 });

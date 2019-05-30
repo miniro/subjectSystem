@@ -4,8 +4,8 @@
 <mapper namespace="team.ftthzj.subjectsystem.dao.MessageDao">
 
     <insert id="addMessage" parameterType="Message">
-		insert into message(id, errorType, studentId, content)
-		values(#{id},#{errorType},#{studentId},#{content})
+		insert into message(id, errorType, studentId, content,property)
+		values(#{id},#{errorType},#{studentId},#{content},#{property})
 	</insert>
 	
 	<!-- 查询消息-->

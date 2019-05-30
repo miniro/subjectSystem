@@ -28,7 +28,13 @@ public class Message {
         this.errorType = errorType;
     }
 
+    public int getProperty() {
+        return property;
+    }
 
+    public void setProperty(int property) {
+        this.property = property;
+    }
 
     public String getContent() {
         return content;
@@ -40,4 +46,5 @@ public class Message {
 
     private String studentId;
     private String content;
+    private int property;
 }

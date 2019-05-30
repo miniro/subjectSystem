@@ -385,7 +385,7 @@ $(function(){
                         用户：${STU_SESSION.name}
                     </a>
                     </li>
-                    <li><a href="${pageContext.request.contextPath }/connectUs.action"><i class="fa fa-gear fa-fw"></i> 上报错误</a></li>
+                    <li><a href="${pageContext.request.contextPath }/connectUs.action"><i class="fa fa-gear fa-fw"></i> 联系管理员</a></li>
                     <li class="divider"></li>
                     <li>
                         <a href="${pageContext.request.contextPath }/logout.action">
@@ -413,12 +413,12 @@ $(function(){
                     </li>
                     <li>
                         <a href="${pageContext.request.contextPath }/score/listScoreTable.action">
-                            <i class="fa fa-file fa-fw" aria-hidden="true"></i> 查看成绩
+                            <i class="fa fa-file fa-fw" aria-hidden="true"></i> 成绩管理
                         </a>
                     </li>
                     <li>
                         <a href="${pageContext.request.contextPath }/notice/list.action">
-                            <i class="fa fa-exclamation-circle fa-fw"  aria-hidden="true"></i> 查看公告
+                            <i class="fa fa-exclamation-circle fa-fw"  aria-hidden="true"></i> 公告管理
                         </a>
                     </li>
                     <li>
