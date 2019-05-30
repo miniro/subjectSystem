@@ -962,16 +962,16 @@
                 flag=data.teacherId;
                 flag2=data.studentId
                 if (flag2){
-                    document.getElementById("stu1").style.display="block";//隐藏
-                    document.getElementById("stu2").style.display="block";//隐藏
-                    document.getElementById("stu3").style.display="block";//隐藏
-                    document.getElementById("stu4").style.display="block"
+                    document.getElementById("stu1").style.display="block";
+                    document.getElementById("stu2").style.display="block";
+                    document.getElementById("stu3").style.display="block";
+                    document.getElementById("stu4").style.display="block";
                     document.getElementById("tea1").style.display="none";//隐藏
                     document.getElementById("tea2").style.display="none";//隐藏
                 }
                 else {
-                    document.getElementById("tea1").style.display="block";//隐藏
-                    document.getElementById("tea2").style.display="block";//隐藏
+                    document.getElementById("tea1").style.display="block";
+                    document.getElementById("tea2").style.display="block";
                     document.getElementById("stu1").style.display="none";//隐藏
                     document.getElementById("stu2").style.display="none";//隐藏
                     document.getElementById("stu3").style.display="none";//隐藏

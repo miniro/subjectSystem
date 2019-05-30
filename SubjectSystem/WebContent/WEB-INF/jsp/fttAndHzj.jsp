@@ -229,104 +229,24 @@
         </div>
         <!-- 左侧显示列表部分 end-->
     </nav>
-    <!-- 公告列表查询部分  start-->
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">公告管理</h1>
+                <h1 class="page-header">关于我们</h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="page-header">计算1603 富涛涛（大佬） 31601146</h3>
+                <h3 class="page-header">计算1603 胡子衿 31601148</h3>
+                <h3 class="page-header">谢谢🙏</h3>
+
             </div>
             <!-- /.col-lg-12 -->
         </div>
         <!-- /.row -->
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <form class="form-inline" method="get"
-                      action="${pageContext.request.contextPath }/notice/list.action">
-                    <div class="form-group">
-                        <label for="noticeId">公告编号</label>
-                        <input type="text" class="form-control" id="noticeId"
-                               value="${noticeId }" name="noticeId" />
-                    </div>
-                    <div class="form-group">
-                        <label for="noticeName">公告名称</label>
-                        <input type="text" class="form-control" id="noticeName"
-                               value="${noticeName }" name="noticeName" />
-                    </div>
-                    <div class="form-group">
-                        <label for="teacherName">教师姓名</label>
-                        <input type="text" class="form-control" id="teacherName"
-                               value="${teacherName }" name="teacherName" />
-                    </div>
-                    <div class="form-group">
-                        <label for="property1">公告类别</label>
-                        <select	class="form-control" id="property1" name="property">
-                            <option value="">--请选择--</option>
-                            <option value="1">必修课</option>
-                            <option value="2">选修课</option>
-                        </select>
-                    </div>
-                    <%--                    <div class="form-group">--%>
-                    <%--                        <label for="credit">所占学分</label>--%>
-                    <%--                        <select	class="form-control" id="credit"  name="credit">--%>
-                    <%--                            <option value="">--请选择--</option>--%>
-                    <%--                            <c:forEach items="${creditType}" var="item">--%>
-                    <%--                                <option value="${item.dict_id}"--%>
-                    <%--                                        <c:if test="${item.dict_id == credit}"> selected</c:if>>--%>
-                    <%--                                        ${item.dict_item_name }--%>
-                    <%--                                </option>--%>
-                    <%--                            </c:forEach>--%>
-                    <%--                        </select>--%>
-                    <%--                    </div>--%>
-                    <button type="submit" class="btn btn-primary">查询</button>
-                </form>
-            </div>
-        </div>
-        <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
-           data-target="#newnoticeDialog" onclick="clearnotice()">新建</a>
-        <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
-           data-target="#noticeChooseEditDialog" onclick="clearnotice()">修改</a>
-        <a href="#" class="btn btn-danger btn-xs" data-toggle="modal"
-           data-target="#noticeDeleteDialog" onclick="clearnotice()">删除</a>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">公告信息列表</div>
-                    <!-- /.panel-heading -->
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                        <tr>
-                            <th>公告编号</th>
-                            <th>公告名称</th>
-                            <th>学分</th>
-                            <th>教师姓名</th>
-                            <th>公告性质</th>
-                            <th>上课时间</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <c:forEach items="${page.rows}" var="row">
-                            <tr>
-                                <td>${row.noticeId}</td>
-                                <td>${row.noticeName}</td>
-                                <td>${row.credit}</td>
-                                <td>${row.teacherName}</td>
-                                <td>${row.property}</td>
-                                <td>${row.time}</td>
-                            </tr>
-                        </c:forEach>
-                        </tbody>
-                    </table>
-                    <div class="col-md-12 text-right">
-                        <itheima:page url="${pageContext.request.contextPath }/notice/list.action" />
-                    </div>
-                    <!-- /.panel-body -->
-                </div>
-                <!-- /.panel -->
-            </div>
-            <!-- /.col-lg-12 -->
-        </div>
     </div>
-    <!-- 公告列表查询部分  end-->
     <!-- footer -->
     <div class="wave-box">
 

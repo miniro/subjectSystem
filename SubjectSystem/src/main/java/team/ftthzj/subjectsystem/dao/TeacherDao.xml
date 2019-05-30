@@ -23,7 +23,7 @@
 		update Teacher
 		<set>
 			<if test="name!=null">
-				name=#{name}
+				name=#{name},
 			</if>
 			<if test="major!=null">
 				major=#{major},
