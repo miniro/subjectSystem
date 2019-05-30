@@ -65,26 +65,8 @@ public class StuController {
 	    return "redirect:login";
 	}
 
-	/**
-	 * 学生基本信息页面
-	 */
-	@RequestMapping(value = "/information/list.action")
-	public String toINformation(HttpSession session) {
-		Student student = (Student) session.getAttribute("STU_SESSION");
-		session.setAttribute("StudentId", student.getStudentId());
-		session.setAttribute("Address", student.getAddress());
-		session.setAttribute("Email", student.getEmail());
-		session.setAttribute("EnrollmentDate", student.getEnrollmentDate());
-		session.setAttribute("Grade", student.getGrade());
-		session.setAttribute("Id", student.getId());
-		session.setAttribute("Major", student.getMajor());
-		session.setAttribute("Name", student.getName());
-		session.setAttribute("Phone", student.getPhone());
-		session.setAttribute("Qq", student.getQq());
-		session.setAttribute("School", student.getSchool());
-		session.setAttribute("Sex", student.getSex());
-		return "personalInfor";
-	}
+
+
 
 	@RequestMapping(value="getYzm",method=RequestMethod.GET)
 	public void getYzm(HttpServletResponse response,HttpServletRequest request){
@@ -104,5 +86,6 @@ public class StuController {
 		} catch (Exception e) {
 		}
 	}
+
 
 }

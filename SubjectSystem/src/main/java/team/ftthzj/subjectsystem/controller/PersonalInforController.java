@@ -5,9 +5,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import team.ftthzj.subjectsystem.po.Student;
+import team.ftthzj.subjectsystem.po.Teacher;
 import team.ftthzj.subjectsystem.service.StudentService;
 import team.ftthzj.subjectsystem.service.TeacherService;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 
 
@@ -53,27 +55,43 @@ public class PersonalInforController {
     @RequestMapping(value = "/personalInfor/update.action")
     @ResponseBody
     public String updatePersonalInforStu(HttpServletRequest request){
-        Student student =new Student();
-        student.setName(request.getParameter("name"));
-        student.setAddress(request.getParameter("address"));
-        student.setEmail(request.getParameter("email"));
-        student.setEnrollmentDate(new Date(System.currentTimeMillis()));
-        student.setGrade(request.getParameter("grade"));
-        student.setMajor(request.getParameter("major"));
-        student.setPassword(request.getParameter("password"));
-        student.setQq(request.getParameter("qq"));
-        student.setPhone(request.getParameter("phone"));
-        student.setSex(request.getParameter("sex"));
-        student.setStudentId(request.getParameter("studentId"));
-        student.setSchool(request.getParameter("school"));
-        int rows = studentService.updateStudent(student);
-        if(rows > 0){
+        int flag1=0,flag2=0;
+        if(request.getParameter("studentId")!=null) {
+            Student student = new Student();
+            student.setName(request.getParameter("name"));
+            student.setAddress(request.getParameter("address"));
+            student.setEmail(request.getParameter("email"));
+            student.setEnrollmentDate(new Date(System.currentTimeMillis()));
+            student.setGrade(request.getParameter("grade"));
+            student.setMajor(request.getParameter("major"));
+            student.setPassword(request.getParameter("password"));
+            student.setQq(request.getParameter("qq"));
+            student.setPhone(request.getParameter("phone"));
+            student.setSex(request.getParameter("sex"));
+            student.setStudentId(request.getParameter("studentId"));
+            student.setSchool(request.getParameter("school"));
+            flag1 = studentService.updateStudent(student);
+
+        }
+        if(request.getParameter("teacherId")!=null){
+            Teacher teacher=new Teacher();
+            teacher.setTeacherId(request.getParameter("teacherId"));
+            teacher.setName(request.getParameter("name"));
+            teacher.setAddress(request.getParameter("address"));
+            teacher.setEmail(request.getParameter("email"));
+            teacher.setMajor(request.getParameter("major"));
+            teacher.setPassword(request.getParameter("password"));
+            teacher.setPhone(request.getParameter("phone"));
+            teacher.setPosition(request.getParameter("position"));
+            teacher.setQq(request.getParameter("qq"));
+            flag2=teacherService.updateTeacher(teacher);
+        }
+        if(flag1 > 0){
             return "OK";
         }else{
             return "FAIL";
         }
     }
-
 
     @RequestMapping(value = "/personalInfor/delete.action")
     @ResponseBody
@@ -92,9 +110,34 @@ public class PersonalInforController {
      */
     @RequestMapping(value = "/personalInfor/getpersonalInforStuById.action")
     @ResponseBody
-    public Student getpersonalInforByIdStu(String id) {
+    public Object getpersonalInforByIdStu(String id, HttpSession session) {
         Student student=studentService.searchStudentById(id);
-        return student;
+        Teacher teacher=teacherService.searchTeacherById(id);
+        if(student!=null){
+            return student;
+        }
+        else {
+            return teacher;
+        }
     }
+
+    @RequestMapping(value = "/information/list.action")
+    public String toINformation(HttpSession session) {
+        return "personalInfor";
+    }
+
+    //		Student student = (Student) session.getAttribute("STU_SESSION");
+    //		session.setAttribute("StudentId", student.getStudentId());
+    //		session.setAttribute("Address", student.getAddress());
+    //		session.setAttribute("Email", student.getEmail());
+    //		session.setAttribute("EnrollmentDate", student.getEnrollmentDate());
+    //		session.setAttribute("Grade", student.getGrade());
+    //		session.setAttribute("Id", student.getId());
+    //		session.setAttribute("Major", student.getMajor());
+    //		session.setAttribute("Name", student.getName());
+    //		session.setAttribute("Phone", student.getPhone());
+    //		session.setAttribute("Qq", student.getQq());
+    //		session.setAttribute("School", student.getSchool());
+    //		session.setAttribute("Sex", student.getSex());
 
 }

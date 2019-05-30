@@ -737,12 +737,20 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="update_personalInfor_form">
-                    <div class="form-group">
-                        <label for="editStudentId" class="col-sm-2 control-label">
+                    <div class="form-group" id="tea1">
+                        <label for="editteacherId" class="col-sm-2 control-label" >
+                            教师编号
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="editteacherId" placeholder="教师编号" name="teacherId" />
+                        </div>
+                    </div>
+                    <div class="form-group" id="stu1">
+                        <label for="editStudentId" class="col-sm-2 control-label " >
                             用户编号
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="editStudentId" placeholder="用户编号" name="studentId" />
+                            <input type="text" class="form-control" id="editStudentId" placeholder="学生编号" name="studentId" />
                         </div>
                     </div>
                     <div class="form-group">
@@ -761,16 +769,16 @@
                             <input type="editSex" class="form-control" id="editSex" placeholder="性别" name="sex" />
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="Grade" class="col-sm-2 control-label">
+                    <div class="form-group" id="stu2">
+                        <label for="Grade" class="col-sm-2 control-label" >
                             年级
                         </label>
                         <div class="col-sm-10">
                             <input type="editGrade" class="form-control" id="editGrade" placeholder="年级" name="grade" />
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="School" class="col-sm-2 control-label">
+                    <div class="form-group" id="stu3">
+                        <label for="School" class="col-sm-2 control-label" >
                             毕业学校
                         </label>
                         <div class="col-sm-10">
@@ -809,12 +817,20 @@
                             <input type="editAddress" class="form-control" id="editAddress" placeholder="家庭地址" name="address" />
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="editEnrollmentDate" class="col-sm-2 control-label">
+                    <div class="form-group" id="stu4">
+                        <label for="editEnrollmentDate" class="col-sm-2 control-label" i>
                             入学时间
                         </label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="editEnrollmentDate" placeholder="入学时间" name="enrollmentDate" />
+                        </div>
+                    </div>
+                    <div class="form-group" id="tea2">
+                        <label for="editposition" class="col-sm-2 control-label" >
+                            职称
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="editposition" placeholder="职称" name="position" />
                         </div>
                     </div>
                 </form>
@@ -941,6 +957,26 @@
                 $("#editEmail").val(data.email);
                 $("#editAddress").val(data.address);
                 $("#editEnrollmentDate").val(data.enrollmentDate);
+                $("#editteacherId").val(data.teacherId);
+                $("#editposition").val(data.position);
+                flag=data.teacherId;
+                flag2=data.studentId
+                if (flag2){
+                    document.getElementById("stu1").style.display="block";//隐藏
+                    document.getElementById("stu2").style.display="block";//隐藏
+                    document.getElementById("stu3").style.display="block";//隐藏
+                    document.getElementById("stu4").style.display="block"
+                    document.getElementById("tea1").style.display="none";//隐藏
+                    document.getElementById("tea2").style.display="none";//隐藏
+                }
+                else {
+                    document.getElementById("tea1").style.display="block";//隐藏
+                    document.getElementById("tea2").style.display="block";//隐藏
+                    document.getElementById("stu1").style.display="none";//隐藏
+                    document.getElementById("stu2").style.display="none";//隐藏
+                    document.getElementById("stu3").style.display="none";//隐藏
+                    document.getElementById("stu4").style.display="none";//隐藏
+                }
             }
         });
     }
