@@ -56,18 +56,6 @@ public class ScoreServiceImpl implements ScoreService{
 		return scoreDao.searchScores(score);
 	}
 
-	@Override
-	public int editScore(String courseId, String studentId, double pacificScore, double midtermScore, double finalScore, double sumScore) {
-		Score score = new Score();
-		score.setCourseId(courseId);
-		score.setStudentId(studentId);
-		score.setPacificScore(pacificScore);
-		score.setMidtermScore(midtermScore);
-		score.setFinalScore(finalScore);
-		score.setSumScore(sumScore);
-		scoreDao.addScore(score);
-		return 1;
-	}
 
 	@Override
 	public int deleteScore(Score score){

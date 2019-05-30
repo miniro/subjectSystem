@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import team.ftthzj.subjectsystem.po.Message;
 import team.ftthzj.subjectsystem.po.Student;
 import team.ftthzj.subjectsystem.service.MessageService;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 
@@ -45,6 +46,59 @@ public class MessageController {
     @RequestMapping(value = "/connectUs.action")
     public String toConnectUs() {
         return "connectUs";
+    }
+
+    /**
+     * 消息列表
+     */
+    @RequestMapping(value = "/message/list.action")
+    public String list() {
+        return "message";
+    }
+
+
+    @RequestMapping(value = "/message/create.action")
+    @ResponseBody
+    public String creatmessage(HttpServletRequest request){
+        int rows = messageService.addmessage(request.getParameter("title"),request.getParameter("startTime")
+                ,request.getParameter("stopTime"),request.getParameter("description"));
+        if(rows > 0){
+            return "OK";
+        }else {
+            return "FAIL";
+        }
+    }
+
+    /**
+     * 通过id获取公告信息
+     */
+    @RequestMapping(value = "/message/getmessageById.action")
+    @ResponseBody
+    public message getmessageById(Integer id) {
+        message message = messageService.searchmessageById(id);
+        return message;
+    }
+
+    @RequestMapping(value = "/message/delete.action")
+    @ResponseBody
+    public String deletemessage(HttpServletRequest request) {
+        int flag=messageService.deletemessage(Integer.valueOf(request.getParameter("messageId")));
+        if(flag==1){
+            return "OK";
+        }else {
+            return "FAIL";
+        }
+    }
+
+    @RequestMapping(value = "/message/update.action")
+    @ResponseBody
+    public String updatemessage(message message){
+        int rows = messageService.updatemessage(message);
+        if(rows > 0){
+            return "OK";
+        }else{
+            return "FAIL";
+        }
     }
 
 }

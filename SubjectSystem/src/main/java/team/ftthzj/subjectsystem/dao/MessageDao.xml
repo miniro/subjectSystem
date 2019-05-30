@@ -7,4 +7,43 @@
 		insert into message(id, errorType, studentId, content)
 		values(#{id},#{errorType},#{studentId},#{content})
 	</insert>
+	
+	<!-- 查询消息-->
+	<select id="searchMessage" parameterType="Message" resultType="Message">
+		select * from message where 1=1
+		<if test="errorType != null and errorType != ''">
+			and errorType = #{errorType}
+		</if>
+		<if test="studentId != null and studentId != ''">
+			and studentId = #{studentId}
+		</if>
+		<if test="content != null and content != ''">
+			and content = #{content}
+		</if>
+	</select>
+
+	<!-- 修改消息-->
+	<update id="updateMessage" parameterType="Message">
+		update message
+		<set>
+			<if test="errorType != null">
+				errorType = #{errorType},
+			</if>
+			<if test="studentId != null">
+				studentId = #{studentId},
+			</if>
+			<if test="content != null">
+				content = #{content},
+			</if>
+		</set>
+	</update>
+
+	<!-- 删除消息-->
+	<delete id="deleteMessage" parameterType="int">
+		delete from message where id = #{id}
+	</delete>
+
+	<select id="getMessage" parameterType="int" resultType="message">
+		select * from message where id = #{id}
+	</select>
 </mapper>

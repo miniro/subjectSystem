@@ -6,21 +6,21 @@ import team.ftthzj.subjectsystem.po.Notice;
 
 public interface NoticeService {
 
-	//新建消息
+	//新建通知
 	public int addNotice(String title, String startTime, String stopTime, String description);
 
-	//列出所有消息
+	//列出所有通知
 	public List<Notice> loadAllNotice();
 
-	//按标题查询消息
+	//按标题查询通知
 	public List<Notice> searchNotices(String title);
 	
-	//删除消息
+	//删除通知
 	public int deleteNotice(int noticeId);
 
-	//获取消息
+	//获取通知
     public Notice searchNoticeById(int noticeId);
 
-    //更新消息
+    //更新通知
 	public int updateNotice(Notice notice);
 }

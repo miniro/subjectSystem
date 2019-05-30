@@ -21,10 +21,6 @@ public interface ScoreService {
 	// 通过课程id查询成绩
 	public List<Score> searchScoreByCourseId(String courseId);
 
-	// 修改成绩
-	public int editScore(String courseId, String studentId, double pacificScore, double midtermScore,
-						   double finalScore, double sumScore);
-
 	// 删除成绩
 	public int deleteScore(Score score);
 
