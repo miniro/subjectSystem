@@ -28,7 +28,7 @@
 		update Student
 		<set>
 			<if test="name!=null">
-				name=#{name}
+				name=#{name},
 			</if>
 			<if test="grade!=null">
 				grade=#{grade},

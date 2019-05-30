@@ -423,7 +423,7 @@ $(function(){
                     </li>
                     <li>
                         <a href="${pageContext.request.contextPath }/information/list.action">
-                            <i class="fa fa-gear fa-fw" aria-hidden="true"></i>个人信息
+                            <i class="fa fa-gear fa-fw" aria-hidden="true"></i>用户信息管理
                         </a>
                     </li>
                     <li>

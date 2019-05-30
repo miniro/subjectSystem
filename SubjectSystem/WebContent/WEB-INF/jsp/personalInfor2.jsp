@@ -205,6 +205,42 @@
 </head>
 <body>
 <script type="text/javascript" src="<%=basePath%>js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript">function Clock_dg(prop) {
+    var angle = 360/60,
+        date = new Date();
+    var h = date.getHours();
+    if(h > 12) {
+        h = h - 12;
+    }
+
+    hour = h;
+    minute = date.getMinutes(),
+        second = date.getSeconds(),
+        hourAngle = (360/12) * hour + (360/(12*60)) * minute;
+
+    $('#minute')[0].style[prop] = 'rotate('+angle * minute+'deg)';
+    $('#second')[0].style[prop] = 'rotate('+angle * second+'deg)';
+    $('#hour')[0].style[prop] = 'rotate('+hourAngle+'deg)';
+    $('#clock').addClass('clock'+h);
+}
+
+
+$(function(){
+    var props = 'transform WebkitTransform MozTransform OTransform msTransform'.split(' '),
+        prop,
+        el = document.createElement('div');
+
+    for(var i = 0, l = props.length; i < l; i++) {
+        if(typeof el.style[props[i]] !== "undefined") {
+            prop = props[i];
+            break;
+        }
+    }
+    setInterval(function(){
+        Clock_dg(prop)
+    },100);
+});
+</script>
 
 
 <div id="wrapper">
@@ -212,7 +248,7 @@
     <nav class="navbar navbar-default navbar-static-top" role="navigation"
          style="margin-bottom: 0">
         <div class="navbar-header">
-            <a class="navbar-brand" href="<%=basePath%>personalInfor/list.action">反方教学选课系统</a>
+            <a class="navbar-brand" href="<%=basePath%>score/list.action">反方教学选课系统</a>
         </div>
         <!-- 导航栏右侧图标部分 -->
         <ul class="nav navbar-top-links navbar-right">
@@ -405,7 +441,7 @@
         </div>
         <!-- 左侧显示列表部分 end-->
     </nav>
-    <!-- 用户信息列表查询部分  start-->
+    <!-- 成绩列表查询部分  start-->
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
@@ -413,87 +449,57 @@
             </div>
             <!-- /.col-lg-12 -->
         </div>
-        <!-- /.row -->
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <form class="form-inline" method="get"
-                      action="${pageContext.request.contextPath }/personalInfor/list.action">
-                    <div class="form-group">
-                        <label for="personalInforId">用户编号</label>
-                        <input type="text" class="form-control" id="personalInforId"
-                               value="${personalInforId }" name="personalInforId" />
-                    </div>
-                    <div class="form-group">
-                        <label for="personalInforName">用户姓名</label>
-                        <input type="text" class="form-control" id="personalInforName"
-                               value="${personalInforName }" name="personalInforName" />
-                    </div>
-                    <div class="form-group">
-                        <label for="teacherName">用户邮箱</label>
-                        <input type="text" class="form-control" id="teacherName"
-                               value="${teacherName }" name="teacherName" />
-                    </div>
-                    <div class="form-group">
-                        <label for="property1">用户类别</label>
-                        <select	class="form-control" id="property1" name="property">
-                            <option value="">--请选择--</option>
-                            <option value="1">老师</option>
-                            <option value="2">学生</option>
-                        </select>
-                    </div>
-                    <%--                    <div class="form-group">--%>
-                    <%--                        <label for="credit">所占学分</label>--%>
-                    <%--                        <select	class="form-control" id="credit"  name="credit">--%>
-                    <%--                            <option value="">--请选择--</option>--%>
-                    <%--                            <c:forEach items="${creditType}" var="item">--%>
-                    <%--                                <option value="${item.dict_id}"--%>
-                    <%--                                        <c:if test="${item.dict_id == credit}"> selected</c:if>>--%>
-                    <%--                                        ${item.dict_item_name }--%>
-                    <%--                                </option>--%>
-                    <%--                            </c:forEach>--%>
-                    <%--                        </select>--%>
-                    <%--                    </div>--%>
-                    <button type="submit" class="btn btn-primary">查询</button>
-                </form>
-            </div>
-        </div>
         <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
-           data-target="#newpersonalInforchooseDialog" onclick="clearpersonalInfor()">新建</a>
+           data-target="#newscoreDialog" onclick="clearscore()">新建</a>
         <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
-           data-target="#personalInforchooseEditDialog" onclick="clearpersonalInfor()">修改</a>
+           data-target="#scorechooseEditDialog" onclick="clearscore()">修改</a>
         <a href="#" class="btn btn-danger btn-xs" data-toggle="modal"
-           data-target="#personalInforDeleteDialog" onclick="clearpersonalInfor()">删除</a>
+           data-target="#scoreDeleteDialog" onclick="clearscore()">删除</a>
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">用户信息信息列表</div>
+                    <div class="panel-heading">用户信息管理表</div>
                     <!-- /.panel-heading -->
                     <table class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                            <th>用户信息编号</th>
-                            <th>用户信息名称</th>
-                            <th>学分</th>
-                            <th>教师姓名</th>
-                            <th>用户信息性质</th>
-                            <th>上课时间</th>
+                            <th>学生编号</th>
+                            <th>姓名</th>
+                            <th>性别</th>
+                            <th>年级</th>
+                            <th>毕业学校</th>
+                            <th>qq号</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach items="${page.rows}" var="row">
                             <tr>
-                                <td>${row.personalInforId}</td>
-                                <td>${row.personalInforName}</td>
-                                <td>${row.credit}</td>
-                                <td>${row.teacherName}</td>
-                                <td>${row.property}</td>
-                                <td>${row.time}</td>
+                                <td>${StudentId}</td>
+                                <td>${Name}</td>
+                                <td>${Sex}</td>
+                                <td>${Grade}</td>
+                                <td>${School}</td>
+                                <td>${Qq}</td>
                             </tr>
-                        </c:forEach>
+                        </tbody>
+                        <thead>
+                        <tr>
+                            <th>手机号</th>
+                            <th>邮箱</th>
+                            <th>家庭地址</th>
+                            <th>入学时间</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>${Phone}</td>
+                            <td>${Email}</td>
+                            <td>${Address}</td>
+                            <td>${EnrollmentDate}</td>
+                        </tr>
                         </tbody>
                     </table>
                     <div class="col-md-12 text-right">
-                        <itheima:page url="${pageContext.request.contextPath }/personalInfor/list.action" />
+                        <itheima:page url="${pageContext.request.contextPath }/score/list.action" />
                     </div>
                     <!-- /.panel-body -->
                 </div>
@@ -502,7 +508,7 @@
             <!-- /.col-lg-12 -->
         </div>
     </div>
-    <!-- 用户信息列表查询部分  end-->
+    <!-- 成绩列表查询部分  end-->
     <!-- footer -->
     <div class="wave-box">
 
@@ -550,9 +556,8 @@
     </div>
     <!-- footer end -->
 </div>
-
-<!-- 选择用户信息模态框 -->
-<div class="modal fade" id="newpersonalInforchooseDialog" tabindex="-1" role="dialog"
+<!-- 创建成绩模态框 -->
+<div class="modal fade" id="newscoreDialog" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -560,17 +565,86 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel">选择用户类型</h4>
+                <h4 class="modal-title" id="myModalLabel1">新建成绩信息</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" id="newpersonalInforchooseDialog_form">
+                <form class="form-horizontal" id="new_score_form">
                     <div class="form-group">
+                        <label for="courseId" class="col-sm-2 control-label">
+                            课程编号
+                        </label>
                         <div class="col-sm-10">
-                            <select	class="form-control" id="type" name="type">
-                                <option value="">--请选择用户类型--</option>
-                                <option value="1">老师</option>
-                                <option value="2">学生</option>
-                            </select>
+                            <input type="text" class="form-control" id="courseId" placeholder="课程编号" name="courseId" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="studentId" class="col-sm-2 control-label">
+                            学生编号
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="studentId" placeholder="学生编号" name="studentId" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="pacificScore" class="col-sm-2 control-label">
+                            平时成绩
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="pacificScore" placeholder="平时成绩" name="pacificScore" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="midScore" class="col-sm-2 control-label">
+                            期中成绩
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="midScore" placeholder="期中成绩" name="midScore" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="finalScore" class="col-sm-2 control-label">
+                            期末成绩
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="finalScore" placeholder="期末成绩" name="finalScore" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="sumScore" class="col-sm-2 control-label">
+                            总成绩
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="sumScore" placeholder="总成绩" name="sumScore" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="createscore()">创建成绩</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="scorechooseEditDialog" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">修改成绩信息</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="edit_score_form">
+                    <div class="form-group">
+                        <label for="courseId" class="col-sm-2 control-label">
+                            成绩编号
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="chooseScoreId" placeholder="成绩编号" name="chooseScoreId" />
                         </div>
                     </div>
                 </form>
@@ -578,13 +652,13 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                 <a href="#" class="btn btn-primary" data-toggle="modal"
-                   data-target="#newpersonalInforDialog " >新建用户信息</a>
+                   data-target="#scoreEditDialog" onclick= "editscore(document.getElementById('chooseScoreId').value)" >选择成绩编号</a>
             </div>
         </div>
     </div>
 </div>
-<!-- 创建用户信息模态框 -->
-<div class="modal fade" id="newpersonalInforDialog" tabindex="-1" role="dialog"
+<!-- 修改成绩模态框 -->
+<div class="modal fade" id="scoreEditDialog" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -592,109 +666,77 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel1">新建用户信息信息</h4>
+                <h4 class="modal-title" id="myModalLabel1">修改成绩信息</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" id="new_personalInfor_form">
+                <form class="form-horizontal" id="update_score_form">
                     <div class="form-group">
-                        <label for="StudentId" class="col-sm-2 control-label">
-                            用户编号
+                        <label for="courseId" class="col-sm-2 control-label">
+                            课程号
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="StudentId" placeholder="用户编号" name="StudentId" />
+                            <input type="text" class="form-control" id="editcourseId" placeholder="课程编号" name="courseId" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="Name" class="col-sm-2 control-label">
-                            姓名
+                        <label for="studentId" class="col-sm-2 control-label">
+                            学生号
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="Name" placeholder="姓名" name="Name" />
+                            <input type="text" class="form-control" id="editstudentId" placeholder="学生编号" name="studentId" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="Sex" class="col-sm-2 control-label">
-                            性别
+                        <label for="pacificScore" class="col-sm-2 control-label">
+                            平时成绩
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="Sex" placeholder="性别" name="Sex" />
+                            <input type="text" class="form-control" id="editpacificScore" placeholder="平时成绩" name="pacificScore" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="Grade" class="col-sm-2 control-label">
-                            年级
+                        <label for="midScore" class="col-sm-2 control-label">
+                            期中成绩
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="Grade" placeholder="年级" name="Grade" />
+                            <input type="text" class="form-control" id="editmidScore" placeholder="期中成绩" name="midScore" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="School" class="col-sm-2 control-label">
-                            毕业学校
+                        <label for="finalScore" class="col-sm-2 control-label">
+                            期末成绩
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="School" placeholder="毕业学校" name="School" />
+                            <input type="text" class="form-control" id="editfinalScore" placeholder="期末成绩" name="finalScore" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="Qq" class="col-sm-2 control-label">
-                            qq号
+                        <label for="sumScore" class="col-sm-2 control-label">
+                            总成绩
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="Qq" placeholder="qq号" name="Qq" />
+                            <input type="text" class="form-control" id="editsumScore" placeholder="总成绩" name="sumScore" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="Phone" class="col-sm-2 control-label">
-                            手机号
+                        <label for="sumScore" class="col-sm-2 control-label">
+                            成绩状态
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="Phone" placeholder="手机号" name="Phone" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="Email" class="col-sm-2 control-label">
-                            邮箱
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="Email" placeholder="邮箱" name="Email" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="Email" class="col-sm-2 control-label">
-                            密码
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="Password" placeholder="密码" name="Password" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="Address" class="col-sm-2 control-label">
-                            家庭地址
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="Address" placeholder="家庭地址" name="Address" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="EnrollmentDate" class="col-sm-2 control-label">
-                            入学时间
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="EnrollmentDate" placeholder="入学时间" name="EnrollmentDate" />
+                            <input type="text" class="form-control" id="editstatus" placeholder="成绩状态" name="status" />
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" onclick="createStuInfor()">创建用户信息</button>
+                <button type="button" class="btn btn-primary" onclick="updatescore()">修改成绩</button>
             </div>
         </div>
     </div>
 </div>
-
-<div class="modal fade" id="personalInforchooseEditDialog" tabindex="-1" role="dialog"
+<!-- 删除成绩模态框 -->
+<div class="modal fade" id="scoreDeleteDialog" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -702,156 +744,31 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel">修改用户信息</h4>
+                <h4 class="modal-title" id="myModalLabel">删除成绩</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" id="edit_personalInfor_form">
+                <form class="form-horizontal" id="delete_score_form">
                     <div class="form-group">
-                        <label for="choosepersonalInforId" class="col-sm-2 control-label">
-                            用户编号
+                        <label for="courseId" class="col-sm-2 control-label">
+                            课程编号
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="choosepersonalInforId" placeholder="用户编号" name="choosepersonalInforId" />
+                            <input type="text" class="form-control" id="courseId" placeholder="课程编号" name="courseId" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="studentId" class="col-sm-2 control-label">
+                            学生编号
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="studentId" placeholder="学生编号" name="studentId" />
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <a href="#" class="btn btn-primary" data-toggle="modal"
-                   data-target="#personalInforEditDialog" onclick= "editpersonalInfor(document.getElementById('choosepersonalInforId').value)" >选择用户编号</a>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- 修改用户信息模态框 -->
-<div class="modal fade" id="personalInforEditDialog" tabindex="-1" role="dialog"
-     aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title" id="myModalLabel1">修改用户信息</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal" id="update_personalInfor_form">
-                    <div class="form-group">
-                        <label for="editStudentId" class="col-sm-2 control-label">
-                            用户编号
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="editStudentId" placeholder="用户编号" name="studentId" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="editName" class="col-sm-2 control-label">
-                            姓名
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="editName" placeholder="姓名" name="name" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="Sex" class="col-sm-2 control-label">
-                            性别
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="editSex" class="form-control" id="editSex" placeholder="性别" name="sex" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="Grade" class="col-sm-2 control-label">
-                            年级
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="editGrade" class="form-control" id="editGrade" placeholder="年级" name="grade" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="School" class="col-sm-2 control-label">
-                            毕业学校
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="editSchool" class="form-control" id="editSchool" placeholder="毕业学校" name="school" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="Qq" class="col-sm-2 control-label">
-                            qq号
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="editQq" class="form-control" id="editQq" placeholder="qq号" name="qq" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="Phone" class="col-sm-2 control-label">
-                            手机号
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="editPhone" class="form-control" id="editPhone" placeholder="手机号" name="phone" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="Email" class="col-sm-2 control-label">
-                            邮箱
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="editEmail" class="form-control" id="editEmail" placeholder="邮箱" name="email" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="Address" class="col-sm-2 control-label">
-                            家庭地址
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="editAddress" class="form-control" id="editAddress" placeholder="家庭地址" name="address" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="editEnrollmentDate" class="col-sm-2 control-label">
-                            入学时间
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="editEnrollmentDate" placeholder="入学时间" name="enrollmentDate" />
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" onclick="updatePersonalInfor()">修改用户信息</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- 删除用户信息模态框 -->
-<div class="modal fade" id="personalInforDeleteDialog" tabindex="-1" role="dialog"
-     aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title" id="myModalLabel">删除用户信息</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal" id="delete_personalInfor_form">
-                    <div class="form-group">
-                        <label for="UserId" class="col-sm-2 control-label">
-                            用户编号
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="UserId" placeholder="用户编号" name="UserId" />
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" onclick="deletepersonalInfor()">删除用户信息</button>
+                <button type="button" class="btn btn-primary" onclick="deletescore()">删除成绩</button>
             </div>
         </div>
     </div>
@@ -875,85 +792,74 @@
 <script src="<%=basePath%>js/script.js"></script>
 <!-- 编写js代码 -->
 <script type="text/javascript">
-    //清空新建用户信息窗口中的数据
-    function clearpersonalInfor() {
-        $("#StudentId").val("");
-        $("#Name").val("");
-        $("#Sex").val("");
-        $("#Grade").val("");
-        $("#School").val("");
-        $("#Qq").val("");
-        $("#Phone").val("");
-        $("#Email").val("");
-        $("#Address").val("");
-        $("#EnrollmentDate").val("");
-        $("#editStudentId").val("");
-        $("#editName").val("");
-        $("#editSex").val("");
-        $("#editGrade").val("");
-        $("#editSchool").val("");
-        $("#editQq").val("");
-        $("#editPhone").val("");
-        $("#editEmail").val("");
-        $("#editAddress").val("");
-        $("#editEnrollmentDate").val("");
+    //清空新建成绩窗口中的数据
+    function clearscore() {
+        $("#courseId").val("");
+        $("#studentId").val("");
+        $("#pacificScore").val("");
+        $("#midScore").val("");
+        $("#finalScore").val("");
+        $("#sumScore").val("");
+        $("#editcourseId").val("");
+        $("#editstudentId").val("");
+        $("#editpacificScore").val("");
+        $("#editmidScore").val("");
+        $("#editfinalScore").val("");
+        $("#editsumScore").val("");
     }
-    // 创建学生信息
-    function createStuInfor() {
-        $.post("<%=basePath%>personalInfor/createStu.action",
-            $("#new_personalInfor_form").serialize(),function(data){
+    // 创建成绩
+    function createscore() {
+        $.post("<%=basePath%>score/create.action",
+            $("#new_score_form").serialize(),function(data){
                 if(data =="OK"){
-                    alert("学生信息创建成功！");
+                    alert("成绩创建成功！");
                     window.location.reload();
                 }else{
-                    alert("学生信息创建失败！");
+                    alert("成绩创建失败！");
                     window.location.reload();
                 }
             });
     }
-    // 执行修改用户信息操作
-    function updatePersonalInfor() {
-        $.post("<%=basePath%>personalInfor/update.action",
-            $("#update_personalInfor_form").serialize(),function(data){
+    // 执行修改成绩操作
+    function updatescore() {
+        $.post("<%=basePath%>score/update.action",
+            $("#update_score_form").serialize(),function(data){
                 if(data =="OK"){
-                    alert("用户信息信息更新成功！");
+                    alert("成绩信息更新成功！");
                     window.location.reload();
                 }else{
-                    alert("用户信息信息更新失败！");
+                    alert("成绩信息更新失败！");
                     window.location.reload();
                 }
             });
     }
-    // 通过id获取修改的用户信息信息
-    function editpersonalInfor(id) {
+    // 通过id获取修改的成绩信息
+    function editscore(id) {
         $.ajax({
             type:"get",
-            url:"<%=basePath%>personalInfor/getpersonalInforStuById.action",
+            url:"<%=basePath%>score/getscoreById.action",
             data:{"id":id},
             success:function(data) {
-                $("#editStudentId").val(data.studentId);
-                $("#editName").val(data.name);
-                $("#editSex").val(data.sex);
-                $("#editGrade").val(data.grade);
-                $("#editSchool").val(data.school);
-                $("#editQq").val(data.qq);
-                $("#editPhone").val(data.phone);
-                $("#editEmail").val(data.email);
-                $("#editAddress").val(data.address);
-                $("#editEnrollmentDate").val(data.enrollmentDate);
+                $("#editcourseId").val(data.courseId);
+                $("#editstudentId").val(data.studentId);
+                $("#editpacificScore").val(data.pacificScore);
+                $("#editmidScore").val(data.midtermScore);
+                $("#editfinalScore").val(data.finalScore);
+                $("#editsumScore").val(data.sumScore);
+                $("#editstatus").val(data.status);
             }
         });
     }
-    // 删除用户信息
-    function deletepersonalInfor() {
-        if(confirm('确定要删除该用户信息吗?')) {
-            $.post("<%=basePath%>personalInfor/delete.action",
-                $("#delete_personalInfor_form").serialize(), function(data){
+    // 删除成绩
+    function deletescore() {
+        if(confirm('确定要删除该成绩吗?')) {
+            $.post("<%=basePath%>score/delete.action",
+                $("#delete_score_form").serialize(), function(data){
                     if(data =="OK"){
-                        alert("用户信息删除成功！");
+                        alert("成绩删除成功！");
                         window.location.reload();
                     }else{
-                        alert("删除用户信息失败！");
+                        alert("删除成绩失败！");
                         window.location.reload();
                     }
                 });
@@ -961,5 +867,10 @@
     }
 </script>
 
+<%--<div id="clock" style="width:150px;height:150px;float:right">--%>
+<%--<div id="hour" style="transform: rotate(56deg);"><img src="${pageContext.request.contextPath}/images/hour.png"></div>--%>
+<%--<div id="minute" style="transform: rotate(312deg);"><img src="${pageContext.request.contextPath}/images/minute.png"></div>--%>
+<%--<div id="second" style="transform: rotate(6deg);"><img src="${pageContext.request.contextPath}/images/second.png"></div>--%>
+<%--</div>--%>
 </body>
 </html>
