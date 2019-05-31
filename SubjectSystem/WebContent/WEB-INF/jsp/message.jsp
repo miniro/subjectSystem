@@ -198,7 +198,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath }/message/listmessageTable.action">
+                        <a href="${pageContext.request.contextPath }/score/list.action">
                             <i class="fa fa-file fa-fw" aria-hidden="true"></i> 成绩管理
                         </a>
                     </li>
