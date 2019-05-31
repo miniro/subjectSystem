@@ -466,7 +466,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">用户信息信息列表</div>
+                    <div class="panel-heading">用户信息列表</div>
                     <!-- /.panel-heading -->
                     <table class="table table-bordered table-striped">
                         <thead>
@@ -578,7 +578,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                 <a href="#" class="btn btn-primary" data-toggle="modal"
-                   data-target="#newpersonalInforDialog " >新建用户信息</a>
+                   data-target="#newpersonalInforDialog " onclick="newpersonalInfor(document.getElementById('type').value)">新建用户信息 </a>
             </div>
         </div>
     </div>
@@ -592,11 +592,19 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel1">新建用户信息信息</h4>
+                <h4 class="modal-title" id="myModalLabel1">新建用户信息</h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="new_personalInfor_form">
-                    <div class="form-group">
+                    <div class="form-group" id="tea11">
+                        <label for="teacherId" class="col-sm-2 control-label" >
+                            教师编号
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="teacherId" placeholder="教师编号" name="teacherId" />
+                        </div>
+                    </div>
+                    <div class="form-group" id="stu11">
                         <label for="StudentId" class="col-sm-2 control-label">
                             用户编号
                         </label>
@@ -620,7 +628,7 @@
                             <input type="text" class="form-control" id="Sex" placeholder="性别" name="Sex" />
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" id="stu22">
                         <label for="Grade" class="col-sm-2 control-label">
                             年级
                         </label>
@@ -628,7 +636,7 @@
                             <input type="text" class="form-control" id="Grade" placeholder="年级" name="Grade" />
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" id="stu33">
                         <label for="School" class="col-sm-2 control-label">
                             毕业学校
                         </label>
@@ -676,7 +684,7 @@
                             <input type="text" class="form-control" id="Address" placeholder="家庭地址" name="Address" />
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" id="stu44">
                         <label for="EnrollmentDate" class="col-sm-2 control-label">
                             入学时间
                         </label>
@@ -684,11 +692,19 @@
                             <input type="text" class="form-control" id="EnrollmentDate" placeholder="入学时间" name="EnrollmentDate" />
                         </div>
                     </div>
+                    <div class="form-group" id="tea22">
+                        <label for="position" class="col-sm-2 control-label" >
+                            职称
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="position" placeholder="职称" name="position" />
+                        </div>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" onclick="createStuInfor()">创建用户信息</button>
+                <button type="button" class="btn btn-primary" onclick="createStuInfor(document.getElementById('teacherId').value)">创建用户信息</button>
             </div>
         </div>
     </div>
@@ -893,6 +909,7 @@
 <script type="text/javascript">
     //清空新建用户信息窗口中的数据
     function clearpersonalInfor() {
+        $("#teacherId").val("");
         $("#StudentId").val("");
         $("#Name").val("");
         $("#Sex").val("");
@@ -915,32 +932,46 @@
         $("#editEnrollmentDate").val("");
     }
     // 创建学生信息
-    function createStuInfor() {
-        $.post("<%=basePath%>personalInfor/createStu.action",
-            $("#new_personalInfor_form").serialize(),function(data){
-                if(data =="OK"){
-                    alert("学生信息创建成功！");
-                    window.location.reload();
-                }else{
-                    alert("学生信息创建失败！");
-                    window.location.reload();
-                }
-            });
+    function createStuInfor(id) {
+        if(id!=""){
+            $.post("<%=basePath%>personalInfor/createTea.action",
+                $("#new_personalInfor_form").serialize(),function(data){
+                    if(data =="OK"){
+                        alert("教师信息创建成功！");
+                        window.location.reload();
+                    }else{
+                        alert("教师信息创建失败！");
+                        window.location.reload();
+                    }
+                });
+        }
+        else{
+            $.post("<%=basePath%>personalInfor/createStu.action",
+                $("#new_personalInfor_form").serialize(),function(data){
+                    if(data =="OK"){
+                        alert("学生信息创建成功！");
+                        window.location.reload();
+                    }else{
+                        alert("学生信息创建失败！");
+                        window.location.reload();
+                    }
+                });
+        }
     }
     // 执行修改用户信息操作
     function updatePersonalInfor() {
         $.post("<%=basePath%>personalInfor/update.action",
             $("#update_personalInfor_form").serialize(),function(data){
                 if(data =="OK"){
-                    alert("用户信息信息更新成功！");
+                    alert("用户信息更新成功！");
                     window.location.reload();
                 }else{
-                    alert("用户信息信息更新失败！");
+                    alert("用户信息更新失败！");
                     window.location.reload();
                 }
             });
     }
-    // 通过id获取修改的用户信息信息
+    // 通过id获取修改的用户信息
     function editpersonalInfor(id) {
         $.ajax({
             type:"get",
@@ -993,6 +1024,26 @@
                         window.location.reload();
                     }
                 });
+        }
+    }
+
+    // 通过id获取修改的用户信息
+    function newpersonalInfor(id) {
+        if (id==2){
+            document.getElementById("stu11").style.display="block";
+            document.getElementById("stu22").style.display="block";
+            document.getElementById("stu33").style.display="block";
+            document.getElementById("stu44").style.display="block";
+            document.getElementById("tea11").style.display="none";//隐藏
+            document.getElementById("tea22").style.display="none";//隐藏
+        }
+        else {
+            document.getElementById("tea11").style.display="block";
+            document.getElementById("tea22").style.display="block";
+            document.getElementById("stu11").style.display="none";//隐藏
+            document.getElementById("stu22").style.display="none";//隐藏
+            document.getElementById("stu33").style.display="none";//隐藏
+            document.getElementById("stu44").style.display="none";//隐藏
         }
     }
 </script>

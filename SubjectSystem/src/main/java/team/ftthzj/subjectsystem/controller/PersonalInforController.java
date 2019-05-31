@@ -24,13 +24,10 @@ public class PersonalInforController {
     @Autowired
     private TeacherService teacherService;
 
-    /**
-     *  用户信息列表
-     */
     @RequestMapping(value = "/personalInfor/createStu.action")
     @ResponseBody
     public String creatPersonalInforStu(HttpServletRequest request){
-        Student student =new Student();
+        Student student = new Student();
         student.setName(request.getParameter("Name"));
         student.setAddress(request.getParameter("Address"));
         student.setEmail(request.getParameter("Email"));
@@ -43,7 +40,7 @@ public class PersonalInforController {
         student.setSex(request.getParameter("Sex"));
         student.setStudentId(request.getParameter("StudentId"));
         student.setSchool(request.getParameter("School"));
-        int rows = studentService.addStudent(student);
+        int rows=rows = studentService.addStudent(student);
         if(rows > 0){
             return "OK";
         }else {
@@ -51,6 +48,27 @@ public class PersonalInforController {
         }
     }
 
+    @RequestMapping(value = "/personalInfor/createTea.action")
+    @ResponseBody
+    public String creatPersonalInforTea(HttpServletRequest request){
+        Teacher teacher = new Teacher();
+        teacher.setName(request.getParameter("Name"));
+        teacher.setAddress(request.getParameter("Address"));
+        teacher.setEmail(request.getParameter("Email"));
+        teacher.setMajor(request.getParameter("Major"));
+        teacher.setPassword(request.getParameter("Password"));
+        teacher.setQq(request.getParameter("Qq"));
+        teacher.setPhone(request.getParameter("Phone"));
+        teacher.setSex(request.getParameter("Sex"));
+        teacher.setTeacherId(request.getParameter("teacherId"));
+        teacher.setPosition(request.getParameter("position"));
+        int rows = teacherService.addTeacher(teacher);
+        if(rows > 0){
+            return "OK";
+        }else {
+            return "FAIL";
+        }
+    }
 
     @RequestMapping(value = "/personalInfor/update.action")
     @ResponseBody
@@ -71,7 +89,6 @@ public class PersonalInforController {
             student.setStudentId(request.getParameter("studentId"));
             student.setSchool(request.getParameter("school"));
             flag1 = studentService.updateStudent(student);
-
         }
         if(request.getParameter("teacherId")!=null){
             Teacher teacher=new Teacher();
@@ -86,7 +103,7 @@ public class PersonalInforController {
             teacher.setQq(request.getParameter("qq"));
             flag2=teacherService.updateTeacher(teacher);
         }
-        if(flag1 > 0){
+        if(flag1 > 0||flag2 > 0){
             return "OK";
         }else{
             return "FAIL";
@@ -125,19 +142,5 @@ public class PersonalInforController {
     public String toINformation(HttpSession session) {
         return "personalInfor";
     }
-
-    //		Student student = (Student) session.getAttribute("STU_SESSION");
-    //		session.setAttribute("StudentId", student.getStudentId());
-    //		session.setAttribute("Address", student.getAddress());
-    //		session.setAttribute("Email", student.getEmail());
-    //		session.setAttribute("EnrollmentDate", student.getEnrollmentDate());
-    //		session.setAttribute("Grade", student.getGrade());
-    //		session.setAttribute("Id", student.getId());
-    //		session.setAttribute("Major", student.getMajor());
-    //		session.setAttribute("Name", student.getName());
-    //		session.setAttribute("Phone", student.getPhone());
-    //		session.setAttribute("Qq", student.getQq());
-    //		session.setAttribute("School", student.getSchool());
-    //		session.setAttribute("Sex", student.getSex());
 
 }

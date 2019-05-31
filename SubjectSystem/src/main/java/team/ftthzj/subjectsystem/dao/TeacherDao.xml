@@ -15,7 +15,7 @@
 	<!-- 添加教师-->
 	<insert id="addTeacher" parameterType="Teacher">
 		insert into teacher(teacherId, name, sex, major, qq, phone, email, password, address, position)
-		values(#{studentId}, #{name}, #{sex}, #{major}, #{qq}, #{phone}, #{email}, #{password}, #{address}, #{position})
+		values(#{teacherId}, #{name}, #{sex}, #{major}, #{qq}, #{phone}, #{email}, #{password}, #{address}, #{position})
 	</insert>
 
 	<!-- 修改教师的name,major,qq,phone,address,position-->
