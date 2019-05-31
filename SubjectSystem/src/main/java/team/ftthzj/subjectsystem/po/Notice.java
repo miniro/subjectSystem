@@ -36,4 +36,22 @@ public class Notice {
 	private String startTime;
 	private String stopTime;
 	private String description;
+	private Integer start;            // 起始行
+	private Integer rows;             // 所取行数
+
+	public Integer getStart() {
+		return start;
+	}
+
+	public void setStart(Integer start) {
+		this.start = start;
+	}
+
+	public Integer getRows() {
+		return rows;
+	}
+
+	public void setRows(Integer rows) {
+		this.rows = rows;
+	}
 }

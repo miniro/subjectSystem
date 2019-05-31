@@ -582,39 +582,6 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="startingTime" style="float:left;padding:7px 15px 0 27px;">begin</label>
-                        <div class="col-sm-10">
-                            <select	class="form-control" id="editbeginTime"  name="beginTime">
-                                <option value="">--请选择--</option>
-                                <c:forEach var="j" begin="1" end="12" step="1">
-                                    <option value="${j}">${j}</option>
-                                </c:forEach>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="startingTime" style="float:left;padding:7px 15px 0 27px;">finish</label>
-                        <div class="col-sm-10">
-                            <select	class="form-control" id="editfinishTime"  name="finishTime">
-                                <option value="">--请选择--</option>
-                                <c:forEach var="j" begin="1" end="12" step="1">
-                                    <option value="${j}">${j}</option>
-                                </c:forEach>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="startingTime" style="float:left;padding:7px 15px 0 27px;">end</label>
-                        <div class="col-sm-10">
-                            <select	class="form-control" id="editendTime"  name="endTime">
-                                <option value="">--请选择--</option>
-                                <c:forEach var="j" begin="1" end="12" step="1">
-                                    <option value="${j}">${j}</option>
-                                </c:forEach>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
                         <label for="startingTime" style="float:left;padding:7px 15px 0 27px;">开始时间</label>
                         <div class="col-sm-10">
                             <select	class="form-control" id="editstartingTime"  name="startingTime">

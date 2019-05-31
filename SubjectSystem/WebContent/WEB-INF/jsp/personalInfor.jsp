@@ -419,7 +419,7 @@
                 <form class="form-inline" method="get"
                       action="${pageContext.request.contextPath }/personalInfor/list.action">
                     <div class="form-group">
-                        <label for="personalInforId">用户编号</label>
+                        <label for="personalInforId">教工号或学号</label>
                         <input type="text" class="form-control" id="personalInforId"
                                value="${personalInforId }" name="personalInforId" />
                     </div>
@@ -429,11 +429,6 @@
                                value="${personalInforName }" name="personalInforName" />
                     </div>
                     <div class="form-group">
-                        <label for="teacherName">用户邮箱</label>
-                        <input type="text" class="form-control" id="teacherName"
-                               value="${teacherName }" name="teacherName" />
-                    </div>
-                    <div class="form-group">
                         <label for="property1">用户类别</label>
                         <select	class="form-control" id="property1" name="property">
                             <option value="">--请选择--</option>
@@ -441,18 +436,6 @@
                             <option value="2">学生</option>
                         </select>
                     </div>
-                    <%--                    <div class="form-group">--%>
-                    <%--                        <label for="credit">所占学分</label>--%>
-                    <%--                        <select	class="form-control" id="credit"  name="credit">--%>
-                    <%--                            <option value="">--请选择--</option>--%>
-                    <%--                            <c:forEach items="${creditType}" var="item">--%>
-                    <%--                                <option value="${item.dict_id}"--%>
-                    <%--                                        <c:if test="${item.dict_id == credit}"> selected</c:if>>--%>
-                    <%--                                        ${item.dict_item_name }--%>
-                    <%--                                </option>--%>
-                    <%--                            </c:forEach>--%>
-                    <%--                        </select>--%>
-                    <%--                    </div>--%>
                     <button type="submit" class="btn btn-primary">查询</button>
                 </form>
             </div>
@@ -471,12 +454,11 @@
                     <table class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                            <th>用户信息编号</th>
-                            <th>用户信息名称</th>
-                            <th>学分</th>
-                            <th>教师姓名</th>
-                            <th>用户信息性质</th>
-                            <th>上课时间</th>
+                            <th>学号或教工号</th>
+                            <th>姓名</th>
+                            <th>用户类型</th>
+                            <th>电话</th>
+                            <th>email</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -487,7 +469,6 @@
                                 <td>${row.credit}</td>
                                 <td>${row.teacherName}</td>
                                 <td>${row.property}</td>
-                                <td>${row.time}</td>
                             </tr>
                         </c:forEach>
                         </tbody>
