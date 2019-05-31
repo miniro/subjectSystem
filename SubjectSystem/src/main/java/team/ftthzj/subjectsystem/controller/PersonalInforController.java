@@ -1,9 +1,13 @@
 package team.ftthzj.subjectsystem.controller;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import team.ftthzj.subjectsystem.common.utils.Page;
 import team.ftthzj.subjectsystem.po.Student;
 import team.ftthzj.subjectsystem.po.Teacher;
 import team.ftthzj.subjectsystem.service.StudentService;
@@ -11,6 +15,7 @@ import team.ftthzj.subjectsystem.service.TeacherService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -121,8 +126,23 @@ public class PersonalInforController {
         }
     }
 
-    @RequestMapping(value = "/information/list.action")
-    public String toINformation(HttpSession session) {
+    @RequestMapping(value = "/personalInfor/list.action")
+    public String toINformation(@RequestParam(defaultValue="1")Integer page,
+                                @RequestParam(defaultValue="10")Integer rows, String userId,
+                                String userName, String userType, Model model) {
+        System.out.println(userId+" "+userName+" "+userType);
+        if(userType == null || Integer.valueOf(userType) == 1){
+            Page<Student> studentPage = studentService.searchStudents(page, rows, userId, userName);
+            model.addAttribute("page", studentPage);
+            model.addAttribute("userType", "学生");
+        }else {
+            Page<Teacher> teacherPage = teacherService.searchTeachers(page, rows, userId, userName);
+            model.addAttribute("page", teacherPage);
+            model.addAttribute("userType", "教师");
+        }
+        model.addAttribute("userId", userId);
+        model.addAttribute("userName", userName);
+
         return "personalInfor";
     }
 

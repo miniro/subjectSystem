@@ -3,12 +3,13 @@ package team.ftthzj.subjectsystem.serviceimpl;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import team.ftthzj.subjectsystem.common.utils.Page;
 import team.ftthzj.subjectsystem.dao.TeacherDao;
-import team.ftthzj.subjectsystem.po.Student;
 import team.ftthzj.subjectsystem.po.Teacher;
 import team.ftthzj.subjectsystem.service.TeacherService;
 
@@ -28,12 +29,6 @@ public class TeacherServiceImpl implements TeacherService{
 		return teacherDao.searchTeacherById(teacherId);
 	}
 
-	public List<Teacher> searchTeachersByName(String teacherName) {
-		Teacher teacher = new Teacher();
-		teacher.setName(teacherName);
-		return teacherDao.searchTeachers(teacher);
-	}
-
 	public int updateTeacher(Teacher teacher) {
 		teacherDao.updateTeacher(teacher);
 		return 1;
@@ -47,6 +42,32 @@ public class TeacherServiceImpl implements TeacherService{
 	public List<Teacher> searchAllTeachers() {
 		Teacher teacher = new Teacher();
 		teacher.setId(0);
-		return teacherDao.searchTeachers(teacher);
+		return teacherDao.searchTeacher(teacher);
+	}
+
+	@Override
+	public Page<Teacher> searchTeachers(Integer page, Integer rows, String teacherId, String name) {
+		Teacher teacher = new Teacher();
+		List<Teacher> teacherList;
+		if(StringUtils.isNotBlank(teacherId) || StringUtils.isNotBlank(name)){
+			if(StringUtils.isNotBlank(teacherId)){
+				teacher.setTeacherId(teacherId);
+			}
+			if(StringUtils.isNotBlank(name)){
+				teacher.setName(name);
+			}
+		}else {
+			teacher.setId(0);
+		}
+		teacher.setStart((page-1) * rows);
+		teacher.setRows(rows);
+		teacherList = teacherDao.searchTeacher(teacher);
+		Integer count = teacherDao.getTeacherNum(teacher);
+		Page<Teacher> result = new Page<>();
+		result.setPage(page);
+		result.setRows(teacherList);
+		result.setSize(rows);
+		result.setTotal(count);
+		return result;
 	}
 }

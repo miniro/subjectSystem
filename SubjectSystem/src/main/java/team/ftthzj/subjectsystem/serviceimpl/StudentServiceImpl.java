@@ -3,10 +3,12 @@ package team.ftthzj.subjectsystem.serviceimpl;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import team.ftthzj.subjectsystem.common.utils.Page;
 import team.ftthzj.subjectsystem.dao.StudentDao;
 import team.ftthzj.subjectsystem.po.Student;
 import team.ftthzj.subjectsystem.service.StudentService;
@@ -27,12 +29,6 @@ public class StudentServiceImpl implements StudentService{
 		return this.studentDao.searchStudentById(studentId);
 	}
 
-	public List<Student> searchStudentsByName(String studentName) {
-		Student student = new Student();
-		student.setName(studentName);
-		return studentDao.searchStudents(student);
-	}
-
 	public int updateStudent(Student student) {
 		studentDao.updateStudent(student);
 		return 1;
@@ -51,7 +47,33 @@ public class StudentServiceImpl implements StudentService{
 	public List<Student> searchAllStudents() {
 		Student student = new Student();
 		student.setId(0);
-		return studentDao.searchStudents(student);
+		return studentDao.searchStudent(student);
+	}
+
+	@Override
+	public Page<Student> searchStudents(Integer page, Integer rows, String studentId, String name) {
+		Student student = new Student();
+		List<Student> studentList;
+		if(StringUtils.isNotBlank(studentId) || StringUtils.isNotBlank(name)){
+			if(StringUtils.isNotBlank(studentId)){
+				student.setStudentId(studentId);
+			}
+			if(StringUtils.isNotBlank(name)){
+				student.setName(name);
+			}
+		}else {
+			student.setId(0);
+		}
+		student.setStart((page-1) * rows);
+		student.setRows(rows);
+		studentList = studentDao.searchStudent(student);
+		Integer count = studentDao.getStudentNum(student);
+		Page<Student> result = new Page<>();
+		result.setPage(page);
+		result.setRows(studentList);
+		result.setSize(rows);
+		result.setTotal(count);
+		return result;
 	}
 
 }

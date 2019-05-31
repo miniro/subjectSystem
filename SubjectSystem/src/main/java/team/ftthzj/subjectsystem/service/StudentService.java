@@ -3,6 +3,7 @@ package team.ftthzj.subjectsystem.service;
 import java.util.Date;
 import java.util.List;
 
+import team.ftthzj.subjectsystem.common.utils.Page;
 import team.ftthzj.subjectsystem.po.Student;
 
 public interface StudentService {
@@ -12,12 +13,12 @@ public interface StudentService {
 
 	//通过id查询学生
 	public Student searchStudentById(String studentId);
-	
-	//通过姓名模糊查询学生
-	public List<Student> searchStudentsByName(String studentName);
-	
+
 	//查询所有学生
 	public List<Student> searchAllStudents();
+
+	//查询学生
+	public Page<Student> searchStudents(Integer page, Integer rows,String studentId, String name);
 	
 	//修改学生信息
 	public int updateStudent(Student student);

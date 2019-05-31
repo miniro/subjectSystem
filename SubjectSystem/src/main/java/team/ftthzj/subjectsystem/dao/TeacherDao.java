@@ -12,9 +12,12 @@ public interface TeacherDao {
 	
 	//通过id查询教师
 	public Teacher searchTeacherById(String teacherId);
-	
-	//通过其他条件查询所有教师
-	public List<Teacher> searchTeachers(Teacher teacher);
+
+	//查询教师
+	public List<Teacher> searchTeacher(Teacher teacher);
+
+	//查询教师数目
+	public Integer getTeacherNum(Teacher teacher);
 	
 	//修改教师信息
 	public int updateTeacher(Teacher teacher);

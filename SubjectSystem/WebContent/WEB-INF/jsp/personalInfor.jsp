@@ -421,19 +421,18 @@
                     <div class="form-group">
                         <label for="personalInforId">教工号或学号</label>
                         <input type="text" class="form-control" id="personalInforId"
-                               value="${personalInforId }" name="personalInforId" />
+                               value="${userId }" name="personalInforId" />
                     </div>
                     <div class="form-group">
                         <label for="personalInforName">用户姓名</label>
                         <input type="text" class="form-control" id="personalInforName"
-                               value="${personalInforName }" name="personalInforName" />
+                               value="${userName }" name="personalInforName" />
                     </div>
                     <div class="form-group">
-                        <label for="property1">用户类别</label>
-                        <select	class="form-control" id="property1" name="property">
-                            <option value="">--请选择--</option>
-                            <option value="1">老师</option>
-                            <option value="2">学生</option>
+                        <label for="userType">用户类别</label>
+                        <select	class="form-control" id="userType" name="userType">
+                            <option value="1">学生</option>
+                            <option value="2">教师</option>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary">查询</button>
@@ -454,7 +453,7 @@
                     <table class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                            <th>学号或教工号</th>
+<%--                            <th>学号或教工号</th>--%>
                             <th>姓名</th>
                             <th>用户类型</th>
                             <th>电话</th>
@@ -464,11 +463,17 @@
                         <tbody>
                         <c:forEach items="${page.rows}" var="row">
                             <tr>
-                                <td>${row.personalInforId}</td>
-                                <td>${row.personalInforName}</td>
-                                <td>${row.credit}</td>
-                                <td>${row.teacherName}</td>
-                                <td>${row.property}</td>
+<%--                                <td>${row.studentId}</td>--%>
+<%--                                <c:if test="${userType == '学生'}">--%>
+<%--                                    <td>${row.studentId}</td>--%>
+<%--                                </c:if>--%>
+<%--                                <c:if test="${userType == '教师'}">--%>
+<%--                                    <td>${row.teacherId}</td>--%>
+<%--                                </c:if>--%>
+                                <td>${row.name}</td>
+                                <td>${userType}</td>
+                                <td>${row.phone}</td>
+                                <td>${row.email}</td>
                             </tr>
                         </c:forEach>
                         </tbody>
