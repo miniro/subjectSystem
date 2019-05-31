@@ -238,8 +238,8 @@
         </div>
         <div class="row">
             <div class="col-lg-12">
-                <h3 class="page-header">计算1603 富涛涛（大佬） 31601146</h3>
-                <h3 class="page-header">计算1603 胡子衿 31601148</h3>
+                <h3 class="page-header">计算1603 富涛涛（负责划水） 31601146</h3>
+                <h3 class="page-header">计算1603 胡子衿（负责工作） 31601148</h3>
                 <h3 class="page-header">谢谢🙏</h3>
 
             </div>
@@ -279,7 +279,6 @@
                 </div>
             </div>
         </div>
-
     </div>
     <div class="footer">
         <div class="auto clearfix">

@@ -243,40 +243,18 @@
                 <form class="form-inline" method="get"
                       action="${pageContext.request.contextPath }/score/list.action">
                     <div class="form-group">
-                        <label for="scoreId">成绩编号</label>
-                        <input type="text" class="form-control" id="scoreId"
-                               value="${scoreId }" name="scoreId" />
+                        <label for="courseName">课程名</label>
+                        <input type="text" class="form-control" id="courseName"
+                               value="${courseName }" name="courseName" />
                     </div>
                     <div class="form-group">
-                        <label for="scoreName">成绩名称</label>
-                        <input type="text" class="form-control" id="scoreName"
-                               value="${scoreName }" name="scoreName" />
-                    </div>
-                    <div class="form-group">
-                        <label for="teacherName">教师姓名</label>
-                        <input type="text" class="form-control" id="teacherName"
-                               value="${teacherName }" name="teacherName" />
-                    </div>
-                    <div class="form-group">
-                        <label for="property1">成绩类别</label>
+                        <label for="property1">课程类别</label>
                         <select	class="form-control" id="property1" name="property">
                             <option value="">--请选择--</option>
                             <option value="1">必修课</option>
                             <option value="2">选修课</option>
                         </select>
                     </div>
-                    <%--                    <div class="form-group">--%>
-                    <%--                        <label for="credit">所占学分</label>--%>
-                    <%--                        <select	class="form-control" id="credit"  name="credit">--%>
-                    <%--                            <option value="">--请选择--</option>--%>
-                    <%--                            <c:forEach items="${creditType}" var="item">--%>
-                    <%--                                <option value="${item.dict_id}"--%>
-                    <%--                                        <c:if test="${item.dict_id == credit}"> selected</c:if>>--%>
-                    <%--                                        ${item.dict_item_name }--%>
-                    <%--                                </option>--%>
-                    <%--                            </c:forEach>--%>
-                    <%--                        </select>--%>
-                    <%--                    </div>--%>
                     <button type="submit" class="btn btn-primary">查询</button>
                 </form>
             </div>
@@ -295,23 +273,21 @@
                     <table class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                            <th>成绩编号</th>
-                            <th>成绩名称</th>
+                            <th>课程编号</th>
+                            <th>课程名</th>
+                            <th>课程性质</th>
                             <th>学分</th>
-                            <th>教师姓名</th>
-                            <th>成绩性质</th>
-                            <th>上课时间</th>
+                            <th>最终成绩</th>
                         </tr>
                         </thead>
                         <tbody>
                         <c:forEach items="${page.rows}" var="row">
                             <tr>
-                                <td>${row.scoreId}</td>
-                                <td>${row.scoreName}</td>
-                                <td>${row.credit}</td>
-                                <td>${row.teacherName}</td>
+                                <td>${row.courseId}</td>
+                                <td>${row.courseName}</td>
                                 <td>${row.property}</td>
-                                <td>${row.time}</td>
+                                <td>${row.credit}</td>
+                                <td>${row.finalScore}</td>
                             </tr>
                         </c:forEach>
                         </tbody>
