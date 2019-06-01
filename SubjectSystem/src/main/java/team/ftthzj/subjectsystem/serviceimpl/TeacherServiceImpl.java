@@ -70,4 +70,10 @@ public class TeacherServiceImpl implements TeacherService{
 		result.setTotal(count);
 		return result;
 	}
+
+	// 通过账号和密码查询教师
+	@Override
+	public Teacher findTea(String email, String password) {
+		return this.teacherDao.findTea(email, password);
+	}
 }

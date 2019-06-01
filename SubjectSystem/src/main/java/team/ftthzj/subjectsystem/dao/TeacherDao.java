@@ -1,8 +1,7 @@
 package team.ftthzj.subjectsystem.dao;
 
 import java.util.List;
-
-import team.ftthzj.subjectsystem.po.Student;
+import org.apache.ibatis.annotations.Param;
 import team.ftthzj.subjectsystem.po.Teacher;
 
 public interface TeacherDao {
@@ -24,4 +23,9 @@ public interface TeacherDao {
 	
 	//删除教师信息
 	public int deleteTeacher(String teacher);
+	/**
+	 * 通过账号和密码查询用户
+	 */
+	public Teacher findTea(@Param("email") String email,
+						   @Param("password") String password);
 }

@@ -79,5 +79,12 @@
 		<include refid="searchTeacherWhere"></include>
 	</select>
 
+	<!-- 查询用户 -->
+	<select id="findTea" parameterType="String" resultType="teacher">
+	    select *
+	    from teacher
+	    where email = #{email}
+	    and password =#{password}
+    </select>
 </mapper>
     

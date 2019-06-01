@@ -171,7 +171,7 @@
                 </a>
                 <ul class="dropdown-menu dropdown-user">
                     <li><a href="#"><i class="fa fa-user fa-fw"></i>
-                        ${STU_SESSION.name}
+                        用户：${STU_SESSION.name}
                     </a>
                     </li>
                     <li><a href="${pageContext.request.contextPath }/connectUs.action"><i class="fa fa-gear fa-fw"></i> 联系管理员</a></li>
@@ -196,33 +196,28 @@
                         </a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath }/course/toCourseTable.action">
-                            <i class="fa fa-table fa-fw" aria-hidden="true"></i> 查看课表
-                        </a>
-                    </li>
-                    <li>
-                        <a href="${pageContext.request.contextPath }/score/list.action">
+                        <a href="${pageContext.request.contextPath }/score/listScoreTable.action">
                             <i class="fa fa-file fa-fw" aria-hidden="true"></i> 成绩管理
                         </a>
                     </li>
                     <li>
                         <a href="${pageContext.request.contextPath }/notice/list.action">
-                            <i class="fa fa-exclamation-circle fa-fw"  aria-hidden="true"></i> 公告管理
+                            <i class="fa fa-exclamation-circle fa-fw"  aria-hidden="true"></i> 公告栏
                         </a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath }/personalInfor/list.action">
-                            <i class="fa fa-gear fa-fw" aria-hidden="true"></i>用户信息管理
+                        <a href="${pageContext.request.contextPath }/information/list.action">
+                            <i class="fa fa-gear fa-fw" aria-hidden="true"></i> 个人信息
                         </a>
                     </li>
                     <li>
                         <a href="${pageContext.request.contextPath }/message/list.action">
-                            <i class="fa fa-magic fa-fw" aria-hidden="true"></i>消息管理
+                            <i class="fa fa-magic fa-fw" aria-hidden="true"></i> 我的消息
                         </a>
                     </li>
                     <li>
                         <a href="${pageContext.request.contextPath }/fttAndHzj/list.action">
-                            <i class="fa fa-bug fa-fw" aria-hidden="true"></i>关于我们
+                            <i class="fa fa-bug fa-fw" aria-hidden="true"></i> 关于我们
                         </a>
                     </li>
                 </ul>
@@ -577,6 +572,39 @@
                                 <option value="">--请选择--</option>
                                 <c:forEach var="i" begin="1" end="7" step="1">
                                     <option value="${i}">周${i}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="startingTime" style="float:left;padding:7px 15px 0 27px;">begin</label>
+                        <div class="col-sm-10">
+                            <select	class="form-control" id="editbeginTime"  name="beginTime">
+                                <option value="">--请选择--</option>
+                                <c:forEach var="j" begin="1" end="12" step="1">
+                                    <option value="${j}">${j}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="startingTime" style="float:left;padding:7px 15px 0 27px;">finish</label>
+                        <div class="col-sm-10">
+                            <select	class="form-control" id="editfinishTime"  name="finishTime">
+                                <option value="">--请选择--</option>
+                                <c:forEach var="j" begin="1" end="12" step="1">
+                                    <option value="${j}">${j}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="startingTime" style="float:left;padding:7px 15px 0 27px;">end</label>
+                        <div class="col-sm-10">
+                            <select	class="form-control" id="editendTime"  name="endTime">
+                                <option value="">--请选择--</option>
+                                <c:forEach var="j" begin="1" end="12" step="1">
+                                    <option value="${j}">${j}</option>
                                 </c:forEach>
                             </select>
                         </div>

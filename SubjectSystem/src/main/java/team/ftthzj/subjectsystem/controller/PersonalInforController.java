@@ -147,7 +147,6 @@ public class PersonalInforController {
     public String toINformation(@RequestParam(defaultValue="1")Integer page,
                                 @RequestParam(defaultValue="10")Integer rows, String userId,
                                 String userName, String userType, Model model) {
-        System.out.println(userId+" "+userName+" "+userType);
         if(userType == null || Integer.valueOf(userType) == 1){
             Page<Student> studentPage = studentService.searchStudents(page, rows, userId, userName);
             model.addAttribute("page", studentPage);
