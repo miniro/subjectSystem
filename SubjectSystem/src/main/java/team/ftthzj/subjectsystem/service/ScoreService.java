@@ -3,6 +3,7 @@ package team.ftthzj.subjectsystem.service;
 import team.ftthzj.subjectsystem.common.utils.Page;
 import team.ftthzj.subjectsystem.po.CourseForUi;
 import team.ftthzj.subjectsystem.po.Score;
+import team.ftthzj.subjectsystem.po.ScoreForUi;
 
 import java.util.List;
 
@@ -25,7 +26,7 @@ public interface ScoreService {
 	public int deleteScore(Score score);
 
 	//查询成绩
-//	public Page<Score> searchCourses(Integer page, Integer rows, String courseId, String studentId, double pacificScore, double midtermScore, double finalScore, double sumScore);
+	public Page<ScoreForUi> searchCourses(Integer page, Integer rows, String studentId, String courseName, String property);
 
 	public List<Score> getScoreByStuAndCourse(String stuId, String courseId);
 

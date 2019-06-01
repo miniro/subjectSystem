@@ -9,6 +9,7 @@ import team.ftthzj.subjectsystem.dao.CourseDao;
 import team.ftthzj.subjectsystem.dao.MessageDao;
 import team.ftthzj.subjectsystem.po.Course;
 import team.ftthzj.subjectsystem.po.Message;
+import team.ftthzj.subjectsystem.po.Notice;
 import team.ftthzj.subjectsystem.service.CourseService;
 import team.ftthzj.subjectsystem.service.MessageService;
 
@@ -31,6 +32,35 @@ public class MessageServiceImpl implements MessageService {
 	public int deleteMessage(int messageId){
 		messageDao.deleteMessage(messageId);
 		return 1;
+	}
+
+	@Override
+	public Page<Message> searchMessage(Integer page, Integer rows, String errorType, String studentId, String content) {
+		Message message = new Message();
+		List<Message> messageList;
+		if(StringUtils.isNotBlank(errorType) || StringUtils.isNotBlank(studentId) || StringUtils.isNotBlank(content)){
+			if(StringUtils.isNotBlank(errorType)){
+				message.setErrorType(Integer.valueOf(errorType));
+			}
+			if(StringUtils.isNotBlank(studentId)){
+				message.setStudentId(studentId);
+			}
+			if(StringUtils.isNotBlank(content)){
+				message.setContent(content);
+			}
+		}else {
+			message.setId(0);
+		}
+		message.setStart((page-1)*rows);
+		message.setRows(rows);
+		messageList = messageDao.searchMessage(message);
+		Integer count = messageDao.getMessageNum(message);
+		Page<Message> result = new Page<>();
+		result.setPage(page);
+		result.setRows(messageList);
+		result.setSize(rows);
+		result.setTotal(count);
+		return result;
 	}
 
 	//获取消息

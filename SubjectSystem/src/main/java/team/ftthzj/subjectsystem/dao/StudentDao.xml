@@ -57,24 +57,34 @@
 		delete from Student where studentId = #{studentId}
 	</delete>
 
+	<!-- 查询的sql片段-->
+	<sql id="searchStudentWhere">
+		<where>
+			<if test="studentId != null and studentId != ''">
+				studentId = #{studentId}
+			</if>
+			<if test="name != null and name != ''">
+				and name like concat('%', #{name}, '%')
+			</if>
+			<if test="id != null">
+				and id > #{id}
+			</if>
+		</where>
+	</sql>
+
 	<!-- 按学号、姓名、学校、年级查询所有学生-->
-	<select id="searchStudents" parameterType="Student" resultType="Student">
-		select * from Student where 1=1
-		<if test="studentId != null and studentId != ''">
-			and studentId = #{studentId}
+	<select id="searchStudent" parameterType="Student" resultType="Student">
+		select * from student
+		<include refid="searchStudentWhere"></include>
+		<if test="start !=null and rows != null">
+			limit #{start},#{rows}
 		</if>
-		<if test="name != null and name != ''">
-			and name like concat('%', #{name}, '%')
-		</if>
-		<if test="school != null and school != ''">
-			and school like concat('%', #{school}, '%')
-		</if>
-		<if test="grade != null and grade != ''">
-			and grade = #{grade}
-		</if>
-		<if test="id != null">
-			and id > #{id}
-		</if>
+	</select>
+
+	<!-- 查询数目-->
+	<select id="getStudentNum" parameterType="Student" resultType="Integer">
+		select count(*) from student
+		<include refid="searchStudentWhere"></include>
 	</select>
 
 </mapper>

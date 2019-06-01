@@ -376,7 +376,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath }/score/listScoreTable.action">
+                        <a href="${pageContext.request.contextPath }/score/list.action">
                             <i class="fa fa-file fa-fw" aria-hidden="true"></i> 成绩管理
                         </a>
                     </li>
@@ -386,7 +386,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath }/information/list.action">
+                        <a href="${pageContext.request.contextPath }/personalInfor/list.action">
                             <i class="fa fa-gear fa-fw" aria-hidden="true"></i>用户信息管理
                         </a>
                     </li>
@@ -419,40 +419,22 @@
                 <form class="form-inline" method="get"
                       action="${pageContext.request.contextPath }/personalInfor/list.action">
                     <div class="form-group">
-                        <label for="personalInforId">用户编号</label>
-                        <input type="text" class="form-control" id="personalInforId"
-                               value="${personalInforId }" name="personalInforId" />
+                        <label for="userId">教工号或学号</label>
+                        <input type="text" class="form-control" id="userId"
+                               value="${userId }" name="userId" />
                     </div>
                     <div class="form-group">
-                        <label for="personalInforName">用户姓名</label>
-                        <input type="text" class="form-control" id="personalInforName"
-                               value="${personalInforName }" name="personalInforName" />
+                        <label for="userName">用户姓名</label>
+                        <input type="text" class="form-control" id="userName"
+                               value="${userName }" name="userName" />
                     </div>
                     <div class="form-group">
-                        <label for="teacherName">用户邮箱</label>
-                        <input type="text" class="form-control" id="teacherName"
-                               value="${teacherName }" name="teacherName" />
-                    </div>
-                    <div class="form-group">
-                        <label for="property1">用户类别</label>
-                        <select	class="form-control" id="property1" name="property">
-                            <option value="">--请选择--</option>
-                            <option value="1">老师</option>
-                            <option value="2">学生</option>
+                        <label for="userType">用户类别</label>
+                        <select	class="form-control" id="userType" name="userType">
+                            <option value="1">学生</option>
+                            <option value="2">教师</option>
                         </select>
                     </div>
-                    <%--                    <div class="form-group">--%>
-                    <%--                        <label for="credit">所占学分</label>--%>
-                    <%--                        <select	class="form-control" id="credit"  name="credit">--%>
-                    <%--                            <option value="">--请选择--</option>--%>
-                    <%--                            <c:forEach items="${creditType}" var="item">--%>
-                    <%--                                <option value="${item.dict_id}"--%>
-                    <%--                                        <c:if test="${item.dict_id == credit}"> selected</c:if>>--%>
-                    <%--                                        ${item.dict_item_name }--%>
-                    <%--                                </option>--%>
-                    <%--                            </c:forEach>--%>
-                    <%--                        </select>--%>
-                    <%--                    </div>--%>
                     <button type="submit" class="btn btn-primary">查询</button>
                 </form>
             </div>
@@ -471,23 +453,26 @@
                     <table class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                            <th>用户信息编号</th>
-                            <th>用户信息名称</th>
-                            <th>学分</th>
-                            <th>教师姓名</th>
-                            <th>用户信息性质</th>
-                            <th>上课时间</th>
+                            <th>学号或教工号</th>
+                            <th>姓名</th>
+                            <th>用户类型</th>
+                            <th>电话</th>
+                            <th>email</th>
                         </tr>
                         </thead>
                         <tbody>
                         <c:forEach items="${page.rows}" var="row">
                             <tr>
-                                <td>${row.personalInforId}</td>
-                                <td>${row.personalInforName}</td>
-                                <td>${row.credit}</td>
-                                <td>${row.teacherName}</td>
-                                <td>${row.property}</td>
-                                <td>${row.time}</td>
+                                <c:if test="${userType == '学生'}">
+                                    <td>${row.studentId}</td>
+                                </c:if>
+                                <c:if test="${userType == '教师'}">
+                                    <td>${row.teacherId}</td>
+                                </c:if>
+                                <td>${row.name}</td>
+                                <td>${userType}</td>
+                                <td>${row.phone}</td>
+                                <td>${row.email}</td>
                             </tr>
                         </c:forEach>
                         </tbody>

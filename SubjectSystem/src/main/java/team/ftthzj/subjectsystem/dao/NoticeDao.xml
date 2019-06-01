@@ -9,16 +9,32 @@
 		insert into notice(title,startTime,stopTime,description) values(#{title}, #{startTime}, #{stopTime}, #{description})
 	</insert>
 
+	<!-- 查询通知数目-->
+	<sql id="searchNoticeWhere">
+		<where>
+			<if test="title != null">
+                title like concat('%', #{title}, '%')
+            </if>
+            <if test="noticeId != null">
+				and noticeId > #{noticeId}
+            </if>
+		</where>
+	</sql>
+
 	<!-- 查询通知-->
-	<select id="searchNotice" parameterType="Notice" resultType="Notice">
-		select * from Notice where 1=1
-		<if test="title != null and title != ''">
-			and title like concat('%', #{title}, '%')
-		</if>
-		<if test="noticeId != null and noticeId != ''">
-			and noticeId > #{noticeId}
-		</if>
+	<select id="searchNotice" parameterType="notice" resultType="notice">
+		select * from notice
+		<include refid="searchNoticeWhere"></include>
+        <if test="start !=null and rows != null">
+            limit #{start},#{rows}
+        </if>
 	</select>
+
+    <!-- 查询数目-->
+    <select id="getNoticeNum" parameterType="notice" resultType="Integer">
+        select count(*) from notice
+        <include refid="searchNoticeWhere"></include>
+    </select>
 
 	<!-- 修改通知-->
 	<update id="updateNotice" parameterType="Notice">

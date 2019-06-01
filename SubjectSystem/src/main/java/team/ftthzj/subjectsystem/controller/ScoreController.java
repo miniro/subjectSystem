@@ -1,16 +1,23 @@
 package team.ftthzj.subjectsystem.controller;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import team.ftthzj.subjectsystem.common.utils.Page;
 import team.ftthzj.subjectsystem.po.Notice;
 import team.ftthzj.subjectsystem.po.Score;
+import team.ftthzj.subjectsystem.po.ScoreForUi;
+import team.ftthzj.subjectsystem.po.Student;
 import team.ftthzj.subjectsystem.service.CourseService;
 import team.ftthzj.subjectsystem.service.ScoreService;
 import team.ftthzj.subjectsystem.service.TeacherService;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -22,9 +29,14 @@ public class ScoreController {
     /**
      *  成绩列表
      */
-    @RequestMapping(value = "/score/listScoreTable.action")
-    public String list(){
-       return "score";
+    @RequestMapping(value = "/score/list.action")
+    public String list(@RequestParam(defaultValue="1")Integer page,
+                       @RequestParam(defaultValue="10")Integer rows,
+                       String courseName, String property, Model model, HttpSession sesstion){
+        Page<ScoreForUi> scoreForUiPage = scoreService.searchCourses(page, rows, ((Student)sesstion.getAttribute("STU_SESSION")).getStudentId() ,courseName, property);
+        model.addAttribute("page", scoreForUiPage);
+
+        return "score";
     }
 
     @RequestMapping(value = "/score/create.action")

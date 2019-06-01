@@ -13,8 +13,11 @@ public interface StudentDao {
 	//通过id查询学生
 	public Student searchStudentById(String studentId);
 
-	//通过其他条件查询所有学生
-	public List<Student> searchStudents(Student student);
+	//查询学生
+	public List<Student> searchStudent(Student student);
+
+	//查询学生数目
+	public Integer getStudentNum(Student student);
 	
 	//修改学生信息
 	public int updateStudent(Student student);

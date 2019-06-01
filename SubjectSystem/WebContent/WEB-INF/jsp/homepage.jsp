@@ -201,7 +201,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath }/score/listScoreTable.action">
+                        <a href="${pageContext.request.contextPath }/score/list.action">
                             <i class="fa fa-file fa-fw" aria-hidden="true"></i> 成绩管理
                         </a>
                     </li>
@@ -211,7 +211,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath }/information/list.action">
+                        <a href="${pageContext.request.contextPath }/personalInfor/list.action">
                             <i class="fa fa-gear fa-fw" aria-hidden="true"></i>用户信息管理
                         </a>
                     </li>
@@ -577,39 +577,6 @@
                                 <option value="">--请选择--</option>
                                 <c:forEach var="i" begin="1" end="7" step="1">
                                     <option value="${i}">周${i}</option>
-                                </c:forEach>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="startingTime" style="float:left;padding:7px 15px 0 27px;">begin</label>
-                        <div class="col-sm-10">
-                            <select	class="form-control" id="editbeginTime"  name="beginTime">
-                                <option value="">--请选择--</option>
-                                <c:forEach var="j" begin="1" end="12" step="1">
-                                    <option value="${j}">${j}</option>
-                                </c:forEach>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="startingTime" style="float:left;padding:7px 15px 0 27px;">finish</label>
-                        <div class="col-sm-10">
-                            <select	class="form-control" id="editfinishTime"  name="finishTime">
-                                <option value="">--请选择--</option>
-                                <c:forEach var="j" begin="1" end="12" step="1">
-                                    <option value="${j}">${j}</option>
-                                </c:forEach>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="startingTime" style="float:left;padding:7px 15px 0 27px;">end</label>
-                        <div class="col-sm-10">
-                            <select	class="form-control" id="editendTime"  name="endTime">
-                                <option value="">--请选择--</option>
-                                <c:forEach var="j" begin="1" end="12" step="1">
-                                    <option value="${j}">${j}</option>
                                 </c:forEach>
                             </select>
                         </div>

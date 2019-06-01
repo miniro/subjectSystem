@@ -1,7 +1,10 @@
 package team.ftthzj.subjectsystem.controller;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import team.ftthzj.subjectsystem.common.utils.Page;
 import team.ftthzj.subjectsystem.po.Message;
 import team.ftthzj.subjectsystem.po.Student;
 import team.ftthzj.subjectsystem.service.MessageService;
@@ -44,7 +47,13 @@ public class MessageController {
      * 消息列表
      */
     @RequestMapping(value = "/message/list.action")
-    public String listMessage() {
+    public String listMessage(@RequestParam(defaultValue="1")Integer page,
+                              @RequestParam(defaultValue="10")Integer rows, String errorType, String studentId, String content, Model model) {
+        Page<Message> messagePage = messageService.searchMessage(page, rows, errorType, studentId, content);
+        model.addAttribute("page", messagePage);
+        model.addAttribute("errorType", errorType);
+        model.addAttribute("studentId", studentId);
+        model.addAttribute("content", content);
         return "message";
     }
 

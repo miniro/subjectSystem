@@ -200,7 +200,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath }/score/listScoreTable.action">
+                        <a href="${pageContext.request.contextPath }/score/list.action">
                             <i class="fa fa-file fa-fw" aria-hidden="true"></i> 成绩管理
                         </a>
                     </li>
@@ -210,7 +210,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath }/information/list.action">
+                        <a href="${pageContext.request.contextPath }/personalInfor/list.action">
                             <i class="fa fa-gear fa-fw" aria-hidden="true"></i>用户信息管理
                         </a>
                     </li>
@@ -243,40 +243,10 @@
                 <form class="form-inline" method="get"
                       action="${pageContext.request.contextPath }/notice/list.action">
                     <div class="form-group">
-                        <label for="noticeId">公告编号</label>
-                        <input type="text" class="form-control" id="noticeId"
-                               value="${noticeId }" name="noticeId" />
+                        <label for="title">公告标题</label>
+                        <input type="text" class="form-control" id="title"
+                               value="${title }" name="title" />
                     </div>
-                    <div class="form-group">
-                        <label for="noticeName">公告名称</label>
-                        <input type="text" class="form-control" id="noticeName"
-                               value="${noticeName }" name="noticeName" />
-                    </div>
-                    <div class="form-group">
-                        <label for="teacherName">教师姓名</label>
-                        <input type="text" class="form-control" id="teacherName"
-                               value="${teacherName }" name="teacherName" />
-                    </div>
-                    <div class="form-group">
-                        <label for="property1">公告类别</label>
-                        <select	class="form-control" id="property1" name="property">
-                            <option value="">--请选择--</option>
-                            <option value="1">必修课</option>
-                            <option value="2">选修课</option>
-                        </select>
-                    </div>
-                    <%--                    <div class="form-group">--%>
-                    <%--                        <label for="credit">所占学分</label>--%>
-                    <%--                        <select	class="form-control" id="credit"  name="credit">--%>
-                    <%--                            <option value="">--请选择--</option>--%>
-                    <%--                            <c:forEach items="${creditType}" var="item">--%>
-                    <%--                                <option value="${item.dict_id}"--%>
-                    <%--                                        <c:if test="${item.dict_id == credit}"> selected</c:if>>--%>
-                    <%--                                        ${item.dict_item_name }--%>
-                    <%--                                </option>--%>
-                    <%--                            </c:forEach>--%>
-                    <%--                        </select>--%>
-                    <%--                    </div>--%>
                     <button type="submit" class="btn btn-primary">查询</button>
                 </form>
             </div>
@@ -296,22 +266,18 @@
                         <thead>
                         <tr>
                             <th>公告编号</th>
-                            <th>公告名称</th>
-                            <th>学分</th>
-                            <th>教师姓名</th>
-                            <th>公告性质</th>
-                            <th>上课时间</th>
+                            <th>公告标题</th>
+                            <th>开始时间</th>
+                            <th>结束时间</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach items="${page.rows}" var="row">
+                        <c:forEach items="${noticeList.rows}" var="row">
                             <tr>
                                 <td>${row.noticeId}</td>
-                                <td>${row.noticeName}</td>
-                                <td>${row.credit}</td>
-                                <td>${row.teacherName}</td>
-                                <td>${row.property}</td>
-                                <td>${row.time}</td>
+                                <td>${row.title}</td>
+                                <td>${row.startTime}</td>
+                                <td>${row.stopTime}</td>
                             </tr>
                         </c:forEach>
                         </tbody>

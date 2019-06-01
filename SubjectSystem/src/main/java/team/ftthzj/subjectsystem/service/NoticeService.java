@@ -2,6 +2,7 @@ package team.ftthzj.subjectsystem.service;
 
 import java.util.List;
 
+import team.ftthzj.subjectsystem.common.utils.Page;
 import team.ftthzj.subjectsystem.po.Notice;
 
 public interface NoticeService {
@@ -12,8 +13,8 @@ public interface NoticeService {
 	//列出所有通知
 	public List<Notice> loadAllNotice();
 
-	//按标题查询通知
-	public List<Notice> searchNotices(String title);
+	//查询通知
+	public Page<Notice> searchNotices(Integer page, Integer rows, String title);
 	
 	//删除通知
 	public int deleteNotice(int noticeId);

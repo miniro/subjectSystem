@@ -73,7 +73,7 @@ public class CourseServiceImpl implements CourseService{
 		if(StringUtils.isNotBlank(teacherName)){
 			Teacher teacher = new Teacher();
 			teacher.setName(teacherName);
-			List<Teacher> teacherList = teacherDao.searchTeachers(teacher);
+			List<Teacher> teacherList = teacherDao.searchTeacher(teacher);
 			for (Teacher t : teacherList){
 				teacherIdList.add(t.getTeacherId());
 			}

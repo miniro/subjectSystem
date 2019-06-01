@@ -412,7 +412,7 @@ $(function(){
                         </a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath }/score/listScoreTable.action">
+                        <a href="${pageContext.request.contextPath }/score/list.action">
                             <i class="fa fa-file fa-fw" aria-hidden="true"></i> 成绩管理
                         </a>
                     </li>
@@ -422,7 +422,7 @@ $(function(){
                         </a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath }/information/list.action">
+                        <a href="${pageContext.request.contextPath }/personalInfor/list.action">
                             <i class="fa fa-gear fa-fw" aria-hidden="true"></i>用户信息管理
                         </a>
                     </li>

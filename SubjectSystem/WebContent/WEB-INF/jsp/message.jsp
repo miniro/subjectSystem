@@ -198,7 +198,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath }/message/listmessageTable.action">
+                        <a href="${pageContext.request.contextPath }/score/list.action">
                             <i class="fa fa-file fa-fw" aria-hidden="true"></i> 成绩管理
                         </a>
                     </li>
@@ -208,7 +208,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath }/information/list.action">
+                        <a href="${pageContext.request.contextPath }/personalInfor/list.action">
                             <i class="fa fa-gear fa-fw" aria-hidden="true"></i>用户信息管理
                         </a>
                     </li>
@@ -241,35 +241,20 @@
                 <form class="form-inline" method="get"
                       action="${pageContext.request.contextPath }/message/list.action">
                     <div class="form-group">
-                        <label for="messageName">消息名称</label>
-                        <input type="text" class="form-control" id="messageName"
-                               value="${messageName }" name="messageName" />
+                        <label for="errorType">错误类型</label>
+                        <input type="text" class="form-control" id="errorType"
+                               value="${errorType }" name="errorType" />
                     </div>
                     <div class="form-group">
-                        <label for="teacherName">教师姓名</label>
-                        <input type="text" class="form-control" id="teacherName"
-                               value="${teacherName }" name="teacherName" />
+                        <label for="studentId">学生id</label>
+                        <input type="text" class="form-control" id="studentId"
+                               value="${studentId }" name="studentId" />
                     </div>
                     <div class="form-group">
-                        <label for="property1">消息类别</label>
-                        <select	class="form-control" id="property1" name="property">
-                            <option value="">--请选择--</option>
-                            <option value="1">必修课</option>
-                            <option value="2">选修课</option>
-                        </select>
+                        <label for="content">内容</label>
+                        <input type="text" class="form-control" id="content"
+                               value="${content }" name="content" />
                     </div>
-                    <%--                    <div class="form-group">--%>
-                    <%--                        <label for="credit">所占学分</label>--%>
-                    <%--                        <select	class="form-control" id="credit"  name="credit">--%>
-                    <%--                            <option value="">--请选择--</option>--%>
-                    <%--                            <c:forEach items="${creditType}" var="item">--%>
-                    <%--                                <option value="${item.dict_id}"--%>
-                    <%--                                        <c:if test="${item.dict_id == credit}"> selected</c:if>>--%>
-                    <%--                                        ${item.dict_item_name }--%>
-                    <%--                                </option>--%>
-                    <%--                            </c:forEach>--%>
-                    <%--                        </select>--%>
-                    <%--                    </div>--%>
                     <button type="submit" class="btn btn-primary">查询</button>
                 </form>
             </div>
@@ -288,21 +273,17 @@
                     <table class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                            <th>消息编号</th>
+                            <th>错误代号</th>
+                            <th>学生id</th>
                             <th>消息内容</th>
-                            <th>错误类型</th>
-                            <th>学生编号</th>
                         </tr>
                         </thead>
                         <tbody>
                         <c:forEach items="${page.rows}" var="row">
                             <tr>
-                                <td>${row.messageId}</td>
-                                <td>${row.messageName}</td>
-                                <td>${row.credit}</td>
-                                <td>${row.teacherName}</td>
-                                <td>${row.property}</td>
-                                <td>${row.time}</td>
+                                <td>${row.errorType}</td>
+                                <td>${row.studentId}</td>
+                                <td>${row.content}</td>
                             </tr>
                         </c:forEach>
                         </tbody>
