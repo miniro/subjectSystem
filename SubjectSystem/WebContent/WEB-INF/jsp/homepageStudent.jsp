@@ -302,6 +302,7 @@
                             <th>教师姓名</th>
                             <th>课程性质</th>
                             <th>上课时间</th>
+                            <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -313,6 +314,9 @@
                                 <td>${row.teacherName}</td>
                                 <td>${row.property}</td>
                                 <td>${row.time}</td>
+                                <td>
+                                    <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#chooseCourseDialog" onclick= "chooseCourseDialog(${row.cust_id})">查看</a>
+                                </td>
                             </tr>
                         </c:forEach>
                         </tbody>

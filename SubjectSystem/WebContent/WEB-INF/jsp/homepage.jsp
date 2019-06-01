@@ -302,6 +302,7 @@
                             <th>教师姓名</th>
                             <th>课程性质</th>
                             <th>上课时间</th>
+                            <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -313,6 +314,11 @@
                                 <td>${row.teacherName}</td>
                                 <td>${row.property}</td>
                                 <td>${row.time}</td>
+                                <td>
+                                    <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#lookCourseDialog" onclick= "lookCourse('${row.courseId}')">详情</a>
+                                    <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#chooseCourseDialog" onclick= "chooseCourse(${row.courseId})">选课</a>
+                                    <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#chooseCourseDialog" onclick= "chooseCourse(${row.courseId})">退课</a>
+                                </td>
                             </tr>
                         </c:forEach>
                         </tbody>
@@ -375,6 +381,86 @@
     </div>
     <!-- footer end -->
 </div>
+
+<!-- 查看课程详情模态框 -->
+<div class="modal fade" id="lookCourseDialog" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel1">课程信息详情</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="course_form">
+                    <div class="form-group">
+                        <label for="new_courseId" class="col-sm-2 control-label">
+                            课程编号
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="courseId_more" placeholder="课程编号" name="courseId" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="new_courseName" class="col-sm-2 control-label">
+                            课程名
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="courseName_more" placeholder="课程名" name="courseName" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="teacherId" style="float:left;padding:7px 15px 0 27px;">教师</label>
+                        <div class="col-sm-10">
+                                <input type="text" class="form-control" id="teacherId_more" placeholder="教师" name="teacherId" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="credit" style="float:left;padding:7px 15px 0 27px;">学分</label>
+                        <div class="col-sm-10">
+                                <input type="text" class="form-control" id="credit_more" placeholder="学分" name="credit_more" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="property" style="float:left;padding:7px 15px 0 27px;">课程性质</label>
+                        <div class="col-sm-10">
+                                <input type="text" class="form-control" id="property_more" placeholder="课程性质" name="property_more" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="weekTime" style="float:left;padding:7px 15px 0 27px;">上课时间</label>
+                        <div class="col-sm-10">
+                                <input type="text" class="form-control" id="weekTime_more" placeholder="上课时间" name="weekTime_more" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="startingTime" style="float:left;padding:7px 15px 0 27px;">开始时间</label>
+                        <div class="col-sm-10">
+                                <input type="text" class="form-control" id="startingTime_more" placeholder="开始时间" name="startingTime_more" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="endingTime" style="float:left;padding:7px 15px 0 27px;">结束时间</label>
+                        <div class="col-sm-10">
+                                <input type="text" class="form-control" id="enddingTime_more" placeholder="结束时间" name="enddingTime_more" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="endingTime" style="float:left;padding:7px 15px 0 27px;">预置课表</label>
+                        <div class="col-sm-10">
+                                <input type="text" class="form-control" id="preset_more" placeholder="预置课表" name="preset_more" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- 创建课程模态框 -->
 <div class="modal fade" id="newcourseDialog" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel">
@@ -401,7 +487,7 @@
                             课程名
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="new_courseName" placeholder="课程姓名" name="courseName" />
+                            <input type="text" class="form-control" id="new_courseName" placeholder="课程名" name="courseName" />
                         </div>
                     </div>
                     <div class="form-group">
@@ -535,7 +621,7 @@
                             课程名
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="editcourseName" placeholder="课程姓名" name="courseName" />
+                            <input type="text" class="form-control" id="editcourseName" placeholder="课程名" name="courseName" />
                         </div>
                     </div>
                     <div class="form-group">
@@ -710,6 +796,31 @@
             }else{
                 alert("课程信息更新失败！");
                 window.location.reload();
+            }
+        });
+    }
+
+    function lookCourse(id) {
+        $.ajax({
+            type:"get",
+            url:"<%=basePath%>course/getcourseById.action",
+            data:{"id":id},
+            success:function(data) {
+                $("#courseId_more").val(data.courseId);
+                $("#courseName_more").val(data.courseName)
+                $("#teacherId_more").val(data.teacherId)
+                $("#credit_more").val(data.credit)
+                $("#property_more").val(data.property);
+                $("#weekTime_more").val(data.weekTime);
+                $("#beginTime_more").val(data.beginTime);
+                $("#finishTime_more").val(data.finishTime);
+                $("#endTime_more").val(data.endTime);
+                $("#property_more").val(data.property);
+                $("#duration_more").val(data.duration);
+                $("#startingTime_more").val(data.startingTime);
+                $("#enddingTime_more").val(data.enddingTime);
+                $("#weekTime_more").val(data.weekTime);
+                $("#preset_more").val(data.preset);
             }
         });
     }
