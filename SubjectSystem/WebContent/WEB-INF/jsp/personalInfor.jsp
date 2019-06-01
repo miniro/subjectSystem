@@ -386,7 +386,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath }/information/list.action">
+                        <a href="${pageContext.request.contextPath }/personalInfor/list.action">
                             <i class="fa fa-gear fa-fw" aria-hidden="true"></i>用户信息管理
                         </a>
                     </li>
@@ -419,14 +419,14 @@
                 <form class="form-inline" method="get"
                       action="${pageContext.request.contextPath }/personalInfor/list.action">
                     <div class="form-group">
-                        <label for="personalInforId">教工号或学号</label>
-                        <input type="text" class="form-control" id="personalInforId"
-                               value="${userId }" name="personalInforId" />
+                        <label for="userId">教工号或学号</label>
+                        <input type="text" class="form-control" id="userId"
+                               value="${userId }" name="userId" />
                     </div>
                     <div class="form-group">
-                        <label for="personalInforName">用户姓名</label>
-                        <input type="text" class="form-control" id="personalInforName"
-                               value="${userName }" name="personalInforName" />
+                        <label for="userName">用户姓名</label>
+                        <input type="text" class="form-control" id="userName"
+                               value="${userName }" name="userName" />
                     </div>
                     <div class="form-group">
                         <label for="userType">用户类别</label>
@@ -453,7 +453,7 @@
                     <table class="table table-bordered table-striped">
                         <thead>
                         <tr>
-<%--                            <th>学号或教工号</th>--%>
+                            <th>学号或教工号</th>
                             <th>姓名</th>
                             <th>用户类型</th>
                             <th>电话</th>
@@ -463,13 +463,12 @@
                         <tbody>
                         <c:forEach items="${page.rows}" var="row">
                             <tr>
-<%--                                <td>${row.studentId}</td>--%>
-<%--                                <c:if test="${userType == '学生'}">--%>
-<%--                                    <td>${row.studentId}</td>--%>
-<%--                                </c:if>--%>
-<%--                                <c:if test="${userType == '教师'}">--%>
-<%--                                    <td>${row.teacherId}</td>--%>
-<%--                                </c:if>--%>
+                                <c:if test="${userType == '学生'}">
+                                    <td>${row.studentId}</td>
+                                </c:if>
+                                <c:if test="${userType == '教师'}">
+                                    <td>${row.teacherId}</td>
+                                </c:if>
                                 <td>${row.name}</td>
                                 <td>${userType}</td>
                                 <td>${row.phone}</td>
