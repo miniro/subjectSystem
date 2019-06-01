@@ -7,8 +7,11 @@ import java.util.List;
 public interface MessageDao {
     public int addMessage(Message Message);
 
+    //查询消息数目
+    public Integer getMessageNum(Message message);
+
     //查询消息
-    public List<Message> searchmessage(Message message);
+    public List<Message> searchMessage(Message message);
 
     //修改消息
     public int updateMessage(Message message);

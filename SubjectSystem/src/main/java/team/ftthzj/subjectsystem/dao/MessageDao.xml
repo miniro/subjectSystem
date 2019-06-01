@@ -7,19 +7,35 @@
 		insert into message(id, errorType, studentId, content,property)
 		values(#{id},#{errorType},#{studentId},#{content},#{property})
 	</insert>
+
+	<!-- 查询sql片段-->
+	<sql id="searchMessageWhere">
+		<where>
+			<if test="errorType != null and errorType != ''">
+				errorType = #{errorType}
+			</if>
+			<if test="studentId != null and studentId != ''">
+				studentId = #{studentId}
+			</if>
+			<if test="content != null and content != ''">
+				content like concat('%', #{content}, '%')
+			</if>
+		</where>
+	</sql>
 	
 	<!-- 查询消息-->
 	<select id="searchMessage" parameterType="Message" resultType="Message">
-		select * from message where 1=1
-		<if test="errorType != null and errorType != ''">
-			and errorType = #{errorType}
+		select * from message
+		<include refid="searchMessageWhere"></include>
+		<if test="start !=null and rows != null">
+			limit #{start},#{rows}
 		</if>
-		<if test="studentId != null and studentId != ''">
-			and studentId = #{studentId}
-		</if>
-		<if test="content != null and content != ''">
-			and content = #{content}
-		</if>
+	</select>
+
+	<!-- 查询数目-->
+	<select id="getMessageNum" parameterType="Message" resultType="Integer">
+		select count(*) from message
+		<include refid="searchMessageWhere"></include>
 	</select>
 
 	<!-- 修改消息-->
