@@ -316,8 +316,8 @@
                                 <td>${row.time}</td>
                                 <td>
                                     <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#lookCourseDialog" onclick= "lookCourse('${row.courseId}')">详情</a>
-                                    <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#chooseCourseDialog" onclick= "chooseCourse(${row.courseId})">选课</a>
-                                    <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#chooseCourseDialog" onclick= "chooseCourse(${row.courseId})">退课</a>
+                                    <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#chooseCourseDialog" onclick= "chooseCourse('${row.courseId}')">选课</a>
+                                    <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#chooseCourseDialog" onclick= "quitCourse('${row.courseId}')">退课</a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -849,19 +849,58 @@
             }
         });
     }
-    // 删除课程
+
+    function quitCourse(id) {
+        if(confirm('确定要退选该课程吗?')) {
+            $.ajax({
+                type:"get",
+                url:"<%=basePath%>course/QuitCourse.action",
+                data:{"id":id},
+                success:function(data) {
+                    if(data =="OK"){
+                        alert("退选成功！");
+                        window.location.reload();
+                    }else{
+                        alert("退选失败！");
+                        window.location.reload();
+                    }
+                }
+            });
+        }
+    }
+
+    function chooseCourse(id) {
+        if(confirm('确定要选择该课程吗?')) {
+            $.ajax({
+                type:"get",
+                url:"<%=basePath%>course/SelectCourse.action",
+                data:{"id":id},
+                success:function(data) {
+                    if(data =="OK"){
+                        alert("选课成功！");
+                        window.location.reload();
+                    }else{
+                        alert("选课失败！");
+                        window.location.reload();
+                    }
+                }
+            });
+        }
+    }
+
+
     function deletecourse() {
         if(confirm('确定要删除该课程吗?')) {
             $.post("<%=basePath%>course/delete.action",
                 $("#delete_course_form").serialize(), function(data){
-                if(data =="OK"){
-                    alert("课程删除成功！");
-                    window.location.reload();
-                }else{
-                    alert("删除课程失败！");
-                    window.location.reload();
-                }
-            });
+                    if(data =="OK"){
+                        alert("课程删除成功！");
+                        window.location.reload();
+                    }else{
+                        alert("删除课程失败！");
+                        window.location.reload();
+                    }
+                });
         }
     }
 </script>

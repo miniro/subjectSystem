@@ -154,6 +154,18 @@ public class CourseController {
         }
     }
 
+    @RequestMapping(value = "/course/QuitCourse.action")
+    @ResponseBody
+    public String QuitCourse(String id) {
+        return "OK";
+    }
+
+    @RequestMapping(value = "/course/SelectCourse.action")
+    @ResponseBody
+    public String SelectCourse(String id) {
+        return "OK";
+    }
+
     /**
      * 通过id获取course信息
      */

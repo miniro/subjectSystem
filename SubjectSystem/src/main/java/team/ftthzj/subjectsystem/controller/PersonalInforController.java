@@ -132,7 +132,27 @@ public class PersonalInforController {
      */
     @RequestMapping(value = "/personalInfor/getpersonalInforStuById.action")
     @ResponseBody
-    public Object getpersonalInforByIdStu(String id, HttpSession session) {
+    public Object getpersonalInforByIdStu(String id) {
+        Student student=studentService.searchStudentById(id);
+        Teacher teacher=teacherService.searchTeacherById(id);
+        if(student!=null){
+            return student;
+        }
+        else {
+            return teacher;
+        }
+    }
+    /**
+     * 通过id获取成绩信息
+     */
+    @RequestMapping(value = "/personalInfor/getpersonalInfor.action")
+    @ResponseBody
+    public Object getpersonalInfor(String studentId,String teacherId) {
+        String id="";
+        System.out.println(studentId);
+        System.out.println(teacherId);
+        if(studentId!=null)id=studentId;
+        else if(teacherId!=null)id=teacherId;
         Student student=studentService.searchStudentById(id);
         Teacher teacher=teacherService.searchTeacherById(id);
         if(student!=null){
