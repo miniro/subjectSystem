@@ -201,7 +201,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath }/score/listScoreTable.action">
+                        <a href="${pageContext.request.contextPath }/score/list.action">
                             <i class="fa fa-file fa-fw" aria-hidden="true"></i> 成绩查询
                         </a>
                     </li>
@@ -315,7 +315,7 @@
                                 <td>${row.property}</td>
                                 <td>${row.time}</td>
                                 <td>
-                                    <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#chooseCourseDialog" onclick= "chooseCourseDialog(${row.cust_id})">查看</a>
+                                    <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#chooseCourseDialog" onclick= "chooseCourseDialog(${row.courseId})">查看</a>
                                 </td>
                             </tr>
                         </c:forEach>

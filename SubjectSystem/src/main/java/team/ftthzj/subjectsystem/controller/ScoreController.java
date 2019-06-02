@@ -33,7 +33,7 @@ public class ScoreController {
     public String list(@RequestParam(defaultValue="1")Integer page,
                        @RequestParam(defaultValue="10")Integer rows,
                        String courseName, String property, Model model, HttpSession sesstion){
-        Page<ScoreForUi> scoreForUiPage = scoreService.searchCourses(page, rows, ((Student)sesstion.getAttribute("STU_SESSION")).getStudentId() ,courseName, property);
+        Page<ScoreForUi> scoreForUiPage = scoreService.searchSelectedCourses(page, rows, ((Student)sesstion.getAttribute("STU_SESSION")).getStudentId() ,courseName, property);
         model.addAttribute("page", scoreForUiPage);
 
         return "score";

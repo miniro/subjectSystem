@@ -26,7 +26,7 @@ public interface ScoreService {
 	public int deleteScore(Score score);
 
 	//查询成绩
-	public Page<ScoreForUi> searchCourses(Integer page, Integer rows, String studentId, String courseName, String property);
+	public Page<ScoreForUi> searchSelectedCourses(Integer page, Integer rows, String studentId, String courseName, String property);
 
 	public List<Score> getScoreByStuAndCourse(String stuId, String courseId);
 

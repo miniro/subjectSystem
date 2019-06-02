@@ -68,7 +68,7 @@ public class ScoreServiceImpl implements ScoreService{
 	}
 
 	@Override
-	public Page<ScoreForUi> searchCourses(Integer page, Integer rows, String studentId, String courseName, String property) {
+	public Page<ScoreForUi> searchSelectedCourses(Integer page, Integer rows, String studentId, String courseName, String property) {
 		List<ScoreForUi> scoreForUiList = new ArrayList<>();
 		List<Course> courseList;
 		Page<ScoreForUi> result = new Page<>();
@@ -90,7 +90,22 @@ public class ScoreServiceImpl implements ScoreService{
 		course.setStart((page-1) * rows);
 		course.setRows(rows);
 		courseList = courseDao.searchCourses(course);
-		for(Course course1 : courseList){
+		//补充
+		List<Course> courseList1 = new ArrayList<>();
+		Score score1 = new Score();
+		score1.setStudentId(studentId);
+		List<Score> scoreList = scoreDao.searchScores(score1);
+		List<String> courseIdList = new ArrayList<>();
+		for(Score score2 : scoreList){
+			courseIdList.add(score2.getCourseId());
+		}
+		for(Course course2 : courseList){
+			if(courseIdList.contains(course2.getcourseId())){
+				courseList1.add(course2);
+			}
+		}
+		//
+		for(Course course1 : courseList1){
 			Score score = new Score();
 			score.setStudentId(studentId);
 			score.setCourseId(course1.getcourseId());
