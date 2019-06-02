@@ -149,6 +149,7 @@ public class ScoreServiceImpl implements ScoreService{
 			score.setCourseId(course1.getcourseId());
 			List<Score> scores = scoreDao.searchScores(score);
 			ScoreForUi scoreForUi = new ScoreForUi();
+			scoreForUi.setId(course1.getId());
 			scoreForUi.setCourseId(course1.getcourseId());
 			scoreForUi.setCourseName(course1.getcourseName());
 			scoreForUi.setCredit(String.valueOf(course1.getCredit()));

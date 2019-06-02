@@ -274,7 +274,9 @@
                         <tbody>
                         <c:forEach items="${noticeList.rows}" var="row">
                             <tr>
-                                <td>${row.noticeId}</td>
+                                <td>
+                                    <a href="#"  data-toggle="modal" data-target="#lookInforNoticeDialog" onclick= "lookInforNotice('${row.noticeId}')">${row.noticeId}</a>
+                                </td>
                                 <td>${row.title}</td>
                                 <td>${row.startTime}</td>
                                 <td>${row.stopTime}</td>
@@ -427,6 +429,59 @@
     </div>
 </div>
 
+<div class="modal fade" id="lookInforNoticeDialog" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel3">公告信息详情</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="update_notice_form">
+                    <div class="form-group">
+                        <label for="title" class="col-sm-2 control-label">
+                            标题
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="moretitle" name="title" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="startTime" class="col-sm-2 control-label">
+                            起始时间
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="morestartTime"  name="startTime" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="stopTime" class="col-sm-2 control-label">
+                            结束时间
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="morestopTime"  name="stopTime" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="description" class="col-sm-2 control-label">
+                            公告内容
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="moredescription"  name="description" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- 修改公告模态框 -->
 <div class="modal fade" id="noticeEditDialog" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel">
@@ -563,6 +618,21 @@
                     window.location.reload();
                 }
             });
+    }
+
+    function lookInforNotice(id) {
+        $.ajax({
+            type:"get",
+            url:"<%=basePath%>notice/getnoticeById.action",
+            data:{"id":id},
+            success:function(data) {
+                $("#morenoticeId").val(data.noticeId);
+                $("#moretitle").val(data.title);
+                $("#morestartTime").val(data.startTime)
+                $("#morestopTime").val(data.stopTime);
+                $("#moredescription").val(data.description);
+            }
+        });
     }
     // 通过noticeId获取修改的公告信息
     function editNotice(id) {

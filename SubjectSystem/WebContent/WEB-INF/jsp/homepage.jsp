@@ -308,14 +308,15 @@
                         <tbody>
                         <c:forEach items="${page.rows}" var="row">
                             <tr>
-                                <td>${row.courseId}</td>
+                                <td>
+                                    <a href="#" data-toggle="modal" data-target="#lookCourseDialog" onclick= "lookCourse('${row.courseId}')">${row.courseId}</a>
+                                </td>
                                 <td>${row.courseName}</td>
                                 <td>${row.credit}</td>
                                 <td>${row.teacherName}</td>
                                 <td>${row.property}</td>
                                 <td>${row.time}</td>
                                 <td>
-                                    <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#lookCourseDialog" onclick= "lookCourse('${row.courseId}')">详情</a>
                                     <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#chooseCourseDialog" onclick= "chooseCourse('${row.courseId}')">选课</a>
                                     <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#chooseCourseDialog" onclick= "quitCourse('${row.courseId}')">退课</a>
                                 </td>
