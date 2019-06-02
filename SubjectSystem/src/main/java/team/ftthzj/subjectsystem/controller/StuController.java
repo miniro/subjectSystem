@@ -1,5 +1,4 @@
 package team.ftthzj.subjectsystem.controller;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,7 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import team.ftthzj.subjectsystem.common.utils.VerifyCodeUtils;
 import team.ftthzj.subjectsystem.po.Student;
+import team.ftthzj.subjectsystem.po.Teacher;
 import team.ftthzj.subjectsystem.service.StudentService;
+import team.ftthzj.subjectsystem.service.TeacherService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,18 +22,33 @@ public class StuController {
 	// 依赖注入
 	@Autowired
 	private StudentService studentService;
+	@Autowired
+	private TeacherService teacherService;
 	/**
-	 * 学生登录
+	 * 用户/管理员登录
 	 */
 	@RequestMapping(value = "/login.action", method = RequestMethod.POST)
 	public String login(String email, String password, Model model, HttpSession session) {
 		// 通过账号和密码查询用户
 		Student student = studentService.findStu(email, password);
-		if(student != null){
+		Teacher teacher= teacherService.findTea(email,password);
+		if(password.equals("admin") && email.equals("admin@qq.com")){
+			// 跳转到主页面
+			Student admin=new Student();
+			admin.setName("管理员");
+			session.setAttribute("STU_SESSION", admin);
+			return "redirect:course/list.action";
+		}
+		else if(student != null){
 			// 将用户对象添加到Session
 			session.setAttribute("STU_SESSION", student);
 			// 跳转到主页面
-			return "redirect:course/list.action";
+			return "redirect:course/student_list.action";
+		}
+		else if(teacher != null){
+			session.setAttribute("STU_SESSION", teacher);
+			// 跳转到主页面
+			return "redirect:course/teacher_list.action";
 		}
 		model.addAttribute("msg", "账号或密码错误，请重新输入！");
          // 返回到登录页面
@@ -57,6 +73,7 @@ public class StuController {
 	    // 重定向到登录页面的跳转方法
 	    return "login";
 	}
+
 	/**
 	 * 向用户登陆页面跳转
 	 */
@@ -64,9 +81,6 @@ public class StuController {
 	public String toLogin() {
 	    return "redirect:login";
 	}
-
-
-
 
 	@RequestMapping(value="getYzm",method=RequestMethod.GET)
 	public void getYzm(HttpServletResponse response,HttpServletRequest request){

@@ -26,182 +26,6 @@
     <link href="<%=basePath%>css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <link href="<%=basePath%>css/boot-crm.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="<%=basePath%>css/style.css">
-    <style type="text/css">
-        html, body {height:100%;}
-
-        body {
-            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2afd0', endColorstr='#88caec',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-            font-family: 'Comfortaa', cursive;
-        }
-
-        #clock {
-            height: 100%;
-            position: relative;
-            width: 100%;
-            margin:10% auto;
-            border-radius:50%;
-            box-shadow:25px 40px 100px rgba(2, 2, 2, 0.7);
-        }
-
-        #clock div {
-            position: absolute;
-            left:50%;
-        }
-
-        #clock img[src*="second"] {
-            transition: transform 600000s linear 1s;
-            height: 150px;
-            width: 100%;
-        }
-
-        #clock:target img[src*="second"] {
-            transform: rotate(3600000deg);
-            height: 150px;
-            width: 2px;
-        }
-
-        #clock img[src*="minute"] {
-            transition: transform 360000s linear 0s;
-            height: 150px;
-            width: 3px;
-        }
-
-        #clock:target img[src*="minute"] {
-            height: 150px;
-            width: 3px;
-            transform: rotate(36000deg);
-        }
-
-        #clock img[src*="hour"] {
-            height: 150px;
-            width: 4px;
-            color: #c7254e;
-            transition: transform 216000s linear 0s;
-        }
-
-        #clock:target img[src*="hour"] {
-            height: 150px;
-            width: 4px;
-            color: #c7254e;
-            transform: rotate(360deg);
-        }
-        .clock1 {
-            background:#383838 url("${pageContext.request.contextPath}/images/clock1.png") no-repeat;
-            background-size:150px 150px;
-        }
-
-        .clock2 {
-            background:#383838 url("${pageContext.request.contextPath}/images/clock2.png") no-repeat;
-            background-size:150px 150px;
-        }
-
-        .clock3 {
-            background:#383838 url("${pageContext.request.contextPath}/images/clock3.png") no-repeat;
-            background-size:150px 150px;
-        }
-
-        .clock4 {
-            background:#383838 url("${pageContext.request.contextPath}/images/clock4.png") no-repeat;
-            background-size:150px 150px;
-        }
-
-        .clock5 {
-            background:#383838 url("${pageContext.request.contextPath}/images/clock5.png") no-repeat;
-            background-size:150px 150px;
-        }
-
-        .clock6 {
-            background:#383838 url("${pageContext.request.contextPath}/images/clock6.png") no-repeat;
-            background-size:150px 150px;
-        }
-
-        .clock7 {
-            background:#383838 url("${pageContext.request.contextPath}/images/clock7.png") no-repeat;
-            background-size:150px 150px;
-        }
-        .clock8 {
-            background:#383838 url("${pageContext.request.contextPath}/images/clock8.png") no-repeat;
-            background-size:150px 150px;
-        }
-
-        .clock9 {
-            background:#383838 url("${pageContext.request.contextPath}/images/clock9.png") no-repeat;
-            background-size:150px 150px;
-        }
-
-        .clock10 {
-            background:#383838 url("${pageContext.request.contextPath}/images/clock10.png") no-repeat;
-            background-size:150px 150px;
-        }
-
-        .clock11 {
-            background:#383838 url("${pageContext.request.contextPath}/images/clock11.png") no-repeat;
-            background-size:150px 150px;
-        }
-
-        .clock12 {
-            background:#383838 url("${pageContext.request.contextPath}/images/clock12.png") no-repeat;
-            background-size:150px 150px;
-        }
-
-        .clock13 {
-            background:#383838 url("${pageContext.request.contextPath}/images/clock1.png") no-repeat;
-            background-size:150px 150px;
-        }
-
-        .clock14 {
-            background:#383838 url("${pageContext.request.contextPath}/images/clock2.png") no-repeat;
-            background-size:150px 150px;
-        }
-
-        .clock15 {
-            background:#383838 url("${pageContext.request.contextPath}/images/clock3.png") no-repeat;
-            background-size:150px 150px;
-        }
-
-        .clock16 {
-            background:#383838 url("${pageContext.request.contextPath}/images/clock4.png") no-repeat;
-            background-size:150px 150px;
-        }
-
-        .clock17 {
-            background:#383838 url("${pageContext.request.contextPath}/images/clock5.png") no-repeat;
-            background-size:150px 150px;
-        }
-
-        .clock18 {
-            background:#383838 url("${pageContext.request.contextPath}/images/clock6.png") no-repeat;
-            background-size:150px 150px;
-        }
-
-        .clock19 {
-            background:#383838 url("${pageContext.request.contextPath}/images/clock7.png") no-repeat;
-            background-size:150px 150px;
-        }
-        .clock20 {
-            background:#383838 url("${pageContext.request.contextPath}/images/clock8.png") no-repeat;
-            background-size:150px 150px;
-        }
-        .clock21 {
-            background:#383838 url("${pageContext.request.contextPath}/images/clock9.png") no-repeat;
-            background-size:150px 150px;
-        }
-        .clock22 {
-            background:#383838 url("${pageContext.request.contextPath}/images/clock10.png") no-repeat;
-            background-size:150px 150px;
-        }
-
-        .clock23 {
-            background:#383838 url("${pageContext.request.contextPath}/images/clock11.png") no-repeat;
-            background-size:150px 150px;
-        }
-
-        .clock0 {
-            background:#383838 url("${pageContext.request.contextPath}/images/clock12.png") no-repeat;
-            background-size:150px 150px;
-        }
-
-    </style>
 </head>
 <body>
 <script type="text/javascript" src="<%=basePath%>js/jquery-1.7.2.min.js"></script>
@@ -448,7 +272,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">用户信息信息列表</div>
+                    <div class="panel-heading">用户信息列表</div>
                     <!-- /.panel-heading -->
                     <table class="table table-bordered table-striped">
                         <thead>
@@ -464,15 +288,21 @@
                         <c:forEach items="${page.rows}" var="row">
                             <tr>
                                 <c:if test="${userType == '学生'}">
-                                    <td>${row.studentId}</td>
+                                    <td>${row.studentId}
+
+                                        <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#lookInforDialog" onclick= "lookInfor('${row.studentId}')">详情</a>
+                                    </td>
                                 </c:if>
                                 <c:if test="${userType == '教师'}">
-                                    <td>${row.teacherId}</td>
+                                    <td>${row.teacherId}
+                                    <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#lookInforDialog" onclick= "lookInfor('${row.teacherId}')">详情</a>
+                                    </td>
                                 </c:if>
                                 <td>${row.name}</td>
                                 <td>${userType}</td>
                                 <td>${row.phone}</td>
                                 <td>${row.email}</td>
+
                             </tr>
                         </c:forEach>
                         </tbody>
@@ -536,6 +366,123 @@
     <!-- footer end -->
 </div>
 
+<div class="modal fade" id="personalInformoreDialog" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel1">用户信息详情</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="update_personalInfor_form">
+                    <div class="form-group" id="tea1">
+                        <label for="moreteacherId" class="col-sm-2 control-label" >
+                            教师编号
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="moreteacherId" placeholder="教师编号" name="teacherId" />
+                        </div>
+                    </div>
+                    <div class="form-group" id="stu1">
+                        <label for="moreStudentId" class="col-sm-2 control-label " >
+                            用户编号
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="moreStudentId" placeholder="学生编号" name="studentId" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="moreName" class="col-sm-2 control-label">
+                            姓名
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="moreName" placeholder="姓名" name="name" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Sex" class="col-sm-2 control-label">
+                            性别
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="moreSex" class="form-control" id="moreSex" placeholder="性别" name="sex" />
+                        </div>
+                    </div>
+                    <div class="form-group" id="stu2">
+                        <label for="Grade" class="col-sm-2 control-label" >
+                            年级
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="moreGrade" class="form-control" id="moreGrade" placeholder="年级" name="grade" />
+                        </div>
+                    </div>
+                    <div class="form-group" id="stu3">
+                        <label for="School" class="col-sm-2 control-label" >
+                            毕业学校
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="moreSchool" class="form-control" id="moreSchool" placeholder="毕业学校" name="school" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Qq" class="col-sm-2 control-label">
+                            qq号
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="moreQq" class="form-control" id="moreQq" placeholder="qq号" name="qq" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Phone" class="col-sm-2 control-label">
+                            手机号
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="morePhone" class="form-control" id="morePhone" placeholder="手机号" name="phone" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Email" class="col-sm-2 control-label">
+                            邮箱
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="moreEmail" class="form-control" id="moreEmail" placeholder="邮箱" name="email" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Address" class="col-sm-2 control-label">
+                            家庭地址
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="moreAddress" class="form-control" id="moreAddress" placeholder="家庭地址" name="address" />
+                        </div>
+                    </div>
+                    <div class="form-group" id="stu4">
+                        <label for="moreEnrollmentDate" class="col-sm-2 control-label" i>
+                            入学时间
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="moreEnrollmentDate" placeholder="入学时间" name="enrollmentDate" />
+                        </div>
+                    </div>
+                    <div class="form-group" id="tea2">
+                        <label for="moreposition" class="col-sm-2 control-label" >
+                            职称
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="moreposition" placeholder="职称" name="position" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="updatePersonalInfor()">修改用户信息</button>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- 选择用户信息模态框 -->
 <div class="modal fade" id="newpersonalInforchooseDialog" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel">
@@ -563,7 +510,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                 <a href="#" class="btn btn-primary" data-toggle="modal"
-                   data-target="#newpersonalInforDialog " >新建用户信息</a>
+                   data-target="#newpersonalInforDialog " onclick="newpersonalInfor(document.getElementById('type').value)">新建用户信息 </a>
             </div>
         </div>
     </div>
@@ -577,11 +524,19 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel1">新建用户信息信息</h4>
+                <h4 class="modal-title" id="myModalLabel1">新建用户信息</h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="new_personalInfor_form">
-                    <div class="form-group">
+                    <div class="form-group" id="tea11">
+                        <label for="teacherId" class="col-sm-2 control-label" >
+                            教师编号
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="teacherId" placeholder="教师编号" name="teacherId" />
+                        </div>
+                    </div>
+                    <div class="form-group" id="stu11">
                         <label for="StudentId" class="col-sm-2 control-label">
                             用户编号
                         </label>
@@ -605,7 +560,7 @@
                             <input type="text" class="form-control" id="Sex" placeholder="性别" name="Sex" />
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" id="stu22">
                         <label for="Grade" class="col-sm-2 control-label">
                             年级
                         </label>
@@ -613,7 +568,7 @@
                             <input type="text" class="form-control" id="Grade" placeholder="年级" name="Grade" />
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" id="stu33">
                         <label for="School" class="col-sm-2 control-label">
                             毕业学校
                         </label>
@@ -661,7 +616,7 @@
                             <input type="text" class="form-control" id="Address" placeholder="家庭地址" name="Address" />
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" id="stu44">
                         <label for="EnrollmentDate" class="col-sm-2 control-label">
                             入学时间
                         </label>
@@ -669,11 +624,19 @@
                             <input type="text" class="form-control" id="EnrollmentDate" placeholder="入学时间" name="EnrollmentDate" />
                         </div>
                     </div>
+                    <div class="form-group" id="tea22">
+                        <label for="position" class="col-sm-2 control-label" >
+                            职称
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="position" placeholder="职称" name="position" />
+                        </div>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" onclick="createStuInfor()">创建用户信息</button>
+                <button type="button" class="btn btn-primary" onclick="createStuInfor(document.getElementById('teacherId').value)">创建用户信息</button>
             </div>
         </div>
     </div>
@@ -878,6 +841,7 @@
 <script type="text/javascript">
     //清空新建用户信息窗口中的数据
     function clearpersonalInfor() {
+        $("#teacherId").val("");
         $("#StudentId").val("");
         $("#Name").val("");
         $("#Sex").val("");
@@ -900,32 +864,87 @@
         $("#editEnrollmentDate").val("");
     }
     // 创建学生信息
-    function createStuInfor() {
-        $.post("<%=basePath%>personalInfor/createStu.action",
-            $("#new_personalInfor_form").serialize(),function(data){
-                if(data =="OK"){
-                    alert("学生信息创建成功！");
-                    window.location.reload();
-                }else{
-                    alert("学生信息创建失败！");
-                    window.location.reload();
-                }
-            });
+    function createStuInfor(id) {
+        if(id!=""){
+            $.post("<%=basePath%>personalInfor/createTea.action",
+                $("#new_personalInfor_form").serialize(),function(data){
+                    if(data =="OK"){
+                        alert("教师信息创建成功！");
+                        window.location.reload();
+                    }else{
+                        alert("教师信息创建失败！");
+                        window.location.reload();
+                    }
+                });
+        }
+        else{
+            $.post("<%=basePath%>personalInfor/createStu.action",
+                $("#new_personalInfor_form").serialize(),function(data){
+                    if(data =="OK"){
+                        alert("学生信息创建成功！");
+                        window.location.reload();
+                    }else{
+                        alert("学生信息创建失败！");
+                        window.location.reload();
+                    }
+                });
+        }
     }
     // 执行修改用户信息操作
     function updatePersonalInfor() {
         $.post("<%=basePath%>personalInfor/update.action",
             $("#update_personalInfor_form").serialize(),function(data){
                 if(data =="OK"){
-                    alert("用户信息信息更新成功！");
+                    alert("用户信息更新成功！");
                     window.location.reload();
                 }else{
-                    alert("用户信息信息更新失败！");
+                    alert("用户信息更新失败！");
                     window.location.reload();
                 }
             });
     }
-    // 通过id获取修改的用户信息信息
+
+    function lookInfor(studentId,teacherId) {
+        $.ajax({
+            type:"get",
+            url:"<%=basePath%>personalInfor/getpersonalInfor.action",
+            data:{"studentId":studentId,"teacherId":teacherId},
+            success:function(data) {
+                $("#moreStudentId").val(data.studentId);
+                $("#moreName").val(data.name);
+                $("#moreSex").val(data.sex);
+                $("#moreGrade").val(data.grade);
+                $("#moreSchool").val(data.school);
+                $("#moreQq").val(data.qq);
+                $("#morePhone").val(data.phone);
+                $("#moreEmail").val(data.email);
+                $("#moreAddress").val(data.address);
+                $("#moreEnrollmentDate").val(data.enrollmentDate);
+                $("#moreteacherId").val(data.teacherId);
+                $("#moreposition").val(data.position);
+                flag=data.teacherId;
+                flag2=data.studentId;
+                if (flag2){
+                    document.getElementById("stu1").style.display="block";
+                    document.getElementById("stu2").style.display="block";
+                    document.getElementById("stu3").style.display="block";
+                    document.getElementById("stu4").style.display="block";
+                    document.getElementById("tea1").style.display="none";//隐藏
+                    document.getElementById("tea2").style.display="none";//隐藏
+                }
+                else {
+                    document.getElementById("tea1").style.display="block";
+                    document.getElementById("tea2").style.display="block";
+                    document.getElementById("stu1").style.display="none";//隐藏
+                    document.getElementById("stu2").style.display="none";//隐藏
+                    document.getElementById("stu3").style.display="none";//隐藏
+                    document.getElementById("stu4").style.display="none";//隐藏
+                }
+            }
+        });
+    }
+
+    // 通过id获取修改的用户信息
     function editpersonalInfor(id) {
         $.ajax({
             type:"get",
@@ -978,6 +997,25 @@
                         window.location.reload();
                     }
                 });
+        }
+    }
+    // 通过id获取修改的用户信息
+    function newpersonalInfor(id) {
+        if (id==2){
+            document.getElementById("stu11").style.display="block";
+            document.getElementById("stu22").style.display="block";
+            document.getElementById("stu33").style.display="block";
+            document.getElementById("stu44").style.display="block";
+            document.getElementById("tea11").style.display="none";//隐藏
+            document.getElementById("tea22").style.display="none";//隐藏
+        }
+        else {
+            document.getElementById("tea11").style.display="block";
+            document.getElementById("tea22").style.display="block";
+            document.getElementById("stu11").style.display="none";//隐藏
+            document.getElementById("stu22").style.display="none";//隐藏
+            document.getElementById("stu33").style.display="none";//隐藏
+            document.getElementById("stu44").style.display="none";//隐藏
         }
     }
 </script>

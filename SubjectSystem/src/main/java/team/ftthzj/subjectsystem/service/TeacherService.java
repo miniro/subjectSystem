@@ -26,4 +26,7 @@ public interface TeacherService {
 	
 	//删除教师
 	public int deleteTeacherById(String teacherId);
+
+	// 通过账号和密码查询教师
+	public Teacher findTea(String email, String password);
 }

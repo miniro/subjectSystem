@@ -171,7 +171,7 @@
                 </a>
                 <ul class="dropdown-menu dropdown-user">
                     <li><a href="#"><i class="fa fa-user fa-fw"></i>
-                        ${STU_SESSION.name}
+                        用户：${STU_SESSION.name}
                     </a>
                     </li>
                     <li><a href="${pageContext.request.contextPath }/connectUs.action"><i class="fa fa-gear fa-fw"></i> 联系管理员</a></li>
@@ -192,37 +192,37 @@
                     <img src="${pageContext.request.contextPath}/images/school.jpg"  height="195" width="280" alt="城市学院" />
                     <li>
                         <a href="${pageContext.request.contextPath }/course/list.action" class="active">
-                            <i class="fa fa-edit fa-fw" aria-hidden="true"></i> 课程管理
+                            <i class="fa fa-edit fa-fw" aria-hidden="true"></i> 课程查询
                         </a>
                     </li>
                     <li>
                         <a href="${pageContext.request.contextPath }/course/toCourseTable.action">
-                            <i class="fa fa-table fa-fw" aria-hidden="true"></i> 查看课表
+                            <i class="fa fa-table fa-fw" aria-hidden="true"></i> 我的课表
                         </a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath }/score/list.action">
-                            <i class="fa fa-file fa-fw" aria-hidden="true"></i> 成绩管理
+                        <a href="${pageContext.request.contextPath }/score/listScoreTable.action">
+                            <i class="fa fa-file fa-fw" aria-hidden="true"></i> 成绩查询
                         </a>
                     </li>
                     <li>
                         <a href="${pageContext.request.contextPath }/notice/list.action">
-                            <i class="fa fa-exclamation-circle fa-fw"  aria-hidden="true"></i> 公告管理
+                            <i class="fa fa-exclamation-circle fa-fw"  aria-hidden="true"></i> 公告栏
                         </a>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath }/personalInfor/list.action">
-                            <i class="fa fa-gear fa-fw" aria-hidden="true"></i>用户信息管理
+                        <a href="${pageContext.request.contextPath }/information/list.action">
+                            <i class="fa fa-gear fa-fw" aria-hidden="true"></i> 个人信息
                         </a>
                     </li>
                     <li>
                         <a href="${pageContext.request.contextPath }/message/list.action">
-                            <i class="fa fa-magic fa-fw" aria-hidden="true"></i>消息管理
+                            <i class="fa fa-magic fa-fw" aria-hidden="true"></i> 我的消息
                         </a>
                     </li>
                     <li>
                         <a href="${pageContext.request.contextPath }/fttAndHzj/list.action">
-                            <i class="fa fa-bug fa-fw" aria-hidden="true"></i>关于我们
+                            <i class="fa fa-bug fa-fw" aria-hidden="true"></i> 关于我们
                         </a>
                     </li>
                 </ul>
@@ -315,9 +315,7 @@
                                 <td>${row.property}</td>
                                 <td>${row.time}</td>
                                 <td>
-                                    <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#lookCourseDialog" onclick= "lookCourse('${row.courseId}')">详情</a>
-                                    <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#chooseCourseDialog" onclick= "chooseCourse('${row.courseId}')">选课</a>
-                                    <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#chooseCourseDialog" onclick= "quitCourse('${row.courseId}')">退课</a>
+                                    <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#chooseCourseDialog" onclick= "chooseCourseDialog(${row.cust_id})">查看</a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -381,86 +379,6 @@
     </div>
     <!-- footer end -->
 </div>
-
-<!-- 查看课程详情模态框 -->
-<div class="modal fade" id="lookCourseDialog" tabindex="-1" role="dialog"
-     aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title" id="myModalLabel1">课程信息详情</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal" id="course_form">
-                    <div class="form-group">
-                        <label for="new_courseId" class="col-sm-2 control-label">
-                            课程编号
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="courseId_more" placeholder="课程编号" name="courseId" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="new_courseName" class="col-sm-2 control-label">
-                            课程名
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="courseName_more" placeholder="课程名" name="courseName" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="teacherId" style="float:left;padding:7px 15px 0 27px;">教师</label>
-                        <div class="col-sm-10">
-                                <input type="text" class="form-control" id="teacherId_more" placeholder="教师" name="teacherId" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="credit" style="float:left;padding:7px 15px 0 27px;">学分</label>
-                        <div class="col-sm-10">
-                                <input type="text" class="form-control" id="credit_more" placeholder="学分" name="credit_more" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="property" style="float:left;padding:7px 15px 0 27px;">课程性质</label>
-                        <div class="col-sm-10">
-                                <input type="text" class="form-control" id="property_more" placeholder="课程性质" name="property_more" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="weekTime" style="float:left;padding:7px 15px 0 27px;">上课时间</label>
-                        <div class="col-sm-10">
-                                <input type="text" class="form-control" id="weekTime_more" placeholder="上课时间" name="weekTime_more" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="startingTime" style="float:left;padding:7px 15px 0 27px;">开始时间</label>
-                        <div class="col-sm-10">
-                                <input type="text" class="form-control" id="startingTime_more" placeholder="开始时间" name="startingTime_more" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="endingTime" style="float:left;padding:7px 15px 0 27px;">结束时间</label>
-                        <div class="col-sm-10">
-                                <input type="text" class="form-control" id="enddingTime_more" placeholder="结束时间" name="enddingTime_more" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="endingTime" style="float:left;padding:7px 15px 0 27px;">预置课表</label>
-                        <div class="col-sm-10">
-                                <input type="text" class="form-control" id="preset_more" placeholder="预置课表" name="preset_more" />
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-            </div>
-        </div>
-    </div>
-</div>
 <!-- 创建课程模态框 -->
 <div class="modal fade" id="newcourseDialog" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel">
@@ -487,7 +405,7 @@
                             课程名
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="new_courseName" placeholder="课程名" name="courseName" />
+                            <input type="text" class="form-control" id="new_courseName" placeholder="课程姓名" name="courseName" />
                         </div>
                     </div>
                     <div class="form-group">
@@ -621,7 +539,7 @@
                             课程名
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="editcourseName" placeholder="课程名" name="courseName" />
+                            <input type="text" class="form-control" id="editcourseName" placeholder="课程姓名" name="courseName" />
                         </div>
                     </div>
                     <div class="form-group">
@@ -663,6 +581,39 @@
                                 <option value="">--请选择--</option>
                                 <c:forEach var="i" begin="1" end="7" step="1">
                                     <option value="${i}">周${i}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="startingTime" style="float:left;padding:7px 15px 0 27px;">begin</label>
+                        <div class="col-sm-10">
+                            <select	class="form-control" id="editbeginTime"  name="beginTime">
+                                <option value="">--请选择--</option>
+                                <c:forEach var="j" begin="1" end="12" step="1">
+                                    <option value="${j}">${j}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="startingTime" style="float:left;padding:7px 15px 0 27px;">finish</label>
+                        <div class="col-sm-10">
+                            <select	class="form-control" id="editfinishTime"  name="finishTime">
+                                <option value="">--请选择--</option>
+                                <c:forEach var="j" begin="1" end="12" step="1">
+                                    <option value="${j}">${j}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="startingTime" style="float:left;padding:7px 15px 0 27px;">end</label>
+                        <div class="col-sm-10">
+                            <select	class="form-control" id="editendTime"  name="endTime">
+                                <option value="">--请选择--</option>
+                                <c:forEach var="j" begin="1" end="12" step="1">
+                                    <option value="${j}">${j}</option>
                                 </c:forEach>
                             </select>
                         </div>
@@ -799,31 +750,6 @@
             }
         });
     }
-
-    function lookCourse(id) {
-        $.ajax({
-            type:"get",
-            url:"<%=basePath%>course/getcourseById.action",
-            data:{"id":id},
-            success:function(data) {
-                $("#courseId_more").val(data.courseId);
-                $("#courseName_more").val(data.courseName)
-                $("#teacherId_more").val(data.teacherId)
-                $("#credit_more").val(data.credit)
-                $("#property_more").val(data.property);
-                $("#weekTime_more").val(data.weekTime);
-                $("#beginTime_more").val(data.beginTime);
-                $("#finishTime_more").val(data.finishTime);
-                $("#endTime_more").val(data.endTime);
-                $("#property_more").val(data.property);
-                $("#duration_more").val(data.duration);
-                $("#startingTime_more").val(data.startingTime);
-                $("#enddingTime_more").val(data.enddingTime);
-                $("#weekTime_more").val(data.weekTime);
-                $("#preset_more").val(data.preset);
-            }
-        });
-    }
     // 通过id获取修改的课程信息
     function editcourse(id) {
         $.ajax({
@@ -849,58 +775,19 @@
             }
         });
     }
-
-    function quitCourse(id) {
-        if(confirm('确定要退选该课程吗?')) {
-            $.ajax({
-                type:"get",
-                url:"<%=basePath%>course/QuitCourse.action",
-                data:{"id":id},
-                success:function(data) {
-                    if(data =="OK"){
-                        alert("退选成功！");
-                        window.location.reload();
-                    }else{
-                        alert("退选失败！");
-                        window.location.reload();
-                    }
-                }
-            });
-        }
-    }
-
-    function chooseCourse(id) {
-        if(confirm('确定要选择该课程吗?')) {
-            $.ajax({
-                type:"get",
-                url:"<%=basePath%>course/SelectCourse.action",
-                data:{"id":id},
-                success:function(data) {
-                    if(data =="OK"){
-                        alert("选课成功！");
-                        window.location.reload();
-                    }else{
-                        alert("选课失败！");
-                        window.location.reload();
-                    }
-                }
-            });
-        }
-    }
-
-
+    // 删除课程
     function deletecourse() {
         if(confirm('确定要删除该课程吗?')) {
             $.post("<%=basePath%>course/delete.action",
                 $("#delete_course_form").serialize(), function(data){
-                    if(data =="OK"){
-                        alert("课程删除成功！");
-                        window.location.reload();
-                    }else{
-                        alert("删除课程失败！");
-                        window.location.reload();
-                    }
-                });
+                if(data =="OK"){
+                    alert("课程删除成功！");
+                    window.location.reload();
+                }else{
+                    alert("删除课程失败！");
+                    window.location.reload();
+                }
+            });
         }
     }
 </script>

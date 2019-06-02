@@ -52,6 +52,57 @@ public class CourseController {
         return "homepage";
     }
 
+    /**
+     *  课程列表
+     */
+    @RequestMapping(value = "/course/teacher_list.action")
+    public String teacher_list(@RequestParam(defaultValue="1")Integer page,
+                       @RequestParam(defaultValue="10")Integer rows,String courseId,
+                       String courseName, String teacherName, String property, String credit,
+                       Model model) {
+        Page<CourseForUi> courses = courseService.searchCourses(page, rows,
+                courseId, courseName, teacherName, property, credit);
+        model.addAttribute("page", courses);
+        model.addAttribute("courseId", courseId);
+        model.addAttribute("courseName", courseName);
+        model.addAttribute("teacherName", teacherName);
+        model.addAttribute("property", property);
+        model.addAttribute("credit", credit);
+        List<Teacher> teacherList = teacherService.searchAllTeachers();
+        model.addAttribute("teacherList", teacherList);
+        List<Double> creditList = new ArrayList<>();
+        for(double d = 0.5; d<=6.0; d+=0.5){
+            creditList.add(d);
+        }
+        model.addAttribute("creditList", creditList);
+        return "homepageTeacher";
+    }
+
+    /**
+     *  课程列表
+     */
+    @RequestMapping(value = "/course/student_list.action")
+    public String student_list(@RequestParam(defaultValue="1")Integer page,
+                               @RequestParam(defaultValue="10")Integer rows,String courseId,
+                               String courseName, String teacherName, String property, String credit,
+                               Model model) {
+        Page<CourseForUi> courses = courseService.searchCourses(page, rows,
+                courseId, courseName, teacherName, property, credit);
+        model.addAttribute("page", courses);
+        model.addAttribute("courseId", courseId);
+        model.addAttribute("courseName", courseName);
+        model.addAttribute("teacherName", teacherName);
+        model.addAttribute("property", property);
+        model.addAttribute("credit", credit);
+        List<Teacher> teacherList = teacherService.searchAllTeachers();
+        model.addAttribute("teacherList", teacherList);
+        List<Double> creditList = new ArrayList<>();
+        for(double d = 0.5; d<=6.0; d+=0.5){
+            creditList.add(d);
+        }
+        model.addAttribute("creditList", creditList);
+        return "homepageStudent";
+    }
 
     @RequestMapping(value = "/course/create.action")
     @ResponseBody
@@ -101,6 +152,18 @@ public class CourseController {
         }else {
             return "FAIL";
         }
+    }
+
+    @RequestMapping(value = "/course/QuitCourse.action")
+    @ResponseBody
+    public String QuitCourse(String id) {
+        return "OK";
+    }
+
+    @RequestMapping(value = "/course/SelectCourse.action")
+    @ResponseBody
+    public String SelectCourse(String id) {
+        return "OK";
     }
 
     /**
