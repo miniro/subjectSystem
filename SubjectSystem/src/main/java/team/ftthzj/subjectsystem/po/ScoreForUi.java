@@ -5,7 +5,17 @@ public class ScoreForUi {
     private String courseName;
     private String property;
     private String credit;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     private String finalScore;
+    private int id;
 
     public String getCourseId() {
         return courseId;

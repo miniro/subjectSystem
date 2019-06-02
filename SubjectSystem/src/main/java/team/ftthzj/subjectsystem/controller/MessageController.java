@@ -50,6 +50,7 @@ public class MessageController {
     public String listMessage(@RequestParam(defaultValue="1")Integer page,
                               @RequestParam(defaultValue="10")Integer rows, String errorType, String studentId, String content, Model model) {
         Page<Message> messagePage = messageService.searchMessage(page, rows, errorType, studentId, content);
+        System.out.println(studentId);
         model.addAttribute("page", messagePage);
         model.addAttribute("errorType", errorType);
         model.addAttribute("studentId", studentId);

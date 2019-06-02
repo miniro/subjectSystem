@@ -283,7 +283,9 @@
                         <tbody>
                         <c:forEach items="${page.rows}" var="row">
                             <tr>
-                                <td>${row.courseId}</td>
+                                <td>
+                                    <a href="#"  data-toggle="modal" data-target="#lookInforScoreDialog" onclick= "lookInforScore('${row.id}')">${row.id}</a>
+                                </td>
                                 <td>${row.courseName}</td>
                                 <td>${row.property}</td>
                                 <td>${row.credit}</td>
@@ -451,8 +453,89 @@
         </div>
     </div>
 </div>
+
+
+
+<!-- 成绩详情模态框 -->
+<div class="modal fade" id="lookInforScoreDialog" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel1">成绩信息详情</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="update_score_form">
+                    <div class="form-group">
+                        <label for="courseId" class="col-sm-2 control-label">
+                            课程号
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="morecourseId" placeholder="课程编号" name="courseId" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="studentId" class="col-sm-2 control-label">
+                            学生号
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="morestudentId" placeholder="学生编号" name="studentId" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="pacificScore" class="col-sm-2 control-label">
+                            平时成绩
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="morepacificScore" placeholder="平时成绩" name="pacificScore" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="midScore" class="col-sm-2 control-label">
+                            期中成绩
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="moremidScore" placeholder="期中成绩" name="midScore" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="finalScore" class="col-sm-2 control-label">
+                            期末成绩
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="morefinalScore" placeholder="期末成绩" name="finalScore" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="sumScore" class="col-sm-2 control-label">
+                            总成绩
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="moresumScore" placeholder="总成绩" name="sumScore" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="sumScore" class="col-sm-2 control-label">
+                            成绩状态
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="morestatus" placeholder="成绩状态" name="status" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- 修改成绩模态框 -->
-<div class="modal fade" id="scoreEditDialog" tabindex="-1" role="dialog"
+<div class="modal fade" id="scoremoreDialog" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -626,6 +709,23 @@
                     window.location.reload();
                 }
             });
+    }
+
+    function lookInforScore(id) {
+        $.ajax({
+            type:"get",
+            url:"<%=basePath%>score/getscoreById.action",
+            data:{"id":id},
+            success:function(data) {
+                $("#morecourseId").val(data.courseId);
+                $("#morestudentId").val(data.studentId);
+                $("#morepacificScore").val(data.pacificScore);
+                $("#moremidScore").val(data.midtermScore);
+                $("#morefinalScore").val(data.finalScore);
+                $("#moresumScore").val(data.sumScore);
+                $("#morestatus").val(data.status);
+            }
+        });
     }
     // 通过id获取修改的成绩信息
     function editscore(id) {

@@ -288,21 +288,19 @@
                         <c:forEach items="${page.rows}" var="row">
                             <tr>
                                 <c:if test="${userType == '学生'}">
-                                    <td>${row.studentId}
-
-                                        <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#lookInforDialog" onclick= "lookInfor('${row.studentId}')">详情</a>
+                                    <td>
+                                        <a href="#"data-toggle="modal" data-target="#lookInforStuDialog" onclick= "lookInforStu('${row.studentId}')">${row.studentId}</a>
                                     </td>
                                 </c:if>
                                 <c:if test="${userType == '教师'}">
-                                    <td>${row.teacherId}
-                                    <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#lookInforDialog" onclick= "lookInfor('${row.teacherId}')">详情</a>
+                                    <td>
+                                        <a href="#"  data-toggle="modal" data-target="#lookInforTeaDialog" onclick= "lookInforTea('${row.teacherId}')">${row.teacherId}</a>
                                     </td>
                                 </c:if>
                                 <td>${row.name}</td>
                                 <td>${userType}</td>
                                 <td>${row.phone}</td>
                                 <td>${row.email}</td>
-
                             </tr>
                         </c:forEach>
                         </tbody>
@@ -366,123 +364,6 @@
     <!-- footer end -->
 </div>
 
-<div class="modal fade" id="personalInformoreDialog" tabindex="-1" role="dialog"
-     aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title" id="myModalLabel1">用户信息详情</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal" id="update_personalInfor_form">
-                    <div class="form-group" id="tea1">
-                        <label for="moreteacherId" class="col-sm-2 control-label" >
-                            教师编号
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="moreteacherId" placeholder="教师编号" name="teacherId" />
-                        </div>
-                    </div>
-                    <div class="form-group" id="stu1">
-                        <label for="moreStudentId" class="col-sm-2 control-label " >
-                            用户编号
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="moreStudentId" placeholder="学生编号" name="studentId" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="moreName" class="col-sm-2 control-label">
-                            姓名
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="moreName" placeholder="姓名" name="name" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="Sex" class="col-sm-2 control-label">
-                            性别
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="moreSex" class="form-control" id="moreSex" placeholder="性别" name="sex" />
-                        </div>
-                    </div>
-                    <div class="form-group" id="stu2">
-                        <label for="Grade" class="col-sm-2 control-label" >
-                            年级
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="moreGrade" class="form-control" id="moreGrade" placeholder="年级" name="grade" />
-                        </div>
-                    </div>
-                    <div class="form-group" id="stu3">
-                        <label for="School" class="col-sm-2 control-label" >
-                            毕业学校
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="moreSchool" class="form-control" id="moreSchool" placeholder="毕业学校" name="school" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="Qq" class="col-sm-2 control-label">
-                            qq号
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="moreQq" class="form-control" id="moreQq" placeholder="qq号" name="qq" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="Phone" class="col-sm-2 control-label">
-                            手机号
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="morePhone" class="form-control" id="morePhone" placeholder="手机号" name="phone" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="Email" class="col-sm-2 control-label">
-                            邮箱
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="moreEmail" class="form-control" id="moreEmail" placeholder="邮箱" name="email" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="Address" class="col-sm-2 control-label">
-                            家庭地址
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="moreAddress" class="form-control" id="moreAddress" placeholder="家庭地址" name="address" />
-                        </div>
-                    </div>
-                    <div class="form-group" id="stu4">
-                        <label for="moreEnrollmentDate" class="col-sm-2 control-label" i>
-                            入学时间
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="moreEnrollmentDate" placeholder="入学时间" name="enrollmentDate" />
-                        </div>
-                    </div>
-                    <div class="form-group" id="tea2">
-                        <label for="moreposition" class="col-sm-2 control-label" >
-                            职称
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="moreposition" placeholder="职称" name="position" />
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" onclick="updatePersonalInfor()">修改用户信息</button>
-            </div>
-        </div>
-    </div>
-</div>
 <!-- 选择用户信息模态框 -->
 <div class="modal fade" id="newpersonalInforchooseDialog" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel">
@@ -672,6 +553,209 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="lookInforStuDialog" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel1">查看学生信息</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="update_personalInfor_form">
+                    <div class="form-group" >
+                        <label for="moreteacherId" class="col-sm-2 control-label" >
+                            教师编号
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="moreteacherId" placeholder="教师编号" name="teacherId" />
+                        </div>
+                    </div>
+                    <div class="form-group" >
+                        <label for="moreStudentId" class="col-sm-2 control-label " >
+                            用户编号
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="moreStudentId" placeholder="学生编号" name="studentId" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="moreName" class="col-sm-2 control-label">
+                            姓名
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="moreName" placeholder="姓名" name="name" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Sex" class="col-sm-2 control-label">
+                            性别
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="moreSex" class="form-control" id="moreSex" placeholder="性别" name="sex" />
+                        </div>
+                    </div>
+                    <div class="form-group" >
+                        <label for="Grade" class="col-sm-2 control-label" >
+                            年级
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="moreGrade" class="form-control" id="moreGrade" placeholder="年级" name="grade" />
+                        </div>
+                    </div>
+                    <div class="form-group" >
+                        <label for="School" class="col-sm-2 control-label" >
+                            毕业学校
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="moreSchool" class="form-control" id="moreSchool" placeholder="毕业学校" name="school" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Qq" class="col-sm-2 control-label">
+                            qq号
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="moreQq" class="form-control" id="moreQq" placeholder="qq号" name="qq" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Phone" class="col-sm-2 control-label">
+                            手机号
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="morePhone" class="form-control" id="morePhone" placeholder="手机号" name="phone" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Email" class="col-sm-2 control-label">
+                            邮箱
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="moreEmail" class="form-control" id="moreEmail" placeholder="邮箱" name="email" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Address" class="col-sm-2 control-label">
+                            家庭地址
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="moreAddress" class="form-control" id="moreAddress" placeholder="家庭地址" name="address" />
+                        </div>
+                    </div>
+                    <div class="form-group" >
+                        <label for="moreEnrollmentDate" class="col-sm-2 control-label" i>
+                            入学时间
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="moreEnrollmentDate" placeholder="入学时间" name="enrollmentDate" />
+                        </div>
+                    </div>
+                    <div class="form-group" >
+                        <label for="moreposition" class="col-sm-2 control-label" >
+                            职称
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="moreposition" placeholder="职称" name="position" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="lookInforTeaDialog" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel1">查看教师信息</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="update_personalInfor_form">
+                    <div class="form-group" >
+                        <label for="moreteacherId" class="col-sm-2 control-label" >
+                            教师编号
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="moreteacherId2" placeholder="教师编号" name="teacherId" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="moreName" class="col-sm-2 control-label">
+                            姓名
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="moreName2" placeholder="姓名" name="name" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Sex" class="col-sm-2 control-label">
+                            性别
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="moreSex" class="form-control" id="moreSex2" placeholder="性别" name="sex" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Qq" class="col-sm-2 control-label">
+                            qq号
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="moreQq" class="form-control" id="moreQq2" placeholder="qq号" name="qq" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Phone" class="col-sm-2 control-label">
+                            手机号
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="morePhone" class="form-control" id="morePhone2" placeholder="手机号" name="phone" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Email" class="col-sm-2 control-label">
+                            邮箱
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="moreEmail" class="form-control" id="moreEmail2" placeholder="邮箱" name="email" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Address" class="col-sm-2 control-label">
+                            家庭地址
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="moreAddress" class="form-control" id="moreAddress2" placeholder="家庭地址" name="address" />
+                        </div>
+                    </div>
+                    <div class="form-group" >
+                        <label for="moreposition" class="col-sm-2 control-label" >
+                            职称
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="moreposition2" placeholder="职称" name="position" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- 修改用户信息模态框 -->
 <div class="modal fade" id="personalInforEditDialog" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel">
@@ -904,11 +988,11 @@
             });
     }
 
-    function lookInfor(studentId,teacherId) {
+    function lookInforStu(studentId) {
         $.ajax({
             type:"get",
-            url:"<%=basePath%>personalInfor/getpersonalInfor.action",
-            data:{"studentId":studentId,"teacherId":teacherId},
+            url:"<%=basePath%>personalInfor/getpersonalInforStu.action",
+            data:{"studentId":studentId},
             success:function(data) {
                 $("#moreStudentId").val(data.studentId);
                 $("#moreName").val(data.name);
@@ -920,26 +1004,24 @@
                 $("#moreEmail").val(data.email);
                 $("#moreAddress").val(data.address);
                 $("#moreEnrollmentDate").val(data.enrollmentDate);
-                $("#moreteacherId").val(data.teacherId);
-                $("#moreposition").val(data.position);
-                flag=data.teacherId;
-                flag2=data.studentId;
-                if (flag2){
-                    document.getElementById("stu1").style.display="block";
-                    document.getElementById("stu2").style.display="block";
-                    document.getElementById("stu3").style.display="block";
-                    document.getElementById("stu4").style.display="block";
-                    document.getElementById("tea1").style.display="none";//隐藏
-                    document.getElementById("tea2").style.display="none";//隐藏
-                }
-                else {
-                    document.getElementById("tea1").style.display="block";
-                    document.getElementById("tea2").style.display="block";
-                    document.getElementById("stu1").style.display="none";//隐藏
-                    document.getElementById("stu2").style.display="none";//隐藏
-                    document.getElementById("stu3").style.display="none";//隐藏
-                    document.getElementById("stu4").style.display="none";//隐藏
-                }
+            }
+        });
+    }
+
+    function lookInforTea(teacherId) {
+        $.ajax({
+            type:"get",
+            url:"<%=basePath%>personalInfor/getpersonalInforTea.action",
+            data:{"teacherId":teacherId},
+            success:function(data) {
+                $("#moreName2").val(data.name);
+                $("#moreSex2").val(data.sex);
+                $("#moreQq2").val(data.qq);
+                $("#morePhone2").val(data.phone);
+                $("#moreEmail2").val(data.email);
+                $("#moreAddress2").val(data.address);
+                $("#moreteacherId2").val(data.teacherId);
+                $("#moreposition2").val(data.position);
             }
         });
     }

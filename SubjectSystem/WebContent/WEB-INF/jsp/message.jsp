@@ -273,8 +273,8 @@
                     <table class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                            <th>错误代号</th>
-                            <th>学生id</th>
+                            <th>错误类型</th>
+                            <th>学生号</th>
                             <th>消息内容</th>
                         </tr>
                         </thead>
@@ -283,7 +283,9 @@
                             <tr>
                                 <td>${row.errorType}</td>
                                 <td>${row.studentId}</td>
-                                <td>${row.content}</td>
+                                <td>
+                                    <a href="#"  data-toggle="modal" data-target="#messageInforDialog" onclick= "lookInforMessage('${row.id}')">${row.content}</a>
+                                </td>
                             </tr>
                         </c:forEach>
                         </tbody>
@@ -423,6 +425,52 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="messageInforDialog" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel1">修改消息信息</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="update_message_form">
+                    <div class="form-group">
+                        <label for="morecontent" class="col-sm-2 control-label">
+                            消息内容
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="morecontent" placeholder="消息内容" name="content" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="morestudentId" class="col-sm-2 control-label">
+                            学生编号
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="morestudentId" placeholder="学生编号" name="studentId" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="moreerrorType" class="col-sm-2 control-label">
+                            错误类型
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="moreerrorType" placeholder="错误类型" name="Type" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- 修改消息模态框 -->
 <div class="modal fade" id="messageEditDialog" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel">
@@ -553,6 +601,19 @@
                     window.location.reload();
                 }
             });
+    }
+
+    function lookInforMessage(id) {
+        $.ajax({
+            type:"get",
+            url:"<%=basePath%>message/getmessageById.action",
+            data:{"id":id},
+            success:function(data) {
+                $("#morestudentId").val(data.studentId);
+                $("#moreerrorType").val(data.errorType);
+                $("#morecontent").val(data.content);
+            }
+        });
     }
     // 通过id获取修改的消息信息
     function editmessage(id) {
