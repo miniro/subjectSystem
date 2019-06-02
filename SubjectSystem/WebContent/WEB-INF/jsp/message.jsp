@@ -273,19 +273,21 @@
                     <table class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                            <th>错误类型</th>
+                            <th>消息编号</th>
                             <th>学生号</th>
                             <th>消息内容</th>
+                            <th>错误类型</th>
                         </tr>
                         </thead>
                         <tbody>
                         <c:forEach items="${page.rows}" var="row">
                             <tr>
-                                <td>${row.errorType}</td>
-                                <td>${row.studentId}</td>
                                 <td>
-                                    <a href="#"  data-toggle="modal" data-target="#messageInforDialog" onclick= "lookInforMessage('${row.id}')">${row.content}</a>
+                                    <a href="#"  data-toggle="modal" data-target="#messageInforDialog" onclick= "lookInforMessage('${row.id}')">${row.id}</a>
                                 </td>
+                                <td>${row.studentId}</td>
+                                <td>${row.content}</td>
+                                <td>${row.errorType}</td>
                             </tr>
                         </c:forEach>
                         </tbody>
