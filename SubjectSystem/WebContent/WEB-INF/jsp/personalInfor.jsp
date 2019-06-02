@@ -289,7 +289,6 @@
                             <tr>
                                 <c:if test="${userType == '学生'}">
                                     <td>${row.studentId}
-
                                         <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#lookInforDialog" onclick= "lookInfor('${row.studentId}')">详情</a>
                                     </td>
                                 </c:if>

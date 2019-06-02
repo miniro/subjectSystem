@@ -12,6 +12,9 @@ public interface ScoreService {
 	// 学生选课
 	public int chooseCourse(String studentId, String courseId);
 
+	//学生退课
+	public int dropCourse(String studentId, String courseId);
+
 	// 录入成绩
 	public int addScore(String courseId, String studentId, double pacificScore, double midtermScore, double finalScore,
 						double sumScore);
@@ -21,9 +24,6 @@ public interface ScoreService {
 
 	// 通过课程id查询成绩
 	public List<Score> searchScoreByCourseId(String courseId);
-
-	// 删除成绩
-	public int deleteScore(Score score);
 
 	//查询成绩
 	public Page<ScoreForUi> searchSelectedCourses(Integer page, Integer rows, String studentId, String courseName, String property);

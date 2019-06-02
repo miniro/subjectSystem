@@ -4,6 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -39,6 +40,33 @@ public class ScoreController {
         return "score";
     }
 
+    //选课
+    @RequestMapping(value = "/score/chooseCourse.action")
+    @ResponseBody
+    public String chooseCourse(String courseId, HttpSession session){
+        int status = scoreService.chooseCourse(((Student)session.getAttribute("STU_SESSION")).getStudentId(), courseId);
+        if(status == -1){
+            return "Not Time";
+        }else if(status == 0){
+            return "Has";
+        }else if(status == -2){
+            return "Time Clash";
+        }else {
+            return "OK";
+        }
+    }
+
+    @RequestMapping(value = "/score/dropCourse.action")
+    @ResponseBody
+    public String dropCourse(String courseId, HttpSession session){
+        int status = scoreService.dropCourse(((Student)session.getAttribute("STU_SESSION")).getStudentId(), courseId);
+        if(status == -1)
+            return "Not Time";
+        else {
+            return "OK";
+        }
+    }
+
     @RequestMapping(value = "/score/create.action")
     @ResponseBody
     public String creatscore(HttpServletRequest request){
@@ -66,19 +94,19 @@ public class ScoreController {
     }
 
 
-    @RequestMapping(value = "/score/delete.action")
-    @ResponseBody
-    public String deletescore(HttpServletRequest request) {
-        Score score=new Score();
-        score.setCourseId(request.getParameter("courseId"));
-        score.setStudentId(request.getParameter("studentId"));
-        int flag=scoreService.deleteScore(score);
-        if(flag==1){
-            return "OK";
-        }else {
-            return "FAIL";
-        }
-    }
+//    @RequestMapping(value = "/score/delete.action")
+//    @ResponseBody
+//    public String deletescore(HttpServletRequest request) {
+//        Score score=new Score();
+//        score.setCourseId(request.getParameter("courseId"));
+//        score.setStudentId(request.getParameter("studentId"));
+//        int flag=scoreService.deleteScore(score);
+//        if(flag==1){
+//            return "OK";
+//        }else {
+//            return "FAIL";
+//        }
+//    }
 
     /**
      * 通过id获取成绩信息

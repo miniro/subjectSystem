@@ -25,7 +25,7 @@ public interface CourseService {
 	public List<Course> loadAllCourses();
 
 	//查询课程
-	public Page<CourseForUi> searchCourses(Integer page, Integer rows, String courseId, String courseName, String teacherName, String property, String credit);
+	public Page<CourseForUi> searchCourses(Integer page, Integer rows, String courseId, String courseName, String teacherName, String property, String credit, String content, String studentId);
 	
 	//修改课程
 	public int updateCourse(Course course);

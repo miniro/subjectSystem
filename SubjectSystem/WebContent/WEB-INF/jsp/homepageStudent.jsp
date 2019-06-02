@@ -37,7 +37,7 @@
     <nav class="navbar navbar-default navbar-static-top" role="navigation"
          style="margin-bottom: 0">
         <div class="navbar-header">
-            <a class="navbar-brand" href="<%=basePath%>course/list.action">反方教学选课系统</a>
+            <a class="navbar-brand" href="<%=basePath%>course/student_list.action">反方教学选课系统</a>
         </div>
         <!-- 导航栏右侧图标部分 -->
         <ul class="nav navbar-top-links navbar-right">
@@ -191,7 +191,7 @@
                 <ul class="nav" id="side-menu">
                     <img src="${pageContext.request.contextPath}/images/school.jpg"  height="195" width="280" alt="城市学院" />
                     <li>
-                        <a href="${pageContext.request.contextPath }/course/list.action" class="active">
+                        <a href="${pageContext.request.contextPath }/course/student_list.action" class="active">
                             <i class="fa fa-edit fa-fw" aria-hidden="true"></i> 课程查询
                         </a>
                     </li>
@@ -242,7 +242,7 @@
         <div class="panel panel-default">
             <div class="panel-body">
                 <form class="form-inline" method="get"
-                      action="${pageContext.request.contextPath }/course/list.action">
+                      action="${pageContext.request.contextPath }/course/student_list.action">
                     <div class="form-group">
                         <label for="courseId">课程编号</label>
                         <input type="text" class="form-control" id="courseId"
@@ -266,18 +266,14 @@
                             <option value="2">选修课</option>
                         </select>
                     </div>
-<%--                    <div class="form-group">--%>
-<%--                        <label for="credit">所占学分</label>--%>
-<%--                        <select	class="form-control" id="credit"  name="credit">--%>
-<%--                            <option value="">--请选择--</option>--%>
-<%--                            <c:forEach items="${creditType}" var="item">--%>
-<%--                                <option value="${item.dict_id}"--%>
-<%--                                        <c:if test="${item.dict_id == credit}"> selected</c:if>>--%>
-<%--                                        ${item.dict_item_name }--%>
-<%--                                </option>--%>
-<%--                            </c:forEach>--%>
-<%--                        </select>--%>
-<%--                    </div>--%>
+                    <div class="form-group">
+                        <label for="content">显示内容</label>
+                        <select	class="form-control" id="content" name="content">
+                            <option value="1">--请选择--</option>
+                            <option value="1">全部课程</option>
+                            <option value="2">已选课程</option>
+                        </select>
+                    </div>
                     <button type="submit" class="btn btn-primary">查询</button>
                 </form>
             </div>
@@ -314,15 +310,22 @@
                                 <td>${row.teacherName}</td>
                                 <td>${row.property}</td>
                                 <td>${row.time}</td>
-                                <td>
-                                    <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#chooseCourseDialog" onclick= "chooseCourseDialog(${row.courseId})">查看</a>
-                                </td>
+                                <c:if test="${content != '2'}">
+                                    <td>
+                                        <a href="#" class="btn btn-primary btn-xs" onclick= "choosecourse('${row.courseId}')">选课</a>
+                                    </td>
+                                </c:if>
+                                <c:if test="${content == '2'}">
+                                    <td>
+                                        <a href="#" class="btn btn-primary btn-xs" onclick= "dropcourse('${row.courseId}')">删除</a>
+                                    </td>
+                                </c:if>
                             </tr>
                         </c:forEach>
                         </tbody>
                     </table>
                     <div class="col-md-12 text-right">
-                        <itheima:page url="${pageContext.request.contextPath }/course/list.action" />
+                        <itheima:page url="${pageContext.request.contextPath }/course/student_list.action" />
                     </div>
                     <!-- /.panel-body -->
                 </div>
@@ -776,7 +779,7 @@
         });
     }
     // 删除课程
-    function deletecourse() {
+    function deletecourse(courseId) {
         if(confirm('确定要删除该课程吗?')) {
             $.post("<%=basePath%>course/delete.action",
                 $("#delete_course_form").serialize(), function(data){
@@ -789,6 +792,46 @@
                 }
             });
         }
+    }
+    //选课
+    function choosecourse(courseId){
+        if(confirm('确定要选该门课吗?')){
+            $.post("<%=basePath%>score/chooseCourse.action",{"courseId":courseId},
+                function(data){
+                    if(data =="OK"){
+                        alert("选课成功！");
+                        window.location.reload();
+                    }else if(data == "Not Time"){
+                        alert("现在不是选课时间！");
+                        window.location.reload();
+                    }else if(data == "Has"){
+                        alert("课表中已有该课程！");
+                        window.location.reload();
+                    }else{
+                        alert("课程时间冲突!");
+                        window.location.reload();
+                    }
+                });
+        }
+    }
+    //退课
+    function dropcourse(courseId) {
+        if(confirm('确定要退选该门课吗?')){
+            $.post("<%=basePath%>score/dropCourse.action",{"courseId":courseId},
+                function(data){
+                    if(data =="OK"){
+                        alert("退选成功！");
+                        window.location.reload();
+                    }else{
+                        alert("现在不是退课时间！");
+                        window.location.reload();
+                    }
+                });
+        }
+    }
+    //test
+    function fuck(id){
+        alert("fuck");
     }
 </script>
 

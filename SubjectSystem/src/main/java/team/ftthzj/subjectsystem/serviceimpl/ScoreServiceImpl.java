@@ -14,6 +14,7 @@ import team.ftthzj.subjectsystem.service.CourseForUiService;
 import team.ftthzj.subjectsystem.service.ScoreService;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service("scoreService")
@@ -26,12 +27,56 @@ public class ScoreServiceImpl implements ScoreService{
 	private CourseDao courseDao;
 	
 	public int chooseCourse(String studentId, String courseId) {
+		Course course = courseDao.searchCourseById(courseId);
+		if(course.getBeginTime().after(new Date())||course.getFinishTime().before(new Date())){
+			return -1;
+		}
 		Score score = new Score();
-		score.setStudentId(studentId);
 		score.setCourseId(courseId);
+		score.setStudentId(studentId);
+		List<Score> scoreList = scoreDao.searchScores(score);
+		if(scoreList.size()!=0){
+			return 0;
+		}
+		Boolean[][] hashTable = new Boolean[8][];
+		for(int i=0;i<8;i++){
+			hashTable[i] = new Boolean[13];
+			for(int j=0;j<13;j++)
+				hashTable[i][j]=false;
+		}
+		Score score1 = new Score();
+		score1.setStudentId(studentId);
+		List<Score> scores = scoreDao.searchScores(score1);
+		for(Score score2 : scores){
+			Course course1 = courseDao.searchCourseById(score2.getCourseId());
+			for(int i=course1.getStartingTime();i<=course1.getEnddingTime();i++){
+				hashTable[course1.getWeekTime()][i]=true;
+			}
+		}
+		Course course1 = courseDao.searchCourseById(courseId);
+		for(int i=course1.getStartingTime();i<=course1.getEnddingTime();i++){
+			if(hashTable[course1.getWeekTime()][i]){
+				return -2;
+			}
+		}
 		scoreDao.chooseCourse(score);
 		return 1;
 	}
+
+	@Override
+	public int dropCourse(String studentId, String courseId) {
+		Course course = courseDao.searchCourseById(courseId);
+		if(course.getBeginTime().after(new Date())||course.getFinishTime().before(new Date())){
+			return -1;
+		}
+		Score score = new Score();
+		score.setStudentId(studentId);
+		score.setCourseId(courseId);
+		scoreDao.deleteScore(score);
+
+		return 1;
+	}
+
 
 	public int addScore(String courseId, String studentId, double pacificScore, double midtermScore, double finalScore,
 			double sumScore) {
@@ -58,13 +103,6 @@ public class ScoreServiceImpl implements ScoreService{
 		Score score = new Score();
 		score.setStudentId(courseId);
 		return scoreDao.searchScores(score);
-	}
-
-
-	@Override
-	public int deleteScore(Score score){
-		scoreDao.deleteScore(score);
-		return 1;
 	}
 
 	@Override

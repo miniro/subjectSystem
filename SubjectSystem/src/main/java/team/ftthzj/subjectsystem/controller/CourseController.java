@@ -28,55 +28,55 @@ public class CourseController {
     /**
      *  课程列表
      */
-    @RequestMapping(value = "/course/list.action")
-    public String list(@RequestParam(defaultValue="1")Integer page,
-                       @RequestParam(defaultValue="10")Integer rows,String courseId,
-                       String courseName, String teacherName, String property, String credit,
-                       Model model) {
-        Page<CourseForUi> courses = courseService.searchCourses(page, rows,
-                courseId, courseName, teacherName, property, credit);
-        model.addAttribute("page", courses);
-        model.addAttribute("courseId", courseId);
-        model.addAttribute("courseName", courseName);
-        model.addAttribute("teacherName", teacherName);
-        model.addAttribute("property", property);
-        model.addAttribute("credit", credit);
-        List<Teacher> teacherList = teacherService.searchAllTeachers();
-        model.addAttribute("teacherList", teacherList);
-        List<Double> creditList = new ArrayList<>();
-        for(double d = 0.5; d<=6.0; d+=0.5){
-            creditList.add(d);
-        }
-        model.addAttribute("creditList", creditList);
-
-        return "homepage";
-    }
+//    @RequestMapping(value = "/course/list.action")
+//    public String list(@RequestParam(defaultValue="1")Integer page,
+//                       @RequestParam(defaultValue="10")Integer rows,String courseId,
+//                       String courseName, String teacherName, String property, String credit,
+//                       Model model) {
+//        Page<CourseForUi> courses = courseService.searchCourses(page, rows,
+//                courseId, courseName, teacherName, property, credit, "1");
+//        model.addAttribute("page", courses);
+//        model.addAttribute("courseId", courseId);
+//        model.addAttribute("courseName", courseName);
+//        model.addAttribute("teacherName", teacherName);
+//        model.addAttribute("property", property);
+//        model.addAttribute("credit", credit);
+//        List<Teacher> teacherList = teacherService.searchAllTeachers();
+//        model.addAttribute("teacherList", teacherList);
+//        List<Double> creditList = new ArrayList<>();
+//        for(double d = 0.5; d<=6.0; d+=0.5){
+//            creditList.add(d);
+//        }
+//        model.addAttribute("creditList", creditList);
+//
+//        return "homepage";
+//    }
 
     /**
      *  课程列表
      */
-    @RequestMapping(value = "/course/teacher_list.action")
-    public String teacher_list(@RequestParam(defaultValue="1")Integer page,
-                       @RequestParam(defaultValue="10")Integer rows,String courseId,
-                       String courseName, String teacherName, String property, String credit,
-                       Model model) {
-        Page<CourseForUi> courses = courseService.searchCourses(page, rows,
-                courseId, courseName, teacherName, property, credit);
-        model.addAttribute("page", courses);
-        model.addAttribute("courseId", courseId);
-        model.addAttribute("courseName", courseName);
-        model.addAttribute("teacherName", teacherName);
-        model.addAttribute("property", property);
-        model.addAttribute("credit", credit);
-        List<Teacher> teacherList = teacherService.searchAllTeachers();
-        model.addAttribute("teacherList", teacherList);
-        List<Double> creditList = new ArrayList<>();
-        for(double d = 0.5; d<=6.0; d+=0.5){
-            creditList.add(d);
-        }
-        model.addAttribute("creditList", creditList);
-        return "homepageTeacher";
-    }
+//    @RequestMapping(value = "/course/teacher_list.action")
+//    public String teacher_list(@RequestParam(defaultValue="1")Integer page,
+//                       @RequestParam(defaultValue="10")Integer rows,String courseId,
+//                       String courseName, String teacherName, String property, String credit,
+//                       Model model, HttpSession session) {
+//        Page<CourseForUi> courses = courseService.searchCourses(page, rows,
+//                courseId, courseName, teacherName, property, credit, "1", ((Student)session.getAttribute("STU_SESSION")).getStudentId());
+//        model.addAttribute("page", courses);
+//        model.addAttribute("courseId", courseId);
+//        model.addAttribute("courseName", courseName);
+//        model.addAttribute("teacherName", teacherName);
+//        model.addAttribute("property", property);
+//        model.addAttribute("credit", credit);
+//        List<Teacher> teacherList = teacherService.searchAllTeachers();
+//        model.addAttribute("teacherList", teacherList);
+//        List<Double> creditList = new ArrayList<>();
+//        for(double d = 0.5; d<=6.0; d+=0.5){
+//            creditList.add(d);
+//        }
+//        model.addAttribute("creditList", creditList);
+//        return "homepageTeacher";
+//    }
 
     /**
      *  课程列表
@@ -84,16 +84,17 @@ public class CourseController {
     @RequestMapping(value = "/course/student_list.action")
     public String student_list(@RequestParam(defaultValue="1")Integer page,
                                @RequestParam(defaultValue="10")Integer rows,String courseId,
-                               String courseName, String teacherName, String property, String credit,
-                               Model model) {
+                               String courseName, String teacherName, String property, String credit, String content,
+                               Model model, HttpSession session) {
         Page<CourseForUi> courses = courseService.searchCourses(page, rows,
-                courseId, courseName, teacherName, property, credit);
+                courseId, courseName, teacherName, property, credit, content, ((Student)session.getAttribute("STU_SESSION")).getStudentId());
         model.addAttribute("page", courses);
         model.addAttribute("courseId", courseId);
         model.addAttribute("courseName", courseName);
         model.addAttribute("teacherName", teacherName);
         model.addAttribute("property", property);
         model.addAttribute("credit", credit);
+        model.addAttribute("content", content);
         List<Teacher> teacherList = teacherService.searchAllTeachers();
         model.addAttribute("teacherList", teacherList);
         List<Double> creditList = new ArrayList<>();

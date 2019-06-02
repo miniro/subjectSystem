@@ -11,11 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import team.ftthzj.subjectsystem.common.utils.Page;
 import team.ftthzj.subjectsystem.dao.CourseDao;
+import team.ftthzj.subjectsystem.dao.ScoreDao;
 import team.ftthzj.subjectsystem.dao.TeacherDao;
-import team.ftthzj.subjectsystem.po.Course;
-import team.ftthzj.subjectsystem.po.CourseForUi;
-import team.ftthzj.subjectsystem.po.Student;
-import team.ftthzj.subjectsystem.po.Teacher;
+import team.ftthzj.subjectsystem.po.*;
 import team.ftthzj.subjectsystem.service.CourseForUiService;
 import team.ftthzj.subjectsystem.service.CourseService;
 
@@ -27,6 +25,8 @@ public class CourseServiceImpl implements CourseService{
 	private CourseDao courseDao;
 	@Autowired
 	private TeacherDao teacherDao;
+	@Autowired
+	private ScoreDao scoreDao;
 
 	public int addCourse(Course course) {
 		courseDao.addCourse(course);
@@ -58,7 +58,7 @@ public class CourseServiceImpl implements CourseService{
 	}
 
 	@Override
-	public Page<CourseForUi> searchCourses(Integer page, Integer rows, String courseId, String courseName, String teacherName, String property, String credit) {
+	public Page<CourseForUi> searchCourses(Integer page, Integer rows, String courseId, String courseName, String teacherName, String property, String credit, String content, String studentId) {
 		Course course = new Course();
 		List<String> teacherIdList = new ArrayList<>();
 		int cnt = 0;
@@ -100,10 +100,24 @@ public class CourseServiceImpl implements CourseService{
 		}
         CourseForUiService courseForUiService = new CourseForUiServiceImpl();
         List<CourseForUi> list = new ArrayList<>();
+        //补充
+		List<String> courseIdList = new ArrayList<>();
+		List<Score> scoreList;
+		if(StringUtils.isNotBlank(content) && Integer.valueOf(content)==2){
+			Score score = new Score();
+			score.setStudentId(studentId);
+			scoreList = scoreDao.searchScores(score);
+			for(Score score1 : scoreList){
+				courseIdList.add(score1.getCourseId());
+			}
+		}
+		//
         for(Course course1 : courses){
-            CourseForUi courseForUi = courseForUiService.format(course1);
-            courseForUi.setTeacherName(teacherDao.searchTeacherById(course1.getTeacherId()).getName());
-            list.add(courseForUi);
+        	if(courseIdList.size()!=0&&courseIdList.contains(course1.getcourseId())||courseIdList.size()==0){
+				CourseForUi courseForUi = courseForUiService.format(course1);
+				courseForUi.setTeacherName(teacherDao.searchTeacherById(course1.getTeacherId()).getName());
+				list.add(courseForUi);
+			}
         }
 		Integer count = courseDao.getCourseNum(course);
 		Page<CourseForUi> result = new Page<>();
