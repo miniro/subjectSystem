@@ -572,14 +572,6 @@
             <div class="modal-body">
                 <form class="form-horizontal" id="update_personalInfor_form">
                     <div class="form-group" >
-                        <label for="moreteacherId" class="col-sm-2 control-label" >
-                            教师编号
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="moreteacherId" placeholder="教师编号" name="teacherId" />
-                        </div>
-                    </div>
-                    <div class="form-group" >
                         <label for="moreStudentId" class="col-sm-2 control-label " >
                             用户编号
                         </label>
@@ -657,14 +649,6 @@
                         </label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="moreEnrollmentDate" placeholder="入学时间" name="enrollmentDate" />
-                        </div>
-                    </div>
-                    <div class="form-group" >
-                        <label for="moreposition" class="col-sm-2 control-label" >
-                            职称
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="moreposition" placeholder="职称" name="position" />
                         </div>
                     </div>
                 </form>
