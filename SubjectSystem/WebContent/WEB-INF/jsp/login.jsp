@@ -355,7 +355,7 @@
 
 			background-color: #00BDDC;
 
-			background-image: url(${pageContext.request.contextPath}/images/snow.jpg);
+			background-image: url(${pageContext.request.contextPath}/images/timg.jpeg);
 
 			background-size: 100% 100%;
 
@@ -363,7 +363,32 @@
 
 		.snow-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 100001; }
 
-	</style>
+	</style> 
+
+<script type="text/javascript">
+    var index=randomNum(1,12);
+    var url="${pageContext.request.contextPath}/images/"+index+'.jpg';
+	setInterval(changeImg);
+	function changeImg() {
+		//设置body的背景图片
+		document.body.style.backgroundImage = "URL("+url+")";  //显示对应的图片
+	}
+    function randomNum(minNum,maxNum){
+        switch(arguments.length){
+            case 1:
+                return parseInt(Math.random()*minNum+1,10);
+                break;
+            case 2:
+                return parseInt(Math.random()*(maxNum-minNum+1)+minNum,10);
+                break;
+            default:
+                return 0;
+                break;
+        }
+    }
+</script>
+
+
 </head>
 <body>
 <!-- 雪花背景 -->
