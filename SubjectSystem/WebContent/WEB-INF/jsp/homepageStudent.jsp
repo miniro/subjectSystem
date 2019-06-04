@@ -26,6 +26,12 @@
     <link href="<%=basePath%>css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <link href="<%=basePath%>css/boot-crm.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="<%=basePath%>css/style.css">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="<%=basePath%>css/mydate.css" rel="stylesheet" type="text/css"/>
+    <script src="<%=basePath%>js/mydate.js"></script>
 </head>
 <body>
 <script type="text/javascript" src="<%=basePath%>js/jquery-1.7.2.min.js"></script>
@@ -304,7 +310,9 @@
                         <tbody>
                         <c:forEach items="${page.rows}" var="row">
                             <tr>
-                                <td>${row.courseId}</td>
+                                <td>
+                                    <a href="#" data-toggle="modal" data-target="#lookCourseDialog" onclick= "lookCourse('${row.courseId}')">${row.courseId}</a>
+                                </td>
                                 <td>${row.courseName}</td>
                                 <td>${row.credit}</td>
                                 <td>${row.teacherName}</td>
@@ -481,14 +489,11 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="beginTime" style="float:left;padding:7px 15px 0 27px;">选课开始时间</label>
-                        <div class="col-md-9">
-                            <select	class="form-control" id="beginTime"  name="beginTime">
-                                <option value="">--请选择--</option>
-                                <c:forEach var="k" begin="1" end="12" step="1">
-                                    <option value="${k}">${k}</option>
-                                </c:forEach>
-                            </select>
+                        <label for="beginTime" class="col-sm-2 control-label">
+                            选课开始时间
+                        </label>
+                        <div class="col-sm-10">
+                            <input onclick="MyDatePick({fmt:'datetime'})" type="text" class="form-control" id="beginTime" placeholder="选课开始时间" name="beginTime" />
                         </div>
                     </div>
                     <div class="form-group">

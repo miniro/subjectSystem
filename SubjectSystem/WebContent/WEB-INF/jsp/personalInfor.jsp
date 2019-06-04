@@ -724,7 +724,7 @@
                         </div>
                     </div>
                     <div class="form-group" >
-                        <label for="moreposition" class="col-sm-2 control-label" >
+                        <label for="moreposition2" class="col-sm-2 control-label" >
                             职称
                         </label>
                         <div class="col-sm-10">

@@ -37,18 +37,21 @@ public class StuController {
 			Student admin=new Student();
 			admin.setName("管理员");
 			session.setAttribute("STU_SESSION", admin);
+			session.setAttribute("FLAG", "0");
 			return "redirect:course/list.action";
 		}
 		else if(student != null){
 			// 将用户对象添加到Session
 			session.setAttribute("STU_SESSION", student);
+			session.setAttribute("FLAG", "1");
 			// 跳转到主页面
-			return "redirect:course/student_list.action";
+			return "redirect:course/list.action";
 		}
 		else if(teacher != null){
 			session.setAttribute("STU_SESSION", teacher);
+			session.setAttribute("FLAG", "-1");
 			// 跳转到主页面
-			return "redirect:course/teacher_list.action";
+			return "redirect:course/list.action";
 		}
 		model.addAttribute("msg", "账号或密码错误，请重新输入！");
          // 返回到登录页面

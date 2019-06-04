@@ -81,7 +81,7 @@ public class CourseController {
     /**
      *  课程列表
      */
-    @RequestMapping(value = "/course/student_list.action")
+    @RequestMapping(value = "/course/list.action")
     public String student_list(@RequestParam(defaultValue="1")Integer page,
                                @RequestParam(defaultValue="10")Integer rows,String courseId,
                                String courseName, String teacherName, String property, String credit, String content,
@@ -226,7 +226,7 @@ public class CourseController {
             day.add("''");
         for(Course course:list){
             int start=course.getStartingTime();
-            int during=course.getDuration();
+            int during=course.getEnddingTime()-course.getStartingTime();
             for(int j=0;j<during;j++){
                 day.remove(start-1+j);
                 day.add(start-1+j,"'"+course.getcourseName()+"'");
