@@ -187,18 +187,13 @@
         </ul>
         <!-- 左侧显示列表部分 start-->
 
-        <div class="navbar-default sidebar" id="navbar1" role="navigation">
+        <div class="navbar-default sidebar" id="navbar1" role="navigation" >
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
                     <img src="${pageContext.request.contextPath}/images/school.jpg"  height="195" width="280" alt="城市学院" />
                     <li>
                         <a href="${pageContext.request.contextPath }/course/list.action" class="active">
                             <i class="fa fa-edit fa-fw" aria-hidden="true"></i> 课程管理
-                        </a>
-                    </li>
-                    <li>
-                        <a href="${pageContext.request.contextPath }/course/toCourseTable.action">
-                            <i class="fa fa-table fa-fw" aria-hidden="true"></i> 查看课表
                         </a>
                     </li>
                     <li>
@@ -213,17 +208,17 @@
                     </li>
                     <li>
                         <a href="${pageContext.request.contextPath }/personalInfor/list.action">
-                            <i class="fa fa-gear fa-fw" aria-hidden="true"></i>用户信息管理
+                            <i class="fa fa-gear fa-fw" aria-hidden="true"></i> 用户信息管理
                         </a>
                     </li>
                     <li>
                         <a href="${pageContext.request.contextPath }/message/list.action">
-                            <i class="fa fa-magic fa-fw" aria-hidden="true"></i>消息管理
+                            <i class="fa fa-magic fa-fw" aria-hidden="true"></i> 消息管理
                         </a>
                     </li>
                     <li>
                         <a href="${pageContext.request.contextPath }/fttAndHzj/list.action">
-                            <i class="fa fa-bug fa-fw" aria-hidden="true"></i>关于我们
+                            <i class="fa fa-bug fa-fw" aria-hidden="true"></i> 关于我们
                         </a>
                     </li>
                 </ul>
@@ -250,22 +245,22 @@
                     </li>
                     <li>
                         <a href="${pageContext.request.contextPath }/notice/list.action">
-                            <i class="fa fa-exclamation-circle fa-fw"  aria-hidden="true"></i> 公告管理
+                            <i class="fa fa-exclamation-circle fa-fw"  aria-hidden="true"></i> 公告栏
                         </a>
                     </li>
                     <li>
                         <a href="${pageContext.request.contextPath }/personalInfor/list.action">
-                            <i class="fa fa-gear fa-fw" aria-hidden="true"></i>用户信息管理
+                            <i class="fa fa-gear fa-fw" aria-hidden="true"></i> 个人信息
                         </a>
                     </li>
                     <li>
                         <a href="${pageContext.request.contextPath }/message/list.action">
-                            <i class="fa fa-magic fa-fw" aria-hidden="true"></i>消息管理
+                            <i class="fa fa-magic fa-fw" aria-hidden="true"></i> 我的消息
                         </a>
                     </li>
                     <li>
                         <a href="${pageContext.request.contextPath }/fttAndHzj/list.action">
-                            <i class="fa fa-bug fa-fw" aria-hidden="true"></i>关于我们
+                            <i class="fa fa-bug fa-fw" aria-hidden="true"></i> 关于我们
                         </a>
                     </li>
                 </ul>
@@ -277,12 +272,7 @@
                     <img src="${pageContext.request.contextPath}/images/school.jpg"  height="195" width="280" alt="城市学院" />
                     <li>
                         <a href="${pageContext.request.contextPath }/course/list.action" class="active">
-                            <i class="fa fa-edit fa-fw" aria-hidden="true"></i> 课程管理
-                        </a>
-                    </li>
-                    <li>
-                        <a href="${pageContext.request.contextPath }/course/toCourseTable.action">
-                            <i class="fa fa-table fa-fw" aria-hidden="true"></i> 查看课表
+                            <i class="fa fa-edit fa-fw" aria-hidden="true"></i> 课程查询
                         </a>
                     </li>
                     <li>
@@ -292,22 +282,22 @@
                     </li>
                     <li>
                         <a href="${pageContext.request.contextPath }/notice/list.action">
-                            <i class="fa fa-exclamation-circle fa-fw"  aria-hidden="true"></i> 公告管理
+                            <i class="fa fa-exclamation-circle fa-fw"  aria-hidden="true"></i> 公告栏
                         </a>
                     </li>
                     <li>
                         <a href="${pageContext.request.contextPath }/personalInfor/list.action">
-                            <i class="fa fa-gear fa-fw" aria-hidden="true"></i>用户信息管理
+                            <i class="fa fa-gear fa-fw" aria-hidden="true"></i> 个人信息
                         </a>
                     </li>
                     <li>
                         <a href="${pageContext.request.contextPath }/message/list.action">
-                            <i class="fa fa-magic fa-fw" aria-hidden="true"></i>消息管理
+                            <i class="fa fa-magic fa-fw" aria-hidden="true"></i> 我的消息
                         </a>
                     </li>
                     <li>
                         <a href="${pageContext.request.contextPath }/fttAndHzj/list.action">
-                            <i class="fa fa-bug fa-fw" aria-hidden="true"></i>关于我们
+                            <i class="fa fa-bug fa-fw" aria-hidden="true"></i> 关于我们
                         </a>
                     </li>
                 </ul>
@@ -316,26 +306,9 @@
 
         <!-- 左侧显示列表部分 end-->
     </nav>
-    <script type="text/javascript">
-    flag="<%=session.getAttribute("FLAG")%>";
-    if (flag==0){
-        document.getElementById("navbar1").style.display="block";
-        document.getElementById("navbar2").style.display="none";//隐藏
-        document.getElementById("navbar3").style.display="none";//隐藏
-    }
-    else if(flag==1){
-        document.getElementById("navbar2").style.display="block";
-        document.getElementById("navbar1").style.display="none";//隐藏
-        document.getElementById("navbar3").style.display="none";//隐藏
-    }
-    else if(flag==-1){
-        document.getElementById("navbar3").style.display="block";
-        document.getElementById("navbar1").style.display="none";//隐藏
-        document.getElementById("navbar2").style.display="none";//隐藏
-    }
-    </script>
+
     <!-- 课程列表查询部分  start-->
-    <div id="page-wrapper">
+    <div id="page-wrapper1">
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">课程管理</h1>
@@ -343,7 +316,7 @@
             <!-- /.col-lg-12 -->
         </div>
         <!-- /.row -->
-        <div class="panel panel-default">
+        <div  class="panel panel-default">
             <div class="panel-body">
                 <form class="form-inline" method="get"
                       action="${pageContext.request.contextPath }/course/list.action">
@@ -370,22 +343,195 @@
                             <option value="2">选修课</option>
                         </select>
                     </div>
-<%--                    <div class="form-group">--%>
-<%--                        <label for="credit">所占学分</label>--%>
-<%--                        <select	class="form-control" id="credit"  name="credit">--%>
-<%--                            <option value="">--请选择--</option>--%>
-<%--                            <c:forEach items="${creditType}" var="item">--%>
-<%--                                <option value="${item.dict_id}"--%>
-<%--                                        <c:if test="${item.dict_id == credit}"> selected</c:if>>--%>
-<%--                                        ${item.dict_item_name }--%>
-<%--                                </option>--%>
-<%--                            </c:forEach>--%>
-<%--                        </select>--%>
-<%--                    </div>--%>
                     <button type="submit" class="btn btn-primary">查询</button>
                 </form>
             </div>
         </div>
+
+        <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
+           data-target="#newcourseDialog" onclick="clearcourse()">新建</a>
+        <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
+           data-target="#courseChooseEditDialog" onclick="clearcourse()">修改</a>
+        <a href="#" class="btn btn-danger btn-xs" data-toggle="modal"
+           data-target="#courseDeleteDialog" onclick="clearcourse()">删除</a>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">课程信息列表</div>
+                    <!-- /.panel-heading -->
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th>课程编号</th>
+                            <th>课程名称</th>
+                            <th>学分</th>
+                            <th>教师姓名</th>
+                            <th>课程性质</th>
+                            <th>上课时间</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach items="${page.rows}" var="row">
+                            <tr>
+                                <td>
+                                    <a href="#" data-toggle="modal" data-target="#lookCourseDialog" onclick= "lookCourse('${row.courseId}')">${row.courseId}</a>
+                                </td>
+                                <td>${row.courseName}</td>
+                                <td>${row.credit}</td>
+                                <td>${row.teacherName}</td>
+                                <td>${row.property}</td>
+                                <td>${row.time}</td>
+                                <td>
+                                    <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#chooseCourseDialog" onclick= "chooseCourse('${row.courseId}')">选课</a>
+                                    <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#chooseCourseDialog" onclick= "quitCourse('${row.courseId}')">退课</a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                    <div class="col-md-12 text-right">
+                        <itheima:page url="${pageContext.request.contextPath }/course/list.action" />
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+    </div>
+    <div id="page-wrapper2">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">课程管理</h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div  class="panel panel-default">
+            <div class="panel-body">
+                <form class="form-inline" method="get"
+                      action="${pageContext.request.contextPath }/course/list.action">
+                    <div class="form-group">
+                        <label for="courseId">课程编号</label>
+                        <input type="text" class="form-control" id="courseId"
+                               value="${courseId }" name="courseId" />
+                    </div>
+                    <div class="form-group">
+                        <label for="courseName">课程名称</label>
+                        <input type="text" class="form-control" id="courseName"
+                               value="${courseName }" name="courseName" />
+                    </div>
+                    <div class="form-group">
+                        <label for="teacherName">教师姓名</label>
+                        <input type="text" class="form-control" id="teacherName"
+                               value="${teacherName }" name="teacherName" />
+                    </div>
+                    <div class="form-group">
+                        <label for="property">课程类别</label>
+                        <select	class="form-control" id="property1" name="property">
+                            <option value="">--请选择--</option>
+                            <option value="1">必修课</option>
+                            <option value="2">选修课</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">查询</button>
+                </form>
+            </div>
+        </div>
+
+        <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
+           data-target="#newcourseDialog" onclick="clearcourse()">新建</a>
+        <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
+           data-target="#courseChooseEditDialog" onclick="clearcourse()">修改</a>
+        <a href="#" class="btn btn-danger btn-xs" data-toggle="modal"
+           data-target="#courseDeleteDialog" onclick="clearcourse()">删除</a>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">课程信息列表</div>
+                    <!-- /.panel-heading -->
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th>课程编号</th>
+                            <th>课程名称</th>
+                            <th>学分</th>
+                            <th>教师姓名</th>
+                            <th>课程性质</th>
+                            <th>上课时间</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach items="${page.rows}" var="row">
+                            <tr>
+                                <td>
+                                    <a href="#" data-toggle="modal" data-target="#lookCourseDialog" onclick= "lookCourse('${row.courseId}')">${row.courseId}</a>
+                                </td>
+                                <td>${row.courseName}</td>
+                                <td>${row.credit}</td>
+                                <td>${row.teacherName}</td>
+                                <td>${row.property}</td>
+                                <td>${row.time}</td>
+                                <td>
+                                    <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#chooseCourseDialog" onclick= "chooseCourse('${row.courseId}')">选课</a>
+                                    <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#chooseCourseDialog" onclick= "quitCourse('${row.courseId}')">退课</a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                    <div class="col-md-12 text-right">
+                        <itheima:page url="${pageContext.request.contextPath }/course/list.action" />
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+    </div>
+    <div id="page-wrapper3">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">课程管理</h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div  class="panel panel-default">
+            <div class="panel-body">
+                <form class="form-inline" method="get"
+                      action="${pageContext.request.contextPath }/course/list.action">
+                    <div class="form-group">
+                        <label for="courseId">课程编号</label>
+                        <input type="text" class="form-control" id="courseId"
+                               value="${courseId }" name="courseId" />
+                    </div>
+                    <div class="form-group">
+                        <label for="courseName">课程名称</label>
+                        <input type="text" class="form-control" id="courseName"
+                               value="${courseName }" name="courseName" />
+                    </div>
+                    <div class="form-group">
+                        <label for="teacherName">教师姓名</label>
+                        <input type="text" class="form-control" id="teacherName"
+                               value="${teacherName }" name="teacherName" />
+                    </div>
+                    <div class="form-group">
+                        <label for="property">课程类别</label>
+                        <select	class="form-control" id="property1" name="property">
+                            <option value="">--请选择--</option>
+                            <option value="1">必修课</option>
+                            <option value="2">选修课</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">查询</button>
+                </form>
+            </div>
+        </div>
+
         <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
            data-target="#newcourseDialog" onclick="clearcourse()">新建</a>
         <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
@@ -439,6 +585,33 @@
         </div>
     </div>
     <!-- 课程列表查询部分  end-->
+    <script type="text/javascript">
+        flag="<%=session.getAttribute("FLAG")%>";
+        if (flag==0){
+            document.getElementById("navbar1").style.display="block";
+            document.getElementById("navbar2").style.display="none";//隐藏
+            document.getElementById("navbar3").style.display="none";//隐藏
+            document.getElementById("page-wrapper1").style.display="block";
+            document.getElementById("page-wrapper2").style.display="none";//隐藏
+            document.getElementById("page-wrapper3").style.display="none";//隐藏
+        }
+        else if(flag==1){
+            document.getElementById("navbar2").style.display="block";
+            document.getElementById("navbar1").style.display="none";//隐藏
+            document.getElementById("navbar3").style.display="none";//隐藏
+            document.getElementById("page-wrapper2").style.display="block";
+            document.getElementById("page-wrapper1").style.display="none";//隐藏
+            document.getElementById("page-wrapper3").style.display="none";//隐藏
+        }
+        else if(flag==-1){
+            document.getElementById("navbar3").style.display="block";
+            document.getElementById("navbar1").style.display="none";//隐藏
+            document.getElementById("navbar2").style.display="none";//隐藏
+            document.getElementById("page-wrapper3").style.display="block";
+            document.getElementById("page-wrapper1").style.display="none";//隐藏
+            document.getElementById("page-wrapper2").style.display="none";//隐藏
+        }
+    </script>
     <!-- footer -->
     <div class="wave-box">
 

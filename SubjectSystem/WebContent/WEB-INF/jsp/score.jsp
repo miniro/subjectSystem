@@ -185,18 +185,14 @@
             <!-- 用户信息和系统设置结束 -->
         </ul>
         <!-- 左侧显示列表部分 start-->
-        <div class="navbar-default sidebar" role="navigation">
+
+        <div class="navbar-default sidebar" id="navbar1" role="navigation" >
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
                     <img src="${pageContext.request.contextPath}/images/school.jpg"  height="195" width="280" alt="城市学院" />
                     <li>
-                        <a href="${pageContext.request.contextPath }/course/list.action" >
+                        <a href="${pageContext.request.contextPath }/course/list.action" class="active">
                             <i class="fa fa-edit fa-fw" aria-hidden="true"></i> 课程管理
-                        </a>
-                    </li>
-                    <li>
-                        <a href="${pageContext.request.contextPath }/course/toCourseTable.action">
-                            <i class="fa fa-table fa-fw" aria-hidden="true"></i> 查看课表
                         </a>
                     </li>
                     <li>
@@ -211,24 +207,123 @@
                     </li>
                     <li>
                         <a href="${pageContext.request.contextPath }/personalInfor/list.action">
-                            <i class="fa fa-gear fa-fw" aria-hidden="true"></i>用户信息管理
+                            <i class="fa fa-gear fa-fw" aria-hidden="true"></i> 用户信息管理
                         </a>
                     </li>
                     <li>
                         <a href="${pageContext.request.contextPath }/message/list.action">
-                            <i class="fa fa-magic fa-fw" aria-hidden="true"></i>消息管理
+                            <i class="fa fa-magic fa-fw" aria-hidden="true"></i> 消息管理
                         </a>
                     </li>
                     <li>
                         <a href="${pageContext.request.contextPath }/fttAndHzj/list.action">
-                            <i class="fa fa-bug fa-fw" aria-hidden="true"></i>关于我们
+                            <i class="fa fa-bug fa-fw" aria-hidden="true"></i> 关于我们
                         </a>
                     </li>
                 </ul>
             </div>
         </div>
+        <div class="navbar-default sidebar" id="navbar2" role="navigation">
+            <div class="sidebar-nav navbar-collapse">
+                <ul class="nav" id="side-menu">
+                    <img src="${pageContext.request.contextPath}/images/school.jpg"  height="195" width="280" alt="城市学院" />
+                    <li>
+                        <a href="${pageContext.request.contextPath }/course/list.action" class="active">
+                            <i class="fa fa-edit fa-fw" aria-hidden="true"></i> 课程查询
+                        </a>
+                    </li>
+                    <li>
+                        <a href="${pageContext.request.contextPath }/course/toCourseTable.action">
+                            <i class="fa fa-table fa-fw" aria-hidden="true"></i> 我的课表
+                        </a>
+                    </li>
+                    <li>
+                        <a href="${pageContext.request.contextPath }/score/list.action">
+                            <i class="fa fa-file fa-fw" aria-hidden="true"></i> 成绩查询
+                        </a>
+                    </li>
+                    <li>
+                        <a href="${pageContext.request.contextPath }/notice/list.action">
+                            <i class="fa fa-exclamation-circle fa-fw"  aria-hidden="true"></i> 公告栏
+                        </a>
+                    </li>
+                    <li>
+                        <a href="${pageContext.request.contextPath }/personalInfor/list.action">
+                            <i class="fa fa-gear fa-fw" aria-hidden="true"></i> 个人信息
+                        </a>
+                    </li>
+                    <li>
+                        <a href="${pageContext.request.contextPath }/message/list.action">
+                            <i class="fa fa-magic fa-fw" aria-hidden="true"></i> 我的消息
+                        </a>
+                    </li>
+                    <li>
+                        <a href="${pageContext.request.contextPath }/fttAndHzj/list.action">
+                            <i class="fa fa-bug fa-fw" aria-hidden="true"></i> 关于我们
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="navbar-default sidebar" id="navbar3" role="navigation">
+            <div class="sidebar-nav navbar-collapse">
+                <ul class="nav" id="side-menu">
+                    <img src="${pageContext.request.contextPath}/images/school.jpg"  height="195" width="280" alt="城市学院" />
+                    <li>
+                        <a href="${pageContext.request.contextPath }/course/list.action" class="active">
+                            <i class="fa fa-edit fa-fw" aria-hidden="true"></i> 课程查询
+                        </a>
+                    </li>
+                    <li>
+                        <a href="${pageContext.request.contextPath }/score/list.action">
+                            <i class="fa fa-file fa-fw" aria-hidden="true"></i> 成绩管理
+                        </a>
+                    </li>
+                    <li>
+                        <a href="${pageContext.request.contextPath }/notice/list.action">
+                            <i class="fa fa-exclamation-circle fa-fw"  aria-hidden="true"></i> 公告栏
+                        </a>
+                    </li>
+                    <li>
+                        <a href="${pageContext.request.contextPath }/personalInfor/list.action">
+                            <i class="fa fa-gear fa-fw" aria-hidden="true"></i> 个人信息
+                        </a>
+                    </li>
+                    <li>
+                        <a href="${pageContext.request.contextPath }/message/list.action">
+                            <i class="fa fa-magic fa-fw" aria-hidden="true"></i> 我的消息
+                        </a>
+                    </li>
+                    <li>
+                        <a href="${pageContext.request.contextPath }/fttAndHzj/list.action">
+                            <i class="fa fa-bug fa-fw" aria-hidden="true"></i> 关于我们
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
         <!-- 左侧显示列表部分 end-->
     </nav>
+    <script type="text/javascript">
+        flag="<%=session.getAttribute("FLAG")%>";
+        if (flag==0){
+            document.getElementById("navbar1").style.display="block";
+            document.getElementById("navbar2").style.display="none";//隐藏
+            document.getElementById("navbar3").style.display="none";//隐藏
+        }
+        else if(flag==1){
+            document.getElementById("navbar2").style.display="block";
+            document.getElementById("navbar1").style.display="none";//隐藏
+            document.getElementById("navbar3").style.display="none";//隐藏
+        }
+        else if(flag==-1){
+            document.getElementById("navbar3").style.display="block";
+            document.getElementById("navbar1").style.display="none";//隐藏
+            document.getElementById("navbar2").style.display="none";//隐藏
+        }
+    </script>
+
     <!-- 成绩列表查询部分  start-->
     <div id="page-wrapper">
         <div class="row">
