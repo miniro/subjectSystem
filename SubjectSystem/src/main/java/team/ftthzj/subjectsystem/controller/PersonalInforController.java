@@ -1,5 +1,6 @@
 package team.ftthzj.subjectsystem.controller;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -132,9 +133,10 @@ public class PersonalInforController {
      */
     @RequestMapping(value = "/personalInfor/getpersonalInforStuById.action")
     @ResponseBody
-    public Object getpersonalInforByIdStu(String id) {
+    public Object getpersonalInforByIdStu(String id, HttpSession session, Model model) {
         Student student=studentService.searchStudentById(id);
         Teacher teacher=teacherService.searchTeacherById(id);
+        model.addAttribute("flag", session.getAttribute("FLAG"));
         if(student!=null){
             return student;
         }
@@ -165,7 +167,7 @@ public class PersonalInforController {
     @RequestMapping(value = "/personalInfor/list.action")
     public String toINformation(@RequestParam(defaultValue="1")Integer page,
                                 @RequestParam(defaultValue="10")Integer rows, String userId,
-                                String userName, String userType, Model model) {
+                                String userName, String userType, Model model, HttpSession session) {
         if(userType == null || Integer.valueOf(userType) == 1){
             Page<Student> studentPage = studentService.searchStudents(page, rows, userId, userName);
             model.addAttribute("page", studentPage);
@@ -177,6 +179,7 @@ public class PersonalInforController {
         }
         model.addAttribute("userId", userId);
         model.addAttribute("userName", userName);
+        model.addAttribute("flag", session.getAttribute("FLAG"));
 
         return "personalInfor";
     }

@@ -48,12 +48,14 @@ public class MessageController {
      */
     @RequestMapping(value = "/message/list.action")
     public String listMessage(@RequestParam(defaultValue="1")Integer page,
-                              @RequestParam(defaultValue="10")Integer rows, String errorType, String studentId, String content, Model model) {
+                              @RequestParam(defaultValue="10")Integer rows, String errorType, String studentId, String content, Model model, HttpSession session) {
         Page<Message> messagePage = messageService.searchMessage(page, rows, errorType, studentId, content);
         model.addAttribute("page", messagePage);
         model.addAttribute("errorType", errorType);
         model.addAttribute("studentId", studentId);
         model.addAttribute("content", content);
+        model.addAttribute("flag", session.getAttribute("FLAG"));
+
         return "message";
     }
 

@@ -37,19 +37,19 @@ public class StuController {
 			Student admin=new Student();
 			admin.setName("管理员");
 			session.setAttribute("STU_SESSION", admin);
-			session.setAttribute("FLAG", "0");
+			session.setAttribute("FLAG", "ADMIN");
 			return "redirect:course/list.action";
 		}
 		else if(student != null){
 			// 将用户对象添加到Session
 			session.setAttribute("STU_SESSION", student);
-			session.setAttribute("FLAG", "1");
+			session.setAttribute("FLAG", "STUDENT");
 			// 跳转到主页面
 			return "redirect:course/list.action";
 		}
 		else if(teacher != null){
 			session.setAttribute("STU_SESSION", teacher);
-			session.setAttribute("FLAG", "-1");
+			session.setAttribute("FLAG", "TEACHER");
 			// 跳转到主页面
 			return "redirect:course/list.action";
 		}

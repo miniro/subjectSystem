@@ -11,6 +11,7 @@ import team.ftthzj.subjectsystem.service.NoticeService;
 
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * 公告控制器类
@@ -26,9 +27,10 @@ public class NoticeController {
      */
     @RequestMapping(value = "/notice/list.action")
     public String list(@RequestParam(defaultValue="1")Integer page,
-                       @RequestParam(defaultValue="10")Integer rows, String title, Model model) {
+                       @RequestParam(defaultValue="10")Integer rows, String title, Model model, HttpSession session) {
         Page<Notice> noticePage = noticeService.searchNotices(page, rows, title);
         model.addAttribute("noticeList", noticePage);
+        model.addAttribute("flag", session.getAttribute("FLAG"));
 
         return "notice";
     }

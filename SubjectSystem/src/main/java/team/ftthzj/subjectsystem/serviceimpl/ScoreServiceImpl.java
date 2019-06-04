@@ -158,7 +158,10 @@ public class ScoreServiceImpl implements ScoreService{
 			}else{
 				scoreForUi.setProperty("选修课");
 			}
+			scoreForUi.setPacificScore(String.valueOf(scores.get(0).getPacificScore()));
+			scoreForUi.setMidtermScore(String.valueOf(scores.get(0).getMidtermScore()));
 			scoreForUi.setFinalScore(String.valueOf(scores.get(0).getFinalScore()));
+			scoreForUi.setSumScore(String.valueOf(scores.get(0).getSumScore()));
 			scoreForUiList.add(scoreForUi);
 		}
 		Integer count = courseDao.getCourseNum(course);

@@ -36,6 +36,7 @@ public class ScoreController {
                        String courseName, String property, Model model, HttpSession sesstion){
         Page<ScoreForUi> scoreForUiPage = scoreService.searchSelectedCourses(page, rows, ((Student)sesstion.getAttribute("STU_SESSION")).getStudentId() ,courseName, property);
         model.addAttribute("page", scoreForUiPage);
+        model.addAttribute("flag", sesstion.getAttribute("FLAG"));
 
         return "score";
     }

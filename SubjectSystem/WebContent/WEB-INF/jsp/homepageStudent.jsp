@@ -250,37 +250,37 @@
                 <form class="form-inline" method="get"
                       action="${pageContext.request.contextPath }/course/student_list.action">
                     <div class="form-group">
-                        <label for="courseId">课程编号</label>
-                        <input type="text" class="form-control" id="courseId"
-                               value="${courseId }" name="courseId" />
-                    </div>
-                    <div class="form-group">
-                        <label for="courseName">课程名称</label>
-                        <input type="text" class="form-control" id="courseName"
-                               value="${courseName }" name="courseName" />
-                    </div>
-                    <div class="form-group">
-                        <label for="teacherName">教师姓名</label>
-                        <input type="text" class="form-control" id="teacherName"
-                               value="${teacherName }" name="teacherName" />
-                    </div>
-                    <div class="form-group">
-                        <label for="property">课程类别</label>
-                        <select	class="form-control" id="property1" name="property">
-                            <option value="">--请选择--</option>
-                            <option value="1">必修课</option>
-                            <option value="2">选修课</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="content">显示内容</label>
-                        <select	class="form-control" id="content" name="content">
-                            <option value="1">--请选择--</option>
-                            <option value="1">全部课程</option>
-                            <option value="2">已选课程</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary">查询</button>
+                <label for="courseId">课程编号</label>
+                <input type="text" class="form-control" id="courseId"
+                       value="${courseId }" name="courseId" />
+            </div>
+                <div class="form-group">
+                    <label for="courseName">课程名称</label>
+                    <input type="text" class="form-control" id="courseName"
+                           value="${courseName }" name="courseName" />
+                </div>
+                <div class="form-group">
+                    <label for="teacherName">教师姓名</label>
+                    <input type="text" class="form-control" id="teacherName"
+                           value="${teacherName }" name="teacherName" />
+                </div>
+                <div class="form-group">
+                    <label for="property">课程类别</label>
+                    <select	class="form-control" id="property1" name="property">
+                        <option value="">--请选择--</option>
+                        <option value="1">必修课</option>
+                        <option value="2">选修课</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="content">显示内容</label>
+                    <select	class="form-control" id="content" name="content">
+                        <option value="1">--请选择--</option>
+                        <option value="1">全部课程</option>
+                        <option value="2">已选课程</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">查询</button>
                 </form>
             </div>
         </div>

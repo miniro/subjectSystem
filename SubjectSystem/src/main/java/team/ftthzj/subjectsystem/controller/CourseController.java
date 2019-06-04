@@ -102,8 +102,9 @@ public class CourseController {
             creditList.add(d);
         }
         model.addAttribute("creditList", creditList);
+        model.addAttribute("flag", session.getAttribute("FLAG"));
 
-        return "homepageStudent";
+        return "homepage";
     }
 
     @RequestMapping(value = "/course/create.action")
