@@ -308,7 +308,9 @@
                             <th>学生号</th>
                             <th>消息内容</th>
                             <th>消息类型</th>
-                            <th>操作</th>
+                            <c:if test="${flag == 'ADMIN'}">
+                                <th>操作</th>
+                            </c:if>
                         </tr>
                         </thead>
                         <tbody>
@@ -320,11 +322,13 @@
                                 <td>${row.studentId}</td>
                                 <td>${row.content}</td>
                                 <td>${row.errorType}</td>
+                                <c:if test="${flag == 'ADMIN'}">
                                 <td>
                                     <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
                                        data-target="#messageEditDialog" onclick= "editmessage('${row.id}')">修改</a>
                                     <a href="#" class="btn btn-danger btn-xs" onclick= "deletemessage('${row.id}')">删除</a>
                                 </td>
+                                </c:if>
                             </tr>
                         </c:forEach>
                         </tbody>

@@ -295,8 +295,12 @@
                 </form>
             </div>
         </div>
-        <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
-           data-target="#newpersonalInforchooseDialog" onclick="clearpersonalInfor()">新建</a>
+        <c:if
+            test="${flag == 'ADMIN'}">
+            <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
+               data-target="#newpersonalInforchooseDialog" onclick="clearpersonalInfor()">新建</a>
+        </c:if>
+
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
@@ -310,7 +314,9 @@
                             <th>用户类型</th>
                             <th>电话</th>
                             <th>邮箱</th>
-                            <th>操作</th>
+                            <c:if
+                                    test="${flag == 'ADMIN'}"><th>操作</th>
+                            </c:if>
                         </tr>
                         </thead>
                         <tbody>
