@@ -8,6 +8,11 @@ public class ScoreForUi {
     private String pacificScore;
     private String midtermScore;
     private String sumScore;
+    private String studentId;
+    private String studentName;
+
+    public ScoreForUi() {
+    }
 
     public int getId() {
         return id;
@@ -82,5 +87,21 @@ public class ScoreForUi {
 
     public void setSumScore(String sumScore) {
         this.sumScore = sumScore;
+    }
+
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
+    }
+
+    public String getStudentName() {
+        return studentName;
+    }
+
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
     }
 }

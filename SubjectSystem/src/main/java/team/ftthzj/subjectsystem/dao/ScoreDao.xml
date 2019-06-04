@@ -63,6 +63,12 @@
 		</if>
 	</select>
 
+	<!-- 查询成绩数目-->
+	<select id="getScoreNum" parameterType="Score" resultType="Integer">
+		select count(*) from score
+		<include refid="searchScoreWhere"></include>
+	</select>
+
 
 
 	<!-- 删除成绩-->

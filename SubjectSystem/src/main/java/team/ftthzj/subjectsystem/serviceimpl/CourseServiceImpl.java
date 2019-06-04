@@ -44,6 +44,13 @@ public class CourseServiceImpl implements CourseService{
 		return courseDao.searchCourses(course);
 	}
 
+	@Override
+	public List<Course> searchCoursesByTeacherId(String teacherId) {
+		Course course = new Course();
+		course.setTeacherId(teacherId);
+		return courseDao.searchCourses(course);
+	}
+
 	public List<Course> searchCoursesByProperty(int property) {
 		Course course = new Course();
 		course.setProperty(property);

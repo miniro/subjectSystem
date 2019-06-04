@@ -15,6 +15,9 @@ public interface ScoreDao {
 	//查询成绩
 	public List<Score> searchScores(Score score);
 
+	//查询成绩数目
+	public Integer getScoreNum(Score score);
+
 	//删除成绩
 	public int deleteScore(Score score);
 
