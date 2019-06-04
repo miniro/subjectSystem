@@ -288,13 +288,8 @@
                         <c:forEach items="${page.rows}" var="row">
                             <tr>
                                 <c:if test="${userType == '学生'}">
-<<<<<<< HEAD
-                                    <td>${row.studentId}
-                                        <a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#lookInforDialog" onclick= "lookInfor('${row.studentId}')">详情</a>
-=======
                                     <td>
                                         <a href="#"data-toggle="modal" data-target="#lookInforStuDialog" onclick= "lookInforStu('${row.studentId}')">${row.studentId}</a>
->>>>>>> 539265d7b218567b62e55334bbfa1010fe451ae3
                                     </td>
                                 </c:if>
                                 <c:if test="${userType == '教师'}">

@@ -33,12 +33,6 @@ public class Course {
 	public void setTeacherId(String teacherId) {
 		this.teacherId = teacherId;
 	}
-	public String getSchoolTime() {
-		return schoolTime;
-	}
-	public void setSchoolTime(String schoolTime) {
-		this.schoolTime = schoolTime;
-	}
 	public Date getBeginTime() {
 		return beginTime;
 	}
@@ -79,7 +73,6 @@ public class Course {
 	private String courseName;
 	private double credit; //学分
 	private String teacherId;
-	private String schoolTime; //上课时间
 	private Date beginTime;
 	private Date finishTime;
 	private Date endTime;

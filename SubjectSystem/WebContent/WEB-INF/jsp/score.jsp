@@ -284,7 +284,7 @@
                         <c:forEach items="${page.rows}" var="row">
                             <tr>
                                 <td>
-                                    <a href="#"  data-toggle="modal" data-target="#lookInforScoreDialog" onclick= "lookInforScore('${row.id}')">${row.id}</a>
+                                    <a href="#"  data-toggle="modal" data-target="#lookInforScoreDialog" onclick= "lookInforScore('${row.courseId}')">${row.id}</a>
                                 </td>
                                 <td>${row.courseName}</td>
                                 <td>${row.property}</td>
