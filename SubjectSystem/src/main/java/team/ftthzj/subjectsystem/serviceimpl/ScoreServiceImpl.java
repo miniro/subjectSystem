@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import team.ftthzj.subjectsystem.common.utils.Page;
 import team.ftthzj.subjectsystem.dao.CourseDao;
 import team.ftthzj.subjectsystem.dao.ScoreDao;
+import team.ftthzj.subjectsystem.dao.StudentDao;
 import team.ftthzj.subjectsystem.dao.TeacherDao;
 import team.ftthzj.subjectsystem.po.*;
 import team.ftthzj.subjectsystem.service.CourseForUiService;
@@ -25,6 +26,8 @@ public class ScoreServiceImpl implements ScoreService{
 	private ScoreDao scoreDao;
 	@Autowired
 	private CourseDao courseDao;
+	@Autowired
+	private StudentDao studentDao;
 	
 	public int chooseCourse(String studentId, String courseId) {
 		Course course = courseDao.searchCourseById(courseId);
@@ -165,6 +168,37 @@ public class ScoreServiceImpl implements ScoreService{
 			scoreForUiList.add(scoreForUi);
 		}
 		Integer count = courseDao.getCourseNum(course);
+		result.setPage(page);
+		result.setRows(scoreForUiList);
+		result.setSize(rows);
+		result.setTotal(count);
+		return result;
+	}
+
+	@Override
+	public Page<ScoreForUi> searchMyCourses(Integer page, Integer rows, String courseId) {
+		if(courseId == null)
+			return null;
+		List<ScoreForUi> scoreForUiList = new ArrayList<>();
+		Score score1 = new Score();
+		score1.setCourseId(courseId);
+		List<Score> scores = scoreDao.searchScores(score1);
+		for(Score score : scores){
+			Student student = studentDao.searchStudentById(score.getStudentId());
+			Course course = courseDao.searchCourseById(courseId);
+			ScoreForUi scoreForUi = new ScoreForUi();
+			scoreForUi.setStudentId(student.getStudentId());
+			scoreForUi.setStudentName(student.getName());
+			scoreForUi.setCourseId(score.getCourseId());
+			scoreForUi.setCourseName(course.getcourseName());
+			scoreForUi.setPacificScore(String.valueOf(score.getPacificScore()));
+			scoreForUi.setMidtermScore(String.valueOf(score.getMidtermScore()));
+			scoreForUi.setFinalScore(String.valueOf(score.getFinalScore()));
+			scoreForUi.setSumScore(String.valueOf(score.getSumScore()));
+			scoreForUiList.add(scoreForUi);
+		}
+		Page<ScoreForUi> result = new Page<>();
+		int count = scoreDao.getScoreNum(score1);
 		result.setPage(page);
 		result.setRows(scoreForUiList);
 		result.setSize(rows);

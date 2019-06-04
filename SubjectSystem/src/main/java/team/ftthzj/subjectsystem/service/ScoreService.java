@@ -28,6 +28,9 @@ public interface ScoreService {
 	//查询成绩
 	public Page<ScoreForUi> searchSelectedCourses(Integer page, Integer rows, String studentId, String courseName, String property);
 
+	//查询选择某门课的学生和成绩
+	public Page<ScoreForUi> searchMyCourses(Integer page, Integer rows, String courseId);
+
 	public List<Score> getScoreByStuAndCourse(String stuId, String courseId);
 
 	public List<Score> getScoreByScoreId(int scoreId);

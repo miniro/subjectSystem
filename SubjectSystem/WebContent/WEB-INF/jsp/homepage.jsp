@@ -211,12 +211,17 @@
                     </c:if>
                     <li>
                         <c:if test="${flag == 'ADMIN'}">
-                            <a href="${pageContext.request.contextPath }/score/list.action">
+                            <a href="${pageContext.request.contextPath }/student/score/list.action">
                                 <i class="fa fa-file fa-fw" aria-hidden="true"></i> 成绩管理
                             </a>
                         </c:if>
-                        <c:if test="${flag != 'ADMIN'}">
-                            <a href="${pageContext.request.contextPath }/score/list.action">
+                        <c:if test="${flag == 'STUDENT'}">
+                            <a href="${pageContext.request.contextPath }/student/score/list.action">
+                                <i class="fa fa-file fa-fw" aria-hidden="true"></i> 成绩查询
+                            </a>
+                        </c:if>
+                        <c:if test="${flag == 'TEACHER'}">
+                            <a href="${pageContext.request.contextPath }/teacher/score/list.action">
                                 <i class="fa fa-file fa-fw" aria-hidden="true"></i> 成绩查询
                             </a>
                         </c:if>
@@ -334,7 +339,9 @@
                             <th>教师姓名</th>
                             <th>课程性质</th>
                             <th>上课时间</th>
-                            <th>操作</th>
+                            <c:if test="${flag != 'TEACHER'}">
+                                <th>操作</th>
+                            </c:if>
                         </tr>
                         </thead>
                         <tbody>

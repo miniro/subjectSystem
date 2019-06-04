@@ -18,6 +18,9 @@ public interface CourseService {
 	//通过课程名查询课程
 	public List<Course> searchCoursesByName(String courseName);
 
+	//通过教师id查询课程
+	public List<Course> searchCoursesByTeacherId(String teacherId);
+
 	//通过课程类型查询课程
 	public List<Course> searchCoursesByProperty(int property);
 

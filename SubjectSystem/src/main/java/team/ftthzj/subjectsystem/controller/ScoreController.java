@@ -9,14 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import team.ftthzj.subjectsystem.common.utils.Page;
-import team.ftthzj.subjectsystem.po.Notice;
-import team.ftthzj.subjectsystem.po.Score;
-import team.ftthzj.subjectsystem.po.ScoreForUi;
-import team.ftthzj.subjectsystem.po.Student;
+import team.ftthzj.subjectsystem.po.*;
 import team.ftthzj.subjectsystem.service.CourseService;
 import team.ftthzj.subjectsystem.service.ScoreService;
 import team.ftthzj.subjectsystem.service.TeacherService;
 
+import javax.net.ssl.HttpsURLConnection;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -26,17 +24,32 @@ public class ScoreController {
     // 依赖注入
     @Autowired
     private ScoreService scoreService;
+    @Autowired
+    private CourseService courseService;
 
     /**
      *  成绩列表
      */
-    @RequestMapping(value = "/score/list.action")
+    @RequestMapping(value = "/student/score/list.action")
     public String list(@RequestParam(defaultValue="1")Integer page,
                        @RequestParam(defaultValue="10")Integer rows,
                        String courseName, String property, Model model, HttpSession sesstion){
         Page<ScoreForUi> scoreForUiPage = scoreService.searchSelectedCourses(page, rows, ((Student)sesstion.getAttribute("STU_SESSION")).getStudentId() ,courseName, property);
+
         model.addAttribute("page", scoreForUiPage);
         model.addAttribute("flag", sesstion.getAttribute("FLAG"));
+
+        return "score";
+    }
+
+    @RequestMapping(value = "/teacher/score/list.action")
+    public String list(@RequestParam(defaultValue="1")Integer page,
+                       @RequestParam(defaultValue="10")Integer rows, String courseId, Model model, HttpSession session){
+        Page<ScoreForUi> scoreForUiPage = scoreService.searchMyCourses(page, rows, courseId);
+        model.addAttribute("page", scoreForUiPage);
+        model.addAttribute("flag", session.getAttribute("FLAG"));
+        List<Course> courseList = courseService.searchCoursesByTeacherId(((Teacher)session.getAttribute("STU_SESSION")).getTeacherId());
+        model.addAttribute("courseList",courseList);
 
         return "score";
     }

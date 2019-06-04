@@ -86,8 +86,14 @@ public class CourseController {
                                @RequestParam(defaultValue="10")Integer rows,String courseId,
                                String courseName, String teacherName, String property, String credit, String content,
                                Model model, HttpSession session) {
-        Page<CourseForUi> courses = courseService.searchCourses(page, rows,
-                courseId, courseName, teacherName, property, credit, content, ((Student)session.getAttribute("STU_SESSION")).getStudentId());
+        Page<CourseForUi> courses;
+        if(session.getAttribute("FLAG").equals("STUDENT")){
+            courses = courseService.searchCourses(page, rows,
+                    courseId, courseName, teacherName, property, credit, content, ((Student)session.getAttribute("STU_SESSION")).getStudentId());
+        }else{
+            courses = courseService.searchCourses(page, rows,
+                    courseId, courseName, teacherName, property, credit, content, null);
+        }
         model.addAttribute("page", courses);
         model.addAttribute("courseId", courseId);
         model.addAttribute("courseName", courseName);
