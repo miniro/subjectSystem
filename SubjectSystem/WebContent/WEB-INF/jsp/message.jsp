@@ -190,13 +190,13 @@
                     <img src="${pageContext.request.contextPath}/images/school.jpg"  height="195" width="280" alt="城市学院" />
                     <li>
                         <c:if test="${flag == 'ADMIN'}">
-                            <a href="${pageContext.request.contextPath }/course/list.action" class="active">
-                                <i class="fa fa-edit fa-fw" aria-hidden="true"></i>课程管理
+                            <a href="${pageContext.request.contextPath }/course/list.action" >
+                                <i class="fa fa-edit fa-fw" aria-hidden="true"></i> 课程管理
                             </a>
                         </c:if>
                         <c:if test="${flag != 'ADMIN'}">
-                            <a href="${pageContext.request.contextPath }/course/list.action" class="active">
-                                <i class="fa fa-edit fa-fw" aria-hidden="true"></i>课程查询
+                            <a href="${pageContext.request.contextPath }/course/list.action" >
+                                <i class="fa fa-edit fa-fw" aria-hidden="true"></i> 课程查询
                             </a>
                         </c:if>
                     </li>
@@ -274,7 +274,7 @@
                 <form class="form-inline" method="get"
                       action="${pageContext.request.contextPath }/message/list.action">
                     <div class="form-group">
-                        <label for="errorType">错误类型</label>
+                        <label for="errorType">消息类型</label>
                         <input type="text" class="form-control" id="errorType"
                                value="${errorType }" name="errorType" />
                     </div>
@@ -295,11 +295,7 @@
         <c:if test="${flag == 'ADMIN'}">
             <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
                data-target="#newmessageDialog" onclick="clearmessage()">新建</a>
-            <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
-               data-target="#messagechooseEditDialog" onclick="clearmessage()">修改</a>
         </c:if>
-        <a href="#" class="btn btn-danger btn-xs" data-toggle="modal"
-           data-target="#messageDeleteDialog" onclick="clearmessage()">删除</a>
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
@@ -311,7 +307,8 @@
                             <th>消息编号</th>
                             <th>学生号</th>
                             <th>消息内容</th>
-                            <th>错误类型</th>
+                            <th>消息类型</th>
+                            <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -323,6 +320,11 @@
                                 <td>${row.studentId}</td>
                                 <td>${row.content}</td>
                                 <td>${row.errorType}</td>
+                                <td>
+                                    <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
+                                       data-target="#messageEditDialog" onclick= "editmessage('${row.id}')">修改</a>
+                                    <a href="#" class="btn btn-danger btn-xs" onclick= "deletemessage('${row.id}')">删除</a>
+                                </td>
                             </tr>
                         </c:forEach>
                         </tbody>
@@ -416,10 +418,10 @@
                     </div>
                     <div class="form-group">
                         <label for="errorType" class="col-sm-2 control-label">
-                            错误类型
+                            消息类型
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="errorType" placeholder="错误类型" name="errorType" />
+                            <input type="text" class="form-control" id="errorType" placeholder="消息类型" name="errorType" />
                         </div>
                     </div>
                 </form>
@@ -474,7 +476,7 @@
                 <h4 class="modal-title" id="myModalLabel1">修改消息信息</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" id="update_message_form">
+                <form class="form-horizontal" id="update_message_form1">
                     <div class="form-group">
                         <label for="morecontent" class="col-sm-2 control-label">
                             消息内容
@@ -493,10 +495,10 @@
                     </div>
                     <div class="form-group">
                         <label for="moreerrorType" class="col-sm-2 control-label">
-                            错误类型
+                            消息类型
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="moreerrorType" placeholder="错误类型" name="Type" />
+                            <input type="text" class="form-control" id="moreerrorType" placeholder="消息类型" name="Type" />
                         </div>
                     </div>
                 </form>
@@ -539,10 +541,10 @@
                     </div>
                     <div class="form-group">
                         <label for="editerrorType" class="col-sm-2 control-label">
-                            错误类型
+                            消息类型
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="editerrorType" placeholder="错误类型" name="Type" />
+                            <input type="text" class="form-control" id="editerrorType" placeholder="消息类型" name="Type" />
                         </div>
                     </div>
                 </form>
@@ -666,26 +668,25 @@
         });
     }
     // 删除消息
-    function deletemessage() {
+    function deletemessage(messageId) {
         if(confirm('确定要删除该消息吗?')) {
-            $.post("<%=basePath%>message/delete.action",
-                $("#delete_message_form").serialize(), function(data){
-                    if(data =="OK"){
+            $.ajax({
+                type: "get",
+                url: "<%=basePath%>message/delete.action",
+                data: {"id": messageId},
+                success: function (data) {
+                    if (data == "OK") {
                         alert("消息删除成功！");
                         window.location.reload();
-                    }else{
-                        alert("删除消息失败！");
+                    } else {
+                        alert("消息删除失败！");
                         window.location.reload();
                     }
-                });
+                }
+            });
         }
     }
 </script>
 
-<%--<div id="clock" style="width:150px;height:150px;float:right">--%>
-<%--<div id="hour" style="transform: rotate(56deg);"><img src="${pageContext.request.contextPath}/images/hour.png"></div>--%>
-<%--<div id="minute" style="transform: rotate(312deg);"><img src="${pageContext.request.contextPath}/images/minute.png"></div>--%>
-<%--<div id="second" style="transform: rotate(6deg);"><img src="${pageContext.request.contextPath}/images/second.png"></div>--%>
-<%--</div>--%>
 </body>
 </html>

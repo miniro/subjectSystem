@@ -53,6 +53,7 @@
 				description = #{description},
 			</if>
 		</set>
+		where noticeId = #{noticeId}
 	</update>
 
 	<!-- 删除通知-->

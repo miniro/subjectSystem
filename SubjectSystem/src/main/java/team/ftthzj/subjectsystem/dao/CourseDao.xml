@@ -60,27 +60,40 @@
 		update course
 		<set>
 			<if test="courseName != null">
-				courseName = #{courseName}
+				courseName = #{courseName},
 			</if>
 			<if test="credit != null">
-				credit = #{credit}
+				credit = #{credit},
 			</if>
 			<if test="teacherId != null">
-				teacherId = #{teacherId}
+				teacherId = #{teacherId},
 			</if>
 			<if test="beginTime != null">
-				beginTime = #{beginTime}
+				beginTime = #{beginTime},
 			</if>
 			<if test="finishTime != null">
-				finishTime = #{finishTime}
+				finishTime = #{finishTime},
 			</if>
 			<if test="endTime != null">
-				endTime = #{endTime}
+				endTime = #{endTime},
 			</if>
 			<if test="property != null">
-				property = #{property}
+				property = #{property},
+			</if>
+			<if test="startingTime != null">
+				startingTime = #{startingTime},
+			</if>
+			<if test="enddingTime != null">
+				enddingTime = #{enddingTime},
+			</if>
+			<if test="weekTime != null">
+				weekTime = #{weekTime},
+			</if>
+			<if test="preset != null">
+				preset = #{preset},
 			</if>
 		</set>
+		where courseId = #{courseId}
 	</update>
 
 	<!-- 删除课程-->

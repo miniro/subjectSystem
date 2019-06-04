@@ -192,13 +192,13 @@
                     <img src="${pageContext.request.contextPath}/images/school.jpg"  height="195" width="280" alt="城市学院" />
                     <li>
                         <c:if test="${flag == 'ADMIN'}">
-                            <a href="${pageContext.request.contextPath }/course/list.action" class="active">
-                                <i class="fa fa-edit fa-fw" aria-hidden="true"></i>课程管理
+                            <a href="${pageContext.request.contextPath }/course/list.action" >
+                                <i class="fa fa-edit fa-fw" aria-hidden="true"></i> 课程管理
                             </a>
                         </c:if>
                         <c:if test="${flag != 'ADMIN'}">
-                            <a href="${pageContext.request.contextPath }/course/list.action" class="active">
-                                <i class="fa fa-edit fa-fw" aria-hidden="true"></i>课程查询
+                            <a href="${pageContext.request.contextPath }/course/list.action" >
+                                <i class="fa fa-edit fa-fw" aria-hidden="true"></i> 课程查询
                             </a>
                         </c:if>
                     </li>
@@ -287,10 +287,6 @@
         <c:if test="${flag == 'ADMIN'}">
             <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
                data-target="#newnoticeDialog" onclick="clearnotice()">新建</a>
-            <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
-               data-target="#noticeChooseEditDialog" onclick="clearnotice()">修改</a>
-            <a href="#" class="btn btn-danger btn-xs" data-toggle="modal"
-               data-target="#noticeDeleteDialog" onclick="clearnotice()">删除</a>
         </c:if>
         <div class="row">
             <div class="col-lg-12">
@@ -304,6 +300,9 @@
                             <th>公告标题</th>
                             <th>开始时间</th>
                             <th>结束时间</th>
+                            <c:if
+                                    test="${flag == 'ADMIN'}"><th>操作</th>
+                            </c:if>
                         </tr>
                         </thead>
                         <tbody>
@@ -315,6 +314,13 @@
                                 <td>${row.title}</td>
                                 <td>${row.startTime}</td>
                                 <td>${row.stopTime}</td>
+                            <c:if test="${flag == 'ADMIN'}">
+                                <td>
+                                    <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
+                                       data-target="#noticeEditDialog" onclick= "editNotice('${row.noticeId}')">修改</a>
+                                    <a href="#" class="btn btn-danger btn-xs" onclick= "deletenotice('${row.noticeId}')">删除</a>
+                                </td>
+                            </c:if>
                             </tr>
                         </c:forEach>
                         </tbody>
@@ -475,7 +481,7 @@
                 <h4 class="modal-title" id="myModalLabel3">公告信息详情</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" id="update_notice_form">
+                <form class="form-horizontal" id="update_notice_form1">
                     <div class="form-group">
                         <label for="title" class="col-sm-2 control-label">
                             标题
@@ -530,6 +536,14 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="update_notice_form">
+                    <div class="form-group">
+                        <label for="title" class="col-sm-2 control-label">
+                            消息编号
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="editnoticeId" name="noticeId" />
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label for="title" class="col-sm-2 control-label">
                             标题
@@ -684,11 +698,14 @@
             }
         });
     }
-    // 删除公告
-    function deletenotice() {
+
+    function deletenotice(noticeId) {
         if(confirm('确定要删除该公告吗?')) {
-            $.post("<%=basePath%>notice/delete.action",
-                $("#delete_notice_form").serialize(), function(data){
+            $.ajax({
+                type:"get",
+                url:"<%=basePath%>notice/delete.action",
+                data:{"noticeId":noticeId},
+                success:function(data) {
                     if(data =="OK"){
                         alert("公告删除成功！");
                         window.location.reload();
@@ -696,7 +713,8 @@
                         alert("公告删除失败！");
                         window.location.reload();
                     }
-                });
+                }
+            });
         }
     }
 </script>

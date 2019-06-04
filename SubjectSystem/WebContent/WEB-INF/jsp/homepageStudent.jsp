@@ -32,12 +32,23 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="<%=basePath%>css/mydate.css" rel="stylesheet" type="text/css"/>
     <script src="<%=basePath%>js/mydate.js"></script>
+    <script src="<%=basePath%>laydate/laydate.js"></script>
 </head>
 <body>
 <script type="text/javascript" src="<%=basePath%>js/jquery-1.7.2.min.js"></script>
+<input type="text" class="demo-input" placeholder="请选择日期" id="test1">
 
+<script>
+    lay('#version').html('-v'+ laydate.v);
 
-
+    //执行一个laydate实例
+    laydate.render({
+        elem: '#test1' //指定元素
+    });
+    laydate.render({
+        elem: '#test2' //指定元素
+    });
+</script>
 <div id="wrapper">
     <!-- 导航栏部分 -->
     <nav class="navbar navbar-default navbar-static-top" role="navigation"
@@ -488,13 +499,11 @@
                             </select>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="beginTime" class="col-sm-2 control-label">
+                    <div class="form-group" postion="relative" z-index="9999">
+                        <label for="test2" class="col-sm-2 control-label">
                             选课开始时间
                         </label>
-                        <div class="col-sm-10">
-                            <input onclick="MyDatePick({fmt:'datetime'})" type="text" class="form-control" id="beginTime" placeholder="选课开始时间" name="beginTime" />
-                        </div>
+                        <%--<input type="text" class="demo-input" placeholder="请选择日期" id="test2" >--%>
                     </div>
                     <div class="form-group">
                         <label for="finishTime" style="float:left;padding:7px 15px 0 27px;">课程开始时间</label>
@@ -883,10 +892,6 @@
                     }
                 });
         }
-    }
-    //test
-    function fuck(id){
-        alert("fuck");
     }
 </script>
 

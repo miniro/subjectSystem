@@ -139,7 +139,6 @@ public class CourseController {
     @RequestMapping(value = "/course/update.action")
     @ResponseBody
     public String editCourse(HttpServletRequest request){
-        int flag = courseService.deleteCourse(request.getParameter("oldCourseId"));
         Course newcourse = new Course();
         newcourse.setcourseId(request.getParameter("courseId"));
         newcourse.setcourseName(request.getParameter("courseName"));
@@ -152,8 +151,8 @@ public class CourseController {
         newcourse.setStartingTime(Integer.valueOf(startingTime));
         newcourse.setEnddingTime(Integer.valueOf(enddingTime));
         newcourse.setProperty(Integer.valueOf(property));
-        int rows = courseService.addCourse(newcourse);
-        if(flag==1&&rows==1){
+        int rows = courseService.updateCourse(newcourse);
+        if(rows==1){
             return "OK";
         }else {
             return "FAIL";
@@ -201,10 +200,11 @@ public class CourseController {
         List<Course> coursesPreset=new ArrayList<>();
         for(Score score:scores){
             Course course=courseService.searchCourseById(score.getCourseId());
-            if(course.getPreset()==0)
-                courses.add(course);
-            else
+            if(course.getPreset()==1)
                 coursesPreset.add(course);
+                System.out.println(course.getcourseName());
+            courses.add(course);
+            System.out.println("6766"+course.getcourseName());
         }
         List<List<String>> coursesName=getCoursesName(courses);
         List<List<String>> coursesPresetName=getCoursesName(coursesPreset);

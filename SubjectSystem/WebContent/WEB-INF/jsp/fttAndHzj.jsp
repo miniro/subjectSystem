@@ -193,13 +193,13 @@
                     <img src="${pageContext.request.contextPath}/images/school.jpg"  height="195" width="280" alt="城市学院" />
                     <li>
                         <c:if test="${flag == 'ADMIN'}">
-                            <a href="${pageContext.request.contextPath }/course/list.action" class="active">
-                                <i class="fa fa-edit fa-fw" aria-hidden="true"></i>课程管理
+                            <a href="${pageContext.request.contextPath }/course/list.action" >
+                                <i class="fa fa-edit fa-fw" aria-hidden="true"></i> 课程管理
                             </a>
                         </c:if>
                         <c:if test="${flag != 'ADMIN'}">
-                            <a href="${pageContext.request.contextPath }/course/list.action" class="active">
-                                <i class="fa fa-edit fa-fw" aria-hidden="true"></i>课程查询
+                            <a href="${pageContext.request.contextPath }/course/list.action" >
+                                <i class="fa fa-edit fa-fw" aria-hidden="true"></i> 课程查询
                             </a>
                         </c:if>
                     </li>

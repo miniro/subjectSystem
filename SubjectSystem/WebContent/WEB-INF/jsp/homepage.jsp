@@ -193,12 +193,12 @@
                     <li>
                         <c:if test="${flag == 'ADMIN'}">
                             <a href="${pageContext.request.contextPath }/course/list.action" class="active">
-                                <i class="fa fa-edit fa-fw" aria-hidden="true"></i>课程管理
+                                <i class="fa fa-edit fa-fw" aria-hidden="true"></i> 课程管理
                             </a>
                         </c:if>
                         <c:if test="${flag != 'ADMIN'}">
                             <a href="${pageContext.request.contextPath }/course/list.action" class="active">
-                                <i class="fa fa-edit fa-fw" aria-hidden="true"></i>课程查询
+                                <i class="fa fa-edit fa-fw" aria-hidden="true"></i> 课程查询
                             </a>
                         </c:if>
                     </li>
@@ -315,10 +315,6 @@
         <c:if test="${flag == 'ADMIN'}">
             <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
                data-target="#newcourseDialog" onclick="clearcourse()">新建</a>
-            <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
-               data-target="#courseChooseEditDialog" onclick="clearcourse()">修改</a>
-            <a href="#" class="btn btn-danger btn-xs" data-toggle="modal"
-               data-target="#courseDeleteDialog" onclick="clearcourse()">删除</a>
         </c:if>
         <div class="row">
             <div class="col-lg-12">
@@ -359,6 +355,14 @@
                                             <a href="#" class="btn btn-danger btn-xs" onclick= "dropcourse('${row.courseId}')">删除</a>
                                         </td>
                                     </c:if>
+                                </c:if>
+
+                                <c:if test="${flag == 'ADMIN'}">
+                                    <td>
+                                        <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
+                                           data-target="#courseEditDialog" onclick= "editcourse('${row.courseId}')">修改</a>
+                                        <a href="#" class="btn btn-danger btn-xs" onclick= "deletecourse('${row.courseId}')">删除</a>
+                                    </td>
                                 </c:if>
                             </tr>
                         </c:forEach>
@@ -940,35 +944,56 @@
         }
     }
 
-    function chooseCourse(id) {
-        if(confirm('确定要选择该课程吗?')) {
+    // 删除课程
+    function deletecourse(courseId) {
+        if(confirm('确定要删除该课程吗?')) {
             $.ajax({
                 type:"get",
-                url:"<%=basePath%>course/SelectCourse.action",
-                data:{"id":id},
+                url:"<%=basePath%>course/delete.action",
+                data:{"courseId":courseId},
                 success:function(data) {
-                    if(data =="OK"){
-                        alert("选课成功！");
-                        window.location.reload();
-                    }else{
-                        alert("选课失败！");
-                        window.location.reload();
-                    }
-                }
-            });
-        }
-    }
-
-
-    function deletecourse() {
-        if(confirm('确定要删除该课程吗?')) {
-            $.post("<%=basePath%>course/delete.action",
-                $("#delete_course_form").serialize(), function(data){
                     if(data =="OK"){
                         alert("课程删除成功！");
                         window.location.reload();
                     }else{
-                        alert("删除课程失败！");
+                        alert("课程删除失败！");
+                        window.location.reload();
+                    }
+                }
+                });
+            }
+    }
+    //选课
+    function choosecourse(courseId){
+        if(confirm('确定要选该门课吗?')){
+            $.post("<%=basePath%>score/chooseCourse.action",{"courseId":courseId},
+                function(data){
+                    if(data =="OK"){
+                        alert("选课成功！");
+                        window.location.reload();
+                    }else if(data == "Not Time"){
+                        alert("现在不是选课时间！");
+                        window.location.reload();
+                    }else if(data == "Has"){
+                        alert("课表中已有该课程！");
+                        window.location.reload();
+                    }else{
+                        alert("课程时间冲突!");
+                        window.location.reload();
+                    }
+                });
+        }
+    }
+    //退课
+    function dropcourse(courseId) {
+        if(confirm('确定要退选该门课吗?')){
+            $.post("<%=basePath%>score/dropCourse.action",{"courseId":courseId},
+                function(data){
+                    if(data =="OK"){
+                        alert("退选成功！");
+                        window.location.reload();
+                    }else{
+                        alert("现在不是退课时间！");
                         window.location.reload();
                     }
                 });

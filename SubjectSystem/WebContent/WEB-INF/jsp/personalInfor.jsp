@@ -192,13 +192,13 @@
                     <img src="${pageContext.request.contextPath}/images/school.jpg"  height="195" width="280" alt="城市学院" />
                     <li>
                         <c:if test="${flag == 'ADMIN'}">
-                            <a href="${pageContext.request.contextPath }/course/list.action" class="active">
-                                <i class="fa fa-edit fa-fw" aria-hidden="true"></i>课程管理
+                            <a href="${pageContext.request.contextPath }/course/list.action" >
+                                <i class="fa fa-edit fa-fw" aria-hidden="true"></i> 课程管理
                             </a>
                         </c:if>
                         <c:if test="${flag != 'ADMIN'}">
-                            <a href="${pageContext.request.contextPath }/course/list.action" class="active">
-                                <i class="fa fa-edit fa-fw" aria-hidden="true"></i>课程查询
+                            <a href="${pageContext.request.contextPath }/course/list.action" >
+                                <i class="fa fa-edit fa-fw" aria-hidden="true"></i> 课程查询
                             </a>
                         </c:if>
                     </li>
@@ -297,10 +297,6 @@
         </div>
         <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
            data-target="#newpersonalInforchooseDialog" onclick="clearpersonalInfor()">新建</a>
-        <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
-           data-target="#personalInforchooseEditDialog" onclick="clearpersonalInfor()">修改</a>
-        <a href="#" class="btn btn-danger btn-xs" data-toggle="modal"
-           data-target="#personalInforDeleteDialog" onclick="clearpersonalInfor()">删除</a>
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
@@ -313,7 +309,8 @@
                             <th>姓名</th>
                             <th>用户类型</th>
                             <th>电话</th>
-                            <th>email</th>
+                            <th>邮箱</th>
+                            <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -333,6 +330,20 @@
                                 <td>${userType}</td>
                                 <td>${row.phone}</td>
                                 <td>${row.email}</td>
+                                <c:if test="${flag == 'ADMIN'}">
+                                    <td>
+                                        <c:if test="${userType == '学生'}">
+                                            <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
+                                               data-target="#personalInforEditDialog" onclick= "editpersonalInfor('${row.studentId}')">修改</a>
+                                            <a href="#" class="btn btn-danger btn-xs" onclick= "deletepersonalInfor('${row.studentId}')">删除</a>
+                                        </c:if>
+                                        <c:if test="${userType == '教师'}">
+                                            <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
+                                               data-target="#personalInforEditDialog" onclick= "editpersonalInfor('${row.teacherId}')">修改</a>
+                                            <a href="#" class="btn btn-danger btn-xs" onclick= "deletepersonalInfor('${row.teacherId}')">删除</a>
+                                        </c:if>
+                                    </td>
+                                </c:if>
                             </tr>
                         </c:forEach>
                         </tbody>
@@ -597,7 +608,7 @@
                 <h4 class="modal-title" id="myModalLabel1">查看学生信息</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" id="update_personalInfor_form">
+                <form class="form-horizontal" id="update_personalInfor_form1">
                     <div class="form-group" >
                         <label for="moreStudentId" class="col-sm-2 control-label " >
                             用户编号
@@ -698,9 +709,9 @@
                 <h4 class="modal-title" id="myModalLabel1">查看教师信息</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" id="update_personalInfor_form">
+                <form class="form-horizontal" id="update_personalInfor_form1">
                     <div class="form-group" >
-                        <label for="moreteacherId" class="col-sm-2 control-label" >
+                        <label for="moreteacherId2" class="col-sm-2 control-label" >
                             教师编号
                         </label>
                         <div class="col-sm-10">
@@ -890,36 +901,6 @@
         </div>
     </div>
 </div>
-<!-- 删除用户信息模态框 -->
-<div class="modal fade" id="personalInforDeleteDialog" tabindex="-1" role="dialog"
-     aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title" id="myModalLabel">删除用户信息</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal" id="delete_personalInfor_form">
-                    <div class="form-group">
-                        <label for="UserId" class="col-sm-2 control-label">
-                            用户编号
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="UserId" placeholder="用户编号" name="UserId" />
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" onclick="deletepersonalInfor()">删除用户信息</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 <div style="margin-top: 100px"></div>
@@ -1083,18 +1064,42 @@
         });
     }
     // 删除用户信息
-    function deletepersonalInfor() {
+    function deletepersonalInfor(id) {
         if(confirm('确定要删除该用户信息吗?')) {
-            $.post("<%=basePath%>personalInfor/delete.action",
-                $("#delete_personalInfor_form").serialize(), function(data){
+            $.ajax({
+                type:"get",
+                url:"<%=basePath%>personalInfor/delete.action",
+                data:{"UserId":id},
+                success:function(data) {
                     if(data =="OK"){
                         alert("用户信息删除成功！");
                         window.location.reload();
                     }else{
-                        alert("删除用户信息失败！");
+                        alert("用户信息删除失败！");
                         window.location.reload();
                     }
-                });
+                }
+            });
+        }
+    }
+
+    function deletecourse(courseId) {
+        if(confirm('确定要删除该课程吗?')) {
+
+            $.ajax({
+                type:"get",
+                url:"<%=basePath%>course/delete.action",
+                data:{"courseId":courseId},
+                success:function(data) {
+                    if(data =="OK"){
+                        alert("课程删除成功！");
+                        window.location.reload();
+                    }else{
+                        alert("课程删除失败！");
+                        window.location.reload();
+                    }
+                }
+            });
         }
     }
     // 通过id获取修改的用户信息

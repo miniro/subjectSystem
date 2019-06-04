@@ -120,6 +120,7 @@ public class PersonalInforController {
     @ResponseBody
     public String deletePersonalInforStu(HttpServletRequest request) {
         int flag=studentService.deleteStudentById(request.getParameter("UserId"));
+        System.out.println(request.getParameter("UserId"));
         int flag2=teacherService.deleteTeacherById(request.getParameter("UserId"));
         if(flag==1||flag2==1){
             return "OK";
