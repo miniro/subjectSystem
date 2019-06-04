@@ -23,6 +23,9 @@ public class CourseForUiServiceImpl implements CourseForUiService {
         }
         String[] week = {"一", "二", "三", "四", "五", "六", "日"};
         String words = "周" + week[course.getWeekTime()-1];
+        if(course.getStartingTime() == course.getEnddingTime()){
+            words += "第";
+        }
         for(int i = course.getStartingTime(); i<=course.getEnddingTime(); i++){
             if(i != course.getStartingTime()){
                 words += ",";

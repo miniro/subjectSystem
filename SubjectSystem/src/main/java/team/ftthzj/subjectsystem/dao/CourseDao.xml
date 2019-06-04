@@ -5,8 +5,8 @@
 	<!-- 课程的各种数据库操作 -->
 	<!-- 新建课程-->
 	<insert id="addCourse" parameterType="course">
-		insert into course(courseId, courseName, credit, teacherId, schoolTime, beginTime, finishTime, endTime, property, duration, startingTime, enddingTime, weekTime)
-		values(#{courseId}, #{courseName}, #{credit}, #{teacherId}, #{schoolTime}, #{beginTime}, #{finishTime}, #{endTime}, #{property}, #{duration}, #{startingTime}, #{enddingTime}, #{weekTime})
+		insert into course(courseId, courseName, credit, teacherId, beginTime, finishTime, endTime, property, duration, startingTime, enddingTime, weekTime)
+		values(#{courseId}, #{courseName}, #{credit}, #{teacherId}, #{beginTime}, #{finishTime}, #{endTime}, #{property}, #{duration}, #{startingTime}, #{enddingTime}, #{weekTime})
 	</insert>
 	
 	<!-- 根据id查询课程-->
@@ -67,9 +67,6 @@
 			</if>
 			<if test="teacherId != null">
 				teacherId = #{teacherId}
-			</if>
-			<if test="schoolTime != null">
-				schoolTime = #{schoolTime}
 			</if>
 			<if test="beginTime != null">
 				beginTime = #{beginTime}

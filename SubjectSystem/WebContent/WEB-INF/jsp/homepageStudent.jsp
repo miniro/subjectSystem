@@ -26,6 +26,12 @@
     <link href="<%=basePath%>css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <link href="<%=basePath%>css/boot-crm.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="<%=basePath%>css/style.css">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="<%=basePath%>css/mydate.css" rel="stylesheet" type="text/css"/>
+    <script src="<%=basePath%>js/mydate.js"></script>
 </head>
 <body>
 <script type="text/javascript" src="<%=basePath%>js/jquery-1.7.2.min.js"></script>
@@ -319,7 +325,7 @@
                                 </c:if>
                                 <c:if test="${content == '2'}">
                                     <td>
-                                        <a href="#" class="btn btn-primary btn-xs" onclick= "dropcourse('${row.courseId}')">删除</a>
+                                        <a href="#" class="btn btn-danger btn-xs" onclick= "dropcourse('${row.courseId}')">删除</a>
                                     </td>
                                 </c:if>
                             </tr>
@@ -450,9 +456,13 @@
                         <div class="col-sm-10">
                             <select	class="form-control" id="weekTime"  name="weekTime">
                                 <option value="">--请选择--</option>
-                                <c:forEach var="i" begin="1" end="7" step="1">
-                                    <option value="${i}">周${i}</option>
-                                </c:forEach>
+                                <option value="1">周一</option>
+                                <option value="2">周二</option>
+                                <option value="3">周三</option>
+                                <option value="4">周四</option>
+                                <option value="5">周五</option>
+                                <option value="6">周六</option>
+                                <option value="7">周日</option>
                             </select>
                         </div>
                     </div>
@@ -475,6 +485,46 @@
                                 <c:forEach var="k" begin="1" end="12" step="1">
                                     <option value="${k}">${k}</option>
                                 </c:forEach>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="beginTime" class="col-sm-2 control-label">
+                            选课开始时间
+                        </label>
+                        <div class="col-sm-10">
+                            <input onclick="MyDatePick({fmt:'datetime'})" type="text" class="form-control" id="beginTime" placeholder="选课开始时间" name="beginTime" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="finishTime" style="float:left;padding:7px 15px 0 27px;">课程开始时间</label>
+                        <div class="col-md-9">
+                            <select	class="form-control" id="finishTime"  name="finishTime">
+                                <option value="">--请选择--</option>
+                                <c:forEach var="k" begin="1" end="12" step="1">
+                                    <option value="${k}">${k}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="endTime" style="float:left;padding:7px 15px 0 27px;">课程结束时间</label>
+                        <div class="col-md-9">
+                            <select	class="form-control" id="endTime"  name="endTime">
+                                <option value="">--请选择--</option>
+                                <c:forEach var="k" begin="1" end="12" step="1">
+                                    <option value="${k}">${k}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="preset" style="float:left;padding:7px 15px 0 27px;">是否预置课表</label>
+                        <div class="col-md-9">
+                            <select	class="form-control" id="preset"  name="preset">
+                                <option value="">--请选择--</option>
+                                <option value="1">是</option>
+                                <option value="0">否</option>
                             </select>
                         </div>
                     </div>
@@ -735,6 +785,9 @@
             $("#new_course_form").serialize(),function(data){
                 if(data =="OK"){
                     alert("课程创建成功！");
+                    window.location.reload();
+                }else if(data == "Time Error"){
+                    alert("结束时间不得早于开始时间！");
                     window.location.reload();
                 }else{
                     alert("课程创建失败！");

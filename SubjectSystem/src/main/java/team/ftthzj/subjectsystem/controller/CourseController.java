@@ -102,7 +102,8 @@ public class CourseController {
             creditList.add(d);
         }
         model.addAttribute("creditList", creditList);
-        return "homepage";
+
+        return "homepageStudent";
     }
 
     @RequestMapping(value = "/course/create.action")
@@ -122,6 +123,9 @@ public class CourseController {
         course.setStartingTime(Integer.valueOf(startingTime));
         course.setEnddingTime(Integer.valueOf(endingTime));
         course.setProperty(Integer.valueOf(property));
+        if(Integer.valueOf(startingTime)>Integer.valueOf(endingTime)){
+            return "Time Error";
+        }
         int rows = courseService.addCourse(course);
         if(rows > 0){
             return "OK";
