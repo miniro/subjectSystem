@@ -184,51 +184,8 @@
             </li>
             <!-- 用户信息和系统设置结束 -->
         </ul>
-        <!-- 左侧显示列表部分 start-->
-        <div class="navbar-default sidebar" role="navigation">
-            <div class="sidebar-nav navbar-collapse">
-                <ul class="nav" id="side-menu">
-                    <img src="${pageContext.request.contextPath}/images/school.jpg"  height="195" width="280" alt="城市学院" />
-                    <li>
-                        <a href="${pageContext.request.contextPath }/course/list.action" >
-                            <i class="fa fa-edit fa-fw" aria-hidden="true"></i> 课程管理
-                        </a>
-                    </li>
-                    <li>
-                        <a href="${pageContext.request.contextPath }/course/toCourseTable.action">
-                            <i class="fa fa-table fa-fw" aria-hidden="true"></i> 查看课表
-                        </a>
-                    </li>
-                    <li>
-                        <a href="${pageContext.request.contextPath }/score/list.action">
-                            <i class="fa fa-file fa-fw" aria-hidden="true"></i> 成绩管理
-                        </a>
-                    </li>
-                    <li>
-                        <a href="${pageContext.request.contextPath }/notice/list.action">
-                            <i class="fa fa-exclamation-circle fa-fw"  aria-hidden="true"></i> 公告管理
-                        </a>
-                    </li>
-                    <li>
-                        <a href="${pageContext.request.contextPath }/personalInfor/list.action">
-                            <i class="fa fa-gear fa-fw" aria-hidden="true"></i>用户信息管理
-                        </a>
-                    </li>
-                    <li>
-                        <a href="${pageContext.request.contextPath }/message/list.action">
-                            <i class="fa fa-magic fa-fw" aria-hidden="true"></i>消息管理
-                        </a>
-                    </li>
-                    <li>
-                        <a href="${pageContext.request.contextPath }/fttAndHzj/list.action">
-                            <i class="fa fa-bug fa-fw" aria-hidden="true"></i>关于我们
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <!-- 左侧显示列表部分 end-->
-    </nav>
+
+
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">

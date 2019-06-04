@@ -304,7 +304,9 @@
                         <tbody>
                         <c:forEach items="${page.rows}" var="row">
                             <tr>
-                                <td>${row.courseId}</td>
+                                <td>
+                                    <a href="#" data-toggle="modal" data-target="#lookCourseDialog" onclick= "lookCourse('${row.courseId}')">${row.courseId}</a>
+                                </td>
                                 <td>${row.courseName}</td>
                                 <td>${row.credit}</td>
                                 <td>${row.teacherName}</td>
