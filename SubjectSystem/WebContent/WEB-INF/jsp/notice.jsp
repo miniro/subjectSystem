@@ -211,7 +211,7 @@
                     </c:if>
                     <li>
                         <c:if test="${flag == 'ADMIN'}">
-                            <a href="${pageContext.request.contextPath }/student/score/list.action">
+                            <a href="${pageContext.request.contextPath }/teacher/score/list.action">
                                 <i class="fa fa-file fa-fw" aria-hidden="true"></i> 成绩管理
                             </a>
                         </c:if>

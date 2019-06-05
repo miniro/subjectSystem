@@ -48,11 +48,28 @@ public class ScoreController {
         Page<ScoreForUi> scoreForUiPage = scoreService.searchMyCourses(page, rows, courseId);
         model.addAttribute("page", scoreForUiPage);
         model.addAttribute("flag", session.getAttribute("FLAG"));
-        List<Course> courseList = courseService.searchCoursesByTeacherId(((Teacher)session.getAttribute("STU_SESSION")).getTeacherId());
+        List<Course> courseList;
+        if(session.getAttribute("FLAG").equals("TEACHER")){
+            courseList = courseService.searchCoursesByTeacherId(((Teacher)session.getAttribute("STU_SESSION")).getTeacherId());
+        }else{
+            courseList = courseService.loadAllCourses();
+        }
         model.addAttribute("courseList",courseList);
 
         return "score";
     }
+
+//    @RequestMapping(value = "/admin/score/list.action")
+//    public String list(@RequestParam(defaultValue="1")Integer page,
+//                       @RequestParam(defaultValue="10")Integer rows, String courseId, String teacherId, Model model, HttpSession session){
+//
+//
+//        model.addAttribute("flag", session.getAttribute("FLAG"));
+//        List<Course> courseList = courseService.searchCoursesByTeacherId(((Teacher)session.getAttribute("STU_SESSION")).getTeacherId());
+//        model.addAttribute("courseList",courseList);
+//
+//        return "score";
+//    }
 
     //选课
     @RequestMapping(value = "/score/chooseCourse.action")

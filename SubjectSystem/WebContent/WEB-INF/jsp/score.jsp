@@ -211,7 +211,7 @@
                     </c:if>
                     <li>
                         <c:if test="${flag == 'ADMIN'}">
-                            <a href="${pageContext.request.contextPath }/student/score/list.action">
+                            <a href="${pageContext.request.contextPath }/teacher/score/list.action">
                                 <i class="fa fa-file fa-fw" aria-hidden="true"></i> 成绩管理
                             </a>
                         </c:if>
@@ -278,73 +278,37 @@
         <!-- /.row -->
         <div class="panel panel-default">
             <div class="panel-body">
-                <c:if test="${flag == 'TEACHER'}">
+                <c:if test="${flag != 'STUDENT'}">
                     <form class="form-inline" method="get" action="${pageContext.request.contextPath }/teacher/score/list.action">
-                        <c:if test="${flag == 'STUDENT'}">
-                            <div class="form-group">
-                                <label for="courseName">课程名</label>
-                                <input type="text" class="form-control" id="courseName"
-                                       value="${courseName }" name="courseName" />
-                            </div>
-                        </c:if>
-                        <c:if test="${flag == 'TEACHER'}">
-                            <div class="form-group">
-                                <label for="courseId" style="float:left;padding:7px 15px 0 27px;">选择课程</label>
-                                <div class="col-sm-10">
-                                    <select	class="form-control" id="courseId2" name="courseId">
-                                        <option value="">--请选择--</option>
-                                        <c:forEach items="${courseList}" var="item">
-                                            <option value="${item.courseId}"<c:if test="${item.courseId == courseId}"> selected</c:if>>${item.courseName}&emsp;${item.courseId}</option>
-                                        </c:forEach>
-                                    </select>
-                                </div>
-                            </div>
-                        </c:if>
-                        <c:if test="${flag != 'TEACHER'}">
-                            <div class="form-group">
-                                <label for="property1">课程类别</label>
-                                <select	class="form-control" id="property1" name="property">
+                        <div class="form-group">
+                            <label for="courseId" style="float:left;padding:7px 15px 0 27px;">选择课程</label>
+                            <div class="col-sm-10">
+                                <select	class="form-control" id="courseId2" name="courseId">
                                     <option value="">--请选择--</option>
-                                    <option value="1">必修课</option>
-                                    <option value="2">选修课</option>
+                                    <c:forEach items="${courseList}" var="item">
+                                        <option value="${item.courseId}"<c:if test="${item.courseId == courseId}"> selected</c:if>>${item.courseName}&emsp;${item.courseId}</option>
+                                    </c:forEach>
                                 </select>
                             </div>
-                        </c:if>
+                        </div>
                         <button type="submit" class="btn btn-primary">查询</button>
                     </form>
                 </c:if>
                 <c:if test="${flag == 'STUDENT'}">
                     <form class="form-inline" method="get" action="${pageContext.request.contextPath }/student/score/list.action">
-                        <c:if test="${flag == 'STUDENT'}">
-                            <div class="form-group">
-                                <label for="courseName">课程名</label>
-                                <input type="text" class="form-control" id="courseName"
-                                       value="${courseName }" name="courseName" />
-                            </div>
-                        </c:if>
-                        <c:if test="${flag == 'TEACHER'}">
-                            <div class="form-group">
-                                <label for="courseId1" style="float:left;padding:7px 15px 0 27px;">选择课程</label>
-                                <div class="col-sm-10">
-                                    <select	class="form-control" id="courseId1" name="courseId">
-                                        <option value="">--请选择--</option>
-                                        <c:forEach items="${courseList}" var="item">
-                                            <option value="${item.courseId}"<c:if test="${item.courseId == courseId}"> selected</c:if>>${item.courseName}&emsp;${item.courseId}</option>
-                                        </c:forEach>
-                                    </select>
-                                </div>
-                            </div>
-                        </c:if>
-                        <c:if test="${flag != 'TEACHER'}">
-                            <div class="form-group">
-                                <label for="property1">课程类别</label>
-                                <select	class="form-control" id="property1" name="property">
-                                    <option value="">--请选择--</option>
-                                    <option value="1">必修课</option>
-                                    <option value="2">选修课</option>
-                                </select>
-                            </div>
-                        </c:if>
+                        <div class="form-group">
+                            <label for="courseName">课程名</label>
+                            <input type="text" class="form-control" id="courseName"
+                                   value="${courseName }" name="courseName" />
+                        </div>
+                        <div class="form-group">
+                            <label for="property1">课程类别</label>
+                            <select	class="form-control" id="property1" name="property">
+                                <option value="">--请选择--</option>
+                                <option value="1">必修课</option>
+                                <option value="2">选修课</option>
+                            </select>
+                        </div>
                         <button type="submit" class="btn btn-primary">查询</button>
                     </form>
                 </c:if>
@@ -372,7 +336,7 @@
                                 <th>课程性质</th>
                                 <th>学分</th>
                             </c:if>
-                            <c:if test="${flag == 'TEACHER'}">
+                            <c:if test="${flag != 'STUDENT'}">
                                 <th>学生学号</th>
                                 <th>学生姓名</th>
                             </c:if>
@@ -393,7 +357,7 @@
                                     <td>${row.property}</td>
                                     <td>${row.credit}</td>
                                 </c:if>
-                                <c:if test="${flag == 'TEACHER'}">
+                                <c:if test="${flag != 'STUDENT'}">
                                     <td>${row.studentId}</td>
                                     <td>${row.studentName}</td>
                                 </c:if>
@@ -410,7 +374,7 @@
                             <itheima:page url="${pageContext.request.contextPath }/student/score/list.action" />
                         </div>
                     </c:if>
-                    <c:if test="${flag == 'TEACHER'}">
+                    <c:if test="${flag != 'STUDENT'}">
                         <div class="col-md-12 text-right">
                             <itheima:page url="${pageContext.request.contextPath }/teacher/score/list.action" />
                         </div>
