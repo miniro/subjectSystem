@@ -312,7 +312,8 @@
                             </select>
                         </div>
                     </c:if>
-                    <button type="submit" class="btn btn-primary">查询</button>
+                    <button type="submit" class="btn btn-primary" name="export" value="0">查询</button>
+                    <button type="submit" class="btn btn-primary" name="export" value="1" onclick="exportcourse()">导出</button>
                 </form>
             </div>
         </div>
@@ -344,8 +345,7 @@
                         <c:forEach items="${page.rows}" var="row">
                             <tr>
                                 <td>
-                                        ${row.courseId}
-<%--                                    <a href="#" data-toggle="modal" data-target="#lookCourseDialog" onclick= "lookCourse('${row.courseId}')">${row.courseId}</a>--%>
+                                    <a href="#" data-toggle="modal" data-target="#lookCourseDialog" onclick= "lookCourse('${row.courseId}')">${row.courseId}</a>
                                 </td>
                                 <td>${row.courseName}</td>
                                 <td>${row.credit}</td>
@@ -385,7 +385,6 @@
             <!-- /.col-lg-12 -->
         </div>
     </div>
-    <!-- footer -->
     <div class="wave-box">
 
         <div class="marquee-box marquee-up" id="marquee-box">
@@ -824,6 +823,10 @@
         $("#startingTime").val("");
         $("#endingTime").val("");
     }
+
+    function exportcourse() {
+        alert("课程导出成功！");
+    }
     // 创建课程
     function createcourse() {
         $.post("<%=basePath%>course/create.action",
@@ -889,12 +892,7 @@
                 $("#editcourseName").val(data.courseName)
                 $("#editteacherId").val(data.teacherId)
                 $("#editcredit").val(data.credit)
-                // $("#editproperty").val(data.property);
-                if(data.property == 1){
-                    $("#editproperty").val("必修课");
-                }else{
-                    $("#editproperty").val("选修课");
-                }
+                $("#editproperty").val(data.property);
                 $("#editweekTime").val(data.weekTime);
                 $("#editbeginTime").val(data.beginTime);
                 $("#editfinishTime").val(data.finishTime);
