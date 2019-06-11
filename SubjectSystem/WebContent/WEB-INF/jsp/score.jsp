@@ -362,13 +362,17 @@
                             <th>期中成绩</th>
                             <th>期末成绩</th>
                             <th>最终成绩</th>
+                            <c:if test="${flag == 'TEACHER'}">
+                                <th>操作</th>
+                            </c:if>
                         </tr>
                         </thead>
                         <tbody>
                         <c:forEach items="${page.rows}" var="row">
                             <tr>
                                 <td>
-                                    <a href="#"  data-toggle="modal" data-target="#lookInforScoreDialog" onclick= "lookInforScore('${row.courseId}')">${row.courseId}</a>
+                                        ${row.courseId}
+<%--                                    <a href="#"  data-toggle="modal" data-target="#lookInforScoreDialog" onclick= "lookInforScore('${row.courseId}')">${row.courseId}</a>--%>
                                 </td>
                                 <td>${row.courseName}</td>
                                 <c:if test="${flag == 'STUDENT'}">
@@ -383,6 +387,13 @@
                                 <td>${row.midtermScore}</td>
                                 <td>${row.finalScore}</td>
                                 <td>${row.sumScore}</td>
+                                <c:if test="${flag == 'TEACHER'}">
+                                    <td>
+                                        <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
+                                           data-target="#scoreEditDialog" onclick= "editcourse('${row.courseId}')">输入成绩</a>
+                                        <a href="#" class="btn btn-danger btn-xs" onclick= "deletecourse('${row.courseId}')">清空成绩</a>
+                                    </td>
+                                </c:if>
                             </tr>
                         </c:forEach>
                         </tbody>
@@ -523,36 +534,36 @@
     </div>
 </div>
 
-<div class="modal fade" id="scorechooseEditDialog" tabindex="-1" role="dialog"
-     aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title" id="myModalLabel">修改成绩信息</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal" id="edit_score_form">
-                    <div class="form-group">
-                        <label for="courseId" class="col-sm-2 control-label">
-                            成绩编号
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="chooseScoreId" placeholder="成绩编号" name="chooseScoreId" />
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <a href="#" class="btn btn-primary" data-toggle="modal"
-                   data-target="#scoreEditDialog" onclick= "editscore(document.getElementById('chooseScoreId').value)" >选择成绩编号</a>
-            </div>
-        </div>
-    </div>
-</div>
+<%--<div class="modal fade" id="scorechooseEditDialog" tabindex="-1" role="dialog"--%>
+<%--     aria-labelledby="myModalLabel">--%>
+<%--    <div class="modal-dialog" role="document">--%>
+<%--        <div class="modal-content">--%>
+<%--            <div class="modal-header">--%>
+<%--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">--%>
+<%--                    <span aria-hidden="true">&times;</span>--%>
+<%--                </button>--%>
+<%--                <h4 class="modal-title" id="myModalLabel">修改成绩信息</h4>--%>
+<%--            </div>--%>
+<%--            <div class="modal-body">--%>
+<%--                <form class="form-horizontal" id="edit_score_form">--%>
+<%--                    <div class="form-group">--%>
+<%--                        <label for="courseId" class="col-sm-2 control-label">--%>
+<%--                            成绩编号--%>
+<%--                        </label>--%>
+<%--                        <div class="col-sm-10">--%>
+<%--                            <input type="text" class="form-control" id="chooseScoreId" placeholder="成绩编号" name="chooseScoreId" />--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </form>--%>
+<%--            </div>--%>
+<%--            <div class="modal-footer">--%>
+<%--                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>--%>
+<%--                <a href="#" class="btn btn-primary" data-toggle="modal"--%>
+<%--                   data-target="#scoreEditDialog" onclick= "editscore(document.getElementById('chooseScoreId').value)" >选择成绩编号</a>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--</div>--%>
 
 
 

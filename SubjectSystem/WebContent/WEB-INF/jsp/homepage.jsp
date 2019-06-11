@@ -344,7 +344,8 @@
                         <c:forEach items="${page.rows}" var="row">
                             <tr>
                                 <td>
-                                    <a href="#" data-toggle="modal" data-target="#lookCourseDialog" onclick= "lookCourse('${row.courseId}')">${row.courseId}</a>
+                                        ${row.courseId}
+<%--                                    <a href="#" data-toggle="modal" data-target="#lookCourseDialog" onclick= "lookCourse('${row.courseId}')">${row.courseId}</a>--%>
                                 </td>
                                 <td>${row.courseName}</td>
                                 <td>${row.credit}</td>
@@ -384,34 +385,6 @@
             <!-- /.col-lg-12 -->
         </div>
     </div>
-    <!-- 课程列表查询部分  end-->
-<%--    <script type="text/javascript">--%>
-<%--        flag="<%=session.getAttribute("FLAG")%>";--%>
-<%--        if (flag==0){--%>
-<%--            document.getElementById("navbar1").style.display="block";--%>
-<%--            document.getElementById("navbar2").style.display="none";//隐藏--%>
-<%--            document.getElementById("navbar3").style.display="none";//隐藏--%>
-<%--            document.getElementById("page-wrapper1").style.display="block";--%>
-<%--            document.getElementById("page-wrapper2").style.display="none";//隐藏--%>
-<%--            document.getElementById("page-wrapper3").style.display="none";//隐藏--%>
-<%--        }--%>
-<%--        else if(flag==1){--%>
-<%--            document.getElementById("navbar2").style.display="block";--%>
-<%--            document.getElementById("navbar1").style.display="none";//隐藏--%>
-<%--            document.getElementById("navbar3").style.display="none";//隐藏--%>
-<%--            document.getElementById("page-wrapper2").style.display="block";--%>
-<%--            document.getElementById("page-wrapper1").style.display="none";//隐藏--%>
-<%--            document.getElementById("page-wrapper3").style.display="none";//隐藏--%>
-<%--        }--%>
-<%--        else if(flag==-1){--%>
-<%--            document.getElementById("navbar3").style.display="block";--%>
-<%--            document.getElementById("navbar1").style.display="none";//隐藏--%>
-<%--            document.getElementById("navbar2").style.display="none";//隐藏--%>
-<%--            document.getElementById("page-wrapper3").style.display="block";--%>
-<%--            document.getElementById("page-wrapper1").style.display="none";//隐藏--%>
-<%--            document.getElementById("page-wrapper2").style.display="none";//隐藏--%>
-<%--        }--%>
-<%--    </script>--%>
     <!-- footer -->
     <div class="wave-box">
 
@@ -916,7 +889,12 @@
                 $("#editcourseName").val(data.courseName)
                 $("#editteacherId").val(data.teacherId)
                 $("#editcredit").val(data.credit)
-                $("#editproperty").val(data.property);
+                // $("#editproperty").val(data.property);
+                if(data.property == 1){
+                    $("#editproperty").val("必修课");
+                }else{
+                    $("#editproperty").val("选修课");
+                }
                 $("#editweekTime").val(data.weekTime);
                 $("#editbeginTime").val(data.beginTime);
                 $("#editfinishTime").val(data.finishTime);
