@@ -766,6 +766,7 @@
         $("#editfinalScore").val("");
         $("#editsumScore").val("");
     }
+
     // 创建成绩
     function createscore() {
         $.post("<%=basePath%>score/create.action",
@@ -773,12 +774,16 @@
                 if(data =="OK"){
                     alert("成绩创建成功！");
                     window.location.reload();
-                }else{
-                    alert("成绩创建失败！");
+                }else if(data == "Time Error1"){
+                    alert("选课阶段不能打分！");
+                    window.location.reload();
+                }else if(data == "Time Error2"){
+                    alert("课程已结束不能打分！");
                     window.location.reload();
                 }
             });
     }
+
     // 执行修改成绩操作
     function updatescore() {
         $.post("<%=basePath%>score/update.action",
