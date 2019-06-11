@@ -196,7 +196,7 @@ public class CourseController {
             day.add("''");
         for(Course course:list){
             int start=course.getStartingTime();
-            int during=course.getEnddingTime()-course.getStartingTime();
+            int during=course.getEnddingTime()-course.getStartingTime()+1;
             for(int j=0;j<during;j++){
                 day.remove(start-1+j);
                 day.add(start-1+j,"'"+course.getcourseName()+"'");

@@ -390,7 +390,7 @@
                                 <c:if test="${flag == 'TEACHER'}">
                                     <td>
                                         <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
-                                           data-target="#scoreEditDialog" onclick= "editcourse('${row.courseId}')">输入成绩</a>
+                                           data-target="#lookInforScoreDialog" onclick= "editcourse('${row.courseId}')">输入成绩</a>
                                         <a href="#" class="btn btn-danger btn-xs" onclick= "deletecourse('${row.courseId}')">清空成绩</a>
                                     </td>
                                 </c:if>
