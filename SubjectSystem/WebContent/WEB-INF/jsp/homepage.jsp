@@ -363,7 +363,6 @@
                                         </td>
                                     </c:if>
                                 </c:if>
-
                                 <c:if test="${flag == 'ADMIN'}">
                                     <td>
                                         <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
@@ -996,11 +995,11 @@
         if(confirm('确定要退选该门课吗?')){
             $.post("<%=basePath%>score/dropCourse.action",{"courseId":courseId},
                 function(data){
-                    if(data =="OK"){
-                        alert("退选成功！");
+                    if(data =="Not Time"){
+                        alert("现在不是退课时间！");
                         window.location.reload();
                     }else{
-                        alert("现在不是退课时间！");
+                        alert("退选成功！");
                         window.location.reload();
                     }
                 });

@@ -1,6 +1,7 @@
 package team.ftthzj.subjectsystem.controller;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.hssf.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +17,11 @@ import team.ftthzj.subjectsystem.service.TeacherService;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -35,7 +40,6 @@ public class ScoreController {
                        @RequestParam(defaultValue="10")Integer rows,
                        String courseName, String property, Model model, HttpSession sesstion){
         Page<ScoreForUi> scoreForUiPage = scoreService.searchSelectedCourses(page, rows, ((Student)sesstion.getAttribute("STU_SESSION")).getStudentId() ,courseName, property);
-
         model.addAttribute("page", scoreForUiPage);
         model.addAttribute("flag", sesstion.getAttribute("FLAG"));
 
@@ -58,18 +62,6 @@ public class ScoreController {
 
         return "score";
     }
-
-//    @RequestMapping(value = "/admin/score/list.action")
-//    public String list(@RequestParam(defaultValue="1")Integer page,
-//                       @RequestParam(defaultValue="10")Integer rows, String courseId, String teacherId, Model model, HttpSession session){
-//
-//
-//        model.addAttribute("flag", session.getAttribute("FLAG"));
-//        List<Course> courseList = courseService.searchCoursesByTeacherId(((Teacher)session.getAttribute("STU_SESSION")).getTeacherId());
-//        model.addAttribute("courseList",courseList);
-//
-//        return "score";
-//    }
 
     //选课
     @RequestMapping(value = "/score/chooseCourse.action")
@@ -101,14 +93,15 @@ public class ScoreController {
     @RequestMapping(value = "/score/create.action")
     @ResponseBody
     public String creatscore(HttpServletRequest request){
-        int rows = scoreService.addScore(request.getParameter("courseId"),request.getParameter("studentId")
+        int status = scoreService.addScore(request.getParameter("courseId"),request.getParameter("studentId")
                 ,Double.valueOf(request.getParameter("pacificScore")),Double.valueOf(request.getParameter("midScore"))
                 , Double.valueOf(request.getParameter("finalScore")),Double.valueOf(request.getParameter("sumScore")));
-        if(rows > 0){
-            return "OK";
-        }else {
-            return "FAIL";
+        if(status == -1){
+            return "Time Error1";
+        }else if(status == -2){
+            return "Time Error2";
         }
+        return "OK";
     }
 
 
@@ -148,4 +141,5 @@ public class ScoreController {
         List<Score>list=scoreService.getScoreByScoreId(id);
         return list.get(0);
     }
+
 }

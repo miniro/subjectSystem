@@ -83,6 +83,15 @@ public class ScoreServiceImpl implements ScoreService{
 
 	public int addScore(String courseId, String studentId, double pacificScore, double midtermScore, double finalScore,
 			double sumScore) {
+//		if(course.getBeginTime().after(new Date())||course.getFinishTime().before(new Date())){
+//			return -1;
+//		}
+		Course course = courseDao.searchCourseById(courseId);
+		if(course.getFinishTime().after(new Date())){
+			return -1;
+		}else if(course.getEndTime().before(new Date())){
+			return -2;
+		}
 		Score score = new Score();
 		score.setCourseId(courseId);
 		score.setStudentId(studentId);
