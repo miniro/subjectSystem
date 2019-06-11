@@ -328,6 +328,7 @@
                             </select>
                         </div>
                         <button type="submit" class="btn btn-primary">查询</button>
+                        <button type="submit" class="btn btn-primary" name="export" value="1" onclick="exportScore()">导出</button>
                     </form>
                 </c:if>
             </div>
@@ -858,6 +859,9 @@
                     }
                 });
         }
+    }
+    function exportScore() {
+        alert("成绩导出成功！");
     }
 </script>
 

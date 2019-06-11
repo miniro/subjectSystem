@@ -312,8 +312,10 @@
                             </select>
                         </div>
                     </c:if>
-                    <button type="submit" class="btn btn-primary" name="export" value="0">查询</button>
-                    <button type="submit" class="btn btn-primary" name="export" value="1" onclick="exportcourse()">导出</button>
+                        <button type="submit" class="btn btn-primary" name="export" value="0">查询</button>
+                    <c:if test="${flag == 'ADMIN'}">
+                        <button type="submit" class="btn btn-primary" name="export" value="1" onclick="exportcourse()">导出</button>
+                    </c:if>
                 </form>
             </div>
         </div>

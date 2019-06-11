@@ -4,22 +4,17 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import team.ftthzj.subjectsystem.common.utils.CSVUtils;
 import team.ftthzj.subjectsystem.common.utils.Page;
 import team.ftthzj.subjectsystem.po.*;
 import team.ftthzj.subjectsystem.service.CourseService;
 import team.ftthzj.subjectsystem.service.ScoreService;
-import team.ftthzj.subjectsystem.service.TeacherService;
-
-import javax.net.ssl.HttpsURLConnection;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,12 +31,31 @@ public class ScoreController {
      */
     @RequestMapping(value = "/student/score/list.action")
     public String list(@RequestParam(defaultValue="1")Integer page,
-                       @RequestParam(defaultValue="10")Integer rows,
+                       @RequestParam(defaultValue="10")Integer rows,Integer export,
                        String courseName, String property, Model model, HttpSession sesstion){
         Page<ScoreForUi> scoreForUiPage = scoreService.searchSelectedCourses(page, rows, ((Student)sesstion.getAttribute("STU_SESSION")).getStudentId() ,courseName, property);
         model.addAttribute("page", scoreForUiPage);
         model.addAttribute("flag", sesstion.getAttribute("FLAG"));
-
+        if(export==null);
+        else if(export.intValue()==1){
+            List<String> dataList=new ArrayList<>();
+            String tmp="课程编号,课程名称,学生编号,学生姓名,平时分,期中成绩,期末成绩,总分,学分";
+            dataList.add(tmp);
+            for(ScoreForUi score :scoreForUiPage.getRows()){
+                String s="";
+                s=s+score.getCourseId()+",";
+                s=s+score.getCourseName()+",";
+                s=s+score.getStudentId()+",";
+                s=s+score.getStudentName()+",";
+                s=s+score.getPacificScore()+",";
+                s=s+score.getMidtermScore()+",";
+                s=s+score.getFinalScore()+",";
+                s=s+score.getSumScore()+",";
+                s=s+score.getCredit();
+                dataList.add(s);
+            }
+            CSVUtils.exportCsv(new File("/Users/abao/Desktop/大三下/ftthzj/SubjectSystem/output/score+"+System.currentTimeMillis()+".csv"), dataList);
+        }
         return "score";
     }
 
