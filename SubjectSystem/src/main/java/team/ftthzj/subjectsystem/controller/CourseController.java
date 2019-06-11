@@ -208,9 +208,7 @@ public class CourseController {
             Course course=courseService.searchCourseById(score.getCourseId());
             if(course.getPreset()==1)
                 coursesPreset.add(course);
-                System.out.println(course.getcourseName());
             courses.add(course);
-            System.out.println("6766"+course.getcourseName());
         }
         List<List<String>> coursesName=getCoursesName(courses);
         List<List<String>> coursesPresetName=getCoursesName(coursesPreset);

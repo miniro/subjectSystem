@@ -284,7 +284,7 @@
                                value="${errorType }" name="errorType" />
                     </div>
                     <div class="form-group">
-                        <label for="studentId">学生id</label>
+                        <label for="studentId">学生编号</label>
                         <input type="text" class="form-control" id="studentId"
                                value="${studentId }" name="studentId" />
                     </div>
@@ -313,9 +313,7 @@
                             <th>学生号</th>
                             <th>消息内容</th>
                             <th>消息类型</th>
-                            <c:if test="${flag == 'ADMIN'}">
-                                <th>操作</th>
-                            </c:if>
+                            <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -333,6 +331,11 @@
                                        data-target="#messageEditDialog" onclick= "editmessage('${row.id}')">修改</a>
                                     <a href="#" class="btn btn-danger btn-xs" onclick= "deletemessage('${row.id}')">删除</a>
                                 </td>
+                                </c:if>
+                                <c:if test="${flag == 'STUDENT'}">
+                                    <td>
+                                        <a href="#" class="btn btn-danger btn-xs" onclick= "deletemessage('${row.id}')">删除</a>
+                                    </td>
                                 </c:if>
                             </tr>
                         </c:forEach>

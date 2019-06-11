@@ -48,6 +48,15 @@
 			<if test="address!=null">
 				address=#{address},
 			</if>
+			<if test="sex!=null">
+				sex=#{sex},
+			</if>
+			<if test="email!=null">
+				email=#{email},
+			</if>
+			<if test="enrollmentDate!=null">
+				enrollmentDate=#{enrollmentDate},
+			</if>
 		</set>
 		where studentId = #{studentId}
 	</update>

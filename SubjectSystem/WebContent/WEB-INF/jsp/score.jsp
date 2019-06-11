@@ -278,43 +278,39 @@
         <!-- /.row -->
         <div class="panel panel-default">
             <div class="panel-body">
-                <c:if test="${flag != 'STUDENT'}">
-                    <form class="form-inline" method="get" action="${pageContext.request.contextPath }/teacher/score/list.action">
-                        <div class="form-group">
-                            <label for="courseId" style="float:left;padding:7px 15px 0 27px;">选择课程</label>
-                            <div class="col-sm-10">
-                                <select	class="form-control" id="courseId2" name="courseId">
-                                    <option value="">--请选择--</option>
-                                    <c:forEach items="${courseList}" var="item">
-                                        <option value="${item.courseId}"<c:if test="${item.courseId == courseId}"> selected</c:if>>${item.courseName}&emsp;${item.courseId}</option>
-                                    </c:forEach>
-                                </select>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary">查询</button>
-                    </form>
-                </c:if>
-                <c:if test="${flag == 'STUDENT'}">
-                    <form class="form-inline" method="get" action="${pageContext.request.contextPath }/student/score/list.action">
-                        <div class="form-group">
-                            <label for="courseName">课程名</label>
-                            <input type="text" class="form-control" id="courseName"
-                                   value="${courseName }" name="courseName" />
-                        </div>
-                        <div class="form-group">
-                            <label for="property1">课程类别</label>
-                            <select	class="form-control" id="property1" name="property">
-                                <option value="">--请选择--</option>
-                                <option value="1">必修课</option>
-                                <option value="2">选修课</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="btn btn-primary">查询</button>
-                    </form>
-                </c:if>
+                <form class="form-inline" method="get" action="${pageContext.request.contextPath }/student/score/list.action">
+                    <div class="form-group">
+                        <label for="courseName">课程名</label>
+                        <input type="text" class="form-control" id="courseName"
+                               value="${courseName }" name="courseName" />
+                    </div>
+                    <div class="form-group">
+                        <label for="property1">课程类别</label>
+                        <select	class="form-control" id="property1" name="property">
+                            <option value="">--请选择--</option>
+                            <option value="1">必修课</option>
+                            <option value="2">选修课</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">查询</button>
+                    <c:if test="${flag == 'ADMIN'}">
+                        <button type="submit" class="btn btn-primary">导出</button>
+                    </c:if>
+                    <c:if test="${flag == 'TEACHER'}">
+                        <button type="submit" class="btn btn-primary">导出</button>
+                    </c:if>
+                </form>
             </div>
         </div>
         <c:if test="${flag == 'TEACHER'}">
+            <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
+               data-target="#newscoreDialog" onclick="clearscore()">新建</a>
+            <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
+               data-target="#scorechooseEditDialog" onclick="clearscore()">修改</a>
+            <a href="#" class="btn btn-danger btn-xs" data-toggle="modal"
+               data-target="#scoreDeleteDialog" onclick="clearscore()">删除</a>
+        </c:if>
+        <c:if test="${flag == 'ADMIN'}">
             <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
                data-target="#newscoreDialog" onclick="clearscore()">新建</a>
             <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"

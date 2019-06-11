@@ -270,12 +270,12 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">用户信息管理</h1>
+                <h1 class="page-header">个人信息</h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
         <!-- /.row -->
-        <div class="panel panel-default">
+            <c:if test="${flag == 'ADMIN'}">
             <div class="panel-body">
                 <form class="form-inline" method="get"
                       action="${pageContext.request.contextPath }/personalInfor/list.action">
@@ -299,49 +299,57 @@
                     <button type="submit" class="btn btn-primary">查询</button>
                 </form>
             </div>
-        </div>
+            </c:if>
         <c:if
             test="${flag == 'ADMIN'}">
             <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
                data-target="#newpersonalInforchooseDialog" onclick="clearpersonalInfor()">新建</a>
         </c:if>
+        <c:if
+                test="${flag == 'TEACHER'}">
+            <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
+               data-target="#personalInforEditDialog" onclick="editpersonalInfor('${STU_SESSION.teacherId}')">修改信息</a>
+        </c:if>
+        <c:if
+                test="${flag == 'STUDENT'}">
+            <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
+               data-target="#personalInforEditDialog" onclick="editpersonalInfor('${STU_SESSION.studentId}')">修改信息</a>
+        </c:if>
 
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">用户信息列表</div>
+                    <div class="panel-heading">我的信息</div>
                     <!-- /.panel-heading -->
                     <table class="table table-bordered table-striped">
-                        <thead>
-                        <tr>
-                            <th>学号或教工号</th>
-                            <th>姓名</th>
-                            <th>用户类型</th>
-                            <th>电话</th>
-                            <th>邮箱</th>
-                            <c:if
-                                    test="${flag == 'ADMIN'}"><th>操作</th>
-                            </c:if>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <c:forEach items="${page.rows}" var="row">
+                        <c:if test="${flag == 'ADMIN'}">
+                            <thead>
                             <tr>
-                                <c:if test="${userType == '学生'}">
-                                    <td>
-                                        <a href="#"data-toggle="modal" data-target="#lookInforStuDialog" onclick= "lookInforStu('${row.studentId}')">${row.studentId}</a>
-                                    </td>
-                                </c:if>
-                                <c:if test="${userType == '教师'}">
-                                    <td>
-                                        <a href="#"  data-toggle="modal" data-target="#lookInforTeaDialog" onclick= "lookInforTea('${row.teacherId}')">${row.teacherId}</a>
-                                    </td>
-                                </c:if>
-                                <td>${row.name}</td>
-                                <td>${userType}</td>
-                                <td>${row.phone}</td>
-                                <td>${row.email}</td>
-                                <c:if test="${flag == 'ADMIN'}">
+                                <th>学号或教工号</th>
+                                <th>姓名</th>
+                                <th>用户类型</th>
+                                <th>电话</th>
+                                <th>邮箱</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach items="${page.rows}" var="row">
+                                <tr>
+                                    <c:if test="${userType == '学生'}">
+                                        <td>
+                                            <a href="#"data-toggle="modal" data-target="#lookInforStuDialog" onclick= "lookInforStu('${row.studentId}')">${row.studentId}</a>
+                                        </td>
+                                    </c:if>
+                                    <c:if test="${userType == '教师'}">
+                                        <td>
+                                            <a href="#"  data-toggle="modal" data-target="#lookInforTeaDialog" onclick= "lookInforTea('${row.teacherId}')">${row.teacherId}</a>
+                                        </td>
+                                    </c:if>
+                                    <td>${row.name}</td>
+                                    <td>${userType}</td>
+                                    <td>${row.phone}</td>
+                                    <td>${row.email}</td>
                                     <td>
                                         <c:if test="${userType == '学生'}">
                                             <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
@@ -354,10 +362,103 @@
                                             <a href="#" class="btn btn-danger btn-xs" onclick= "deletepersonalInfor('${row.teacherId}')">删除</a>
                                         </c:if>
                                     </td>
-                                </c:if>
+                                </tr>
+                            </c:forEach>
+                        </c:if>
+
+                        <c:if test="${flag == 'STUDENT'}">
+                            <thead>
+                            <tr>
+                                <th>学生编号</th>
+                                <th>姓名</th>
+                                <th>性别</th>
+                                <th>年级</th>
                             </tr>
-                        </c:forEach>
-                        </tbody>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>${STU_SESSION.studentId}</td>
+                                <td>${STU_SESSION.name}</td>
+                                <td>${STU_SESSION.sex}</td>
+                                <td>${STU_SESSION.grade}</td>
+                            </tr>
+                            </tbody>
+                            <thead>
+                            <tr>
+                                <th>毕业学校</th>
+                                <th>专业</th>
+                                <th>qq号</th>
+                                <th>手机号</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>${STU_SESSION.school}</td>
+                                <td>${STU_SESSION.major}</td>
+                                <td>${STU_SESSION.qq}</td>
+                                <td>${STU_SESSION.phone}</td>
+                            </tr>
+                            </tbody>
+                            <thead>
+                            <tr>
+                                <th>邮箱</th>
+                                <th>家庭地址</th>
+                                <th>入学时间</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>${STU_SESSION.email}</td>
+                                <td>${STU_SESSION.address}</td>
+                                <td>${STU_SESSION.enrollmentDate}</td>
+                            </tr>
+                            </tbody>
+                        </c:if>
+
+                        <c:if test="${flag == 'TEACHER'}">
+                                <thead>
+                                <tr>
+                                    <th>教师编号</th>
+                                    <th>姓名</th>
+                                    <th>性别</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>${STU_SESSION.teacherId}</td>
+                                    <td>${STU_SESSION.name}</td>
+                                    <td>${STU_SESSION.sex}</td>
+                                </tr>
+                                </tbody>
+                                <thead>
+                                <tr>
+                                    <th>qq号</th>
+                                    <th>手机号</th>
+                                    <th>邮箱</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>${STU_SESSION.email}</td>
+                                    <td>${STU_SESSION.qq}</td>
+                                    <td>${STU_SESSION.phone}</td>
+                                </tr>
+                                </tbody>
+                                <thead>
+                                <tr>
+
+                                    <th>家庭地址</th>
+                                    <th>职位</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>${STU_SESSION.address}</td>
+                                    <td>${STU_SESSION.position}</td>
+                                </tr>
+                                </tbody>
+                            </c:if>
+
                     </table>
                     <div class="col-md-12 text-right">
                         <itheima:page url="${pageContext.request.contextPath }/personalInfor/list.action" />
@@ -1053,8 +1154,7 @@
                 $("#editEnrollmentDate").val(data.enrollmentDate);
                 $("#editteacherId").val(data.teacherId);
                 $("#editposition").val(data.position);
-                flag=data.teacherId;
-                flag2=data.studentId
+                var flag2=data.studentId
                 if (flag2){
                     document.getElementById("stu1").style.display="block";
                     document.getElementById("stu2").style.display="block";
@@ -1094,25 +1194,7 @@
         }
     }
 
-    function deletecourse(courseId) {
-        if(confirm('确定要删除该课程吗?')) {
 
-            $.ajax({
-                type:"get",
-                url:"<%=basePath%>course/delete.action",
-                data:{"courseId":courseId},
-                success:function(data) {
-                    if(data =="OK"){
-                        alert("课程删除成功！");
-                        window.location.reload();
-                    }else{
-                        alert("课程删除失败！");
-                        window.location.reload();
-                    }
-                }
-            });
-        }
-    }
     // 通过id获取修改的用户信息
     function newpersonalInfor(id) {
         if (id==2){
