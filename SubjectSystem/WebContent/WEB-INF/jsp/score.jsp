@@ -333,14 +333,7 @@
                 </c:if>
             </div>
         </div>
-        <c:if test="${flag == 'ADMIN'}">
-            <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
-               data-target="#newscoreDialog" onclick="clearscore()">新建</a>
-            <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
-               data-target="#scorechooseEditDialog" onclick="clearscore()">修改</a>
-            <a href="#" class="btn btn-danger btn-xs" data-toggle="modal"
-               data-target="#scoreDeleteDialog" onclick="clearscore()">删除</a>
-        </c:if>
+        
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
@@ -363,6 +356,7 @@
                             <th>期中成绩</th>
                             <th>期末成绩</th>
                             <th>最终成绩</th>
+                            <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -384,6 +378,20 @@
                                 <td>${row.midtermScore}</td>
                                 <td>${row.finalScore}</td>
                                 <td>${row.sumScore}</td>
+                                <c:if test="${flag == 'ADMIN'}">
+                                    <td>
+                                        <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
+                                           data-target="#courseEditDialog" onclick= "editscore('${row.id}')">修改</a>
+                                        <a href="#" class="btn btn-danger btn-xs" onclick= "deletescore('${row.id}')">删除</a>
+                                    </td>
+                                </c:if>
+                                <c:if test="${flag == 'TEACHER'}">
+                                    <td>
+                                        <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
+                                           data-target="#courseEditDialog" onclick= "editscore('${row.courseId}')">修改</a>
+                                        <a href="#" class="btn btn-danger btn-xs" onclick= "deletescore('${row.studentId}','${row.courseId}')">删除</a>
+                                    </td>
+                                </c:if>
                             </tr>
                         </c:forEach>
                         </tbody>
@@ -846,20 +854,25 @@
         });
     }
     // 删除成绩
-    function deletescore() {
-        if(confirm('确定要删除该成绩吗?')) {
-            $.post("<%=basePath%>score/delete.action",
-                $("#delete_score_form").serialize(), function(data){
+    function deletescore(studentId,courseId) {
+        if(confirm('确定要删除该课程吗?')) {
+            $.ajax({
+                type:"get",
+                url:"<%=basePath%>score/delete.action",
+                data:{"studentId":studentId,"courseId":courseId},
+                success:function(data) {
                     if(data =="OK"){
-                        alert("成绩删除成功！");
+                        alert("课程删除成功！");
                         window.location.reload();
                     }else{
-                        alert("删除成绩失败！");
+                        alert("课程删除失败！");
                         window.location.reload();
                     }
-                });
+                }
+            });
         }
     }
+
     function exportScore() {
         alert("成绩导出成功！");
     }

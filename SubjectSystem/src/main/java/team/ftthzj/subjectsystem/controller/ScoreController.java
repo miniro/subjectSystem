@@ -131,19 +131,21 @@ public class ScoreController {
     }
 
 
-//    @RequestMapping(value = "/score/delete.action")
-//    @ResponseBody
-//    public String deletescore(HttpServletRequest request) {
-//        Score score=new Score();
-//        score.setCourseId(request.getParameter("courseId"));
-//        score.setStudentId(request.getParameter("studentId"));
-//        int flag=scoreService.deleteScore(score);
-//        if(flag==1){
-//            return "OK";
-//        }else {
-//            return "FAIL";
-//        }
-//    }
+    @RequestMapping(value = "/score/delete.action")
+    @ResponseBody
+    public String deletescore(String studentId,String courseId) {
+        Score score=scoreService.getScoreByStuAndCourse(studentId,courseId).get(0);
+        score.setSumScore(0);
+        score.setFinalScore(0);
+        score.setMidtermScore(0);
+        score.setPacificScore(0);
+        int flag=scoreService.updateScore(score);
+        if(flag==1){
+            return "OK";
+        }else {
+            return "FAIL";
+        }
+    }
 
     /**
      * 通过id获取成绩信息
