@@ -134,6 +134,8 @@ public class ScoreController {
     @RequestMapping(value = "/score/delete.action")
     @ResponseBody
     public String deletescore(String studentId,String courseId) {
+        System.out.println(studentId);
+        System.out.println(courseId);
         Score score=scoreService.getScoreByStuAndCourse(studentId,courseId).get(0);
         score.setSumScore(0);
         score.setFinalScore(0);
@@ -153,7 +155,18 @@ public class ScoreController {
     @RequestMapping(value = "/score/getscoreById.action")
     @ResponseBody
     public Score getScoreById(int id) {
+        System.out.println(id);
         List<Score>list=scoreService.getScoreByScoreId(id);
+        System.out.println(list.get(0).getId());
+        return list.get(0);
+    }
+
+    @RequestMapping(value = "/score/getscoreByStuIdAndCourseId.action")
+    @ResponseBody
+    public Score getScoreByStuIdAndCourseId(String studentId,String courseId) {
+        System.out.println(studentId);
+        List<Score>list=scoreService.getScoreByStuAndCourse(studentId,courseId);
+        System.out.println(list.get(0).getId());
         return list.get(0);
     }
 

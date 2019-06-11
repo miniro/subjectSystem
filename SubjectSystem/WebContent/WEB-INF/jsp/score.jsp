@@ -333,7 +333,14 @@
                 </c:if>
             </div>
         </div>
-        
+        <c:if test="${flag == 'ADMIN'}">
+            <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
+               data-target="#newscoreDialog" onclick="clearcourse()">新建</a>
+        </c:if>
+        <c:if test="${flag == 'TEACHER'}">
+            <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
+               data-target="#newscoreDialog" onclick="clearcourse()">新建</a>
+        </c:if>
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
@@ -349,7 +356,7 @@
                                 <th>学分</th>
                             </c:if>
                             <c:if test="${flag != 'STUDENT'}">
-                                <th>学生学号</th>
+                                <th>学生编号</th>
                                 <th>学生姓名</th>
                             </c:if>
                             <th>平时成绩</th>
@@ -363,7 +370,7 @@
                         <c:forEach items="${page.rows}" var="row">
                             <tr>
                                 <td>
-                                    <a href="#"  data-toggle="modal" data-target="#lookInforScoreDialog" onclick= "lookInforScore('${row.courseId}')">${row.courseId}</a>
+                                    <a href="#"  data-toggle="modal" data-target="#lookInforScoreDialog" onclick= "lookInforScore('${row.studentId}','${row.courseId}')">${row.courseId}</a>
                                 </td>
                                 <td>${row.courseName}</td>
                                 <c:if test="${flag == 'STUDENT'}">
@@ -381,14 +388,14 @@
                                 <c:if test="${flag == 'ADMIN'}">
                                     <td>
                                         <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
-                                           data-target="#courseEditDialog" onclick= "editscore('${row.id}')">修改</a>
-                                        <a href="#" class="btn btn-danger btn-xs" onclick= "deletescore('${row.id}')">删除</a>
+                                           data-target="#courseEditDialog" onclick= "editscore('${row.studentId}','${row.courseId}')">修改</a>
+                                        <a href="#" class="btn btn-danger btn-xs" onclick= "deletescore('${row.studentId}','${row.courseId}')">删除</a>
                                     </td>
                                 </c:if>
                                 <c:if test="${flag == 'TEACHER'}">
                                     <td>
                                         <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
-                                           data-target="#courseEditDialog" onclick= "editscore('${row.courseId}')">修改</a>
+                                           data-target="#courseEditDialog" onclick= "editscore('${row.studentId}','${row.courseId}')">修改</a>
                                         <a href="#" class="btn btn-danger btn-xs" onclick= "deletescore('${row.studentId}','${row.courseId}')">删除</a>
                                     </td>
                                 </c:if>
@@ -820,11 +827,12 @@
             });
     }
 
-    function lookInforScore(id) {
+    function lookInforScore(studentId,courseId) {
+        alert(studentId)
         $.ajax({
             type:"get",
-            url:"<%=basePath%>score/getscoreById.action",
-            data:{"id":id},
+            url:"<%=basePath%>score/getscoreByStuIdAndCourseId.action",
+            data:{"studentId":studentId,"courseId":courseId},
             success:function(data) {
                 $("#morecourseId").val(data.courseId);
                 $("#morestudentId").val(data.studentId);
@@ -837,11 +845,11 @@
         });
     }
     // 通过id获取修改的成绩信息
-    function editscore(id) {
+    function editscore(studentId,courseId) {
         $.ajax({
             type:"get",
-            url:"<%=basePath%>score/getscoreById.action",
-            data:{"id":id},
+            url:"<%=basePath%>score/getscoreByStuIdAndCourseId.action",
+            data:{"studentId":studentId,"courseId":courseId},
             success:function(data) {
                 $("#editcourseId").val(data.courseId);
                 $("#editstudentId").val(data.studentId);
@@ -855,7 +863,7 @@
     }
     // 删除成绩
     function deletescore(studentId,courseId) {
-        if(confirm('确定要删除该课程吗?')) {
+        if(confirm('确定要删除该成绩吗?')) {
             $.ajax({
                 type:"get",
                 url:"<%=basePath%>score/delete.action",
