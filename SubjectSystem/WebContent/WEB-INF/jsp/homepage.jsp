@@ -312,7 +312,8 @@
                             </select>
                         </div>
                     </c:if>
-                    <button type="submit" class="btn btn-primary">查询</button>
+                    <button type="submit" class="btn btn-primary" name="export" value="0">查询</button>
+                    <button type="submit" class="btn btn-primary" name="export" value="1" onclick="exportcourse()">导出</button>
                 </form>
             </div>
         </div>
@@ -384,35 +385,6 @@
             <!-- /.col-lg-12 -->
         </div>
     </div>
-    <!-- 课程列表查询部分  end-->
-<%--    <script type="text/javascript">--%>
-<%--        flag="<%=session.getAttribute("FLAG")%>";--%>
-<%--        if (flag==0){--%>
-<%--            document.getElementById("navbar1").style.display="block";--%>
-<%--            document.getElementById("navbar2").style.display="none";//隐藏--%>
-<%--            document.getElementById("navbar3").style.display="none";//隐藏--%>
-<%--            document.getElementById("page-wrapper1").style.display="block";--%>
-<%--            document.getElementById("page-wrapper2").style.display="none";//隐藏--%>
-<%--            document.getElementById("page-wrapper3").style.display="none";//隐藏--%>
-<%--        }--%>
-<%--        else if(flag==1){--%>
-<%--            document.getElementById("navbar2").style.display="block";--%>
-<%--            document.getElementById("navbar1").style.display="none";//隐藏--%>
-<%--            document.getElementById("navbar3").style.display="none";//隐藏--%>
-<%--            document.getElementById("page-wrapper2").style.display="block";--%>
-<%--            document.getElementById("page-wrapper1").style.display="none";//隐藏--%>
-<%--            document.getElementById("page-wrapper3").style.display="none";//隐藏--%>
-<%--        }--%>
-<%--        else if(flag==-1){--%>
-<%--            document.getElementById("navbar3").style.display="block";--%>
-<%--            document.getElementById("navbar1").style.display="none";//隐藏--%>
-<%--            document.getElementById("navbar2").style.display="none";//隐藏--%>
-<%--            document.getElementById("page-wrapper3").style.display="block";--%>
-<%--            document.getElementById("page-wrapper1").style.display="none";//隐藏--%>
-<%--            document.getElementById("page-wrapper2").style.display="none";//隐藏--%>
-<%--        }--%>
-<%--    </script>--%>
-    <!-- footer -->
     <div class="wave-box">
 
         <div class="marquee-box marquee-up" id="marquee-box">
@@ -850,6 +822,10 @@
         $("#weekTime").val("");
         $("#startingTime").val("");
         $("#endingTime").val("");
+    }
+
+    function exportcourse() {
+        alert("课程导出成功！");
     }
     // 创建课程
     function createcourse() {

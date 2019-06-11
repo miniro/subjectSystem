@@ -5,11 +5,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import team.ftthzj.subjectsystem.common.utils.CSVUtils;
 import team.ftthzj.subjectsystem.common.utils.Page;
 import team.ftthzj.subjectsystem.po.*;
 import team.ftthzj.subjectsystem.service.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.util.*;
 
 /**
@@ -28,63 +30,10 @@ public class CourseController {
     /**
      *  课程列表
      */
-//    @RequestMapping(value = "/course/list.action")
-//    public String list(@RequestParam(defaultValue="1")Integer page,
-//                       @RequestParam(defaultValue="10")Integer rows,String courseId,
-//                       String courseName, String teacherName, String property, String credit,
-//                       Model model) {
-//        Page<CourseForUi> courses = courseService.searchCourses(page, rows,
-//                courseId, courseName, teacherName, property, credit, "1");
-//        model.addAttribute("page", courses);
-//        model.addAttribute("courseId", courseId);
-//        model.addAttribute("courseName", courseName);
-//        model.addAttribute("teacherName", teacherName);
-//        model.addAttribute("property", property);
-//        model.addAttribute("credit", credit);
-//        List<Teacher> teacherList = teacherService.searchAllTeachers();
-//        model.addAttribute("teacherList", teacherList);
-//        List<Double> creditList = new ArrayList<>();
-//        for(double d = 0.5; d<=6.0; d+=0.5){
-//            creditList.add(d);
-//        }
-//        model.addAttribute("creditList", creditList);
-//
-//        return "homepage";
-//    }
-
-    /**
-     *  课程列表
-     */
-//    @RequestMapping(value = "/course/teacher_list.action")
-//    public String teacher_list(@RequestParam(defaultValue="1")Integer page,
-//                       @RequestParam(defaultValue="10")Integer rows,String courseId,
-//                       String courseName, String teacherName, String property, String credit,
-//                       Model model, HttpSession session) {
-//        Page<CourseForUi> courses = courseService.searchCourses(page, rows,
-//                courseId, courseName, teacherName, property, credit, "1", ((Student)session.getAttribute("STU_SESSION")).getStudentId());
-//        model.addAttribute("page", courses);
-//        model.addAttribute("courseId", courseId);
-//        model.addAttribute("courseName", courseName);
-//        model.addAttribute("teacherName", teacherName);
-//        model.addAttribute("property", property);
-//        model.addAttribute("credit", credit);
-//        List<Teacher> teacherList = teacherService.searchAllTeachers();
-//        model.addAttribute("teacherList", teacherList);
-//        List<Double> creditList = new ArrayList<>();
-//        for(double d = 0.5; d<=6.0; d+=0.5){
-//            creditList.add(d);
-//        }
-//        model.addAttribute("creditList", creditList);
-//        return "homepageTeacher";
-//    }
-
-    /**
-     *  课程列表
-     */
     @RequestMapping(value = "/course/list.action")
-    public String student_list(@RequestParam(defaultValue="1")Integer page,
+    public String Courselist(@RequestParam(defaultValue="1")Integer page,
                                @RequestParam(defaultValue="10")Integer rows,String courseId,
-                               String courseName, String teacherName, String property, String credit, String content,
+                               String courseName, String teacherName, String property, String credit, String content,Integer export,
                                Model model, HttpSession session) {
         Page<CourseForUi> courses;
         if(session.getAttribute("FLAG").equals("STUDENT")){
@@ -109,7 +58,23 @@ public class CourseController {
         }
         model.addAttribute("creditList", creditList);
         model.addAttribute("flag", session.getAttribute("FLAG"));
-
+        if(export==null);
+        else if(export.intValue()==1){
+            List<String> dataList=new ArrayList<>();
+            String tmp="课程编号,课程名称,教师姓名,上课时间,学分,课程性质";
+            dataList.add(tmp);
+            for(CourseForUi course :courses.getRows()){
+                String s="";
+                s=s+course.getCourseId()+",";
+                s=s+course.getCourseName()+",";
+                s=s+course.getTeacherName()+",";
+                s=s+course.getTime().replaceAll(",","、")+",";
+                s=s+course.getCredit()+",";
+                s=s+course.getProperty();
+                dataList.add(s);
+            }
+            CSVUtils.exportCsv(new File("/Users/abao/Desktop/大三下/1.csv"), dataList);
+        }
         return "homepage";
     }
 
