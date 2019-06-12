@@ -169,11 +169,21 @@
                     <i class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
-                    <li><a href="#"><i class="fa fa-user fa-fw"></i>
-                        用户：${STU_SESSION.name}
-                    </a>
-                    </li>
-                    <li><a href="${pageContext.request.contextPath }/connectUs.action"><i class="fa fa-gear fa-fw"></i> 联系管理员</a></li>
+                    <c:if test="${flag == 'STUDENT'}">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i>
+                            用户：${STU_SESSION.name}(学生用户)
+                        </a>
+                        </li>
+                    </c:if>
+                    <c:if test="${flag == 'TEACHER'}">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i>
+                            用户：${STU_SESSION.name}(教师用户)
+                        </a>
+                        </li>
+                    </c:if>
+                    <c:if test="${flag == 'STUDENT'}">
+                        <li><a href="${pageContext.request.contextPath }/connectUs.action"><i class="fa fa-gear fa-fw"></i> 联系管理员</a></li>
+                    </c:if>
                     <li class="divider"></li>
                     <li>
                         <a href="${pageContext.request.contextPath }/logout.action">
@@ -251,9 +261,11 @@
                         </c:if>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath }/message/list.action">
-                            <i class="fa fa-magic fa-fw" aria-hidden="true"></i> 消息管理
-                        </a>
+                        <c:if test="${flag != 'TEACHER'}">
+                            <a href="${pageContext.request.contextPath }/message/list.action">
+                                <i class="fa fa-magic fa-fw" aria-hidden="true"></i> 消息管理
+                            </a>
+                        </c:if>
                     </li>
                     <li>
                         <a href="${pageContext.request.contextPath }/fttAndHzj/list.action">
