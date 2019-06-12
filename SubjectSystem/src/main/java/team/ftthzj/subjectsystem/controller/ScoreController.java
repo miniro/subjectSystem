@@ -15,6 +15,8 @@ import team.ftthzj.subjectsystem.service.ScoreService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +39,21 @@ public class ScoreController {
         model.addAttribute("page", scoreForUiPage);
         model.addAttribute("flag", sesstion.getAttribute("FLAG"));
         return "score";
+    }
+
+    @RequestMapping(value = "/score/import.action")
+    @ResponseBody
+    public String importScore(HttpServletRequest request) {
+        String file=request.getParameter("file");
+        String filePath=request.getSession().getServletContext().getRealPath("")+"import2/"+file.split("\\\\")[2];
+        List<String> dataList= CSVUtils.importCsv(new File(filePath));
+        if(dataList!=null && !dataList.isEmpty()){
+            for(String data : dataList){
+                String tmp[] = data.split(",");
+                scoreService.addScore(tmp[0],tmp[1],Double.valueOf(tmp[2]),Double.valueOf(tmp[3]),Double.valueOf(tmp[4]),Double.valueOf(tmp[5]));
+            }
+        }
+        return "OK";
     }
 
     @RequestMapping(value = "/teacher/score/list.action")

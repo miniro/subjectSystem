@@ -917,7 +917,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title">修改用户信息</h4>
+                <h4 class="modal-title">导入用户信息</h4>
             </div>
             <div class="form-group">
                 <input id="fileFolder" type=file webkitdirectory>
@@ -1261,7 +1261,7 @@
     }
 
     function commit(){
-        //判断是否选中文件夹
+        //判断是否选中文件
         var file=$("#fileFolder").val();
         if(file==''){
             alert('请选择要上传的文件');

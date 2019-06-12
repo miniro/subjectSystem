@@ -304,6 +304,9 @@
                         </div>
                         <button type="submit" class="btn btn-primary">查询</button>
                         <button type="submit" class="btn btn-primary" name="export" value="1" onclick="exportScore()">导出</button>
+                        <a href="#" data-toggle="modal"
+                           data-target="#importDialog"><button type="submit" class="btn btn-primary">导入</button>
+                        </a>
                     </form>
                 </c:if>
                 <c:if test="${flag == 'STUDENT'}">
@@ -448,6 +451,28 @@
     </div>
     <!-- footer end -->
 </div>
+
+<div class="modal fade" id="importDialog" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">导入成绩信息</h4>
+            </div>
+            <div class="form-group">
+                <input id="fileFolder" type=file webkitdirectory>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="commit()">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- 创建成绩模态框 -->
 <div class="modal fade" id="newscoreDialog" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel">
@@ -872,6 +897,34 @@
 
     function exportScore() {
         alert("成绩导出成功！");
+    }
+
+    function commit(){
+        //判断是否选中文件
+        var file=$("#fileFolder").val();
+        if(file==''){
+            alert('请选择要上传的文件');
+            return;
+        }
+        else{
+            if(confirm('确定要导入成绩信息吗?')) {
+                $.ajax({
+                    type: "get",
+                    url: "<%=basePath%>score/import.action",
+                    data: {"file": file},
+                    success: function (data) {
+                        if (data == "OK") {
+                            alert("导入成功！");
+                            window.location.reload();
+                        } else {
+                            alert("导入失败！");
+                            window.location.reload();
+                        }
+                    }
+                });
+            }
+            window.location.reload();
+        }
     }
 </script>
 
