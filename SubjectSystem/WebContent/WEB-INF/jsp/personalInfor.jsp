@@ -316,6 +316,8 @@
             test="${flag == 'ADMIN'}">
             <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
                data-target="#newpersonalInforchooseDialog" onclick="clearpersonalInfor()">新建</a>
+            <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
+               data-target="#importDialog">导入</a>
         </c:if>
         <c:if
                 test="${flag == 'TEACHER'}">
@@ -907,6 +909,28 @@
     </div>
 </div>
 
+<div class="modal fade" id="importDialog" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">修改用户信息</h4>
+            </div>
+            <div class="form-group">
+                <input id="fileFolder" type=file webkitdirectory>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="commit()">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <!-- 修改用户信息模态框 -->
 <div class="modal fade" id="personalInforEditDialog" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel">
@@ -1236,6 +1260,34 @@
         }
     }
 
+    function commit(){
+        //判断是否选中文件夹
+        var file=$("#fileFolder").val();
+        if(file==''){
+            alert('请选择要上传的文件');
+            return;
+        }
+        else{
+            if(confirm('确定要导入用户信息吗?')) {
+                $.ajax({
+                    type: "get",
+                    url: "<%=basePath%>personalInfor/import.action",
+                    data: {"file": file},
+                    success: function (data) {
+                        if (data == "OK") {
+                            alert("导入成功！");
+                            window.location.reload();
+                        } else {
+                            alert("导入失败！");
+                            window.location.reload();
+                        }
+                    }
+                });
+            }
+            window.location.reload();
+        }
+    }
+
 
     // 通过id获取修改的用户信息
     function newpersonalInfor(id) {
@@ -1256,7 +1308,10 @@
             document.getElementById("stu44").style.display="none";//隐藏
         }
     }
+
 </script>
+
+
 
 </body>
 </html>
