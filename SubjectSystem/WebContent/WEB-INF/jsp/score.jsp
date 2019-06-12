@@ -281,10 +281,9 @@
                 <c:if test="${flag =='TEACHER'}">
                     <form class="form-inline" method="get" action="${pageContext.request.contextPath }/teacher/score/list.action">
                         <div class="form-group">
-                            <label for="courseId" style="float:left;padding:7px 15px 0 27px;">选择课程</label>
                             <div class="col-sm-10">
                                 <select	class="form-control" id="courseId2" name="courseId">
-                                    <option value="">--请选择--</option>
+                                    <option value="">--请选择课程--</option>
                                     <c:forEach items="${courseList}" var="item">
                                         <option value="${item.courseId}"<c:if test="${item.courseId == courseId}"> selected</c:if>>${item.courseName}&emsp;${item.courseId}</option>
                                     </c:forEach>
@@ -292,6 +291,7 @@
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary">查询</button>
+                        <button type="submit" class="btn btn-primary" name="export" value="1" onclick="exportScore()">导出</button>
                     </form>
                 </c:if>
                 <c:if test="${flag == 'STUDENT'}">
@@ -313,7 +313,7 @@
                     </form>
                 </c:if>
                 <c:if test="${flag == 'ADMIN'}">
-                    <form class="form-inline" method="get" action="${pageContext.request.contextPath }/student/score/list.action">
+                    <form class="form-inline" method="get" action="${pageContext.request.contextPath }/teacher/score/list.action">
                         <div class="form-group">
                             <label for="courseName">课程名</label>
                             <input type="text" class="form-control" id="courseName"
@@ -363,7 +363,9 @@
                             <th>期中成绩</th>
                             <th>期末成绩</th>
                             <th>最终成绩</th>
-                            <th>操作</th>
+                            <c:if test="${flag =='TEACHER'}">
+                                <th>操作</th>
+                            </c:if>
                         </tr>
                         </thead>
                         <tbody>
@@ -385,17 +387,10 @@
                                 <td>${row.midtermScore}</td>
                                 <td>${row.finalScore}</td>
                                 <td>${row.sumScore}</td>
-                                <c:if test="${flag == 'ADMIN'}">
-                                    <td>
-                                        <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
-                                           data-target="#courseEditDialog" onclick= "editscore('${row.studentId}','${row.courseId}')">修改</a>
-                                        <a href="#" class="btn btn-danger btn-xs" onclick= "deletescore('${row.studentId}','${row.courseId}')">删除</a>
-                                    </td>
-                                </c:if>
                                 <c:if test="${flag == 'TEACHER'}">
                                     <td>
                                         <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
-                                           data-target="#courseEditDialog" onclick= "editscore('${row.studentId}','${row.courseId}')">修改</a>
+                                           data-target="#scoremoreDialog" onclick= "editscore('${row.studentId}','${row.courseId}')">修改</a>
                                         <a href="#" class="btn btn-danger btn-xs" onclick= "deletescore('${row.studentId}','${row.courseId}')">删除</a>
                                     </td>
                                 </c:if>
@@ -584,7 +579,7 @@
                 <h4 class="modal-title" id="myModalLabel1">成绩信息详情</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" id="update_score_form">
+                <form class="form-horizontal" id="update_score_form1">
                     <div class="form-group">
                         <label for="courseId" class="col-sm-2 control-label">
                             课程号
@@ -665,6 +660,14 @@
                 <form class="form-horizontal" id="update_score_form">
                     <div class="form-group">
                         <label for="courseId" class="col-sm-2 control-label">
+                            成绩编号
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="editId" placeholder="成绩编号" name="id" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="courseId" class="col-sm-2 control-label">
                             课程号
                         </label>
                         <div class="col-sm-10">
@@ -692,7 +695,7 @@
                             期中成绩
                         </label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="editmidScore" placeholder="期中成绩" name="midScore" />
+                            <input type="text" class="form-control" id="editmidScore" placeholder="期中成绩" name="midtermScore" />
                         </div>
                     </div>
                     <div class="form-group">
@@ -799,6 +802,7 @@
         $("#editmidScore").val("");
         $("#editfinalScore").val("");
         $("#editsumScore").val("");
+        $("#editId").val("");
     }
     // 创建成绩
     function createscore() {
@@ -828,7 +832,6 @@
     }
 
     function lookInforScore(studentId,courseId) {
-        alert(studentId)
         $.ajax({
             type:"get",
             url:"<%=basePath%>score/getscoreByStuIdAndCourseId.action",
@@ -851,6 +854,7 @@
             url:"<%=basePath%>score/getscoreByStuIdAndCourseId.action",
             data:{"studentId":studentId,"courseId":courseId},
             success:function(data) {
+                $("#editId").val(data.id);
                 $("#editcourseId").val(data.courseId);
                 $("#editstudentId").val(data.studentId);
                 $("#editpacificScore").val(data.pacificScore);
