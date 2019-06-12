@@ -296,7 +296,7 @@
                     </div>
                     <div class="form-group">
                         <label for="property">课程类别</label>
-                        <select	class="form-control" id="property1" name="property">
+                        <select	class="form-control" id="property" name="property">
                             <option value="">--请选择--</option>
                             <option value="1">必修课</option>
                             <option value="2">选修课</option>

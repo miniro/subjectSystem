@@ -33,7 +33,7 @@ public class CourseController {
     @RequestMapping(value = "/course/list.action")
     public String Courselist(@RequestParam(defaultValue="1")Integer page,
                                @RequestParam(defaultValue="10")Integer rows,String courseId,
-                               String courseName, String teacherName, String property, String credit, String content,Integer export,
+                               String courseName, String teacherName, String property, String credit, String content, Integer export,
                                Model model, HttpSession session) {
         Page<CourseForUi> courses;
         if(session.getAttribute("FLAG").equals("STUDENT")){
