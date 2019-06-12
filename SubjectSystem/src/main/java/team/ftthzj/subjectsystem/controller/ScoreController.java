@@ -55,7 +55,7 @@ public class ScoreController {
         if(export==null);
         else if(export.intValue()==1){
             List<String> dataList=new ArrayList<>();
-            String tmp="课程编号,课程名称,学生编号,学生姓名,平时分,期中成绩,期末成绩,总分,学分";
+            String tmp="课程编号,课程名称,学生编号,学生姓名,平时分,期中成绩,期末成绩,最终成绩";
             dataList.add(tmp);
             for(ScoreForUi score :scoreForUiPage.getRows()){
                 String s="";
@@ -67,7 +67,6 @@ public class ScoreController {
                 s=s+score.getMidtermScore()+",";
                 s=s+score.getFinalScore()+",";
                 s=s+score.getSumScore()+",";
-                s=s+score.getCredit();
                 dataList.add(s);
             }
             CSVUtils.exportCsv(new File("/Users/abao/Desktop/大三下/ftthzj/SubjectSystem/output/score+"+System.currentTimeMillis()+".csv"), dataList);
