@@ -19,6 +19,9 @@ public interface TeacherService {
 	public List<Teacher> searchAllTeachers();
 
 	//查询教师
+	public List<Teacher> getTeachers(Teacher teacher);
+
+	//查询教师
 	public Page<Teacher> searchTeachers(Integer page, Integer rows,String teacherId, String name);
 	
 	//修改教师信息

@@ -46,6 +46,11 @@ public class TeacherServiceImpl implements TeacherService{
 	}
 
 	@Override
+	public List<Teacher> getTeachers(Teacher teacher) {
+		return teacherDao.searchTeacher(teacher);
+	}
+
+	@Override
 	public Page<Teacher> searchTeachers(Integer page, Integer rows, String teacherId, String name) {
 		Teacher teacher = new Teacher();
 		List<Teacher> teacherList;

@@ -41,6 +41,22 @@ public class PersonalInforController {
     @RequestMapping(value = "/personalInfor/createStu.action")
     @ResponseBody
     public String creatPersonalInforStu(HttpServletRequest request){
+        if(request.getParameter("StudentId").equals("")){
+            return "StudentId Empty";
+        }else if(request.getParameter("Name").equals("")){
+            return "Name Empty";
+        }else if(request.getParameter("Email").equals("")){
+            return "Email Empty";
+        }else if(request.getParameter("Password").equals("")){
+            return "Password Empty";
+        }
+        Student student1 = new Student();
+        student1.setStudentId(request.getParameter("StudentId"));
+        student1.setEmail(request.getParameter("Email"));
+        List<Student> studentList = studentService.getStudents(student1);
+        if(studentList.size()>0){
+            return "Duplicate";
+        }
         Student student = new Student();
         student.setName(request.getParameter("Name"));
         student.setAddress(request.getParameter("Address"));
@@ -65,6 +81,22 @@ public class PersonalInforController {
     @RequestMapping(value = "/personalInfor/createTea.action")
     @ResponseBody
     public String creatPersonalInforTea(HttpServletRequest request){
+        if(request.getParameter("teacherId").equals("")){
+            return "TeacherId Empty";
+        }else if(request.getParameter("Name").equals("")){
+            return "Name Empty";
+        }else if(request.getParameter("Email").equals("")){
+            return "Email Empty";
+        }else if(request.getParameter("Password").equals("")){
+            return "Password Empty";
+        }
+        Teacher teacher1 = new Teacher();
+        teacher1.setTeacherId(request.getParameter("teacherId"));
+        teacher1.setEmail(request.getParameter("Email"));
+        List<Teacher> teacherList = teacherService.getTeachers(teacher1);
+        if(teacherList.size()>0){
+            return "Duplicate";
+        }
         Teacher teacher = new Teacher();
         teacher.setName(request.getParameter("Name"));
         teacher.setAddress(request.getParameter("Address"));

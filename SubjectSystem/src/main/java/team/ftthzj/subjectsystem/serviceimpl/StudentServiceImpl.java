@@ -51,6 +51,11 @@ public class StudentServiceImpl implements StudentService{
 	}
 
 	@Override
+	public List<Student> getStudents(Student student) {
+		return studentDao.searchStudent(student);
+	}
+
+	@Override
 	public Page<Student> searchStudents(Integer page, Integer rows, String studentId, String name) {
 		Student student = new Student();
 		List<Student> studentList;

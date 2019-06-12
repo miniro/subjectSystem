@@ -18,6 +18,9 @@ public interface StudentService {
 	public List<Student> searchAllStudents();
 
 	//查询学生
+	public List<Student> getStudents(Student student);
+
+	//查询学生
 	public Page<Student> searchStudents(Integer page, Integer rows,String studentId, String name);
 	
 	//修改学生信息

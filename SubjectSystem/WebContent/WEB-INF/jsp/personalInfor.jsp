@@ -1073,11 +1073,26 @@
         if(id!=""){
             $.post("<%=basePath%>personalInfor/createTea.action",
                 $("#new_personalInfor_form").serialize(),function(data){
-                    if(data =="OK"){
+                    if(data == "OK"){
                         alert("教师信息创建成功！");
                         window.location.reload();
+                    }else if(data == "TeacherId Empty"){
+                        alert("教师id不得为空！");
+                        window.location.reload();
+                    }else if(data == "Name Empty"){
+                        alert("姓名不得为空！");
+                        window.location.reload();
+                    }else if(data == "Email Empty"){
+                        alert("邮箱不得为空！");
+                        window.location.reload();
+                    }else if(data == "Password Empty"){
+                        alert("密码不得为空！");
+                        window.location.reload();
+                    }else if(data == "Duplicate"){
+                        alert("教师id或者邮箱已注册！");
+                        window.location.reload();
                     }else{
-                        alert("教师信息创建失败！");
+                        alert("创建失败！");
                         window.location.reload();
                     }
                 });
@@ -1085,11 +1100,26 @@
         else{
             $.post("<%=basePath%>personalInfor/createStu.action",
                 $("#new_personalInfor_form").serialize(),function(data){
-                    if(data =="OK"){
+                    if(data == "OK"){
                         alert("学生信息创建成功！");
                         window.location.reload();
+                    }else if(data == "StudentId Empty"){
+                        alert("学号不得为空！");
+                        window.location.reload();
+                    }else if(data == "Name Empty"){
+                        alert("姓名不得为空！");
+                        window.location.reload();
+                    }else if(data == "Email Empty"){
+                        alert("邮箱不得为空！");
+                        window.location.reload();
+                    }else if(data == "Password Empty"){
+                        alert("密码不得为空！");
+                        window.location.reload();
+                    }else if(data == "Duplicate"){
+                        alert("学号或者邮箱已注册！");
+                        window.location.reload();
                     }else{
-                        alert("学生信息创建失败！");
+                        alert("创建失败！");
                         window.location.reload();
                     }
                 });
