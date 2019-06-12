@@ -141,6 +141,12 @@ public class CourseServiceImpl implements CourseService{
 	}
 
 	public int deleteCourse(String courseId) {
+		Score score = new Score();
+		score.setCourseId(courseId);
+		List<Score> list = scoreDao.searchScores(score);
+		if(list.size() > 0){
+			return -1;
+		}
 		courseDao.deleteCourse(courseId);
 		return 1;
 	}

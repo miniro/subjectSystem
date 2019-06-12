@@ -9,8 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import team.ftthzj.subjectsystem.common.utils.Page;
+import team.ftthzj.subjectsystem.po.Course;
+import team.ftthzj.subjectsystem.po.Score;
 import team.ftthzj.subjectsystem.po.Student;
 import team.ftthzj.subjectsystem.po.Teacher;
+import team.ftthzj.subjectsystem.service.CourseService;
+import team.ftthzj.subjectsystem.service.ScoreService;
 import team.ftthzj.subjectsystem.service.StudentService;
 import team.ftthzj.subjectsystem.service.TeacherService;
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +33,10 @@ public class PersonalInforController {
     private StudentService studentService;
     @Autowired
     private TeacherService teacherService;
+    @Autowired
+    private CourseService courseService;
+    @Autowired
+    private ScoreService scoreService;
 
     @RequestMapping(value = "/personalInfor/createStu.action")
     @ResponseBody
@@ -119,13 +127,27 @@ public class PersonalInforController {
     @RequestMapping(value = "/personalInfor/delete.action")
     @ResponseBody
     public String deletePersonalInforStu(HttpServletRequest request) {
-        int flag=studentService.deleteStudentById(request.getParameter("UserId"));
-        int flag2=teacherService.deleteTeacherById(request.getParameter("UserId"));
-        if(flag==1||flag2==1){
-            return "OK";
-        }else {
-            return "FAIL";
+//        int flag=studentService.deleteStudentById(request.getParameter("UserId"));
+//        int flag2=teacherService.deleteTeacherById(request.getParameter("UserId"));
+//        if(flag==1||flag2==1){
+//            return "OK";
+//        }else {
+//            return "FAIL";
+//        }
+        if(request.getParameter("UserId").charAt(0)=='S'){
+            List<Score> scoreList = scoreService.searchScoreByStudentId(request.getParameter("UserId"));
+            if(scoreList.size() > 0){
+                return "FAIL";
+            }
+            studentService.deleteStudentById(request.getParameter("UserId"));
+        }else{
+            List<Course> courseList = courseService.searchCoursesByTeacherId(request.getParameter("UserId"));
+            if(courseList.size() > 0){
+                return "FAIL";
+            }
+            teacherService.deleteTeacherById(request.getParameter("UserId"));
         }
+        return "OK";
     }
 
     /**

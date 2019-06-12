@@ -952,7 +952,7 @@
                         alert("课程删除成功！");
                         window.location.reload();
                     }else{
-                        alert("课程删除失败！");
+                        alert("该课程已有人选，不能删除！");
                         window.location.reload();
                     }
                 }

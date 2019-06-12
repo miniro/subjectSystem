@@ -1198,7 +1198,7 @@
                         alert("用户信息删除成功！");
                         window.location.reload();
                     }else{
-                        alert("用户信息删除失败！");
+                        alert("该用户已选课或已指定课程，无法删除！");
                         window.location.reload();
                     }
                 }
