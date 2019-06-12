@@ -35,7 +35,7 @@ public class MessageController {
             message.setErrorType(2);
         message.setProperty(0);
         messageService.addMessage(message);
-        return "homepage";
+        return "redirect:list.action";
     }
 
     @RequestMapping(value = "/connectUs.action")

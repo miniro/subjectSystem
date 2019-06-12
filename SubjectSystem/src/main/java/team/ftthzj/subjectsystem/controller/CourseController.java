@@ -33,7 +33,7 @@ public class CourseController {
     @RequestMapping(value = "/course/list.action")
     public String Courselist(@RequestParam(defaultValue="1")Integer page,
                                @RequestParam(defaultValue="10")Integer rows,String courseId,
-                               String courseName, String teacherName, String property, String credit, String content,Integer export,
+                               String courseName, String teacherName, String property, String credit, String content, Integer export,
                                Model model, HttpSession session) {
         Page<CourseForUi> courses;
         if(session.getAttribute("FLAG").equals("STUDENT")){
@@ -73,7 +73,7 @@ public class CourseController {
                 s=s+course.getProperty();
                 dataList.add(s);
             }
-            CSVUtils.exportCsv(new File("/Users/abao/Desktop/大三下/ftthzj/SubjectSystem/output/course+"+System.currentTimeMillis()+".csv"), dataList);
+            CSVUtils.exportCsv(new File("F:/大三下/javaee/final/SubjectSystem/output/course/"+System.currentTimeMillis()+".csv"), dataList);
         }
         return "homepage";
     }
@@ -196,7 +196,7 @@ public class CourseController {
             day.add("''");
         for(Course course:list){
             int start=course.getStartingTime();
-            int during=course.getEnddingTime()-course.getStartingTime();
+            int during=course.getEnddingTime()-course.getStartingTime()+1;
             for(int j=0;j<during;j++){
                 day.remove(start-1+j);
                 day.add(start-1+j,"'"+course.getcourseName()+"'");

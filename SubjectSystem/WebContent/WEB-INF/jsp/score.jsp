@@ -169,11 +169,21 @@
                     <i class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
-                    <li><a href="#"><i class="fa fa-user fa-fw"></i>
-                        用户：${STU_SESSION.name}
-                    </a>
-                    </li>
-                    <li><a href="${pageContext.request.contextPath }/connectUs.action"><i class="fa fa-gear fa-fw"></i> 联系管理员</a></li>
+                    <c:if test="${flag == 'STUDENT'}">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i>
+                            用户：${STU_SESSION.name}(学生用户)
+                        </a>
+                        </li>
+                    </c:if>
+                    <c:if test="${flag == 'TEACHER'}">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i>
+                            用户：${STU_SESSION.name}(教师用户)
+                        </a>
+                        </li>
+                    </c:if>
+                    <c:if test="${flag == 'STUDENT'}">
+                        <li><a href="${pageContext.request.contextPath }/connectUs.action"><i class="fa fa-gear fa-fw"></i> 联系管理员</a></li>
+                    </c:if>
                     <li class="divider"></li>
                     <li>
                         <a href="${pageContext.request.contextPath }/logout.action">
@@ -251,9 +261,11 @@
                         </c:if>
                     </li>
                     <li>
-                        <a href="${pageContext.request.contextPath }/message/list.action">
-                            <i class="fa fa-magic fa-fw" aria-hidden="true"></i> 消息管理
-                        </a>
+                        <c:if test="${flag != 'TEACHER'}">
+                            <a href="${pageContext.request.contextPath }/message/list.action">
+                                <i class="fa fa-magic fa-fw" aria-hidden="true"></i> 消息管理
+                            </a>
+                        </c:if>
                     </li>
                     <li>
                         <a href="${pageContext.request.contextPath }/fttAndHzj/list.action">
@@ -278,7 +290,7 @@
         <!-- /.row -->
         <div class="panel panel-default">
             <div class="panel-body">
-                <c:if test="${flag =='TEACHER'}">
+                <c:if test="${flag != 'STUDENT'}">
                     <form class="form-inline" method="get" action="${pageContext.request.contextPath }/teacher/score/list.action">
                         <div class="form-group">
                             <div class="col-sm-10">
@@ -312,35 +324,8 @@
                         <button type="submit" class="btn btn-primary">查询</button>
                     </form>
                 </c:if>
-                <c:if test="${flag == 'ADMIN'}">
-                    <form class="form-inline" method="get" action="${pageContext.request.contextPath }/teacher/score/list.action">
-                        <div class="form-group">
-                            <label for="courseName">课程名</label>
-                            <input type="text" class="form-control" id="courseName"
-                                   value="${courseName }" name="courseName" />
-                        </div>
-                        <div class="form-group">
-                            <label for="property1">课程类别</label>
-                            <select	class="form-control" id="property1" name="property">
-                                <option value="">--请选择--</option>
-                                <option value="1">必修课</option>
-                                <option value="2">选修课</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="btn btn-primary">查询</button>
-                        <button type="submit" class="btn btn-primary" name="export" value="1" onclick="exportScore()">导出</button>
-                    </form>
-                </c:if>
             </div>
         </div>
-        <c:if test="${flag == 'ADMIN'}">
-            <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
-               data-target="#newscoreDialog" onclick="clearcourse()">新建</a>
-        </c:if>
-        <c:if test="${flag == 'TEACHER'}">
-            <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
-               data-target="#newscoreDialog" onclick="clearcourse()">新建</a>
-        </c:if>
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
@@ -391,7 +376,7 @@
                                     <td>
                                         <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
                                            data-target="#scoremoreDialog" onclick= "editscore('${row.studentId}','${row.courseId}')">修改</a>
-                                        <a href="#" class="btn btn-danger btn-xs" onclick= "deletescore('${row.studentId}','${row.courseId}')">删除</a>
+                                        <a href="#" class="btn btn-danger btn-xs" onclick= "deletescore('${row.studentId}','${row.courseId}')">清空</a>
                                     </td>
                                 </c:if>
                             </tr>

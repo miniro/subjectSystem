@@ -45,6 +45,7 @@ public class ScoreController {
         Page<ScoreForUi> scoreForUiPage = scoreService.searchMyCourses(page, rows, courseId);
         model.addAttribute("page", scoreForUiPage);
         model.addAttribute("flag", session.getAttribute("FLAG"));
+        model.addAttribute("courseId", courseId);
         List<Course> courseList;
         if(session.getAttribute("FLAG").equals("TEACHER")){
             courseList = courseService.searchCoursesByTeacherId(((Teacher)session.getAttribute("STU_SESSION")).getTeacherId());
@@ -69,7 +70,7 @@ public class ScoreController {
                 s=s+score.getSumScore()+",";
                 dataList.add(s);
             }
-            CSVUtils.exportCsv(new File("/Users/abao/Desktop/大三下/ftthzj/SubjectSystem/output/score+"+System.currentTimeMillis()+".csv"), dataList);
+            CSVUtils.exportCsv(new File("F:/大三下/javaee/final/SubjectSystem/output/score/"+System.currentTimeMillis()+".csv"), dataList);
         }
         return "score";
     }
