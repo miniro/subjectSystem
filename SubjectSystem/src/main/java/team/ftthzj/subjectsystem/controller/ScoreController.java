@@ -31,15 +31,31 @@ public class ScoreController {
      */
     @RequestMapping(value = "/student/score/list.action")
     public String list(@RequestParam(defaultValue="1")Integer page,
-                       @RequestParam(defaultValue="10")Integer rows,Integer export,
+                       @RequestParam(defaultValue="10")Integer rows,
                        String courseName, String property, Model model, HttpSession sesstion){
         Page<ScoreForUi> scoreForUiPage = scoreService.searchSelectedCourses(page, rows, ((Student)sesstion.getAttribute("STU_SESSION")).getStudentId() ,courseName, property);
         model.addAttribute("page", scoreForUiPage);
         model.addAttribute("flag", sesstion.getAttribute("FLAG"));
+        return "score";
+    }
+
+    @RequestMapping(value = "/teacher/score/list.action")
+    public String list(@RequestParam(defaultValue="1")Integer page,
+                       @RequestParam(defaultValue="10")Integer rows,Integer export, String courseId, Model model, HttpSession session){
+        Page<ScoreForUi> scoreForUiPage = scoreService.searchMyCourses(page, rows, courseId);
+        model.addAttribute("page", scoreForUiPage);
+        model.addAttribute("flag", session.getAttribute("FLAG"));
+        List<Course> courseList;
+        if(session.getAttribute("FLAG").equals("TEACHER")){
+            courseList = courseService.searchCoursesByTeacherId(((Teacher)session.getAttribute("STU_SESSION")).getTeacherId());
+        }else{
+            courseList = courseService.loadAllCourses();
+        }
+        model.addAttribute("courseList",courseList);
         if(export==null);
         else if(export.intValue()==1){
             List<String> dataList=new ArrayList<>();
-            String tmp="课程编号,课程名称,学生编号,学生姓名,平时分,期中成绩,期末成绩,总分,学分";
+            String tmp="课程编号,课程名称,学生编号,学生姓名,平时分,期中成绩,期末成绩,最终成绩";
             dataList.add(tmp);
             for(ScoreForUi score :scoreForUiPage.getRows()){
                 String s="";
@@ -51,28 +67,10 @@ public class ScoreController {
                 s=s+score.getMidtermScore()+",";
                 s=s+score.getFinalScore()+",";
                 s=s+score.getSumScore()+",";
-                s=s+score.getCredit();
                 dataList.add(s);
             }
             CSVUtils.exportCsv(new File("/Users/abao/Desktop/大三下/ftthzj/SubjectSystem/output/score+"+System.currentTimeMillis()+".csv"), dataList);
         }
-        return "score";
-    }
-
-    @RequestMapping(value = "/teacher/score/list.action")
-    public String list(@RequestParam(defaultValue="1")Integer page,
-                       @RequestParam(defaultValue="10")Integer rows, String courseId, Model model, HttpSession session){
-        Page<ScoreForUi> scoreForUiPage = scoreService.searchMyCourses(page, rows, courseId);
-        model.addAttribute("page", scoreForUiPage);
-        model.addAttribute("flag", session.getAttribute("FLAG"));
-        List<Course> courseList;
-        if(session.getAttribute("FLAG").equals("TEACHER")){
-            courseList = courseService.searchCoursesByTeacherId(((Teacher)session.getAttribute("STU_SESSION")).getTeacherId());
-        }else{
-            courseList = courseService.loadAllCourses();
-        }
-        model.addAttribute("courseList",courseList);
-
         return "score";
     }
 
@@ -134,8 +132,6 @@ public class ScoreController {
     @RequestMapping(value = "/score/delete.action")
     @ResponseBody
     public String deletescore(String studentId,String courseId) {
-        System.out.println(studentId);
-        System.out.println(courseId);
         Score score=scoreService.getScoreByStuAndCourse(studentId,courseId).get(0);
         score.setSumScore(0);
         score.setFinalScore(0);
@@ -155,18 +151,14 @@ public class ScoreController {
     @RequestMapping(value = "/score/getscoreById.action")
     @ResponseBody
     public Score getScoreById(int id) {
-        System.out.println(id);
         List<Score>list=scoreService.getScoreByScoreId(id);
-        System.out.println(list.get(0).getId());
         return list.get(0);
     }
 
     @RequestMapping(value = "/score/getscoreByStuIdAndCourseId.action")
     @ResponseBody
     public Score getScoreByStuIdAndCourseId(String studentId,String courseId) {
-        System.out.println(studentId);
         List<Score>list=scoreService.getScoreByStuAndCourse(studentId,courseId);
-        System.out.println(list.get(0).getId());
         return list.get(0);
     }
 
