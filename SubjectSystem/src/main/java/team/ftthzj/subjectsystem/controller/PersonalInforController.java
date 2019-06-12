@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import team.ftthzj.subjectsystem.common.utils.CSVUtils;
 import team.ftthzj.subjectsystem.common.utils.Page;
 import team.ftthzj.subjectsystem.po.Student;
 import team.ftthzj.subjectsystem.po.Teacher;
@@ -15,6 +16,9 @@ import team.ftthzj.subjectsystem.service.StudentService;
 import team.ftthzj.subjectsystem.service.TeacherService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -53,7 +57,34 @@ public class PersonalInforController {
             return "FAIL";
         }
     }
-
+    @RequestMapping(value = "/personalInfor/import.action")
+    @ResponseBody
+    public String importPersonalInfor(HttpServletRequest request) throws ParseException {
+        String file=request.getParameter("file");
+        String filePath=request.getSession().getServletContext().getRealPath("")+"import/"+file.split("\\\\")[2];
+        List<String> dataList= CSVUtils.importCsv(new File(filePath));
+        if(dataList!=null && !dataList.isEmpty()){
+            for(String data : dataList){
+                Student student=new Student();
+                String tmp[] = data.split(",");
+                student.setStudentId(tmp[0]);
+                student.setName(tmp[1]);
+                student.setSex(tmp[2]);
+                student.setGrade(tmp[3]);
+                student.setSchool(tmp[4]);
+                student.setMajor(tmp[5]);
+                student.setQq(tmp[6]);
+                student.setPhone(tmp[7]);
+                student.setEmail(tmp[8]);
+                student.setPassword(tmp[9]);
+                student.setAddress(tmp[10]);
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+                student.setEnrollmentDate(sdf.parse(tmp[11]));
+                studentService.addStudent(student);
+            }
+        }
+        return "OK";
+    }
     @RequestMapping(value = "/personalInfor/createTea.action")
     @ResponseBody
     public String creatPersonalInforTea(HttpServletRequest request){
