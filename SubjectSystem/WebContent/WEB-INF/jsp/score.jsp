@@ -391,7 +391,7 @@
                                     <td>
                                         <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
                                            data-target="#scoremoreDialog" onclick= "editscore('${row.studentId}','${row.courseId}')">修改</a>
-                                        <a href="#" class="btn btn-danger btn-xs" onclick= "deletescore('${row.studentId}','${row.courseId}')">删除</a>
+                                        <a href="#" class="btn btn-danger btn-xs" onclick= "deletescore('${row.studentId}','${row.courseId}')">清空</a>
                                     </td>
                                 </c:if>
                             </tr>
