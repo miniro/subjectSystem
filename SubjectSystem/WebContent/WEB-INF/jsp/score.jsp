@@ -328,17 +328,18 @@
                             </select>
                         </div>
                         <button type="submit" class="btn btn-primary">查询</button>
+                        <button type="submit" class="btn btn-primary" name="export" value="1" onclick="exportScore()">导出</button>
                     </form>
                 </c:if>
             </div>
         </div>
         <c:if test="${flag == 'ADMIN'}">
             <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
-               data-target="#newscoreDialog" onclick="clearscore()">新建</a>
+               data-target="#newscoreDialog" onclick="clearcourse()">新建</a>
+        </c:if>
+        <c:if test="${flag == 'TEACHER'}">
             <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
-               data-target="#scorechooseEditDialog" onclick="clearscore()">修改</a>
-            <a href="#" class="btn btn-danger btn-xs" data-toggle="modal"
-               data-target="#scoreDeleteDialog" onclick="clearscore()">删除</a>
+               data-target="#newscoreDialog" onclick="clearcourse()">新建</a>
         </c:if>
         <div class="row">
             <div class="col-lg-12">
@@ -355,24 +356,21 @@
                                 <th>学分</th>
                             </c:if>
                             <c:if test="${flag != 'STUDENT'}">
-                                <th>学生学号</th>
+                                <th>学生编号</th>
                                 <th>学生姓名</th>
                             </c:if>
                             <th>平时成绩</th>
                             <th>期中成绩</th>
                             <th>期末成绩</th>
                             <th>最终成绩</th>
-                            <c:if test="${flag == 'TEACHER'}">
-                                <th>操作</th>
-                            </c:if>
+                            <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
                         <c:forEach items="${page.rows}" var="row">
                             <tr>
                                 <td>
-                                        ${row.courseId}
-<%--                                    <a href="#"  data-toggle="modal" data-target="#lookInforScoreDialog" onclick= "lookInforScore('${row.courseId}')">${row.courseId}</a>--%>
+                                    <a href="#"  data-toggle="modal" data-target="#lookInforScoreDialog" onclick= "lookInforScore('${row.studentId}','${row.courseId}')">${row.courseId}</a>
                                 </td>
                                 <td>${row.courseName}</td>
                                 <c:if test="${flag == 'STUDENT'}">
@@ -387,11 +385,18 @@
                                 <td>${row.midtermScore}</td>
                                 <td>${row.finalScore}</td>
                                 <td>${row.sumScore}</td>
+                                <c:if test="${flag == 'ADMIN'}">
+                                    <td>
+                                        <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
+                                           data-target="#courseEditDialog" onclick= "editscore('${row.studentId}','${row.courseId}')">修改</a>
+                                        <a href="#" class="btn btn-danger btn-xs" onclick= "deletescore('${row.studentId}','${row.courseId}')">删除</a>
+                                    </td>
+                                </c:if>
                                 <c:if test="${flag == 'TEACHER'}">
                                     <td>
                                         <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
-                                           data-target="#lookInforScoreDialog" onclick= "editcourse('${row.courseId}')">输入成绩</a>
-                                        <a href="#" class="btn btn-danger btn-xs" onclick= "deletecourse('${row.courseId}')">清空成绩</a>
+                                           data-target="#courseEditDialog" onclick= "editscore('${row.studentId}','${row.courseId}')">修改</a>
+                                        <a href="#" class="btn btn-danger btn-xs" onclick= "deletescore('${row.studentId}','${row.courseId}')">删除</a>
                                     </td>
                                 </c:if>
                             </tr>
@@ -534,36 +539,36 @@
     </div>
 </div>
 
-<%--<div class="modal fade" id="scorechooseEditDialog" tabindex="-1" role="dialog"--%>
-<%--     aria-labelledby="myModalLabel">--%>
-<%--    <div class="modal-dialog" role="document">--%>
-<%--        <div class="modal-content">--%>
-<%--            <div class="modal-header">--%>
-<%--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">--%>
-<%--                    <span aria-hidden="true">&times;</span>--%>
-<%--                </button>--%>
-<%--                <h4 class="modal-title" id="myModalLabel">修改成绩信息</h4>--%>
-<%--            </div>--%>
-<%--            <div class="modal-body">--%>
-<%--                <form class="form-horizontal" id="edit_score_form">--%>
-<%--                    <div class="form-group">--%>
-<%--                        <label for="courseId" class="col-sm-2 control-label">--%>
-<%--                            成绩编号--%>
-<%--                        </label>--%>
-<%--                        <div class="col-sm-10">--%>
-<%--                            <input type="text" class="form-control" id="chooseScoreId" placeholder="成绩编号" name="chooseScoreId" />--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </form>--%>
-<%--            </div>--%>
-<%--            <div class="modal-footer">--%>
-<%--                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>--%>
-<%--                <a href="#" class="btn btn-primary" data-toggle="modal"--%>
-<%--                   data-target="#scoreEditDialog" onclick= "editscore(document.getElementById('chooseScoreId').value)" >选择成绩编号</a>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--</div>--%>
+<div class="modal fade" id="scorechooseEditDialog" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">修改成绩信息</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="edit_score_form">
+                    <div class="form-group">
+                        <label for="courseId" class="col-sm-2 control-label">
+                            成绩编号
+                        </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="chooseScoreId" placeholder="成绩编号" name="chooseScoreId" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <a href="#" class="btn btn-primary" data-toggle="modal"
+                   data-target="#scoreEditDialog" onclick= "editscore(document.getElementById('chooseScoreId').value)" >选择成绩编号</a>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
@@ -822,11 +827,12 @@
             });
     }
 
-    function lookInforScore(id) {
+    function lookInforScore(studentId,courseId) {
+        alert(studentId)
         $.ajax({
             type:"get",
-            url:"<%=basePath%>score/getscoreById.action",
-            data:{"id":id},
+            url:"<%=basePath%>score/getscoreByStuIdAndCourseId.action",
+            data:{"studentId":studentId,"courseId":courseId},
             success:function(data) {
                 $("#morecourseId").val(data.courseId);
                 $("#morestudentId").val(data.studentId);
@@ -839,11 +845,11 @@
         });
     }
     // 通过id获取修改的成绩信息
-    function editscore(id) {
+    function editscore(studentId,courseId) {
         $.ajax({
             type:"get",
-            url:"<%=basePath%>score/getscoreById.action",
-            data:{"id":id},
+            url:"<%=basePath%>score/getscoreByStuIdAndCourseId.action",
+            data:{"studentId":studentId,"courseId":courseId},
             success:function(data) {
                 $("#editcourseId").val(data.courseId);
                 $("#editstudentId").val(data.studentId);
@@ -856,19 +862,27 @@
         });
     }
     // 删除成绩
-    function deletescore() {
+    function deletescore(studentId,courseId) {
         if(confirm('确定要删除该成绩吗?')) {
-            $.post("<%=basePath%>score/delete.action",
-                $("#delete_score_form").serialize(), function(data){
+            $.ajax({
+                type:"get",
+                url:"<%=basePath%>score/delete.action",
+                data:{"studentId":studentId,"courseId":courseId},
+                success:function(data) {
                     if(data =="OK"){
-                        alert("成绩删除成功！");
+                        alert("课程删除成功！");
                         window.location.reload();
                     }else{
-                        alert("删除成绩失败！");
+                        alert("课程删除失败！");
                         window.location.reload();
                     }
-                });
+                }
+            });
         }
+    }
+
+    function exportScore() {
+        alert("成绩导出成功！");
     }
 </script>
 

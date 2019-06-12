@@ -73,7 +73,7 @@ public class CourseController {
                 s=s+course.getProperty();
                 dataList.add(s);
             }
-            CSVUtils.exportCsv(new File("/Users/abao/Desktop/大三下/1.csv"), dataList);
+            CSVUtils.exportCsv(new File("/Users/abao/Desktop/大三下/ftthzj/SubjectSystem/output/course+"+System.currentTimeMillis()+".csv"), dataList);
         }
         return "homepage";
     }
