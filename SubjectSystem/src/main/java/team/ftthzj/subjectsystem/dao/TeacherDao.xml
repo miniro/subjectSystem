@@ -37,8 +37,20 @@
 			<if test="address!=null">
 				address=#{address},
 			</if>
+			<if test="sex!=null">
+				sex=#{sex},
+			</if>
 			<if test="position!=null">
-				address=#{position},
+				position=#{position},
+			</if>
+			<if test="address!=null">
+				address=#{address},
+			</if>
+			<if test="email!=null">
+				email=#{email},
+			</if>
+			<if test="password!=null">
+				password=#{password},
 			</if>
 		</set>
 		where teacherId = #{teacherId}

@@ -176,6 +176,12 @@
                         </a>
                         </li>
                     </c:if>
+                    <c:if test="${flag == 'ADMIN'}">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i>
+                            管理员
+                        </a>
+                        </li>
+                    </c:if>
                     <c:if test="${flag == 'TEACHER'}">
                         <li><a href="#"><i class="fa fa-user fa-fw"></i>
                             用户：${STU_SESSION.name}(教师用户)

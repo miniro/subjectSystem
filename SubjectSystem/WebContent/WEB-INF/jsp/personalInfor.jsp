@@ -175,6 +175,12 @@
                         </a>
                         </li>
                     </c:if>
+                    <c:if test="${flag == 'ADMIN'}">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i>
+                            管理员
+                        </a>
+                        </li>
+                    </c:if>
                     <c:if test="${flag == 'TEACHER'}">
                         <li><a href="#"><i class="fa fa-user fa-fw"></i>
                             用户：${STU_SESSION.name}(教师用户)
@@ -325,11 +331,20 @@
                data-target="#personalInforEditDialog" onclick="editpersonalInfor('${STU_SESSION.teacherId}')">修改信息</a>
         </c:if>
         <c:if
+                test="${flag == 'TEACHER'}">
+            <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
+               data-target="#passwordEditDialog">修改密码</a>
+        </c:if>
+        <c:if
                 test="${flag == 'STUDENT'}">
             <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
                data-target="#personalInforEditDialog" onclick="editpersonalInfor('${STU_SESSION.studentId}')">修改信息</a>
         </c:if>
-
+        <c:if
+                test="${flag == 'STUDENT'}">
+            <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
+               data-target="#passwordEditDialog">修改密码</a>
+        </c:if>
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
@@ -453,9 +468,9 @@
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td>${STU_SESSION.email}</td>
                                     <td>${STU_SESSION.qq}</td>
                                     <td>${STU_SESSION.phone}</td>
+                                    <td>${STU_SESSION.email}</td>
                                 </tr>
                                 </tbody>
                                 <thead>
@@ -474,9 +489,6 @@
                             </c:if>
 
                     </table>
-                    <div class="col-md-12 text-right">
-                        <itheima:page url="${pageContext.request.contextPath }/personalInfor/list.action" />
-                    </div>
                     <!-- /.panel-body -->
                 </div>
                 <!-- /.panel -->
@@ -531,6 +543,57 @@
         </div>
     </div>
     <!-- footer end -->
+</div>
+
+
+<div class="modal fade" id="passwordEditDialog" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">修改密码</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="passwdDialog_form">
+                    <div class="form-group">
+                        <div class="col-sm-10">
+                            <div class="form-group" >
+                                <label for="StudentId" class="col-sm-2 control-label">
+                                    原密码
+                                </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="passwd" placeholder="原密码" name="passwd" />
+                                </div>
+                            </div>
+                            <div class="form-group" >
+                                <label for="StudentId" class="col-sm-2 control-label">
+                                    新密码
+                                </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="passwd1" placeholder="新密码" name="passwd1" />
+                                </div>
+                            </div>
+                            <div class="form-group" >
+                                <label for="StudentId" class="col-sm-2 control-label">
+                                    再输入
+                                </label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="passwd2" placeholder="再次输入" name="passwd2" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <a href="#" class="btn btn-primary" onclick="editPasswd()">修改密码</a>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- 选择用户信息模态框 -->
@@ -1101,7 +1164,7 @@
                         alert("教师信息创建成功！");
                         window.location.reload();
                     }else if(data == "TeacherId Empty"){
-                        alert("教师id不得为空！");
+                        alert("教师编号不得为空！");
                         window.location.reload();
                     }else if(data == "Name Empty"){
                         alert("姓名不得为空！");
@@ -1309,6 +1372,26 @@
         }
     }
 
+    function editPasswd(){
+        $.post("<%=basePath%>personalInfor/editPasswd.action",
+            $("#passwdDialog_form").serialize(),function(data){
+                if(data =="OK"){
+                    alert("密码更改成功！");
+                    window.location.reload();
+                }else if(data=="flag1"){
+                    alert("两次密码输入不一致！");
+                    window.location.reload();
+                }
+                else if(data=="flag2"){
+                    alert("新旧密码相同！");
+                    window.location.reload();
+                }
+                else if(data=="flag3"){
+                    alert("原密码错误！");
+                    window.location.reload();
+                }
+            });
+    }
 </script>
 
 

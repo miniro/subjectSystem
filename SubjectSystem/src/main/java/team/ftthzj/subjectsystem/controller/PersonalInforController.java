@@ -190,13 +190,6 @@ public class PersonalInforController {
     @RequestMapping(value = "/personalInfor/delete.action")
     @ResponseBody
     public String deletePersonalInforStu(HttpServletRequest request) {
-//        int flag=studentService.deleteStudentById(request.getParameter("UserId"));
-//        int flag2=teacherService.deleteTeacherById(request.getParameter("UserId"));
-//        if(flag==1||flag2==1){
-//            return "OK";
-//        }else {
-//            return "FAIL";
-//        }
         if(request.getParameter("UserId").charAt(0)=='S'){
             List<Score> scoreList = scoreService.searchScoreByStudentId(request.getParameter("UserId"));
             if(scoreList.size() > 0){
@@ -253,6 +246,17 @@ public class PersonalInforController {
     public String toINformation(@RequestParam(defaultValue="1")Integer page,
                                 @RequestParam(defaultValue="10")Integer rows, String userId,
                                 String userName, String userType, Model model, HttpSession session) {
+        String flag =(String) session.getAttribute("FLAG");
+        if(flag.equals("STUDENT")) {
+            Student student = (Student) session.getAttribute("STU_SESSION");
+            student = studentService.searchStudentById(student.getStudentId());
+            session.setAttribute("STU_SESSION", student);
+        }
+        else if(flag.equals("TEACHER")){
+            Teacher teacher = (Teacher) session.getAttribute("STU_SESSION");
+            teacher = teacherService.searchTeacherById(teacher.getTeacherId());
+            session.setAttribute("STU_SESSION", teacher);
+        }
         if(userType == null || Integer.valueOf(userType) == 1){
             Page<Student> studentPage = studentService.searchStudents(page, rows, userId, userName);
             model.addAttribute("page", studentPage);
@@ -267,6 +271,31 @@ public class PersonalInforController {
         model.addAttribute("flag", session.getAttribute("FLAG"));
 
         return "personalInfor";
+    }
+
+    @RequestMapping(value = "/personalInfor/editPasswd.action")
+    @ResponseBody
+    public String editPasswd(HttpServletRequest request,HttpSession session) {
+        String flag =(String) session.getAttribute("FLAG");
+        if(!(request.getParameter("passwd2").equals(request.getParameter("passwd1"))))
+            return "flag1";
+        if(request.getParameter("passwd1").equals(request.getParameter("passwd")))
+            return "flag2";
+        if(flag.equals("STUDENT")) {
+            Student student = (Student) session.getAttribute("STU_SESSION");
+            if(!(request.getParameter("passwd").equals(student.getPassword())))
+                return "flag3";
+            student.setPassword(request.getParameter("passwd1"));
+            studentService.updateStudent(student);
+        }
+        else if(flag.equals("TEACHER")){
+            Teacher teacher = (Teacher) session.getAttribute("STU_SESSION");
+            if(!(request.getParameter("passwd").equals(teacher.getPassword())))
+                return "flag3";
+            teacher.setPassword(request.getParameter("passwd1"));
+            teacherService.updateTeacher(teacher);
+        }
+        return "OK";
     }
 
 }

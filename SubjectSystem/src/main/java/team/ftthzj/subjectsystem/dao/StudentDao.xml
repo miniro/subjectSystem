@@ -54,6 +54,9 @@
 			<if test="email!=null">
 				email=#{email},
 			</if>
+			<if test="password!=null">
+				password=#{password},
+			</if>
 			<if test="enrollmentDate!=null">
 				enrollmentDate=#{enrollmentDate},
 			</if>
