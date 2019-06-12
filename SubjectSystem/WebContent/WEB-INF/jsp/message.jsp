@@ -301,11 +301,13 @@
                         <input type="text" class="form-control" id="errorType"
                                value="${errorType }" name="errorType" />
                     </div>
-                    <div class="form-group">
-                        <label for="studentId">学生编号</label>
-                        <input type="text" class="form-control" id="studentId"
-                               value="${studentId }" name="studentId" />
-                    </div>
+                    <c:if test="${flag == 'ADMIN'}">
+                        <div class="form-group">
+                            <label for="studentId">学生编号</label>
+                            <input type="text" class="form-control" id="studentId"
+                                   value="${studentId }" name="studentId" />
+                        </div>
+                    </c:if>
                     <div class="form-group">
                         <label for="content">内容</label>
                         <input type="text" class="form-control" id="content"
