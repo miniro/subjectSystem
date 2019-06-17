@@ -597,9 +597,13 @@
                         <div class="col-sm-10">
                             <select	class="form-control" id="weekTime"  name="weekTime">
                                 <option value="">--请选择--</option>
-                                <c:forEach var="i" begin="1" end="7" step="1">
-                                    <option value="${i}">周${i}</option>
-                                </c:forEach>
+                                <option value="1">周一</option>
+                                <option value="2">周二</option>
+                                <option value="3">周三</option>
+                                <option value="4">周四</option>
+                                <option value="5">周五</option>
+                                <option value="6">周六</option>
+                                <option value="7">周日</option>
                             </select>
                         </div>
                     </div>
@@ -857,8 +861,11 @@
                 }else if(data == "Time Error"){
                     alert("结束时间不得早于开始时间！");
                     window.location.reload();
+                }else if(data == "Teacher Collide"){
+                    alert("该老师在该时段已有分配课程！");
+                    window.location.reload();
                 }else{
-                    alert("课程创建失败！");
+                    alert("选课失败");
                     window.location.reload();
                 }
             });
