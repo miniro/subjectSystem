@@ -29,6 +29,25 @@ public class CourseServiceImpl implements CourseService{
 	private ScoreDao scoreDao;
 
 	public int addCourse(Course course) {
+		Boolean[][] hashTable = new Boolean[8][];
+		for(int i=0;i<8;i++){
+			hashTable[i] = new Boolean[13];
+			for(int j=0;j<13;j++)
+				hashTable[i][j]=false;
+		}
+		Course course1 = new Course();
+		course1.setTeacherId(course.getTeacherId());
+		List<Course> courseList = courseDao.searchCourses(course1);
+		for(Course c:courseList){
+			for(int i=c.getStartingTime();i<=c.getEnddingTime();i++){
+				hashTable[c.getWeekTime()][i]=true;
+			}
+		}
+		for(int i=course.getStartingTime();i<=course.getEnddingTime();i++){
+			if(hashTable[course.getWeekTime()][i]){
+				return -1;
+			}
+		}
 		courseDao.addCourse(course);
 		return 1;
 	}

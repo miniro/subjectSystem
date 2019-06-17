@@ -98,9 +98,11 @@ public class CourseController {
         if(Integer.valueOf(startingTime)>Integer.valueOf(endingTime)){
             return "Time Error";
         }
-        int rows = courseService.addCourse(course);
-        if(rows > 0){
+        int status = courseService.addCourse(course);
+        if(status > 0){
             return "OK";
+        }else if(status == -1){
+            return "Teacher Collide";
         }else {
             return "FAIL";
         }
