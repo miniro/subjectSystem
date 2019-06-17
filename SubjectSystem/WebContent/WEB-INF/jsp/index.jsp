@@ -18,6 +18,6 @@ $("#getYzm").click(function(){
 var url = "https://www.sojson.com/getYzm.shtml?t=" + Math.random();
 this.src = url;
 }).click().show();aa
-a
+aa
 </body>
 </html>
