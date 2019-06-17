@@ -517,12 +517,6 @@
                                 <input type="text" class="form-control" id="enddingTime_more" placeholder="结束时间" name="enddingTime_more" />
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="endingTime" style="float:left;padding:7px 15px 0 27px;">预置课表</label>
-                        <div class="col-sm-10">
-                                <input type="text" class="form-control" id="preset_more" placeholder="预置课表" name="preset_more" />
-                        </div>
-                    </div>
                 </form>
             </div>
             <div class="modal-footer">
@@ -887,16 +881,17 @@
                 $("#courseName_more").val(data.courseName)
                 $("#teacherId_more").val(data.teacherId)
                 $("#credit_more").val(data.credit)
-                $("#property_more").val(data.property);
-                $("#weekTime_more").val(data.weekTime);
-                $("#beginTime_more").val(data.beginTime);
-                $("#finishTime_more").val(data.finishTime);
+                if(data.property==1){
+                    $("#property_more").val("必修课");
+                }
+                else {
+                    $("#property_more").val("选修课");
+                }
+                $("#weekTime_more").val("周"+data.weekTime);
                 $("#endTime_more").val(data.endTime);
-                $("#property_more").val(data.property);
                 $("#duration_more").val(data.duration);
-                $("#startingTime_more").val(data.startingTime);
-                $("#enddingTime_more").val(data.enddingTime);
-                $("#weekTime_more").val(data.weekTime);
+                $("#startingTime_more").val("第"+data.startingTime+"节");
+                $("#enddingTime_more").val("第"+data.enddingTime+"节");
                 $("#preset_more").val(data.preset);
             }
         });
@@ -927,24 +922,6 @@
         });
     }
 
-    function quitCourse(id) {
-        if(confirm('确定要退选该课程吗?')) {
-            $.ajax({
-                type:"get",
-                url:"<%=basePath%>course/QuitCourse.action",
-                data:{"id":id},
-                success:function(data) {
-                    if(data =="OK"){
-                        alert("退选成功！");
-                        window.location.reload();
-                    }else{
-                        alert("退选失败！");
-                        window.location.reload();
-                    }
-                }
-            });
-        }
-    }
 
     // 删除课程
     function deletecourse(courseId) {

@@ -171,7 +171,10 @@ public class ScoreController {
 
     @RequestMapping(value = "/score/getscoreByStuIdAndCourseId.action")
     @ResponseBody
-    public Score getScoreByStuIdAndCourseId(String studentId,String courseId) {
+    public Score getScoreByStuIdAndCourseId(String studentId,String courseId,HttpSession sesstion) {
+        if(sesstion.getAttribute("FLAG")=="STUDENT"){
+            studentId=((Student)sesstion.getAttribute("STU_SESSION")).getStudentId();
+        }
         List<Score>list=scoreService.getScoreByStuAndCourse(studentId,courseId);
         return list.get(0);
     }

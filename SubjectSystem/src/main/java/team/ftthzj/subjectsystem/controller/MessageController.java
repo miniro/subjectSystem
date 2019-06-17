@@ -1,5 +1,4 @@
 package team.ftthzj.subjectsystem.controller;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -64,7 +63,7 @@ public class MessageController {
     @ResponseBody
     public String creatMessage(HttpServletRequest request){
         Message message=new Message();
-        message.setErrorType(Integer.valueOf(request.getParameter("errorType")));
+        message.setErrorType(0);
         message.setContent(request.getParameter("content"));
         message.setStudentId(request.getParameter("studentId"));
         message.setProperty(1);

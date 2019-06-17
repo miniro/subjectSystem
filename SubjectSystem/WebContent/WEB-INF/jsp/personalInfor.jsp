@@ -573,7 +573,7 @@
                                     新密码
                                 </label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="passwd1" placeholder="新密码" name="passwd1" />
+                                    <input type="password" class="form-control" id="passwd1" placeholder="新密码" name="passwd1" />
                                 </div>
                             </div>
                             <div class="form-group" >
@@ -581,7 +581,7 @@
                                     再输入
                                 </label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="passwd2" placeholder="再次输入" name="passwd2" />
+                                    <input type="password" class="form-control" id="passwd2" placeholder="再次输入" name="passwd2" />
                                 </div>
                             </div>
                         </div>

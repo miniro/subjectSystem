@@ -456,14 +456,6 @@
                             <input type="text" class="form-control" id="studentId" placeholder="学生编号" name="studentId" />
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="errorType" class="col-sm-2 control-label">
-                            消息类型
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="errorType" placeholder="消息类型" name="errorType" />
-                        </div>
-                    </div>
                 </form>
             </div>
             <div class="modal-footer">

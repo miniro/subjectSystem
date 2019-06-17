@@ -56,19 +56,6 @@
             <a href="${pageContext.request.contextPath }/course/list.action">
                     返回主页
             </a>
-            <div class="contact100-form-social flex-c-m">
-                <a  class="contact100-form-social-item flex-c-m bg1 m-r-20" target="_blank">
-                    <i class="fa fa-wechat" aria-hidden="true"></i>
-                </a>
-
-                <a  class="contact100-form-social-item flex-c-m bg2 m-r-20" target="_blank">
-                    <i class="fa fa-qq" aria-hidden="true"></i>
-                </a>
-
-                <a  class="contact100-form-social-item flex-c-m bg3" target="_blank">
-                    <i class="fa fa-weibo" aria-hidden="true"></i>
-                </a>
-            </div>
         </form>
         <div class="contact100-more flex-col-c-m" style="background-image: url('images/bg-01.jpg');">
         </div>
