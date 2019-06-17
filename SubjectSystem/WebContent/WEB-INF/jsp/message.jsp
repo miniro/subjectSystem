@@ -330,9 +330,10 @@
                         <thead>
                         <tr>
                             <th>消息编号</th>
-                            <th>学生号</th>
+                            <th>学生编号</th>
                             <th>消息内容</th>
                             <th>消息类型</th>
+                            <th>收发件类型</th>
                             <th>操作</th>
                         </tr>
                         </thead>
@@ -354,6 +355,12 @@
                                     <td>其他</td>
                                 </c:if>
                                 <c:if test="${flag == 'ADMIN'}">
+                                    <c:if test="${row.property=='0'}">
+                                        <td>收件</td>
+                                    </c:if>
+                                    <c:if test="${row.property=='1'}">
+                                        <td>发件</td>
+                                    </c:if>
                                 <td>
                                     <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
                                        data-target="#messageEditDialog" onclick= "editmessage('${row.id}')">修改</a>
@@ -361,6 +368,12 @@
                                 </td>
                                 </c:if>
                                 <c:if test="${flag == 'STUDENT'}">
+                                    <c:if test="${row.property=='1'}">
+                                        <td>收件</td>
+                                    </c:if>
+                                    <c:if test="${row.property=='0'}">
+                                        <td>发件</td>
+                                    </c:if>
                                     <td>
                                         <a href="#" class="btn btn-danger btn-xs" onclick= "deletemessage('${row.id}')">删除</a>
                                     </td>
