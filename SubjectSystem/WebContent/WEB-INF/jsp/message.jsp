@@ -344,7 +344,15 @@
                                 </td>
                                 <td>${row.studentId}</td>
                                 <td>${row.content}</td>
-                                <td>${row.errorType}</td>
+                                <c:if test="${row.errorType=='0'}">
+                                    <td>错误</td>
+                                </c:if>
+                                <c:if test="${row.errorType=='1'}">
+                                    <td>建议</td>
+                                </c:if>
+                                <c:if test="${row.errorType=='2'}">
+                                    <td>其他</td>
+                                </c:if>
                                 <c:if test="${flag == 'ADMIN'}">
                                 <td>
                                     <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"

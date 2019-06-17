@@ -83,7 +83,7 @@ public class ScoreController {
                 s=s+score.getSumScore()+",";
                 dataList.add(s);
             }
-            CSVUtils.exportCsv(new File("F:/大三下/javaee/final/SubjectSystem/output/score/"+System.currentTimeMillis()+".csv"), dataList);
+            CSVUtils.exportCsv(new File("/Users/abao/Desktop/大三下/ftthzj/SubjectSystem/output/score_"+System.currentTimeMillis()+".csv"), dataList);
         }
         return "score";
     }
