@@ -755,37 +755,6 @@
     </div>
 </div>
 
-<div class="modal fade" id="personalInforchooseEditDialog" tabindex="-1" role="dialog"
-     aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title" id="myModalLabel">修改用户信息</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal" id="edit_personalInfor_form">
-                    <div class="form-group">
-                        <label for="choosepersonalInforId" class="col-sm-2 control-label">
-                            用户编号
-                        </label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="choosepersonalInforId" placeholder="用户编号" name="choosepersonalInforId" />
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <a href="#" class="btn btn-primary" data-toggle="modal"
-                   data-target="#personalInforEditDialog" onclick= "editpersonalInfor(document.getElementById('choosepersonalInforId').value)" >选择用户编号</a>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="modal fade" id="lookInforStuDialog" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
@@ -1036,7 +1005,11 @@
                             性别
                         </label>
                         <div class="col-sm-10">
-                            <input type="editSex" class="form-control" id="editSex" placeholder="性别" name="sex" />
+                            <select	class="form-control" id="sex"  name="sex">
+                                <option value="">--请选择--</option>
+                                <option value="男">男</option>
+                                <option value="女">女</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group" id="stu2">
@@ -1044,7 +1017,13 @@
                             年级
                         </label>
                         <div class="col-sm-10">
-                            <input type="editGrade" class="form-control" id="editGrade" placeholder="年级" name="grade" />
+                            <select	class="form-control" id="grade"  name="grade">
+                                <option value="">--请选择--</option>
+                                <option value="大一">大一</option>
+                                <option value="大二">大二</option>
+                                <option value="大三">大三</option>
+                                <option value="大四">大四</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group" id="stu3">
