@@ -350,7 +350,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">我的信息</div>
                     <!-- /.panel-heading -->
-                    <table class="table table-bordered table-striped">
+                    <table class="table table-bordered table-striped" style="text-align: center">
                         <c:if test="${flag == 'ADMIN'}">
                             <thead>
                             <tr>
